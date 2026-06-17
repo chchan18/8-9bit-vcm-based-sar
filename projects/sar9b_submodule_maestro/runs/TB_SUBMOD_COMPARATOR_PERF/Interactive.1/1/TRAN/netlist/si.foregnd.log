@@ -1,0 +1,9 @@
+Begin Incremental Netlisting Jun 17 20:58:10 2026
+ERROR (OSSHNL-108): The property, 'connectivityLastUpdated', specified on
+library 'SAR9B_400MV', cell 'TB_SUBMOD_COMPARATOR_PERF',
+view 'schematic', does
+not have an integer value. Re-extract the design (File->Check
+and Save menu
+option) to correct this error.
+
+End netlisting Jun 17 20:58:10 2026

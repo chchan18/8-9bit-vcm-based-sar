@@ -24,6 +24,7 @@ session 使用 `Vpk=800m`，SAR9B nominal 结果已经恢复到接近 9-bit：
 |------|---------|
 | `PROJECT_STATUS.md` | 当前状态、历史结果、handoff 信息 |
 | `projects/sar9b_enob_recovery/` | SAR9B ENOB recovery 项目、脚本、结果与分析 |
+| `projects/sar9b_submodule_maestro/` | SAR9B 子模块独立 Maestro testbench、脚本与运行记录 |
 | `sar9b_work/` | 9-bit SAR 修复、仿真、导出与分析脚本 |
 | `versions/` | 分阶段版本化文档快照 |
 | `virtuoso-bridge-lite/` | 本地 Virtuoso bridge 工具 |
@@ -47,3 +48,9 @@ parameters fs=400M Vpk=800m Cunit=1f Vth_sw=0.9 TSTOP=2.7u
 
 基础 recovery 已完成。后续重点应放在 Vpk/PVT/input robustness sweep，确认
 `8.7` ENOB 不是单一 nominal corner 的偶然点。
+
+并行的子模块验证项目已经启动：
+`projects/sar9b_submodule_maestro/` 在 `SAR9B_400MV` 中创建了 comparator、
+non-overlap clock、9-step async control、bootstrap switch 四个独立 Maestro
+`TRAN` testbench。当前 testbench setup 已完成，自动 run 仍受 ADE/Maestro
+modal/run-control 影响，性能数字需等 GUI `Update and Run` 成功后再采纳。

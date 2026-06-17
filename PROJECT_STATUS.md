@@ -52,7 +52,11 @@ E:\8bitvcmvirtuoso\
 │   ├── v002_virtuoso-bridge-lite/ # Bridge installation
 │   ├── v003_ADC_documentation/    # ADC design README + netlist + input.scs
 │   ├── v004_sar9b_dac9_measurement_chain/ # DAC9 measurement-chain repair docs
-│   └── v005_sar9b_vpk800_enob_recovery/   # Vpk=800m ENOB recovery docs
+│   ├── v005_sar9b_vpk800_enob_recovery/   # Vpk=800m ENOB recovery docs
+│   └── v006_sar9b_submodule_maestro/      # Standalone submodule Maestro TB docs
+├── projects/
+│   ├── sar9b_enob_recovery/       # SAR9B Vpk=800m recovery scripts and evidence
+│   └── sar9b_submodule_maestro/   # Comparator/clock/control/bootstrap Maestro TBs
 └── sar9b_work/                    # Working directory for 9-bit SAR development
     ├── *.py                       # Python scripts (TB fixes, netlist mods, sim runs)
     ├── *.sh                       # Shell scripts for remote execution
@@ -88,6 +92,10 @@ Created for 9-bit ADC development. Contains copies of all sub-cells.
 |------|--------|-------------|
 | `TOP_9B_ADC` | ✅ schematic+symbol | 9-bit binary SAR ADC; active best run uses q4-scaled binary CDAC |
 | `ADC_9B_tb_best_q4` | ✅ schematic+maestro | Current validated SAR9B Maestro testbench |
+| `TB_SUBMOD_COMPARATOR_PERF` | ✅ schematic+maestro | Standalone comparator transient testbench |
+| `TB_SUBMOD_CLK_NOOVERLAP_PERF` | ✅ schematic+maestro | Standalone non-overlap clock transient testbench |
+| `TB_SUBMOD_ASYCTRL_9CLK_PERF` | ✅ schematic+maestro | Standalone 9-step asynchronous control transient testbench |
+| `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | ✅ schematic+maestro | Standalone differential bootstrap switch transient testbench |
 | `ADC_9B_tb` | ❌ corrupted | Failed TB — DO NOT USE |
 | All sub-cells | ✅ schematic | Copied from 8BIT400MVcmredundancySAR |
 | VA cells | ✅ veriloga+symbol | `decode_redun9to8`, `DAC8b_va`, `DAC9b_va`; current Maestro wrapper includes `DAC9b_va` for the 9-bit `/out` measurement chain |
@@ -548,6 +556,31 @@ useful as a patched setup backup, but the robust operational flow is
 `scripts/start_vpk800_maestro_run.py`, which sets variables in the live Maestro
 session and verifies the generated netlist.
 
+### New Project: SAR9B submodule Maestro testbenches
+
+A submodule validation project has been opened at
+`projects/sar9b_submodule_maestro/`.
+
+Created in `SAR9B_400MV`:
+
+| Testbench | DUT | Metric target |
+|-----------|-----|---------------|
+| `TB_SUBMOD_COMPARATOR_PERF` | `COMPARATOR` | Decision delay and output swing |
+| `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `CLK_NOOVERLAP` | Non-overlap timing |
+| `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `Asycontrol_logic_9clk` | 9-step SAR clock sequencing |
+| `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `BOOTSTRAP_DIFF` | Sampling switch tracking |
+
+Status:
+
+1. Done: symbol/source inspection, schematic testbench creation, and Maestro
+   `TRAN` setup for all four cells.
+2. Done: bridge-created schematic property `connectivityLastUpdated` repaired
+   after initial comparator netlisting failed with `OSSHNL-108`.
+3. Blocked: background `maeRunSimulation` stopped immediately, and GUI-mode
+   automation remains fragile around ADE modal/run-control handling.
+4. Next: run each generated Maestro view through GUI `Update and Run`, then
+   archive/export PSF data for block-level performance metrics.
+
 ### Priority 1: Proper 9-bit measurement
 Raw-code measurement was first completed without editing the schematic:
 
@@ -652,6 +685,10 @@ maeGetOutputValue("ENOB" "test" ?history "historyName")
 | Iteration starter | `sar9b_work/start_scaled_binary_run.py` | Apply the 1/4-scaled binary CDAC point and trigger ADE Explorer run |
 | Best iteration summary | `sar9b_work/iterations/scaled_binary_q4/README.md` | Achieved ENOB 8.717 bits raw-code |
 | Current SAR9B best run | `sar9b_work/iterations/sar9b_maestro_best_q4/README.md` | SAR9B `Interactive.11`, DAC9 `/out` ENOB 7.86 bits and raw-code ENOB 7.920 bits |
+| SAR9B ENOB recovery project | `projects/sar9b_enob_recovery/README.md` | Final Vpk=800m recovery result with `/out` ENOB 8.678 bits and raw-code ENOB 8.7203 bits |
+| SAR9B submodule Maestro project | `projects/sar9b_submodule_maestro/README.md` | Standalone comparator, clock, async-control, and bootstrap Maestro testbenches |
+| SAR9B submodule Maestro creator | `projects/sar9b_submodule_maestro/scripts/create_submodule_maestro_tests.py` | Creates four standalone schematic testbenches and Maestro `TRAN` views in `SAR9B_400MV` |
+| SAR9B submodule run helper | `projects/sar9b_submodule_maestro/scripts/run_submodule_maestro_tests.py` | Attempts Maestro runs, archives histories, exports waveforms, and computes quick metrics |
 | SAR9B Maestro launcher | `sar9b_work/start_sar9b_maestro_best_run.py` | Starts `SAR9B_400MV/ADC_9B_tb_best_q4` Maestro runs |
 | SAR9B result checker | `sar9b_work/check_sar9b_maestro_run.py` | Polls and archives SAR9B Maestro/Spectre status; success requires 0 run errors and 0 Spectre errors |
 | SAR9B AHDL wrapper setup | `sar9b_work/set_sar9b_ahdl_wrapper.py` | Uploads `sar9b_va_ahdl.scs` and sets Maestro definitionFiles to the wrapper |
@@ -677,3 +714,4 @@ maeGetOutputValue("ENOB" "test" ?history "historyName")
 10. **`maeRunSimulation` / `run_and_wait` is fragile here**: ADE Explorer may require the GUI `Update and Run` dialog. When it appears, pressing `Update and Run` starts the run; poll `ExplorerRun.0.log` and `spectre.out` through SSH.
 11. **Always verify restore after failed runs**: If a script times out while a modal is open, restore can fail silently; run `sar9b_work/restore.py` and read back all cap values.
 12. **SAR9B target discipline**: For the requested 9-bit flow, modify and run `SAR9B_400MV/ADC_9B_tb_best_q4`, not the older `8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4` reference cell.
+13. **Bridge-created schematics may need extraction metadata repair**: If new schematic testbenches fail netlisting with `OSSHNL-108`, set `connectivityLastUpdated` to an integer value and run Check/Save again.

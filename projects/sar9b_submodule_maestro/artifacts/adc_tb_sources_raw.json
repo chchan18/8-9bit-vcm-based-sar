@@ -1,0 +1,3 @@
+{
+  "raw": "(nil (\"I2\" \"gnd\" \"symbol\" nil) (\"V3\" \"vdc\" \"symbol\" ((\"vdc\" \"450m\"))) (\"V4\" \"vdc\" \"symbol\" ((\"vdc\" \"900.0m\"))) (\"V1\" \"vdc\" \"symbol\" ((\"vdc\" \"0\"))) (\"V0\" \"vdc\" \"symbol\" ((\"vdc\" \"900.0m\"))) (\"V6\" \"vdc\" \"symbol\" ((\"vdc\" \"450.0m\"))) (\"V2\" \"vpulse\" \"symbol\" ((\"vdc\" \"0\") (\"v2\" \"900.0m\") (\"per\" \"1/fs\") (\"td\" \"1p\") (\"tr\" \"1p\") (\"tf\" \"1p\") (\"pw\" \"0.2/fs\"))) (\"V8\" \"vsource\" \"symbol\" ((\"filenums\" \"none\") (\"td\" \"50p\") (\"sinedc\" \"0\") (\"va\" \"Vpk\") (\"freq\" \"(7/1024)*fs\") (\"srcType\" \"sine\"))) (\"I5\" \"ideal_balun\" \"symbol\" nil) nil nil)"
+}
