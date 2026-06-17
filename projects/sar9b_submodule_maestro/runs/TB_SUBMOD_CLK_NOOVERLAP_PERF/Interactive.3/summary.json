@@ -1,0 +1,49 @@
+{
+  "cell": "TB_SUBMOD_CLK_NOOVERLAP_PERF",
+  "history": "Interactive.3",
+  "session": "fnxSession76",
+  "signals": [
+    "/CLKIN",
+    "/CLKOP",
+    "/CLKON"
+  ],
+  "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.3.log",
+  "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.3/1/TRAN/psf",
+  "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.3/1/TRAN/psf/spectre.out",
+  "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.3/1/TRAN/netlist/input.scs",
+  "completed": true,
+  "run_errors": 0,
+  "spectre_summary": {
+    "errors": 0,
+    "warnings": 30,
+    "notices": 10
+  },
+  "waveform_points": 6001,
+  "metrics": {
+    "clkin_rise_ps": [
+      502.50000000000006,
+      5502.500000000001,
+      10502.5
+    ],
+    "clkop_rise_ps": [
+      594.3345629369733,
+      5594.336710395191,
+      10594.336717934731
+    ],
+    "clkon_rise_ps": [
+      2595.307265315768,
+      7595.305017661819
+    ],
+    "clkop_fall_ps": [
+      2560.0509656673735,
+      7560.05641325786
+    ],
+    "clkon_fall_ps": [
+      559.235075042873,
+      5559.233578791824,
+      10559.233580052347
+    ],
+    "both_high_total_ps": 0.0,
+    "both_low_total_ps": 176.0
+  }
+}

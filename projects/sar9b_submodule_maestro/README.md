@@ -34,13 +34,14 @@ Nominal variables:
 | `scripts/inspect_submodule_symbols.py` | Reads DUT symbol terminals and selected schematic instances. |
 | `scripts/inspect_adc_tb_sources.py` | Reads known ADC testbench source parameter names for reuse. |
 | `scripts/create_schematic_smoke.py` | Creates a small RC schematic to verify schematic creation APIs. |
-| `scripts/create_submodule_maestro_tests.py` | Creates the four schematic testbenches and corresponding Maestro `TRAN` views. |
-| `scripts/run_submodule_maestro_tests.py` | Attempts Maestro runs, archives histories, exports waveforms, and computes quick metrics. |
+| `scripts/create_submodule_maestro_tests.py` | Creates/rebuilds the four schematic testbenches and corresponding Maestro `TRAN` views. Use `--rebuild-schematics` after changing stimulus wiring. |
+| `scripts/run_submodule_maestro_tests.py` | Runs Maestro, downloads logs/netlists/waveforms, and computes quick metrics. Supports `--trigger callback`, `--trigger gui-button`, and `--trigger mae`. |
 | `scripts/archive_submodule_history.py` | Copies an existing remote Maestro history into this project. |
-| `scripts/inspect_fix_schematic_props.py` | Inspects/fixes schematic `connectivityLastUpdated`; needed after bridge-created schematics. |
+| `scripts/inspect_fix_schematic_props.py` | Inspects/fixes schematic extraction metadata using `dbSetConnCurrent`; needed after bridge-created schematics. |
 | `scripts/check_submodule_remote_status.py` | Polls remote Maestro histories, logs, and process state for a selected cell. |
 | `scripts/dismiss_ade_dialogs.py` | Sends Escape to residual ADE modal dialogs. |
 | `scripts/reload_bridge_ciw.py` | Experimental CIW bridge reload helper; use carefully because X11 focus can be fragile. |
+| `scripts/inspect_extraction_metadata.py` | Compares extraction metadata against known-good SAR9B/legacy testbenches. |
 
 ## Artifacts
 
@@ -53,35 +54,35 @@ Nominal variables:
 | `runs/TB_SUBMOD_COMPARATOR_PERF/Interactive.0` | Archived pre-fix failed run: `OSSHNL-108`. |
 | `runs/TB_SUBMOD_COMPARATOR_PERF/Interactive.1` | Archived pre-fix failed run: `OSSHNL-108`. |
 | `runs/TB_SUBMOD_COMPARATOR_PERF/Interactive.2` | Background run attempt stopped immediately by Maestro. |
+| `runs/submodule_run_manifest.json` | Latest four-testbench Maestro run summary. |
 
 ## Current Run Status
 
-The testbench and Maestro setup stage is complete. Automated execution is not
-yet producing valid performance metrics:
+The four Maestro testbenches now run through Spectre with zero errors. Latest
+run manifest: `runs/submodule_run_manifest.json`.
 
-1. `Interactive.0` and `Interactive.1` failed during netlisting because the
-   bridge-created schematics had `connectivityLastUpdated=nil`.
-2. `scripts/inspect_fix_schematic_props.py --fix` repaired that property and
-   re-saved all four schematics.
-3. A background `maeRunSimulation` attempt generated `Interactive.2`, but the
-   Maestro log reports `Received stop signal from user`; no Spectre performance
-   run was completed.
-4. GUI-mode `maeRunSimulation` still destabilized the bridge around ADE modal
-   handling, so no submodule timing metrics should be treated as measured yet.
+| Testbench | Latest history | Spectre | Quick metric |
+|-----------|----------------|---------|--------------|
+| `TB_SUBMOD_COMPARATOR_PERF` | `Interactive.8` | 0 errors, 5 warnings | `CLKC` rise to decision crossing: `3.923 ps` |
+| `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `Interactive.3` | 0 errors, 30 warnings | no simultaneous-high time; total both-low window `176 ps` |
+| `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `Interactive.7` | 0 errors, 10 warnings | `VALID` pulses and `CLKC` toggles, but `CLKO<0..8>` do not yet reach rail |
+| `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `Interactive.4` | 0 errors, 30 warnings | final differential tracking: `100.000067 mV` for `100 mV` input |
+
+Important fixes made during this pass:
+
+1. `OSSHNL-109` was resolved by running `schCheck`, `dbSave`,
+   `dbSetConnCurrent`, then `dbSave`; this keeps `connectivityLastUpdated`
+   equal to `schGeometryLastUpdated`.
+2. The generated testbenches now use an explicit `VSS_SRC (VSS 0)` style
+   reference, with `VSS_SRC` wired to an `analogLib/gnd` symbol. Plain `"0"`
+   wire labels were not sufficient and produced floating `_net0` references.
+3. Public supply/ground source placement was moved away from local stimulus
+   sources to avoid accidental wire shorts through vertical connection lines.
 
 ## Recommended Next Step
 
-Open each generated Maestro view in Virtuoso and run through the GUI
-`Update and Run` path:
-
-```text
-SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro
-SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro
-SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro
-SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro
-```
-
-After each successful run, use `scripts/archive_submodule_history.py` to capture
-the remote history locally, then use `scripts/run_submodule_maestro_tests.py`
-or a follow-up export script to compute delay, overlap, sequencing, and
-bootstrap tracking metrics from PSF waveforms.
+Continue with ASYCTRL functional stimulus. The current standalone testbench
+proves the Maestro/netlist/Spectre path is healthy, but the DFFRN reset/seed
+conditions still do not generate rail-to-rail `CLKO<0..8>` sequencing. A useful
+next pass is to build a smaller `DFFRN` unit test or replay the exact top-level
+`VALID`/`clks` startup timing from the full ADC run.

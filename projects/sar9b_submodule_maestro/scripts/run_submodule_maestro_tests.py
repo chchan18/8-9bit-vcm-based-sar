@@ -12,7 +12,7 @@ import argparse
 from pathlib import Path
 
 from virtuoso_bridge import VirtuosoClient
-from virtuoso_bridge.virtuoso.maestro import close_gui_session, open_gui_session
+from virtuoso_bridge.virtuoso.maestro import close_gui_session, open_gui_session, run_and_wait
 
 
 LIB = "SAR9B_400MV"
@@ -22,6 +22,8 @@ SETUP_MANIFEST = PROJECT_DIR / "artifacts/submodule_maestro_setup_manifest.json"
 RUN_ROOT = PROJECT_DIR / "runs"
 SAMPLE_STEP = 2e-12
 VTH = 0.45
+X11_HELPER_LOCAL = Path("sar9b_work/x11_type_text.py")
+X11_HELPER_REMOTE = "/tmp/x11_type_text.py"
 
 
 def skill_ok(result) -> bool:
@@ -35,6 +37,27 @@ def ssh(client: VirtuosoClient, command: str, timeout: int = 30) -> str:
     if result.returncode != 0:
         raise RuntimeError(f"remote command failed: {command}\n{result.stderr}")
     return result.stdout or ""
+
+
+def ensure_x11_helper(client: VirtuosoClient) -> None:
+    if X11_HELPER_LOCAL.exists():
+        client.upload_file(str(X11_HELPER_LOCAL), X11_HELPER_REMOTE)
+
+
+def press_first_window(client: VirtuosoClient, title: str) -> bool:
+    tree = ssh(client, "DISPLAY=:0 xwininfo -root -tree", timeout=20)
+    for line in tree.splitlines():
+        if title not in line:
+            continue
+        match = re.search(r"\b(0x[0-9a-fA-F]+)\b", line)
+        if not match:
+            continue
+        window = match.group(1)
+        print(f"Pressing Enter on {title}: {window}", flush=True)
+        ssh(client, f"DISPLAY=:0 python3 {X11_HELPER_REMOTE} {window} '\\n'", timeout=20)
+        time.sleep(2)
+        return True
+    return False
 
 
 def run_skill(client: VirtuosoClient, title: str, code: str, timeout: int = 60) -> str:
@@ -55,6 +78,10 @@ def remote_file_exists(client: VirtuosoClient, path: str) -> bool:
 
 def remote_tail(client: VirtuosoClient, path: str, lines: int = 80) -> str:
     return ssh(client, f"test -f {path} && tail -n {lines} {path} || true", timeout=60)
+
+
+def remote_epoch(client: VirtuosoClient) -> int:
+    return int(ssh(client, "date +%s", timeout=20).strip())
 
 
 def parse_spectre_summary(text: str) -> dict[str, object]:
@@ -98,12 +125,29 @@ def latest_history_after(client: VirtuosoClient, cell: str, start_epoch: int) ->
     if not text:
         return None
     stamp, filename = text.split(maxsplit=1)
-    if float(stamp) < start_epoch - 300:
+    if float(stamp) < start_epoch:
         return None
     return filename.removesuffix(".log")
 
 
-def trigger_run(client: VirtuosoClient, session: str, cell: str, start_epoch: int) -> str:
+def wait_for_history_after(
+    client: VirtuosoClient,
+    cell: str,
+    start_epoch: int,
+    timeout: int = 180,
+) -> str:
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        history = latest_history_after(client, cell, start_epoch)
+        if history:
+            print(f"Detected new history={history}", flush=True)
+            return history
+        print(f"Waiting for new history for {cell}...", flush=True)
+        time.sleep(10)
+    raise TimeoutError(f"no new Maestro history appeared for {cell}")
+
+
+def trigger_run_mae(client: VirtuosoClient, session: str, cell: str, start_epoch: int) -> str:
     result = client.execute_skill(f'maeRunSimulation(?session "{session}")', timeout=300)
     if not skill_ok(result):
         history = latest_history_after(client, cell, start_epoch)
@@ -120,6 +164,92 @@ def trigger_run(client: VirtuosoClient, session: str, cell: str, start_epoch: in
         raise RuntimeError("maeRunSimulation returned nil")
     print(f"maeRunSimulation returned history={history}", flush=True)
     return history
+
+
+def trigger_run_gui_button(
+    client: VirtuosoClient,
+    session: str,
+    cell: str,
+    start_epoch: int,
+) -> str:
+    ensure_x11_helper(client)
+    try:
+        result = client.execute_skill(
+            '''
+let((s)
+  s = sevSession(hiGetCurrentWindow())
+  unless(s error("No sevSession on current window"))
+  sevRun(s))
+''',
+            timeout=20,
+        )
+        if skill_ok(result):
+            print(f"sevRun returned: {(result.output or '').strip()}", flush=True)
+        else:
+            print(f"sevRun non-success: {result}", flush=True)
+    except Exception as exc:  # noqa: BLE001
+        print(f"sevRun warning: {exc}", flush=True)
+
+    for title in [
+        "ADE Assembler Update and Run",
+        "ADE Explorer Update and Run",
+        "ADE Assembler Save Setup",
+        "ADE Explorer Save Setup",
+        "Save Setup",
+    ]:
+        if press_first_window(client, title):
+            break
+    time.sleep(2)
+    for title in ["ADE Assembler Update and Run", "ADE Explorer Update and Run"]:
+        press_first_window(client, title)
+    return wait_for_history_after(client, cell, start_epoch)
+
+
+def trigger_run_callback(
+    client: VirtuosoClient,
+    session: str,
+    cell: str,
+    start_epoch: int,
+) -> str:
+    try:
+        history, status = run_and_wait(client, session=session, timeout=900)
+        history_name = (history or "").strip().strip('"')
+        print(f"run_and_wait returned history={history_name} status={status}", flush=True)
+        if not history_name or history_name == "nil":
+            raise RuntimeError("run_and_wait returned no history")
+        return history_name
+    except Exception as exc:  # noqa: BLE001
+        print(f"run_and_wait warning: {exc}", flush=True)
+        ensure_x11_helper(client)
+        for title in [
+            "ADE Assembler Update and Run",
+            "ADE Explorer Update and Run",
+            "ADE Assembler Save Setup",
+            "ADE Explorer Save Setup",
+            "Save Setup",
+        ]:
+            if press_first_window(client, title):
+                break
+        time.sleep(2)
+        for title in ["ADE Assembler Update and Run", "ADE Explorer Update and Run"]:
+            press_first_window(client, title)
+        return wait_for_history_after(client, cell, start_epoch, timeout=90)
+
+
+def trigger_run(
+    client: VirtuosoClient,
+    session: str,
+    cell: str,
+    start_epoch: int,
+    trigger: str,
+) -> str:
+    if trigger == "mae":
+        return trigger_run_mae(client, session, cell, start_epoch)
+    if trigger == "gui-button":
+        return trigger_run_gui_button(client, session, cell, start_epoch)
+    if trigger == "callback":
+        return trigger_run_callback(client, session, cell, start_epoch)
+    raise ValueError(f"unsupported trigger mode: {trigger}")
 
 
 def wait_for_completion(
@@ -331,7 +461,7 @@ def quick_metrics(cell: str, times: list[float], waves: dict[str, list[float]]) 
     return {}
 
 
-def run_one(client: VirtuosoClient, spec: dict[str, object]) -> dict[str, object]:
+def run_one(client: VirtuosoClient, spec: dict[str, object], trigger: str) -> dict[str, object]:
     cell = str(spec["cell"])
     signals = [str(sig) for sig in spec["signals"]]
     tstop = parse_time(str(spec["stop"]))
@@ -340,8 +470,8 @@ def run_one(client: VirtuosoClient, spec: dict[str, object]) -> dict[str, object
     session = open_gui_session(client, LIB, cell, timeout=180)
     try:
         run_skill(client, f"save {cell}", f'maeSaveSetup(?session "{session}")', timeout=60)
-        start_epoch = int(time.time())
-        history = trigger_run(client, session, cell, start_epoch)
+        start_epoch = remote_epoch(client)
+        history = trigger_run(client, session, cell, start_epoch, trigger)
         run_log_remote = f"/home/IC/Desktop/Project/{LIB}/{cell}/maestro/results/maestro/{history}.log"
         results_dir_remote = f"/home/IC/simulation/{LIB}/{cell}/maestro/results/maestro/{history}/1/{TEST_NAME}/psf"
         spectre_out_remote = f"{results_dir_remote}/spectre.out"
@@ -410,6 +540,12 @@ def run_one(client: VirtuosoClient, spec: dict[str, object]) -> dict[str, object
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cell", help="run only one testbench cell")
+    parser.add_argument(
+        "--trigger",
+        choices=["gui-button", "mae", "callback"],
+        default="gui-button",
+        help="run trigger method; callback uses maeRunSimulation(?callback ...)",
+    )
     args = parser.parse_args()
 
     manifest = json.loads(SETUP_MANIFEST.read_text(encoding="utf-8"))
@@ -418,11 +554,12 @@ def main() -> None:
     for spec in manifest["testbenches"]:
         if args.cell and spec["cell"] != args.cell:
             continue
-        summaries.append(run_one(client, spec))
+        summaries.append(run_one(client, spec, args.trigger))
     run_manifest = {
         "library": LIB,
         "test_name": TEST_NAME,
         "sample_step_s": SAMPLE_STEP,
+        "trigger": args.trigger,
         "runs": summaries,
     }
     RUN_ROOT.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,64 @@
+{
+  "cell": "TB_SUBMOD_ASYCTRL_9CLK_PERF",
+  "history": "Interactive.7",
+  "session": "fnxSession77",
+  "signals": [
+    "/CLKS",
+    "/VALID",
+    "/CLKC",
+    "/CLKO<0>",
+    "/CLKO<1>",
+    "/CLKO<2>",
+    "/CLKO<3>",
+    "/CLKO<4>",
+    "/CLKO<5>",
+    "/CLKO<6>",
+    "/CLKO<7>",
+    "/CLKO<8>"
+  ],
+  "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.7.log",
+  "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.7/1/TRAN/psf",
+  "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.7/1/TRAN/psf/spectre.out",
+  "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.7/1/TRAN/netlist/input.scs",
+  "completed": true,
+  "run_errors": 0,
+  "spectre_summary": {
+    "errors": 0,
+    "warnings": 10,
+    "notices": 10
+  },
+  "waveform_points": 14001,
+  "metrics": {
+    "valid_rise_ps": [
+      502.50000000000006,
+      3002.5000000000005,
+      5502.500000000001,
+      8002.5,
+      10502.5
+    ],
+    "clko_first_rise_ps": {
+      "/CLKO<0>": null,
+      "/CLKO<1>": null,
+      "/CLKO<2>": null,
+      "/CLKO<3>": null,
+      "/CLKO<4>": null,
+      "/CLKO<5>": null,
+      "/CLKO<6>": null,
+      "/CLKO<7>": null,
+      "/CLKO<8>": null
+    },
+    "clko_rises_ps": {
+      "/CLKO<0>": [],
+      "/CLKO<1>": [],
+      "/CLKO<2>": [],
+      "/CLKO<3>": [],
+      "/CLKO<4>": [],
+      "/CLKO<5>": [],
+      "/CLKO<6>": [],
+      "/CLKO<7>": [],
+      "/CLKO<8>": []
+    },
+    "clkc_min": -0.02560255317336815,
+    "clkc_max": 0.9155083559035436
+  }
+}

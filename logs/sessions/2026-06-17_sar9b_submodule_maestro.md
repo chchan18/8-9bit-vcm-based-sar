@@ -18,13 +18,25 @@ Each cell has a schematic and Maestro `TRAN` view in library `SAR9B_400MV`.
 
 - Symbol/source inspection artifacts were saved under
   `projects/sar9b_submodule_maestro/artifacts/`.
-- `connectivityLastUpdated` had to be set to integer `0` on bridge-created
-  schematics to avoid `OSSHNL-108`.
-- No valid submodule performance metrics have been accepted yet. Existing
-  archived histories document setup/run-control blockers, not DUT performance.
+- Bridge-created schematics initially failed with `OSSHNL-108`/`OSSHNL-109`.
+  The robust repair is `schCheck -> dbSave -> dbSetConnCurrent -> dbSave`,
+  which keeps `connectivityLastUpdated == schGeometryLastUpdated`.
+- Testbench references were rebuilt around an explicit `VSS_SRC (VSS 0)` path.
+  Labeling a terminal `"0"` was not enough; it produced floating `_net0`.
+- Public supply sources were moved left of the local stimulus sources to avoid
+  accidental vertical-wire shorts.
+- Final four-testbench run completed through Maestro/Spectre with zero Spectre
+  errors for all four cells:
+  - comparator `Interactive.8`: decision delay `3.923 ps`;
+  - clock non-overlap `Interactive.3`: no simultaneous-high window, both-low
+    total `176 ps`;
+  - ASYCTRL `Interactive.7`: Spectre-clean, `VALID`/`CLKC` active, but
+    `CLKO<0..8>` still do not reach rail;
+  - bootstrap `Interactive.4`: final differential output `100.000067 mV` for
+    `100 mV` input.
 
 ## Next
 
-Run each generated Maestro view through the GUI `Update and Run` flow, then
-archive/export waveforms for comparator delay, clock non-overlap, asynchronous
-clock sequencing, and bootstrap tracking metrics.
+Investigate ASYCTRL reset/seed conditions with a smaller `DFFRN` unit test or
+by replaying top-level ADC startup timing. The Maestro run/export pipeline is
+now healthy enough for repeated block-level iterations.

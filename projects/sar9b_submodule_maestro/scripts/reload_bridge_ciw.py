@@ -25,9 +25,21 @@ def ssh(client: VirtuosoClient, command: str, timeout: int = 30) -> str:
 
 
 def find_ciw_window(tree: str) -> str:
+    excluded = [
+        "update and run",
+        "save setup",
+        "add instance",
+        "edit object properties",
+        "open file",
+        "descend",
+        "graph tip",
+        "tools",
+    ]
     candidates = []
     for line in tree.splitlines():
         lowered = line.lower()
+        if any(token in lowered for token in excluded):
+            continue
         if (
             "command interpreter" in lowered
             or "ciw" in lowered
@@ -35,13 +47,18 @@ def find_ciw_window(tree: str) -> str:
         ):
             match = re.search(r"\b(0x[0-9a-fA-F]+)\b", line)
             if match:
-                candidates.append((match.group(1), line.strip()))
+                size = re.search(r"\s(\d+)x(\d+)[+-]", line)
+                area = 0
+                if size:
+                    area = int(size.group(1)) * int(size.group(2))
+                candidates.append((area, match.group(1), line.strip()))
     if not candidates:
         raise RuntimeError(f"could not find CIW window in tree:\n{tree}")
+    candidates.sort(reverse=True)
     print("CIW candidates:", flush=True)
-    for window, line in candidates:
+    for _, window, line in candidates:
         print(f"  {window}: {line}", flush=True)
-    return candidates[0][0]
+    return candidates[0][1]
 
 
 def main() -> None:

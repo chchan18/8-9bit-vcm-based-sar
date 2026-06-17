@@ -71,14 +71,16 @@ let((cv out)
 let((cv out)
   cv = dbOpenCellViewByType("{LIB}" "{cell}" "schematic" "" "a")
   unless(cv error("open failed"))
-  cv~>connectivityLastUpdated = 0
   schCheck(cv)
-  cv~>connectivityLastUpdated = 0
+  dbReplaceProp(cv "instance#" 'int length(cv~>instances))
+  dbSave(cv)
+  dbSetConnCurrent(cv)
   dbSave(cv)
   out = list(
     "propNames" cv~>prop~>name
     "propValues" cv~>prop~>value
     "connectivityLastUpdated" cv~>connectivityLastUpdated
+    "schGeometryLastUpdated" cv~>schGeometryLastUpdated
     "lastSchematicExtraction" cv~>lastSchematicExtraction)
   dbClose(cv)
   out)

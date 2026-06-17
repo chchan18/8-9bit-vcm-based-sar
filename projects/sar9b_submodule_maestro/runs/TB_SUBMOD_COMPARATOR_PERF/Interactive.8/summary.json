@@ -1,0 +1,32 @@
+{
+  "cell": "TB_SUBMOD_COMPARATOR_PERF",
+  "history": "Interactive.8",
+  "session": "fnxSession75",
+  "signals": [
+    "/CLKC",
+    "/VP",
+    "/VN",
+    "/VOP",
+    "/VON"
+  ],
+  "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.8.log",
+  "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.8/1/TRAN/psf",
+  "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.8/1/TRAN/psf/spectre.out",
+  "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.8/1/TRAN/netlist/input.scs",
+  "completed": true,
+  "run_errors": 0,
+  "spectre_summary": {
+    "errors": 0,
+    "warnings": 5,
+    "notices": 9
+  },
+  "waveform_points": 4001,
+  "metrics": {
+    "clk_rise_s": 1.0025e-09,
+    "decision_cross_s": 1.0064230309591008e-09,
+    "decision_delay_ps": 3.9230309591008004,
+    "final_vop": 3.361434385704241e-06,
+    "final_von": 4.155453536741088e-06,
+    "final_diff_v": -7.940191510368473e-07
+  }
+}

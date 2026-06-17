@@ -574,12 +574,18 @@ Status:
 
 1. Done: symbol/source inspection, schematic testbench creation, and Maestro
    `TRAN` setup for all four cells.
-2. Done: bridge-created schematic property `connectivityLastUpdated` repaired
-   after initial comparator netlisting failed with `OSSHNL-108`.
-3. Blocked: background `maeRunSimulation` stopped immediately, and GUI-mode
-   automation remains fragile around ADE modal/run-control handling.
-4. Next: run each generated Maestro view through GUI `Update and Run`, then
-   archive/export PSF data for block-level performance metrics.
+2. Done: bridge-created schematic extraction metadata repaired with
+   `dbSetConnCurrent` after initial netlisting failed with `OSSHNL-108` and
+   `OSSHNL-109`.
+3. Done: generated testbenches rebuilt with a real `VSS_SRC (VSS 0)` ground
+   reference through `analogLib/gnd`; plain `"0"` labels produced floating
+   `_net0` references.
+4. Done: all four Maestro testbenches now run through Spectre with zero errors:
+   comparator `Interactive.8`, clock non-overlap `Interactive.3`, ASYCTRL
+   `Interactive.7`, and bootstrap `Interactive.4`.
+5. Remaining: ASYCTRL standalone stimulus is not yet functionally exercising
+   `CLKO<0..8>` rail-to-rail sequencing. Build a smaller `DFFRN` unit test or
+   replay the full ADC startup timing.
 
 ### Priority 1: Proper 9-bit measurement
 Raw-code measurement was first completed without editing the schematic:
@@ -714,4 +720,5 @@ maeGetOutputValue("ENOB" "test" ?history "historyName")
 10. **`maeRunSimulation` / `run_and_wait` is fragile here**: ADE Explorer may require the GUI `Update and Run` dialog. When it appears, pressing `Update and Run` starts the run; poll `ExplorerRun.0.log` and `spectre.out` through SSH.
 11. **Always verify restore after failed runs**: If a script times out while a modal is open, restore can fail silently; run `sar9b_work/restore.py` and read back all cap values.
 12. **SAR9B target discipline**: For the requested 9-bit flow, modify and run `SAR9B_400MV/ADC_9B_tb_best_q4`, not the older `8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4` reference cell.
-13. **Bridge-created schematics may need extraction metadata repair**: If new schematic testbenches fail netlisting with `OSSHNL-108`, set `connectivityLastUpdated` to an integer value and run Check/Save again.
+13. **Bridge-created schematics may need extraction metadata repair**: If new schematic testbenches fail netlisting with `OSSHNL-108` or `OSSHNL-109`, run `schCheck`, `dbSave`, `dbSetConnCurrent`, then `dbSave`; manual `connectivityLastUpdated` edits are brittle because `dbSave` advances `schGeometryLastUpdated`.
+14. **Do not use text `"0"` labels as Spectre ground in generated TBs**: Wire a local `VSS_SRC` minus terminal to an `analogLib/gnd` symbol so the netlist emits `VSS_SRC (VSS 0)`. Text labels can netlist as floating `_net0`.

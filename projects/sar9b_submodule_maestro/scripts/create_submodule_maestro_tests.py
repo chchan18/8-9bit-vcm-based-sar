@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
@@ -19,6 +20,7 @@ from virtuoso_bridge.virtuoso.maestro import (
     set_var,
 )
 from virtuoso_bridge.virtuoso.schematic.ops import (
+    schematic_create_wire_between_instance_terms as wire_between,
     schematic_create_inst_by_master_name as inst,
     schematic_label_instance_term as label_term,
 )
@@ -64,6 +66,24 @@ let((cv)
     return '"yes"' in out
 
 
+def clear_schematic(client: VirtuosoClient, cell: str) -> None:
+    run_skill(
+        client,
+        f"clear schematic {cell}",
+        f'''
+let((cv)
+  cv = dbOpenCellViewByType("{LIB}" "{cell}" "schematic" "" "a")
+  unless(cv error("cannot open schematic"))
+  foreach(obj cv~>instances dbDeleteObject(obj))
+  foreach(obj cv~>shapes dbDeleteObject(obj))
+  dbSave(cv)
+  dbClose(cv)
+  "cleared")
+''',
+        timeout=120,
+    )
+
+
 def set_instance_params(client: VirtuosoClient, cell: str, params: list[tuple[str, str, str]]) -> None:
     items = " ".join(f'list("{name}" "{param}" "{value}")' for name, param, value in params)
     run_skill(
@@ -86,7 +106,9 @@ let((cv)
       else
         inst~>pname = pval)))
   schCheck(cv)
-  cv~>connectivityLastUpdated = 0
+  dbReplaceProp(cv "instance#" 'int length(cv~>instances))
+  dbSave(cv)
+  dbSetConnCurrent(cv)
   dbSave(cv)
   dbClose(cv)
   "ok")
@@ -96,22 +118,28 @@ let((cv)
 
 
 def create_common_supply(sch) -> None:
-    sch.add(inst("analogLib", "vdc", "symbol", "VDD_SRC", -4.0, 3.0, "R0"))
-    sch.add(inst("analogLib", "gnd", "symbol", "GND0", -4.0, 1.8, "R0"))
+    sch.add(inst("analogLib", "vdc", "symbol", "VDD_SRC", -7.0, 3.0, "R0"))
+    sch.add(inst("analogLib", "vdc", "symbol", "VSS_SRC", -7.0, 1.8, "R0"))
+    sch.add(inst("analogLib", "gnd", "symbol", "GND0", -7.0, 0.6, "R0"))
     sch.add(label_term("VDD_SRC", "PLUS", "VDD"))
-    sch.add(label_term("VDD_SRC", "MINUS", "0"))
-    sch.add(label_term("GND0", "gnd!", "0"))
+    sch.add(label_term("VDD_SRC", "MINUS", "VSS"))
+    sch.add(label_term("VSS_SRC", "PLUS", "VSS"))
+    sch.add(wire_between("VSS_SRC", "MINUS", "GND0", "gnd!"))
 
 
-def add_load_cap(sch, name: str, net: str, x: float, y: float) -> None:
+def add_load_cap(sch, name: str, net: str, x: float, y: float, ref: str = "VSS") -> None:
     sch.add(inst("analogLib", "cap", "symbol", name, x, y, "R0"))
     sch.add(label_term(name, "PLUS", net))
-    sch.add(label_term(name, "MINUS", "0"))
+    sch.add(label_term(name, "MINUS", ref))
 
 
-def create_comparator_tb(client: VirtuosoClient) -> dict[str, object]:
+def create_comparator_tb(client: VirtuosoClient, rebuild: bool = False) -> dict[str, object]:
     cell = "TB_SUBMOD_COMPARATOR_PERF"
-    if not cell_exists(client, cell, "schematic"):
+    exists = cell_exists(client, cell, "schematic")
+    if rebuild and exists:
+        clear_schematic(client, cell)
+        exists = False
+    if not exists:
         with client.schematic.edit(LIB, cell) as sch:
             create_common_supply(sch)
             sch.add(inst(LIB, "COMPARATOR", "symbol", "XCOMP", 0.0, 0.0, "R0"))
@@ -123,7 +151,7 @@ def create_comparator_tb(client: VirtuosoClient) -> dict[str, object]:
             for term, net in [
                 ("CLKC", "CLKC"),
                 ("VDD", "VDD"),
-                ("VSS", "0"),
+                ("VSS", "VSS"),
                 ("VP", "VP"),
                 ("VN", "VN"),
                 ("VOP", "VOP"),
@@ -131,9 +159,9 @@ def create_comparator_tb(client: VirtuosoClient) -> dict[str, object]:
             ]:
                 sch.add(label_term("XCOMP", term, net))
             for source, plus, minus in [
-                ("VCLK", "CLKC", "0"),
-                ("VVP", "VP", "0"),
-                ("VVN", "VN", "0"),
+                ("VCLK", "CLKC", "VSS"),
+                ("VVP", "VP", "VSS"),
+                ("VVN", "VN", "VSS"),
             ]:
                 sch.add(label_term(source, "PLUS", plus))
                 sch.add(label_term(source, "MINUS", minus))
@@ -142,7 +170,8 @@ def create_comparator_tb(client: VirtuosoClient) -> dict[str, object]:
         cell,
         [
             ("VDD_SRC", "vdc", "vdd"),
-            ("VCLK", "vdc", "0"),
+            ("VSS_SRC", "vdc", "0"),
+            ("VCLK", "v1", "0"),
             ("VCLK", "v2", "vdd"),
             ("VCLK", "td", "1n"),
             ("VCLK", "tr", "5p"),
@@ -163,9 +192,13 @@ def create_comparator_tb(client: VirtuosoClient) -> dict[str, object]:
     }
 
 
-def create_clk_nooverlap_tb(client: VirtuosoClient) -> dict[str, object]:
+def create_clk_nooverlap_tb(client: VirtuosoClient, rebuild: bool = False) -> dict[str, object]:
     cell = "TB_SUBMOD_CLK_NOOVERLAP_PERF"
-    if not cell_exists(client, cell, "schematic"):
+    exists = cell_exists(client, cell, "schematic")
+    if rebuild and exists:
+        clear_schematic(client, cell)
+        exists = False
+    if not exists:
         with client.schematic.edit(LIB, cell) as sch:
             create_common_supply(sch)
             sch.add(inst(LIB, "CLK_NOOVERLAP", "symbol", "XNO", 0.0, 0.0, "R0"))
@@ -177,17 +210,18 @@ def create_clk_nooverlap_tb(client: VirtuosoClient) -> dict[str, object]:
                 ("CLKOP", "CLKOP"),
                 ("CLKON", "CLKON"),
                 ("VDD", "VDD"),
-                ("VSS", "0"),
+                ("VSS", "VSS"),
             ]:
                 sch.add(label_term("XNO", term, net))
             sch.add(label_term("VCLK", "PLUS", "CLKIN"))
-            sch.add(label_term("VCLK", "MINUS", "0"))
+            sch.add(label_term("VCLK", "MINUS", "VSS"))
     set_instance_params(
         client,
         cell,
         [
             ("VDD_SRC", "vdc", "vdd"),
-            ("VCLK", "vdc", "0"),
+            ("VSS_SRC", "vdc", "0"),
+            ("VCLK", "v1", "0"),
             ("VCLK", "v2", "vdd"),
             ("VCLK", "td", "500p"),
             ("VCLK", "tr", "5p"),
@@ -206,34 +240,43 @@ def create_clk_nooverlap_tb(client: VirtuosoClient) -> dict[str, object]:
     }
 
 
-def create_asyctrl_tb(client: VirtuosoClient) -> dict[str, object]:
+def create_asyctrl_tb(client: VirtuosoClient, rebuild: bool = False) -> dict[str, object]:
     cell = "TB_SUBMOD_ASYCTRL_9CLK_PERF"
-    if not cell_exists(client, cell, "schematic"):
+    exists = cell_exists(client, cell, "schematic")
+    if rebuild and exists:
+        clear_schematic(client, cell)
+        exists = False
+    if not exists:
         with client.schematic.edit(LIB, cell) as sch:
             create_common_supply(sch)
             sch.add(inst(LIB, "Asycontrol_logic_9clk", "symbol", "XASY", 0.0, 0.0, "R0"))
-            sch.add(inst("analogLib", "vdc", "symbol", "VCLKS", -4.0, 0.8, "R0"))
+            sch.add(inst("analogLib", "vpulse", "symbol", "VCLKS", -4.0, 0.8, "R0"))
             sch.add(inst("analogLib", "vpulse", "symbol", "VVALID", -4.0, -0.8, "R0"))
             add_load_cap(sch, "C_CLKC", "CLKC", 3.2, 0.7)
-            for bit in range(9):
-                add_load_cap(sch, f"C_CLKO{bit}", f"CLKO<{bit}>", 3.2, -0.5 - 0.35 * bit)
             for term, net in [
                 ("CLKS", "CLKS"),
                 ("VALID", "VALID"),
                 ("CLKC", "CLKC"),
                 ("CLKO<8:0>", "CLKO<8:0>"),
                 ("VDD", "VDD"),
-                ("VSS", "0"),
+                ("VSS", "VSS"),
             ]:
                 sch.add(label_term("XASY", term, net))
             sch.add(label_term("VCLKS", "PLUS", "CLKS"))
-            sch.add(label_term("VCLKS", "MINUS", "0"))
+            sch.add(label_term("VCLKS", "MINUS", "VSS"))
             sch.add(label_term("VVALID", "PLUS", "VALID"))
-            sch.add(label_term("VVALID", "MINUS", "0"))
+            sch.add(label_term("VVALID", "MINUS", "VSS"))
     params = [
         ("VDD_SRC", "vdc", "vdd"),
-        ("VCLKS", "vdc", "vdd"),
-        ("VVALID", "vdc", "0"),
+        ("VSS_SRC", "vdc", "0"),
+        ("VCLKS", "v1", "0"),
+        ("VCLKS", "v2", "vdd"),
+        ("VCLKS", "td", "100p"),
+        ("VCLKS", "tr", "5p"),
+        ("VCLKS", "tf", "5p"),
+        ("VCLKS", "pw", "50n"),
+        ("VCLKS", "per", "50n"),
+        ("VVALID", "v1", "0"),
         ("VVALID", "v2", "vdd"),
         ("VVALID", "td", "500p"),
         ("VVALID", "tr", "5p"),
@@ -242,7 +285,6 @@ def create_asyctrl_tb(client: VirtuosoClient) -> dict[str, object]:
         ("VVALID", "per", "2.5n"),
         ("C_CLKC", "c", "cload"),
     ]
-    params.extend((f"C_CLKO{bit}", "c", "cload") for bit in range(9))
     set_instance_params(client, cell, params)
     return {
         "cell": cell,
@@ -252,9 +294,13 @@ def create_asyctrl_tb(client: VirtuosoClient) -> dict[str, object]:
     }
 
 
-def create_bootstrap_tb(client: VirtuosoClient) -> dict[str, object]:
+def create_bootstrap_tb(client: VirtuosoClient, rebuild: bool = False) -> dict[str, object]:
     cell = "TB_SUBMOD_BOOTSTRAP_DIFF_PERF"
-    if not cell_exists(client, cell, "schematic"):
+    exists = cell_exists(client, cell, "schematic")
+    if rebuild and exists:
+        clear_schematic(client, cell)
+        exists = False
+    if not exists:
         with client.schematic.edit(LIB, cell) as sch:
             create_common_supply(sch)
             sch.add(inst(LIB, "BOOTSTRAP_DIFF", "symbol", "XBOOT", 0.0, 0.0, "R0"))
@@ -268,7 +314,7 @@ def create_bootstrap_tb(client: VirtuosoClient) -> dict[str, object]:
                 ("CLKS", "CLKS"),
                 ("CLKSB", "CLKSB"),
                 ("VDD", "VDD"),
-                ("VSS", "0"),
+                ("VSS", "VSS"),
                 ("VIP", "VIP"),
                 ("VIN", "VIN"),
                 ("VOUTP", "VOUTP"),
@@ -276,10 +322,10 @@ def create_bootstrap_tb(client: VirtuosoClient) -> dict[str, object]:
             ]:
                 sch.add(label_term("XBOOT", term, net))
             for source, plus, minus in [
-                ("VCLKS", "CLKS", "0"),
-                ("VCLKSB", "CLKSB", "0"),
-                ("VVIP", "VIP", "0"),
-                ("VVIN", "VIN", "0"),
+                ("VCLKS", "CLKS", "VSS"),
+                ("VCLKSB", "CLKSB", "VSS"),
+                ("VVIP", "VIP", "VSS"),
+                ("VVIN", "VIN", "VSS"),
             ]:
                 sch.add(label_term(source, "PLUS", plus))
                 sch.add(label_term(source, "MINUS", minus))
@@ -288,14 +334,15 @@ def create_bootstrap_tb(client: VirtuosoClient) -> dict[str, object]:
         cell,
         [
             ("VDD_SRC", "vdc", "vdd"),
-            ("VCLKS", "vdc", "0"),
+            ("VSS_SRC", "vdc", "0"),
+            ("VCLKS", "v1", "0"),
             ("VCLKS", "v2", "vdd"),
             ("VCLKS", "td", "500p"),
             ("VCLKS", "tr", "5p"),
             ("VCLKS", "tf", "5p"),
             ("VCLKS", "pw", "2n"),
             ("VCLKS", "per", "5n"),
-            ("VCLKSB", "vdc", "vdd"),
+            ("VCLKSB", "v1", "vdd"),
             ("VCLKSB", "v2", "0"),
             ("VCLKSB", "td", "500p"),
             ("VCLKSB", "tr", "5p"),
@@ -385,13 +432,21 @@ let((obj)
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--rebuild-schematics",
+        action="store_true",
+        help="clear and rebuild generated submodule schematics before saving Maestro setup",
+    )
+    args = parser.parse_args()
+
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     client = VirtuosoClient.from_env()
     specs = [
-        create_comparator_tb(client),
-        create_clk_nooverlap_tb(client),
-        create_asyctrl_tb(client),
-        create_bootstrap_tb(client),
+        create_comparator_tb(client, rebuild=args.rebuild_schematics),
+        create_clk_nooverlap_tb(client, rebuild=args.rebuild_schematics),
+        create_asyctrl_tb(client, rebuild=args.rebuild_schematics),
+        create_bootstrap_tb(client, rebuild=args.rebuild_schematics),
     ]
     maestro = [ensure_maestro_setup(client, spec) for spec in specs]
     manifest = {

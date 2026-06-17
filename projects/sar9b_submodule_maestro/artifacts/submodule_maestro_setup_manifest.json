@@ -77,7 +77,7 @@
   "maestro": [
     {
       "cell": "TB_SUBMOD_COMPARATOR_PERF",
-      "session": "fnxSession22",
+      "session": "fnxSession70",
       "views": "(\"maestro\" \"schematic\")",
       "outputs": [
         {
@@ -109,7 +109,7 @@
     },
     {
       "cell": "TB_SUBMOD_CLK_NOOVERLAP_PERF",
-      "session": "fnxSession23",
+      "session": "fnxSession71",
       "views": "(\"maestro\" \"schematic\")",
       "outputs": [
         {
@@ -131,7 +131,7 @@
     },
     {
       "cell": "TB_SUBMOD_ASYCTRL_9CLK_PERF",
-      "session": "fnxSession24",
+      "session": "fnxSession72",
       "views": "(\"maestro\" \"schematic\")",
       "outputs": [
         {
@@ -198,7 +198,7 @@
     },
     {
       "cell": "TB_SUBMOD_BOOTSTRAP_DIFF_PERF",
-      "session": "fnxSession25",
+      "session": "fnxSession73",
       "views": "(\"maestro\" \"schematic\")",
       "outputs": [
         {

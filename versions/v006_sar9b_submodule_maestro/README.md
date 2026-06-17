@@ -35,15 +35,22 @@ and section `top_tt`.
 
 ## Run Status
 
-Setup is complete, but automated performance measurement is still blocked by
-ADE/Maestro run control rather than by a measured circuit failure:
+The generated Maestro run/export flow now completes for all four submodule
+testbenches. Latest histories:
 
-1. Initial comparator histories `Interactive.0` and `Interactive.1` hit
-   `OSSHNL-108` because `connectivityLastUpdated` was `nil`.
-2. The property was repaired on all four new schematics.
-3. A later background attempt, `Interactive.2`, was stopped immediately by
-   Maestro and did not run Spectre.
+| Testbench | Latest history | Spectre result | Quick result |
+|-----------|----------------|----------------|--------------|
+| `TB_SUBMOD_COMPARATOR_PERF` | `Interactive.8` | 0 errors, 5 warnings | decision crossing delay `3.923 ps` |
+| `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `Interactive.3` | 0 errors, 30 warnings | no simultaneous-high window; both-low total `176 ps` |
+| `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `Interactive.7` | 0 errors, 10 warnings | `VALID` and `CLKC` active; `CLKO<0..8>` still not rail-to-rail |
+| `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `Interactive.4` | 0 errors, 30 warnings | final differential output `100.000067 mV` for `100 mV` input |
 
-The next validation pass should run the generated Maestro views through the GUI
-`Update and Run` flow or improve the ADE modal handling before collecting
-timing/performance metrics.
+Key repair details:
+
+1. `OSSHNL-109` was fixed by saving schematics with `dbSetConnCurrent`; manual
+   property edits were insufficient because `dbSave` advances
+   `schGeometryLastUpdated`.
+2. The testbenches were rebuilt with a real `VSS_SRC (VSS 0)` reference using
+   an `analogLib/gnd` wire. Plain `"0"` labels produced floating `_net0`.
+3. ASYCTRL still needs a functional stimulus/initialization pass. The current
+   result proves the Maestro/Spectre chain, but not the 9-step sequence.
