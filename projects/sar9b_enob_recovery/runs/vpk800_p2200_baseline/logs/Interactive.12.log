@@ -1,0 +1,21 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Wed Jun 17 17:17:01 2026 
+Best design point: 1
+Design specs: 
+	Vcmbased_ADC_tb_1	corner	Nominal - 
+	spectrum_enob_p2200		8.678
+	spectrum_sinad_p2200		54.01
+	spectrum_enob		8.678
+	spectrum_sinad		54.01
+Design parameters: 
+	fs		400M
+	Vpk		800m
+	Cunit		1f
+	TSTOP		2.7u
+
+Interactive.12
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.12 completed. 
+Current time: Wed Jun 17 17:54:01 2026 

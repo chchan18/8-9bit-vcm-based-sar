@@ -7,6 +7,12 @@
 This version records the final documentation update for the active
 `SAR9B_400MV/ADC_9B_tb_best_q4` 9-bit Maestro validation flow.
 
+Superseded by `versions/v005_sar9b_vpk800_enob_recovery/`: the measurement
+chain documented here was correct, but the run was under-driven by a hidden
+`Vpk=450m` Maestro override. The recovered `Vpk=800m` run reports Maestro
+default `/out` ENOB `8.678` bits and DAC9 `/out` phase-sweep ENOB `8.7005`
+bits.
+
 The old Maestro `/out` measurement path:
 
 ```text

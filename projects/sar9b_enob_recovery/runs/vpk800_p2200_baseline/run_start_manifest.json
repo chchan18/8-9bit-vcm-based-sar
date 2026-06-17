@@ -1,0 +1,24 @@
+{
+  "library": "SAR9B_400MV",
+  "testbench_cell": "ADC_9B_tb_best_q4",
+  "top_cell": "TOP_9B_ADC",
+  "test_name": "Vcmbased_ADC_tb_1",
+  "target_vpk": "800m",
+  "session": "fnxSession18",
+  "history": "Interactive.12",
+  "start_epoch": 1781687821,
+  "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.12.log",
+  "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.12/1/Vcmbased_ADC_tb_1/psf",
+  "netlist_remote": "/home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.12/1/Vcmbased_ADC_tb_1/netlist/input.scs",
+  "vpk_set_outputs": {
+    "global": "t",
+    "test": "t",
+    "corner_nominal": "nil",
+    "corner_default": "t",
+    "maeGetVar": "\"800m\"",
+    "asiDesignVars": "((\"fs\" \"400M\") (\"Vpk\" \"800m\") (\"Cunit\" \"1f\") (\"Vth_sw\" \"0.9\") (\"TSTOP\" \"2.7u\"))"
+  },
+  "netlist_parameters_line": "parameters fs=400M Vpk=800m Cunit=1f Vth_sw=0.9 TSTOP=2.7u",
+  "netlist_has_vpk800": true,
+  "netlist_has_vpk450": false
+}

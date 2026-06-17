@@ -50,7 +50,9 @@ E:\8bitvcmvirtuoso\
 ├── versions/
 │   ├── v001_initial-setup/        # Git, logging, hooks setup
 │   ├── v002_virtuoso-bridge-lite/ # Bridge installation
-│   └── v003_ADC_documentation/    # ADC design README + netlist + input.scs
+│   ├── v003_ADC_documentation/    # ADC design README + netlist + input.scs
+│   ├── v004_sar9b_dac9_measurement_chain/ # DAC9 measurement-chain repair docs
+│   └── v005_sar9b_vpk800_enob_recovery/   # Vpk=800m ENOB recovery docs
 └── sar9b_work/                    # Working directory for 9-bit SAR development
     ├── *.py                       # Python scripts (TB fixes, netlist mods, sim runs)
     ├── *.sh                       # Shell scripts for remote execution
@@ -469,6 +471,56 @@ Artifacts:
 | `sar9b_work/iterations/sar9b_maestro_best_q4/out_phase_interactive10_fine/out_phase_sweep.json` | `/out` phase sweep selecting p2200 window |
 | `sar9b_work/iterations/sar9b_maestro_best_q4/maestro_files_loaded_phase_p2200/active.state` | Verified Maestro setup with corrected default `spectrum_enob/sinad` expressions |
 
+### SAR9B_400MV Vpk=800m ENOB recovery update (2026-06-17, current best)
+
+The new `projects/sar9b_enob_recovery/` investigation confirmed that the
+previous `Interactive.11` ENOB `7.86` result was dominated by a hidden Maestro
+variable override: the generated netlist used `Vpk=450m`, while the intended
+high-ENOB setup uses `Vpk=800m`.
+
+A pure Maestro XML upload was not enough because an already-open ADE session
+could write stale `Vpk=450m` values back into `maestro.sdb`. The successful
+run therefore set `Vpk=800m` directly in the live Maestro session, saved the
+setup, started the run, and verified the generated netlist before measuring.
+
+| Item | Value |
+|------|-------|
+| Project | `projects/sar9b_enob_recovery` |
+| Library | `SAR9B_400MV` |
+| Maestro cell | `ADC_9B_tb_best_q4` |
+| History | `Interactive.12` |
+| Netlist Vpk evidence | `parameters fs=400M Vpk=800m Cunit=1f Vth_sw=0.9 TSTOP=2.7u` |
+| Spectre result | 0 errors, 40 warnings, 8 notices |
+| Spectre elapsed | 36m 58.5s |
+| Maestro default `/out` outputs | SINAD 54.01 dB, ENOB 8.678 bits |
+| Raw top-level `biP<8:0>` best result | SINAD 54.2559 dB, ENOB 8.7203 bits |
+| Best raw-code sample phase | `+1500 ps` relative to the original Maestro FFT grid |
+| Raw code range | 24 to 487 |
+| DAC9 `/out` phase-sweep best result | SINAD 54.1370 dB, ENOB 8.7005 bits |
+| Best DAC9 `/out` sample phase | `+2250 ps` relative to the original Maestro FFT grid |
+| DAC9 `/out` range | 42.27 mV to 857.73 mV |
+
+Artifacts:
+
+| File | Content |
+|------|---------|
+| `projects/sar9b_enob_recovery/README.md` | Root-cause project summary and final recovery result |
+| `projects/sar9b_enob_recovery/analysis/2026-06-17_root_cause.md` | Root-cause calculations plus verification run |
+| `projects/sar9b_enob_recovery/scripts/start_vpk800_maestro_run.py` | Live-session `Vpk=800m` setter, runner, and netlist verifier |
+| `projects/sar9b_enob_recovery/scripts/check_vpk800_run.py` | Run polling and log/netlist archiver |
+| `projects/sar9b_enob_recovery/runs/vpk800_p2200_baseline/run_start_manifest.json` | Interactive.12 setup and netlist-verification manifest |
+| `projects/sar9b_enob_recovery/runs/vpk800_p2200_baseline/run_complete_manifest.json` | Spectre completion manifest |
+| `projects/sar9b_enob_recovery/runs/vpk800_p2200_baseline/input.scs` | Captured `Vpk=800m` netlist |
+| `projects/sar9b_enob_recovery/runs/vpk800_p2200_baseline/logs/Interactive.12.log` | Maestro run log with `Vpk 800m` |
+| `projects/sar9b_enob_recovery/runs/vpk800_p2200_baseline/logs/spectre.out` | Spectre log |
+| `projects/sar9b_enob_recovery/runs/vpk800_p2200_baseline/phase_sweep_bip/bip_phase_sweep.json` | Raw `biP<8:0>` phase sweep |
+| `projects/sar9b_enob_recovery/runs/vpk800_p2200_baseline/out_phase_sweep/out_phase_sweep.json` | DAC9 `/out` phase sweep |
+
+Interpretation: the active SAR9B 9-bit path and the repaired
+`biP<0..8> -> DAC9b_va -> /out` measurement chain are now both validated near
+`8.7` ENOB at nominal. Remaining work should focus on robustness sweeps rather
+than basic measurement-chain repair.
+
 ---
 
 ## 8. Remaining Tasks
@@ -478,17 +530,23 @@ Artifacts:
 A new investigation project has been opened at
 `projects/sar9b_enob_recovery/`.
 
-Initial root-cause conclusion: the current `SAR9B_400MV` ENOB is low mostly
-because the final Maestro netlist used `Vpk=450m`, while the earlier q4 run
-that reached raw-code `ENOB=8.7167 bits` used `Vpk=800m`. The hidden override
-is in `maestro.sdb`: `active.state` already shows `Vpk=800m`, but the SDB has
-repeated active-run blocks with `Vpk=450m`, and the generated
-`Interactive.11` netlist confirms the 450m value won.
+Root-cause result: the previous `SAR9B_400MV` ENOB `7.86` value was low mostly
+because the final Maestro netlist used `Vpk=450m`, while the intended q4 setup
+uses `Vpk=800m`. A live-session `maeSetVar` flow forced the correct variable
+precedence, generated an `Interactive.12` netlist with `Vpk=800m`, and
+recovered:
 
-First project artifact:
-`projects/sar9b_enob_recovery/artifacts/maestro_files_vpk800_p2200/`, generated
-from the known-good p2200 setup. Its patch manifest changes all SDB `Vpk`
-entries to `800m` while preserving the DAC9 measurement-chain repair.
+| Path | SINAD | ENOB | Best phase |
+|------|-------|------|------------|
+| Raw `biP<8:0>` | 54.2559 dB | 8.7203 bits | `+1500 ps` |
+| Maestro default `/out` | 54.01 dB | 8.678 bits | p2200 output expression |
+| DAC9 `/out` phase-sweep best | 54.1370 dB | 8.7005 bits | `+2250 ps` |
+
+The first project artifact,
+`projects/sar9b_enob_recovery/artifacts/maestro_files_vpk800_p2200/`, remains
+useful as a patched setup backup, but the robust operational flow is
+`scripts/start_vpk800_maestro_run.py`, which sets variables in the live Maestro
+session and verifies the generated netlist.
 
 ### Priority 1: Proper 9-bit measurement
 Raw-code measurement was first completed without editing the schematic:
@@ -517,7 +575,10 @@ Target-achieved validation work:
 5. Done: Maestro default `spectrum_enob` and `spectrum_sinad` now use the
    p2200 `/out` FFT window (`28.2 ns -> 2.5882 us`, 1024 samples), and
    `Interactive.11` reports `ENOB=7.86 bits`, `SINAD=49.08 dB`.
-6. Sweep PVT/input amplitude and confirm the high-ENOB plateau is robust.
+6. Done: `Interactive.12` forced the intended `Vpk=800m` live Maestro setup
+   and recovered raw `biP<8:0>` ENOB `8.7203 bits`, Maestro default `/out`
+   ENOB `8.678 bits`, and DAC9 `/out` phase-sweep ENOB `8.7005 bits`.
+7. Sweep PVT/input amplitude and confirm the high-ENOB plateau is robust.
 7. Decide whether fractional `Cunit*0.5` and `Cunit*0.25` values are acceptable
    physically, or replace them with an explicit smaller `Cunit` and integer
    binary weights.

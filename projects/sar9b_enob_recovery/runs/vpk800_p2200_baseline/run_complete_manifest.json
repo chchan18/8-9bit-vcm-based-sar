@@ -1,0 +1,19 @@
+{
+  "library": "SAR9B_400MV",
+  "testbench_cell": "ADC_9B_tb_best_q4",
+  "top_cell": "TOP_9B_ADC",
+  "test_name": "Vcmbased_ADC_tb_1",
+  "target_vpk": "800m",
+  "history": "Interactive.12",
+  "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.12.log",
+  "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.12/1/Vcmbased_ADC_tb_1/psf",
+  "netlist_remote": "/home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.12/1/Vcmbased_ADC_tb_1/netlist/input.scs",
+  "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.12/1/Vcmbased_ADC_tb_1/psf/spectre.out",
+  "spectre": {
+    "errors": 0,
+    "warnings": 40,
+    "notices": 8,
+    "elapsed": "36m  58.5s"
+  },
+  "checked_epoch": 1781690067
+}

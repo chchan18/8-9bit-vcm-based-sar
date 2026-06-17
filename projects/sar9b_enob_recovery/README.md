@@ -73,14 +73,51 @@ Expected result: if amplitude is the dominant issue, raw `biP<8:0>` should
 move from ENOB `7.92` back near `8.7`, and DAC9 `/out` should follow after FFT
 window verification.
 
+## First Experiment Result
+
+Status: passed.
+
+The patched XML files alone were not sufficient because an already-open ADE
+session could still save stale in-memory `Vpk=450m` values back into
+`maestro.sdb`. The successful flow therefore sets `Vpk=800m` in the live
+Maestro session with `maeSetVar`, saves the setup, starts the run, and then
+checks the generated netlist before trusting the result.
+
+| Item | Value |
+|------|-------|
+| Library | `SAR9B_400MV` |
+| Maestro cell | `ADC_9B_tb_best_q4` |
+| History | `Interactive.12` |
+| Netlist Vpk evidence | `parameters fs=400M Vpk=800m Cunit=1f Vth_sw=0.9 TSTOP=2.7u` |
+| Spectre status | 0 errors, 40 warnings, 8 notices |
+| Spectre elapsed | 36m 58.5s |
+| Maestro default `/out` outputs | SINAD 54.01 dB, ENOB 8.678 bits |
+| Raw `biP<8:0>` best | SINAD 54.2559 dB, ENOB 8.7203 bits |
+| Raw best phase | `+1500 ps` relative to the original Maestro FFT grid |
+| Raw code range | 24 to 487 |
+| DAC9 `/out` phase-sweep best | SINAD 54.1370 dB, ENOB 8.7005 bits |
+| DAC9 `/out` best phase | `+2250 ps` relative to the original Maestro FFT grid |
+| DAC9 `/out` range | 42.27 mV to 857.73 mV |
+
+The recovered result confirms the root-cause hypothesis: the SAR9B design and
+the repaired 9-bit DAC measurement chain can both reach near-9-bit ENOB once
+the hidden `Vpk=450m` Maestro override is removed.
+
+Phase-sweep highlights:
+
+| Path | Stable/Best Window | Result |
+|------|--------------------|--------|
+| Raw `biP<8:0>` | `+1500 ps` through `+2100 ps` | ENOB 8.7203 bits |
+| DAC9 `/out` | best at `+2250 ps` | ENOB 8.7005 bits |
+
 ## Follow-up Experiments
 
 | Priority | Experiment | Purpose |
 |----------|------------|---------|
-| P0 | `vpk800_p2200_baseline` | Confirm the under-drive hypothesis. |
+| P0 | `vpk800_p2200_baseline` | Done: confirmed the under-drive hypothesis and recovered ENOB. |
 | P1 | `vpk_sweep_650_700_750_800m` | Find the highest SINAD before clipping/settling artifacts. |
-| P2 | `phase_sweep_vpk800` | Re-select the best raw-code and DAC9 `/out` sample windows after increasing amplitude. |
-| P3 | `dac9_trise_sweep` | Check whether finite DAC9 edge smoothing is still costing the `/out` metric. |
+| P2 | `phase_sweep_vpk800` | Done: raw best at `+1500 ps`, DAC9 `/out` best at `+2250 ps`. |
+| P3 | `dac9_trise_sweep` | Lower priority: DAC9 `/out` is now within 0.02 bit of raw `biP`. |
 | P4 | `pvt_input_robustness` | Confirm the result is not a single nominal-corner point. |
 
 ## Project Files
@@ -91,22 +128,20 @@ window verification.
 | `experiment_matrix.csv` | Experiment queue and expected pass criteria. |
 | `scripts/patch_maestro_vpk.py` | Local patcher for `active.state` and `maestro.sdb`. |
 | `scripts/upload_vpk800_setup.py` | Dry-run-by-default uploader that backs up the remote Maestro setup before applying the Vpk=800m setup. |
+| `scripts/start_vpk800_maestro_run.py` | Sets `Vpk=800m` in the live Maestro session, starts a run, and verifies the generated netlist. |
+| `scripts/check_vpk800_run.py` | Polls the active Maestro/Spectre run and archives logs/netlist. |
 | `artifacts/maestro_files_vpk800_p2200/` | Generated patched Maestro setup after running the patcher. |
+| `runs/vpk800_p2200_baseline/` | Interactive.12 manifest, netlist, logs, and phase-sweep exports. |
 
 ## Current State
 
-The local patched setup has been generated. Its manifest shows:
+`vpk800_p2200_baseline` is complete. The best verified nominal result is now:
 
 ```text
-active.state: Vpk 800m -> 800m
-maestro.sdb:  12 x 450m + 12 x 800m -> 24 x 800m
+raw biP<8:0>: ENOB 8.7203, SINAD 54.2559 dB
+Maestro /out: ENOB 8.6780, SINAD 54.0100 dB
+DAC9 /out:    ENOB 8.7005, SINAD 54.1370 dB phase-sweep best
 ```
 
-The next action is to upload this setup with:
-
-```powershell
-.\.venv\Scripts\python.exe projects\sar9b_enob_recovery\scripts\upload_vpk800_setup.py --apply
-```
-
-Then start a fresh `SAR9B_400MV/ADC_9B_tb_best_q4` Maestro run and verify the
-captured netlist uses `Vpk=800m`.
+The next useful work is robustness, not basic recovery: run a small Vpk/PVT
+sweep and confirm the high-ENOB plateau is not a single nominal-corner point.

@@ -17,3 +17,7 @@ Date: 2026-06-17
   than the active target.
 - Recorded the validated p2200 FFT expressions used by default Maestro
   `spectrum_enob` and `spectrum_sinad`.
+- Added a supersession note pointing to
+  `versions/v005_sar9b_vpk800_enob_recovery/`, where the hidden `Vpk=450m`
+  override is resolved; Maestro default `/out` ENOB recovers to `8.678` bits
+  and DAC9 `/out` phase-sweep ENOB reaches `8.7005` bits.

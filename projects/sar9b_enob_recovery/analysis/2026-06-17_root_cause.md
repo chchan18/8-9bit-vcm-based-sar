@@ -79,3 +79,28 @@ The setup is internally inconsistent:
 Therefore the next step is to remove or patch the hidden `Vpk=450m` Maestro
 override, rerun at `Vpk=800m`, and then remeasure both raw `biP<8:0>` and DAC9
 `/out`.
+
+## Verification Run
+
+The follow-up run confirmed the hypothesis. Because an already-open ADE session
+can write stale `450m` values back into `maestro.sdb`, the successful flow used
+`maeSetVar` on the live Maestro session before saving and running.
+
+| Item | Value |
+|------|-------|
+| Run | `SAR9B_400MV/ADC_9B_tb_best_q4` `Interactive.12` |
+| Live-session readback | `maeGetVar("Vpk") -> "800m"` |
+| Netlist parameter line | `parameters fs=400M Vpk=800m Cunit=1f Vth_sw=0.9 TSTOP=2.7u` |
+| Spectre result | 0 errors, 40 warnings, 8 notices |
+| Spectre elapsed | 36m 58.5s |
+| Maestro default `/out` outputs | SINAD 54.01 dB, ENOB 8.678 bits |
+| Raw `biP<8:0>` best | SINAD 54.2559 dB, ENOB 8.7203 bits |
+| Raw best phase | `+1500 ps` |
+| Raw code range | 24 to 487 |
+| DAC9 `/out` phase-sweep best | SINAD 54.1370 dB, ENOB 8.7005 bits |
+| DAC9 `/out` best phase | `+2250 ps` |
+
+This closes the root cause: the previous ENOB `7.86` was caused primarily by
+the hidden `Vpk=450m` Maestro override. With the intended `Vpk=800m`, both the
+raw SAR output and the repaired 9-bit DAC measurement chain recover to about
+`8.7` ENOB.

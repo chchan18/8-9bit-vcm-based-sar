@@ -1,6 +1,6 @@
 priority,experiment,status,change,expected_result,pass_criterion
-P0,vpk800_p2200_baseline,planned,Patch all Maestro Vpk overrides to 800m and keep p2200 DAC9 outputs,Raw ENOB near 8.7 and code range near 24..487,netlist shows Vpk=800m and raw ENOB >= 8.5
+P0,vpk800_p2200_baseline,done,Set Vpk=800m in live Maestro session and keep DAC9 outputs,Recovered raw ENOB near 8.7 and DAC9 /out follows,passed netlist Vpk=800m raw ENOB=8.7203 maestro out ENOB=8.678 phase out ENOB=8.7005
 P1,vpk_sweep_650_700_750_800m,planned,Sweep Vpk after baseline is reproducible,Identify max SINAD before clipping or settling artifacts,best point ENOB >= baseline and no midband/glitch inflation
-P2,phase_sweep_vpk800,planned,Sweep raw biP and DAC9 /out phase at Vpk=800m,Find stable raw and analog output windows,stable plateau spanning at least 300 ps
-P3,dac9_trise_sweep,planned,Reduce ideal DAC9 trise/tfall or use sampled/held output expression,Close raw-code to DAC9 /out ENOB gap,DAC9 /out within 0.1 bit of raw biP
+P2,phase_sweep_vpk800,done,Sweep raw biP and DAC9 /out phase at Vpk=800m,Found stable raw and analog output windows,passed raw ENOB=8.7203 at +1500ps out ENOB=8.7005 at +2250ps
+P3,dac9_trise_sweep,deferred,Reduce ideal DAC9 trise/tfall or use sampled/held output expression,Close raw-code to DAC9 /out ENOB gap,lower priority because DAC9 /out is within 0.02 bit of raw biP
 P4,pvt_input_robustness,planned,Run nominal amplitude point across key corners/input amplitudes,Check robustness of recovered ENOB,no nominal-only artifact

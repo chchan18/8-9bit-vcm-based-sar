@@ -54,5 +54,39 @@ active.state: 1 x 800m -> 1 x 800m
 maestro.sdb:  12 x 450m + 12 x 800m -> 24 x 800m
 ```
 
-Next step: upload the patched setup, run a fresh SAR9B Maestro simulation, and
-verify the new captured netlist uses `Vpk=800m`.
+## Follow-up Run Completed
+
+The first experiment was completed in `SAR9B_400MV/ADC_9B_tb_best_q4` as
+`Interactive.12`. A pure XML upload was not enough because an already-open ADE
+session could save stale in-memory `Vpk=450m` values back into `maestro.sdb`;
+the successful flow used live-session `maeSetVar` calls before saving and
+running.
+
+Netlist evidence:
+
+```spectre
+parameters fs=400M Vpk=800m Cunit=1f Vth_sw=0.9 TSTOP=2.7u
+```
+
+Results:
+
+Maestro default p2200 outputs:
+
+```text
+spectrum_enob_p2200  8.678
+spectrum_sinad_p2200 54.01
+spectrum_enob        8.678
+spectrum_sinad       54.01
+```
+
+| Path | Best phase | SINAD | ENOB | Notes |
+|------|------------|-------|------|-------|
+| Raw `biP<8:0>` | `+1500 ps` | 54.2559 dB | 8.7203 bits | Code range 24 to 487 |
+| DAC9 `/out` phase sweep | `+2250 ps` | 54.1370 dB | 8.7005 bits | 42.27 mV to 857.73 mV |
+
+Spectre completed with 0 errors, 40 warnings, and 8 notices in 36m 58.5s.
+
+Conclusion: the previous SAR9B ENOB `7.86` result was primarily caused by the
+hidden `Vpk=450m` Maestro override. The repaired 9-bit DAC measurement chain is
+reasonable after the intended `Vpk=800m` setup is forced into the live Maestro
+session.

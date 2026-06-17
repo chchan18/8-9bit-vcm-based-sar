@@ -1,0 +1,10 @@
+{
+  "remote_maestro": "/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro",
+  "setup_dir": "E:\\8bitvcmvirtuoso\\projects\\sar9b_enob_recovery\\artifacts\\maestro_files_vpk800_p2200",
+  "backup_dir": "projects\\sar9b_enob_recovery\\artifacts\\remote_backup_before_vpk800_1781687578",
+  "applied": true,
+  "files": [
+    "active.state",
+    "maestro.sdb"
+  ]
+}
