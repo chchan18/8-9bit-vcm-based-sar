@@ -509,7 +509,10 @@ Target-achieved validation work:
 Investigate if Spectre 19+ or `-lib` flag can bypass the PDK `library` statement issue.
 
 ### Priority 3: Documentation
-- Update `versions/v003_ADC_documentation/README_TOP_redun1_ADC.md` with 9-bit results
+- Done: `versions/v003_ADC_documentation/README_TOP_redun1_ADC.md` now includes
+  the final `SAR9B_400MV/ADC_9B_tb_best_q4` DAC9 `/out` result
+  (`ENOB=7.86 bits`, `SINAD=49.08 dB`) and raw-code reference
+  (`ENOB=7.9200 bits`, `SINAD=49.4385 dB`).
 
 ---
 

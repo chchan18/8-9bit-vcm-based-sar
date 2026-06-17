@@ -7,6 +7,7 @@
 > **Sampling Rate**: 400 MS/s (fs=400M)  
 > **Resolution**: 8-bit (9-bit redundant CDAC → decoded to 8-bit)  
 > **Measured Performance**: ENOB = 7.82 bits, SINAD = 48.84 dB  
+> **Latest SAR9B_400MV 9-bit validation**: DAC9 `/out` ENOB = 7.86 bits, SINAD = 49.08 dB
 > **Library**: `8BIT400MVcmredundancySAR`  
 > **Simulator**: Spectre 18.1, `reltol=1e-3`, `errpreset=moderate`
 
@@ -709,10 +710,11 @@ Conclusion: the original full-size binary experiment was limited mainly by
 CDAC load/switch settling. Once the binary CDAC total is brought back near the
 original redundant CDAC load, raw-code ENOB exceeds the 7-bit target.
 
-### Real 9-bit Maestro Validation
+### Original-library 9-bit Maestro Validation Reference
 
 A clean Maestro testbench was then created to avoid using the original
-`ADC_redun1_tb` as the active design:
+`ADC_redun1_tb` as the active design. This result is preserved as a reference,
+but the active target has since moved to `SAR9B_400MV/ADC_9B_tb_best_q4`.
 
 | Item | Value |
 |------|-------|
@@ -743,6 +745,79 @@ Artifacts:
 sar9b_work/iterations/9bit_maestro_best_q4/
 ```
 
+### SAR9B_400MV DAC9 Maestro Validation
+
+The current validated 9-bit flow is in the dedicated `SAR9B_400MV` library.
+The Maestro measurement chain was repaired so the active `/out` no longer uses
+the old `decode_redun9to8 -> DAC8b_va` path. The testbench now measures the
+9-bit raw code through a direct ideal DAC:
+
+```
+biP<0..8> -> DAC9b_va -> /out
+```
+
+Final run summary:
+
+| Item | Value |
+|------|-------|
+| Library | `SAR9B_400MV` |
+| Maestro cell | `ADC_9B_tb_best_q4` |
+| DUT | `I0 -> SAR9B_400MV/TOP_9B_ADC` |
+| CDAC weights | q4-scaled binary on `TOP_9B_ADC` |
+| History | `Interactive.11` |
+| Run time | 2026-06-17 14:32:29 -> 16:21:46 |
+| Spectre status | 0 errors, 40 warnings, 8 notices |
+| Spectre elapsed | 1h 49m 18s |
+| Maestro `/out` after DAC9 + p2200 repair | SINAD 49.08 dB, ENOB 7.86 bits |
+| Raw `biP<8:0>` reference | SINAD 49.4385 dB, ENOB 7.9200 bits |
+
+Captured `Interactive.11` netlist evidence:
+
+```spectre
+include "/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/sar9b_va_ahdl.scs"
+I0 (...) TOP_9B_ADC
+I15 (out VDD biP\<0\> biP\<1\> biP\<2\> biP\<3\> biP\<4\> biP\<5\> \
+        biP\<6\> biP\<7\> biP\<8\>) DAC9b_va VFS=0.9 VTH=0.45 trise=1e-09 \
+        tfall=1e-09 td=0 rout=1
+```
+
+The wrapper file contains only the DAC9 Verilog-A include:
+
+```spectre
+ahdl_include "/home/IC/Desktop/Project/SAR9B_400MV/DAC9b_va/veriloga/veriloga.va"
+```
+
+The final top-level netlist has no `decode_redun9to8`, no `DAC8b_va`, and no
+empty `subckt DAC9b_va`. This fixes the old low-Maestro-ENOB failure mode
+where the legacy 8-bit measurement path reported `ENOB=2.365`.
+
+The default Maestro ENOB/SINAD outputs were also moved to the validated p2200
+window for the finite-rise DAC9 `/out` waveform:
+
+```skill
+spectrumMeasurement(v("/out" ?result "tran") t 2.82e-08 2.5882e-06 1024 390600 2e+08 0 "Rectangular" 0 0 1 "enob")
+spectrumMeasurement(v("/out" ?result "tran") t 2.82e-08 2.5882e-06 1024 390600 2e+08 0 "Rectangular" 0 0 1 "sinad")
+```
+
+`Interactive.11.log` reports:
+
+```text
+spectrum_enob_p2200  7.86
+spectrum_sinad_p2200 49.08
+spectrum_enob        7.86
+spectrum_sinad       49.08
+```
+
+Artifacts:
+
+```
+sar9b_work/iterations/sar9b_maestro_best_q4/
+sar9b_work/iterations/sar9b_maestro_best_q4/logs/Interactive.11.log
+sar9b_work/iterations/sar9b_maestro_best_q4/maestro_files_loaded_phase_p2200/active.state
+sar9b_work/iterations/sar9b_maestro_best_q4/measurement_chain_dac9_final_manifest.json
+sar9b_work/iterations/sar9b_maestro_best_q4/phase_outputs_manifest.json
+```
+
 ---
 
 ## Design Summary
@@ -765,6 +840,8 @@ sar9b_work/iterations/9bit_maestro_best_q4/
 | Transistor count | ~130 (ADC core, excluding decode + DAC) |
 | ENOB (measured) | 7.82 bits @ 400MS/s |
 | SINAD (measured) | 48.84 dB |
+| SAR9B DAC9 `/out` ENOB | 7.86 bits @ 400MS/s |
+| SAR9B DAC9 `/out` SINAD | 49.08 dB |
 | Simulation | Spectre 18.1, reltol=1e-3, 24m 45s runtime |
 | PDK | `/project_tsmcN28_NEW/.../CRN28HPCp/models/spectre/toplevel.scs`|
 
