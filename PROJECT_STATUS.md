@@ -473,6 +473,23 @@ Artifacts:
 
 ## 8. Remaining Tasks
 
+### New Project: SAR9B ENOB recovery
+
+A new investigation project has been opened at
+`projects/sar9b_enob_recovery/`.
+
+Initial root-cause conclusion: the current `SAR9B_400MV` ENOB is low mostly
+because the final Maestro netlist used `Vpk=450m`, while the earlier q4 run
+that reached raw-code `ENOB=8.7167 bits` used `Vpk=800m`. The hidden override
+is in `maestro.sdb`: `active.state` already shows `Vpk=800m`, but the SDB has
+repeated active-run blocks with `Vpk=450m`, and the generated
+`Interactive.11` netlist confirms the 450m value won.
+
+First project artifact:
+`projects/sar9b_enob_recovery/artifacts/maestro_files_vpk800_p2200/`, generated
+from the known-good p2200 setup. Its patch manifest changes all SDB `Vpk`
+entries to `800m` while preserving the DAC9 measurement-chain repair.
+
 ### Priority 1: Proper 9-bit measurement
 Raw-code measurement was first completed without editing the schematic:
 

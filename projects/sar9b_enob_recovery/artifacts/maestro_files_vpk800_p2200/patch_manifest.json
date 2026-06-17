@@ -1,0 +1,26 @@
+{
+  "source": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\sar9b_maestro_best_q4\\maestro_files_loaded_phase_p2200",
+  "dest": "E:\\8bitvcmvirtuoso\\projects\\sar9b_enob_recovery\\artifacts\\maestro_files_vpk800_p2200",
+  "target_vpk": "800m",
+  "files": {
+    "active.state": {
+      "before_vpk_values": {
+        "800m": 1
+      },
+      "after_vpk_values": {
+        "800m": 1
+      },
+      "replacements": 1
+    },
+    "maestro.sdb": {
+      "before_vpk_values": {
+        "800m": 12,
+        "450m": 12
+      },
+      "after_vpk_values": {
+        "800m": 24
+      },
+      "replacements": 24
+    }
+  }
+}
