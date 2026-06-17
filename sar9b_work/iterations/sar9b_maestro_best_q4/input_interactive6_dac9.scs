@@ -1,5 +1,5 @@
 // Generated for: spectre
-// Generated on: Jun 17 12:49:31 2026
+// Generated on: Jun 17 12:12:58 2026
 // Design library name: SAR9B_400MV
 // Design cell name: ADC_9B_tb_best_q4
 // Design view name: schematic
@@ -8,6 +8,13 @@ global 0
 include "/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/sar9b_va_ahdl.scs"
 parameters fs=400M Vpk=450m Cunit=1f Vth_sw=0.9 TSTOP=2.7u
 include "/home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/toplevel.scs" section=top_tt
+
+// Library name: SAR9B_400MV
+// Cell name: DAC9b_va
+// View name: schematic
+subckt DAC9b_va b0 b1 b2 b3 b4 b5 b6 b7 b8 out vdd
+ends DAC9b_va
+// End of subcircuit definition.
 
 // Library name: analogLib
 // Cell name: ideal_balun
@@ -781,9 +788,8 @@ ends TOP_9B_ADC
 // Library name: SAR9B_400MV
 // Cell name: ADC_9B_tb_best_q4
 // View name: schematic
-I15 (out VDD biP\<0\> biP\<1\> biP\<2\> biP\<3\> biP\<4\> biP\<5\> \
-        biP\<6\> biP\<7\> biP\<8\>) DAC9b_va VFS=0.9 VTH=0.45 trise=1e-09 \
-        tfall=1e-09 td=0 rout=1
+I15 (biP\<0\> biP\<1\> biP\<2\> biP\<3\> biP\<4\> biP\<5\> biP\<6\> \
+        biP\<7\> biP\<8\> out VDD) DAC9b_va
 V3 (Vcm VSS) vsource dc=450m type=dc
 V4 (EN VSS) vsource dc=900.0m type=dc
 V1 (VSS 0) vsource dc=0 type=dc

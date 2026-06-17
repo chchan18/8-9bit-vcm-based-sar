@@ -1,7 +1,7 @@
 # 8bitvcmvirtuoso — Project Status & Handoff
 
 > **Date**: 2026-06-17  
-> **Session span**: Initial setup → SAR9B 9-bit Maestro validation → raw `biP<8:0>` ENOB measurement  
+> **Session span**: Initial setup → SAR9B 9-bit Maestro validation → DAC9 `/out` ENOB measurement repair
 > **Bridge**: IC@192.168.225.132 (Virtuoso IC618, Spectre 18.1, TSMC 28nm HPC+)
 
 ---
@@ -88,7 +88,7 @@ Created for 9-bit ADC development. Contains copies of all sub-cells.
 | `ADC_9B_tb_best_q4` | ✅ schematic+maestro | Current validated SAR9B Maestro testbench |
 | `ADC_9B_tb` | ❌ corrupted | Failed TB — DO NOT USE |
 | All sub-cells | ✅ schematic | Copied from 8BIT400MVcmredundancySAR |
-| VA cells | ✅ veriloga+symbol | `decode_redun9to8`, `DAC8b_va`; Maestro uses `sar9b_va_ahdl.scs` wrapper for AHDL include |
+| VA cells | ✅ veriloga+symbol | `decode_redun9to8`, `DAC8b_va`, `DAC9b_va`; current Maestro wrapper includes `DAC9b_va` for the 9-bit `/out` measurement chain |
 | `simulation/` | ✅ | Contains Verilog-A files and netlist attempt |
 
 ---
@@ -394,7 +394,10 @@ Artifacts:
 
 ### SAR9B_400MV 9-bit Maestro validation update (2026-06-17, current)
 
-The requested SAR9B library/cell was then repaired and run directly:
+The requested SAR9B library/cell was repaired and run directly. The latest
+update also fixes the Maestro `/out` measurement chain: the old
+`decode_redun9to8 -> DAC8b_va` path has been removed from the active SAR9B
+testbench and replaced by a direct `biP<0..8> -> DAC9b_va -> /out` path.
 
 | Item | Value |
 |------|-------|
@@ -402,34 +405,53 @@ The requested SAR9B library/cell was then repaired and run directly:
 | Maestro cell | `ADC_9B_tb_best_q4` |
 | DUT instance | `I0 -> SAR9B_400MV/TOP_9B_ADC` |
 | CDAC weights | q4-scaled binary weights on `TOP_9B_ADC` |
-| Verilog-A include method | `ADC_9B_tb_best_q4/maestro/sar9b_va_ahdl.scs` wrapper |
-| History | `Interactive.5` |
-| Run time | 2026-06-17 10:34:06 -> 11:06:37 |
+| Verilog-A include method | `ADC_9B_tb_best_q4/maestro/sar9b_va_ahdl.scs` wrapper, containing only `DAC9b_va` |
+| History | `Interactive.11` |
+| Run time | 2026-06-17 14:32:29 -> 16:21:46 |
 | Spectre result | 0 errors, 40 warnings, 8 notices |
-| Spectre elapsed | 32m 31.3s |
-| Maestro legacy `/out` result | SINAD 16 dB, ENOB 2.365 bits |
-| Raw top-level `biP<8:0>` best result | SINAD 49.451 dB, ENOB 7.922 bits |
+| Spectre elapsed | 1h 49m 18s |
+| Maestro `/out` result after DAC9 chain + p2200 FFT repair | SINAD 49.08 dB, ENOB 7.86 bits |
+| Raw top-level `biP<8:0>` best result from repaired SAR9B PSF | SINAD 49.4385 dB, ENOB 7.9200 bits |
 | Best raw-code sample phase | `+1500 ps` relative to the original Maestro FFT grid |
-| Fine-sweep high-ENOB window | `+1500 ps` through `+1800 ps` all gave ENOB 7.922 bits |
+| `/out` DAC waveform FFT window | `+2200 ps`, i.e. `28.2 ns -> 2.5882 us`, gives ENOB 7.86 bits |
 | Best code range | 125 to 386 |
 
-Netlist evidence from `Interactive.5`:
+Netlist evidence from `Interactive.11`:
 
-```
+```spectre
 include "/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/sar9b_va_ahdl.scs"
 I0 (...) TOP_9B_ADC
+I15 (out VDD biP\<0\> biP\<1\> biP\<2\> biP\<3\> biP\<4\> biP\<5\> \
+        biP\<6\> biP\<7\> biP\<8\>) DAC9b_va VFS=0.9 VTH=0.45 trise=1e-09 \
+        tfall=1e-09 td=0 rout=1
 ```
 
 The wrapper contains:
 
-```
-ahdl_include "/home/IC/Desktop/Project/SAR9B_400MV/DAC8b_va/veriloga/veriloga.va"
-ahdl_include "/home/IC/Desktop/Project/SAR9B_400MV/decode_redun9to8/veriloga/veriloga.va"
+```spectre
+ahdl_include "/home/IC/Desktop/Project/SAR9B_400MV/DAC9b_va/veriloga/veriloga.va"
 ```
 
-The legacy Maestro `/out` value is still low because the testbench keeps the
-old `decode_redun9to8 -> DAC8b_va` measurement chain. The valid SAR9B 9-bit
-metric is the raw `biP<8:0>` offline FFT from the same PSF result.
+The captured top-level netlist has no `decode_redun9to8`, no `DAC8b_va`, and
+no empty `subckt DAC9b_va`. The old `ENOB=2.365` failure mode is therefore
+fixed. `Interactive.10` first proved the DAC9 chain was structurally correct
+but still used the original Maestro FFT grid, giving `/out` ENOB 3.56 bits.
+The final setup changes the default `spectrum_enob` and `spectrum_sinad`
+expressions to the validated p2200 `/out` window:
+
+```skill
+spectrumMeasurement(v("/out" ?result "tran") t 2.82e-08 2.5882e-06 1024 390600 2e+08 0 "Rectangular" 0 0 1 "enob")
+spectrumMeasurement(v("/out" ?result "tran") t 2.82e-08 2.5882e-06 1024 390600 2e+08 0 "Rectangular" 0 0 1 "sinad")
+```
+
+`Interactive.11.log` reports:
+
+```text
+spectrum_enob_p2200  7.86
+spectrum_sinad_p2200 49.08
+spectrum_enob        7.86
+spectrum_sinad       49.08
+```
 
 Artifacts:
 
@@ -437,12 +459,15 @@ Artifacts:
 |------|---------|
 | `sar9b_work/iterations/sar9b_maestro_best_q4/README.md` | Current SAR9B run summary |
 | `sar9b_work/iterations/sar9b_maestro_best_q4/run_complete_manifest.json` | Final remote paths and Spectre summary |
-| `sar9b_work/iterations/sar9b_maestro_best_q4/input.scs` | Captured SAR9B netlist proving wrapper, DUT, and q4 weights |
+| `sar9b_work/iterations/sar9b_maestro_best_q4/input.scs` | Captured SAR9B `Interactive.11` netlist proving wrapper, DUT, q4 weights, and `DAC9b_va` `/out` chain |
 | `sar9b_work/iterations/sar9b_maestro_best_q4/sar9b_va_ahdl.scs` | Local copy of the AHDL wrapper |
-| `sar9b_work/iterations/sar9b_maestro_best_q4/logs/Interactive.5.log` | Maestro run log |
+| `sar9b_work/iterations/sar9b_maestro_best_q4/logs/Interactive.11.log` | Final Maestro run log with p2200 `/out` ENOB 7.86 bits |
 | `sar9b_work/iterations/sar9b_maestro_best_q4/logs/spectre.out` | Spectre log |
 | `sar9b_work/iterations/sar9b_maestro_best_q4/phase_sweep/bip_phase_sweep.json` | Broad raw-code phase sweep |
 | `sar9b_work/iterations/sar9b_maestro_best_q4/phase_sweep_fine/bip_phase_sweep.json` | Fine raw-code phase sweep |
+| `sar9b_work/iterations/sar9b_maestro_best_q4/phase_sweep_interactive10/bip_phase_sweep.json` | Raw-code phase sweep from the repaired `Interactive.10` run |
+| `sar9b_work/iterations/sar9b_maestro_best_q4/out_phase_interactive10_fine/out_phase_sweep.json` | `/out` phase sweep selecting p2200 window |
+| `sar9b_work/iterations/sar9b_maestro_best_q4/maestro_files_loaded_phase_p2200/active.state` | Verified Maestro setup with corrected default `spectrum_enob/sinad` expressions |
 
 ---
 
@@ -461,20 +486,24 @@ Raw-code measurement was first completed without editing the schematic:
 Target-achieved validation work:
 
 1. Done: `SAR9B_400MV/ADC_9B_tb_best_q4` was repaired and run through
-   Maestro as history `Interactive.5`.
+   Maestro as history `Interactive.5`, then rerun as `Interactive.10` after
+   the `/out` measurement chain repair, and finally rerun as `Interactive.11`
+   after the p2200 Maestro output-expression repair.
 2. Done: `I0` points to `SAR9B_400MV/TOP_9B_ADC`; TOP internals point to
    SAR9B cells; q4-scaled binary weights are in the captured netlist.
 3. Done: raw `biP<8:0>` measurement from the SAR9B Maestro PSF gives
-   `ENOB=7.922 bits`, `SINAD=49.451 dB` at `+1500 ps`.
-4. Add a deterministic output sampling/VALID measurement path around
-   `+1500 ps` to `+2250 ps` relative to the existing FFT grid.
-5. Sweep PVT/input amplitude and confirm the high-ENOB plateau is robust.
-6. Decide whether fractional `Cunit*0.5` and `Cunit*0.25` values are acceptable
+   `ENOB=7.9200 bits`, `SINAD=49.4385 dB` at `+1500 ps` in the repaired
+   `Interactive.10` run.
+4. Done: legacy `decode_redun9to8 -> DAC8b_va` `/out` path was replaced with
+   direct `biP<0..8> -> DAC9b_va -> /out`; `Interactive.11` netlist proves no
+   `decode_redun9to8`, no `DAC8b_va`, and no empty `DAC9b_va` subckt.
+5. Done: Maestro default `spectrum_enob` and `spectrum_sinad` now use the
+   p2200 `/out` FFT window (`28.2 ns -> 2.5882 us`, 1024 samples), and
+   `Interactive.11` reports `ENOB=7.86 bits`, `SINAD=49.08 dB`.
+6. Sweep PVT/input amplitude and confirm the high-ENOB plateau is robust.
+7. Decide whether fractional `Cunit*0.5` and `Cunit*0.25` values are acceptable
    physically, or replace them with an explicit smaller `Cunit` and integer
    binary weights.
-7. Optional cleanup: replace/remove the legacy `decode_redun9to8 -> DAC8b_va`
-   output path with a true `DAC9b_va` measurement path so the Maestro `/out`
-   result reflects the raw 9-bit code directly.
 
 ### Priority 2: Standalone netlist
 Investigate if Spectre 19+ or `-lib` flag can bypass the PDK `library` statement issue.
@@ -541,7 +570,7 @@ maeGetOutputValue("ENOB" "test" ?history "historyName")
 | Phase sweep exporter | `sar9b_work/export_bip_phase_sweep.py` | Export top-level `biP<8:0>` directly from a PSF result at phase offsets |
 | Iteration starter | `sar9b_work/start_scaled_binary_run.py` | Apply the 1/4-scaled binary CDAC point and trigger ADE Explorer run |
 | Best iteration summary | `sar9b_work/iterations/scaled_binary_q4/README.md` | Achieved ENOB 8.717 bits raw-code |
-| Current SAR9B best run | `sar9b_work/iterations/sar9b_maestro_best_q4/README.md` | SAR9B `Interactive.5`, raw-code ENOB 7.922 bits |
+| Current SAR9B best run | `sar9b_work/iterations/sar9b_maestro_best_q4/README.md` | SAR9B `Interactive.11`, DAC9 `/out` ENOB 7.86 bits and raw-code ENOB 7.920 bits |
 | SAR9B Maestro launcher | `sar9b_work/start_sar9b_maestro_best_run.py` | Starts `SAR9B_400MV/ADC_9B_tb_best_q4` Maestro runs |
 | SAR9B result checker | `sar9b_work/check_sar9b_maestro_run.py` | Polls and archives SAR9B Maestro/Spectre status; success requires 0 run errors and 0 Spectre errors |
 | SAR9B AHDL wrapper setup | `sar9b_work/set_sar9b_ahdl_wrapper.py` | Uploads `sar9b_va_ahdl.scs` and sets Maestro definitionFiles to the wrapper |

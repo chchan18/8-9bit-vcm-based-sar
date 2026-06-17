@@ -1,0 +1,126 @@
+{
+  "history": "Interactive.10",
+  "results_dir": "/home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.10/1/Vcmbased_ADC_tb_1/psf",
+  "offsets_ps": [
+    0.0,
+    1200.0,
+    1350.0,
+    1500.0,
+    1650.0,
+    1800.0
+  ],
+  "results": [
+    {
+      "offset_ps": 0.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\sar9b_maestro_best_q4\\out_phase_interactive10\\out_phase_p0ps.txt",
+      "time_start": 2.6e-08,
+      "time_stop": 2.5835e-06,
+      "v_min": 0.2139700702515551,
+      "v_max": 0.6849812011158815,
+      "v_mean": 0.4500163436228643,
+      "metrics": {
+        "sinad_db": 23.204923667218612,
+        "enob_bits": 3.562279678939969,
+        "dc": 0.4500163436228643,
+        "signal_power": 27587.828427318847,
+        "noise_dist_power": 131.89403346472682
+      }
+    },
+    {
+      "offset_ps": 1200.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\sar9b_maestro_best_q4\\out_phase_interactive10\\out_phase_p1200ps.txt",
+      "time_start": 2.72e-08,
+      "time_stop": 2.5847e-06,
+      "v_min": 0.1947803399967095,
+      "v_max": 0.705131080088498,
+      "v_mean": 0.449909565545393,
+      "metrics": {
+        "sinad_db": 27.24447974418449,
+        "enob_bits": 4.2333022830871245,
+        "dc": 0.449909565545393,
+        "signal_power": 27593.561047242176,
+        "noise_dist_power": 52.04269485292025
+      }
+    },
+    {
+      "offset_ps": 1350.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\sar9b_maestro_best_q4\\out_phase_interactive10\\out_phase_p1350ps.txt",
+      "time_start": 2.735e-08,
+      "time_stop": 2.58485e-06,
+      "v_min": 0.20269481628857,
+      "v_max": 0.6972054440806695,
+      "v_mean": 0.44993064424727497,
+      "metrics": {
+        "sinad_db": 30.462661103277252,
+        "enob_bits": 4.767883904198879,
+        "dc": 0.44993064424727497,
+        "signal_power": 27593.615301015532,
+        "noise_dist_power": 24.80518639996808
+      }
+    },
+    {
+      "offset_ps": 1500.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\sar9b_maestro_best_q4\\out_phase_interactive10\\out_phase_p1500ps.txt",
+      "time_start": 2.75e-08,
+      "time_stop": 2.585e-06,
+      "v_min": 0.2107499035280662,
+      "v_max": 0.6891256812645364,
+      "v_mean": 0.4499571387287431,
+      "metrics": {
+        "sinad_db": 34.32022186753632,
+        "enob_bits": 5.4086747288266315,
+        "dc": 0.4499571387287431,
+        "signal_power": 27594.84241202184,
+        "noise_dist_power": 10.2048289942868
+      }
+    },
+    {
+      "offset_ps": 1650.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\sar9b_maestro_best_q4\\out_phase_interactive10\\out_phase_p1650ps.txt",
+      "time_start": 2.765e-08,
+      "time_stop": 2.58515e-06,
+      "v_min": 0.2189397274028164,
+      "v_max": 0.6809358573897861,
+      "v_mean": 0.44997750772142464,
+      "metrics": {
+        "sinad_db": 38.74135384479173,
+        "enob_bits": 6.143082034018561,
+        "dc": 0.44997750772142464,
+        "signal_power": 27597.515470110673,
+        "noise_dist_power": 3.6875218383465835
+      }
+    },
+    {
+      "offset_ps": 1800.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\sar9b_maestro_best_q4\\out_phase_interactive10\\out_phase_p1800ps.txt",
+      "time_start": 2.78e-08,
+      "time_stop": 2.5853e-06,
+      "v_min": 0.2201565557729941,
+      "v_max": 0.6798434442270059,
+      "v_mean": 0.4500027654397472,
+      "metrics": {
+        "sinad_db": 42.75178177124097,
+        "enob_bits": 6.809266074956973,
+        "dc": 0.4500027654397472,
+        "signal_power": 27598.424712877895,
+        "noise_dist_power": 1.46455645262904
+      }
+    }
+  ],
+  "best_by_sinad": {
+    "offset_ps": 1800.0,
+    "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\sar9b_maestro_best_q4\\out_phase_interactive10\\out_phase_p1800ps.txt",
+    "time_start": 2.78e-08,
+    "time_stop": 2.5853e-06,
+    "v_min": 0.2201565557729941,
+    "v_max": 0.6798434442270059,
+    "v_mean": 0.4500027654397472,
+    "metrics": {
+      "sinad_db": 42.75178177124097,
+      "enob_bits": 6.809266074956973,
+      "dc": 0.4500027654397472,
+      "signal_power": 27598.424712877895,
+      "noise_dist_power": 1.46455645262904
+    }
+  }
+}

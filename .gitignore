@@ -36,6 +36,7 @@ htmlcov/
 .vscode/
 .idea/
 .claude/settings.local.json
+.codex/skills/
 *.swp
 *.swo
 
@@ -49,7 +50,9 @@ Desktop.ini
 .env.local
 
 # Runtime logs / local transient workdirs
-/logs/
+/logs/*
+!/logs/sessions/
+!/logs/sessions/*.md
 temp_maestro_state/
 sar9b_output/
 *.cdslck

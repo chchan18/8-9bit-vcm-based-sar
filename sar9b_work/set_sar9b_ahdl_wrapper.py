@@ -14,8 +14,7 @@ from start_sar9b_maestro_best_run import TEST_NAME
 
 
 VA_FILES = [
-    f"/home/IC/Desktop/Project/{LIB}/DAC8b_va/veriloga/veriloga.va",
-    f"/home/IC/Desktop/Project/{LIB}/decode_redun9to8/veriloga/veriloga.va",
+    f"/home/IC/Desktop/Project/{LIB}/DAC9b_va/veriloga/veriloga.va",
 ]
 REMOTE_WRAPPER = f"/home/IC/Desktop/Project/{LIB}/{TB_CELL}/maestro/sar9b_va_ahdl.scs"
 LOCAL_WRAPPER = OUT_DIR / "sar9b_va_ahdl.scs"
@@ -101,7 +100,7 @@ def main() -> None:
     grep = ssh(
         client,
         (
-            "grep -R \"definitionFiles\\|allDefinitionFiles\\|sar9b_va_ahdl\\|DAC8b_va/veriloga\\|decode_redun9to8/veriloga\" -n "
+            "grep -R \"definitionFiles\\|allDefinitionFiles\\|sar9b_va_ahdl\\|DAC9b_va/veriloga\\|DAC8b_va/veriloga\\|decode_redun9to8/veriloga\" -n "
             f"{remote_maestro}/active.state {remote_maestro}/maestro.sdb {REMOTE_WRAPPER} || true"
         ),
         timeout=30,

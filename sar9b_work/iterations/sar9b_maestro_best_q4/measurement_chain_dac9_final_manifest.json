@@ -1,0 +1,45 @@
+{
+  "date": "2026-06-17",
+  "library": "SAR9B_400MV",
+  "testbench_cell": "ADC_9B_tb_best_q4",
+  "test_name": "Vcmbased_ADC_tb_1",
+  "final_history": "Interactive.11",
+  "previous_structural_history": "Interactive.10",
+  "measurement_chain": "biP<0..8> -> DAC9b_va -> /out",
+  "wrapper_remote": "/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/sar9b_va_ahdl.scs",
+  "wrapper_local": "sar9b_work/iterations/sar9b_maestro_best_q4/sar9b_va_ahdl.scs",
+  "wrapper_ahdl_include": "/home/IC/Desktop/Project/SAR9B_400MV/DAC9b_va/veriloga/veriloga.va",
+  "netlist_local": "sar9b_work/iterations/sar9b_maestro_best_q4/input.scs",
+  "netlist_remote": "/home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.11/1/Vcmbased_ADC_tb_1/netlist/input.scs",
+  "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.11/1/Vcmbased_ADC_tb_1/psf",
+  "legacy_chain_removed": {
+    "decode_redun9to8": true,
+    "DAC8b_va": true,
+    "empty_DAC9b_va_subckt": true
+  },
+  "maestro_out_metrics": {
+    "sample_phase_ps": 2200.0,
+    "start_s": 2.82e-08,
+    "stop_s": 2.5882e-06,
+    "nsamples": 1024,
+    "sinad_db": 49.08,
+    "enob_bits": 7.86,
+    "source": "sar9b_work/iterations/sar9b_maestro_best_q4/logs/Interactive.11.log",
+    "setup_source": "sar9b_work/iterations/sar9b_maestro_best_q4/maestro_files_loaded_phase_p2200/active.state"
+  },
+  "raw_bip_metrics": {
+    "sample_phase_ps": 1500.0,
+    "sinad_db": 49.438517667906304,
+    "enob_bits": 7.9200195461638385,
+    "code_min": 125,
+    "code_max": 386,
+    "source": "sar9b_work/iterations/sar9b_maestro_best_q4/phase_sweep_interactive10/bip_phase_sweep.json"
+  },
+  "spectre": {
+    "errors": 0,
+    "warnings": 40,
+    "notices": 8,
+    "elapsed": "1h 49m 18s"
+  },
+  "status": "Final Maestro default /out ENOB/SINAD now use the validated DAC9 p2200 FFT window and report ENOB=7.86 bits. Raw biP<8:0> remains the reference upper-bound measurement at ENOB=7.9200 bits."
+}

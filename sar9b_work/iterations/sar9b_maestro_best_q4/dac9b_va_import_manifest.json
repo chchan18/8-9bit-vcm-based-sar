@@ -1,0 +1,16 @@
+{
+  "library": "SAR9B_400MV",
+  "cell": "DAC9b_va",
+  "local_va": "sar9b_work\\DAC9b_va.va",
+  "remote_va": "/home/IC/Desktop/Project/SAR9B_400MV/DAC9b_va/veriloga/veriloga.va",
+  "reparse": {
+    "status": "error",
+    "output": "",
+    "errors": [
+      "(\"ahdlUpdateViewInfo\" 0 t nil (\"*Error* ahdlUpdateViewInfo: extra arguments or keyword missing\" (\"SAR9B_400MV\")))"
+    ],
+    "note": "This IC618 install rejects ahdlUpdateViewInfo signatures; Maestro uses sar9b_va_ahdl.scs ahdl_include to compile the real VA file."
+  },
+  "cdf": "(\"params\" (\"VFS\" \"VTH\" \"trise\" \"tfall\" \"td\" \"rout\"))",
+  "verify": "(\"views\" (\"veriloga\" \"symbol\" \"schematic\") \"symbol_terms\" (\"b8\" \"b7\" \"b6\" \"b5\" \"b4\" \"b3\" \"b2\" \"b1\" \"b0\" \"vdd\" \"out\") \"veriloga_terms\" nil)"
+}

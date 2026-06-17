@@ -1,0 +1,996 @@
+{
+  "library": "SAR9B_400MV",
+  "testbench_cell": "ADC_9B_tb_best_q4",
+  "backup_cell": "ADC_9B_tb_best_q4_pre_dac9",
+  "dac_cell": "DAC9b_va",
+  "backup": "(\"backup_created\" \"SAR9B_400MV\" \"ADC_9B_tb_best_q4_pre_dac9\")",
+  "removed": "(\"removed_instances\" (\"I14:decode_redun9to8\" \"I15:DAC8b_va\") \"removed_fig_nets\" (\"net10\" \"net11\" \"net13\" \"net14\" \"net15\" \"net16\" \"net17\" \"net18\"))",
+  "added": "(\"I15\" \"SAR9B_400MV\" \"DAC9b_va\" \"symbol\" \"terms\" (\"out\" \"vdd\" \"b0\" \"b1\" \"b2\" \"b3\" \"b4\" \"b5\" \"b6\" \"b7\" \"b8\") \"nets\" (\"out\" \"VDD\" \"biP<0>\" \"biP<1>\" \"biP<2>\" \"biP<3>\" \"biP<4>\" \"biP<5>\" \"biP<6>\" \"biP<7>\" \"biP<8>\") \"params\" nil nil)",
+  "before_instances": {
+    "I14": {
+      "name": "I14",
+      "lib": "SAR9B_400MV",
+      "cell": "decode_redun9to8",
+      "xy": [
+        0.0625,
+        1.125
+      ],
+      "orient": "R0",
+      "bBox": [
+        [
+          -0.44375,
+          -0.4
+        ],
+        [
+          2.13125,
+          1.4125
+        ]
+      ],
+      "numInst": 1,
+      "view": "symbol",
+      "params": {
+        "vth": "0.45",
+        "vlogic": "0.9",
+        "trise": "1e-11",
+        "tfall": "1e-11",
+        "tdelay": "0"
+      },
+      "terms": {
+        "clk": "clks",
+        "D0": "net18",
+        "D1": "net17",
+        "D2": "net16",
+        "D3": "net15",
+        "D4": "net14",
+        "D5": "net13",
+        "D6": "net11",
+        "D7": "net10",
+        "B0": "biP<0>",
+        "B1": "biP<1>",
+        "B2": "biP<2>",
+        "B3": "biP<3>",
+        "B4": "biP<4>",
+        "B5": "biP<5>",
+        "B6": "biP<6>",
+        "B7": "biP<7>",
+        "B8": "biP<8>"
+      }
+    },
+    "I15": {
+      "name": "I15",
+      "lib": "SAR9B_400MV",
+      "cell": "DAC8b_va",
+      "xy": [
+        2.125,
+        1.125
+      ],
+      "orient": "R0",
+      "bBox": [
+        [
+          1.625,
+          0.0
+        ],
+        [
+          4.2875,
+          1.65
+        ]
+      ],
+      "numInst": 1,
+      "view": "symbol",
+      "params": {
+        "N": "8",
+        "VFS": "0.9",
+        "VTH": "0.45",
+        "trise": "1e-09",
+        "tfall": "1e-09",
+        "td": "0",
+        "rout": "1"
+      },
+      "terms": {
+        "vdd": "VDD",
+        "out": "out",
+        "b0": "net18",
+        "b1": "net17",
+        "b2": "net16",
+        "b3": "net15",
+        "b4": "net14",
+        "b5": "net13",
+        "b6": "net11",
+        "b7": "net10"
+      }
+    },
+    "I0": {
+      "name": "I0",
+      "lib": "SAR9B_400MV",
+      "cell": "TOP_9B_ADC",
+      "xy": [
+        -3.25,
+        0.6875
+      ],
+      "orient": "R0",
+      "bBox": [
+        [
+          -3.275,
+          -0.125
+        ],
+        [
+          -0.8,
+          1.275
+        ]
+      ],
+      "numInst": 1,
+      "view": "symbol",
+      "params": {},
+      "terms": {
+        "DOUTN<8:0>": "biN<8:0>",
+        "DOUTP<8:0>": "biP<8:0>",
+        "VIP": "VIP",
+        "CLKIN": "clks",
+        "VIN": "VIN",
+        "VDD": "VDD",
+        "VSS": "VSS",
+        "Vcm": "Vcm",
+        "VrefN": "VSS",
+        "VrefP": "VDD",
+        "EN": "EN"
+      }
+    }
+  },
+  "after": {
+    "interesting_instances": {
+      "I15": {
+        "name": "I15",
+        "lib": "SAR9B_400MV",
+        "cell": "DAC9b_va",
+        "xy": [
+          2.1,
+          1.1
+        ],
+        "orient": "R0",
+        "bBox": [
+          [
+            2.075,
+            -0.15
+          ],
+          [
+            4.3375,
+            1.2625
+          ]
+        ],
+        "numInst": 1,
+        "view": "symbol",
+        "params": {
+          "VFS": "0.9",
+          "VTH": "0.45",
+          "trise": "1e-09",
+          "tfall": "1e-09",
+          "td": "0",
+          "rout": "1"
+        },
+        "terms": {
+          "out": "out",
+          "vdd": "VDD",
+          "b0": "biP<0>",
+          "b1": "biP<1>",
+          "b2": "biP<2>",
+          "b3": "biP<3>",
+          "b4": "biP<4>",
+          "b5": "biP<5>",
+          "b6": "biP<6>",
+          "b7": "biP<7>",
+          "b8": "biP<8>"
+        }
+      },
+      "I0": {
+        "name": "I0",
+        "lib": "SAR9B_400MV",
+        "cell": "TOP_9B_ADC",
+        "xy": [
+          -3.25,
+          0.6875
+        ],
+        "orient": "R0",
+        "bBox": [
+          [
+            -3.275,
+            -0.125
+          ],
+          [
+            -0.8,
+            1.275
+          ]
+        ],
+        "numInst": 1,
+        "view": "symbol",
+        "params": {},
+        "terms": {
+          "DOUTN<8:0>": "biN<8:0>",
+          "DOUTP<8:0>": "biP<8:0>",
+          "VIP": "VIP",
+          "CLKIN": "clks",
+          "VIN": "VIN",
+          "VDD": "VDD",
+          "VSS": "VSS",
+          "Vcm": "Vcm",
+          "VrefN": "VSS",
+          "VrefP": "VDD",
+          "EN": "EN"
+        }
+      }
+    },
+    "interesting_nets": {
+      "out": {
+        "connections": [
+          "I16.noConn",
+          "I15.out"
+        ],
+        "numBits": 1,
+        "sigType": "signal",
+        "isGlobal": false
+      },
+      "VDD": {
+        "connections": [
+          "I15.vdd",
+          "I0.VDD",
+          "I0.VrefP",
+          "V0.PLUS"
+        ],
+        "numBits": 1,
+        "sigType": "signal",
+        "isGlobal": false
+      },
+      "biP<0>": {
+        "connections": [
+          "I15.b0"
+        ],
+        "numBits": 1,
+        "sigType": "signal",
+        "isGlobal": false
+      },
+      "biP<1>": {
+        "connections": [
+          "I15.b1"
+        ],
+        "numBits": 1,
+        "sigType": "signal",
+        "isGlobal": false
+      },
+      "biP<2>": {
+        "connections": [
+          "I15.b2"
+        ],
+        "numBits": 1,
+        "sigType": "signal",
+        "isGlobal": false
+      },
+      "biP<3>": {
+        "connections": [
+          "I15.b3"
+        ],
+        "numBits": 1,
+        "sigType": "signal",
+        "isGlobal": false
+      },
+      "biP<4>": {
+        "connections": [
+          "I15.b4"
+        ],
+        "numBits": 1,
+        "sigType": "signal",
+        "isGlobal": false
+      },
+      "biP<5>": {
+        "connections": [
+          "I15.b5"
+        ],
+        "numBits": 1,
+        "sigType": "signal",
+        "isGlobal": false
+      },
+      "biP<6>": {
+        "connections": [
+          "I15.b6"
+        ],
+        "numBits": 1,
+        "sigType": "signal",
+        "isGlobal": false
+      },
+      "biP<7>": {
+        "connections": [
+          "I15.b7"
+        ],
+        "numBits": 1,
+        "sigType": "signal",
+        "isGlobal": false
+      },
+      "biP<8>": {
+        "connections": [
+          "I15.b8"
+        ],
+        "numBits": 1,
+        "sigType": "signal",
+        "isGlobal": false
+      }
+    },
+    "checks": {
+      "I14_removed": true,
+      "I15_is_DAC9b_va": true,
+      "I15_terms": {
+        "out": "out",
+        "vdd": "VDD",
+        "b0": "biP<0>",
+        "b1": "biP<1>",
+        "b2": "biP<2>",
+        "b3": "biP<3>",
+        "b4": "biP<4>",
+        "b5": "biP<5>",
+        "b6": "biP<6>",
+        "b7": "biP<7>",
+        "b8": "biP<8>"
+      },
+      "I15_expected_terms_match": true
+    },
+    "schematic": {
+      "instances": [
+        {
+          "name": "I15",
+          "lib": "SAR9B_400MV",
+          "cell": "DAC9b_va",
+          "xy": [
+            2.1,
+            1.1
+          ],
+          "orient": "R0",
+          "bBox": [
+            [
+              2.075,
+              -0.15
+            ],
+            [
+              4.3375,
+              1.2625
+            ]
+          ],
+          "numInst": 1,
+          "view": "symbol",
+          "params": {
+            "VFS": "0.9",
+            "VTH": "0.45",
+            "trise": "1e-09",
+            "tfall": "1e-09",
+            "td": "0",
+            "rout": "1"
+          },
+          "terms": {
+            "out": "out",
+            "vdd": "VDD",
+            "b0": "biP<0>",
+            "b1": "biP<1>",
+            "b2": "biP<2>",
+            "b3": "biP<3>",
+            "b4": "biP<4>",
+            "b5": "biP<5>",
+            "b6": "biP<6>",
+            "b7": "biP<7>",
+            "b8": "biP<8>"
+          }
+        },
+        {
+          "name": "I2",
+          "lib": "analogLib",
+          "cell": "gnd",
+          "xy": [
+            -3.5,
+            -1.5
+          ],
+          "orient": "R0",
+          "bBox": [
+            [
+              -3.5625,
+              -1.75
+            ],
+            [
+              -3.0375,
+              -1.475
+            ]
+          ],
+          "numInst": 1,
+          "view": "symbol",
+          "params": {},
+          "terms": {
+            "gnd!": "gnd!"
+          }
+        },
+        {
+          "name": "V3",
+          "lib": "analogLib",
+          "cell": "vdc",
+          "xy": [
+            -4.0,
+            -0.875
+          ],
+          "orient": "R0",
+          "bBox": [
+            [
+              -4.7625,
+              -1.275
+            ],
+            [
+              -3.4125,
+              -0.85
+            ]
+          ],
+          "numInst": 1,
+          "view": "symbol",
+          "params": {
+            "FNpairs": "0",
+            "vdc": "450m",
+            "srcType": "dc"
+          },
+          "terms": {
+            "PLUS": "Vcm",
+            "MINUS": "VSS"
+          }
+        },
+        {
+          "name": "V4",
+          "lib": "analogLib",
+          "cell": "vdc",
+          "xy": [
+            -2.4375,
+            -0.875
+          ],
+          "orient": "R0",
+          "bBox": [
+            [
+              -3.2,
+              -1.275
+            ],
+            [
+              -1.85,
+              -0.85
+            ]
+          ],
+          "numInst": 1,
+          "view": "symbol",
+          "params": {
+            "FNpairs": "0",
+            "vdc": "900.0m",
+            "srcType": "dc"
+          },
+          "terms": {
+            "PLUS": "EN",
+            "MINUS": "VSS"
+          }
+        },
+        {
+          "name": "V1",
+          "lib": "analogLib",
+          "cell": "vdc",
+          "xy": [
+            -3.5,
+            -0.875
+          ],
+          "orient": "R0",
+          "bBox": [
+            [
+              -4.2625,
+              -1.275
+            ],
+            [
+              -2.9125,
+              -0.85
+            ]
+          ],
+          "numInst": 1,
+          "view": "symbol",
+          "params": {
+            "FNpairs": "0",
+            "vdc": "0",
+            "srcType": "dc"
+          },
+          "terms": {
+            "PLUS": "VSS",
+            "MINUS": "gnd!"
+          }
+        },
+        {
+          "name": "V0",
+          "lib": "analogLib",
+          "cell": "vdc",
+          "xy": [
+            -3.0,
+            -0.875
+          ],
+          "orient": "R0",
+          "bBox": [
+            [
+              -3.7625,
+              -1.275
+            ],
+            [
+              -2.4125,
+              -0.85
+            ]
+          ],
+          "numInst": 1,
+          "view": "symbol",
+          "params": {
+            "FNpairs": "0",
+            "vdc": "900.0m",
+            "srcType": "dc"
+          },
+          "terms": {
+            "PLUS": "VDD",
+            "MINUS": "VSS"
+          }
+        },
+        {
+          "name": "V6",
+          "lib": "analogLib",
+          "cell": "vdc",
+          "xy": [
+            -0.5,
+            -1.4375
+          ],
+          "orient": "R0",
+          "bBox": [
+            [
+              -1.2625,
+              -1.8375
+            ],
+            [
+              0.0875,
+              -1.4125
+            ]
+          ],
+          "numInst": 1,
+          "view": "symbol",
+          "params": {
+            "FNpairs": "0",
+            "vdc": "450.0m",
+            "srcType": "dc"
+          },
+          "terms": {
+            "PLUS": "net12",
+            "MINUS": "VSS"
+          }
+        },
+        {
+          "name": "V2",
+          "lib": "analogLib",
+          "cell": "vpulse",
+          "xy": [
+            -1.8125,
+            -0.875
+          ],
+          "orient": "R0",
+          "bBox": [
+            [
+              -2.54375,
+              -1.275
+            ],
+            [
+              -1.225,
+              -0.85
+            ]
+          ],
+          "numInst": 1,
+          "view": "symbol",
+          "params": {
+            "FNpairs": "0",
+            "vdc": "0",
+            "v1": "0",
+            "v2": "900.0m",
+            "per": "1/fs",
+            "td": "1p",
+            "tr": "1p",
+            "tf": "1p",
+            "pw": "0.2/fs",
+            "srcType": "pulse"
+          },
+          "terms": {
+            "PLUS": "clks",
+            "MINUS": "VSS"
+          }
+        },
+        {
+          "name": "V8",
+          "lib": "analogLib",
+          "cell": "vsource",
+          "xy": [
+            -1.0625,
+            -0.875
+          ],
+          "orient": "R0",
+          "bBox": [
+            [
+              -1.79375,
+              -1.275
+            ],
+            [
+              -0.475,
+              -0.85
+            ]
+          ],
+          "numInst": 1,
+          "view": "symbol",
+          "params": {
+            "srcType": "sine",
+            "freq": "(7/1024)*fs",
+            "va": "Vpk",
+            "sinedc": "0",
+            "pwlEntryMethod": "File",
+            "tvpairs": "0",
+            "Z1": "No",
+            "Z2": "No",
+            "Z3": "No",
+            "Z4": "No",
+            "Z5": "No",
+            "Z6": "No",
+            "Z7": "No",
+            "Z8": "No",
+            "Z9": "No",
+            "Z10": "No",
+            "Z11": "No",
+            "Z12": "No",
+            "Z13": "No",
+            "Z14": "No",
+            "Z15": "No",
+            "Z16": "No",
+            "Z17": "No",
+            "Z18": "No",
+            "Z19": "No",
+            "Z20": "No",
+            "Z21": "No",
+            "Z22": "No",
+            "Z23": "No",
+            "Z24": "No",
+            "Z25": "No",
+            "Z26": "No",
+            "Z27": "No",
+            "Z28": "No",
+            "Z29": "No",
+            "Z30": "No",
+            "Z31": "No",
+            "Z32": "No",
+            "Z33": "No",
+            "Z34": "No",
+            "Z35": "No",
+            "Z36": "No",
+            "Z37": "No",
+            "Z38": "No",
+            "Z39": "No",
+            "Z40": "No",
+            "Z41": "No",
+            "Z42": "No",
+            "Z43": "No",
+            "Z44": "No",
+            "Z45": "No",
+            "Z46": "No",
+            "Z47": "No",
+            "Z48": "No",
+            "Z49": "No",
+            "Z50": "No",
+            "triggerValue": "1",
+            "td": "50p",
+            "allbrkpts": " ",
+            "perPrbs": "1n",
+            "freqvec": "0",
+            "filenums": "none",
+            "pam4_modulation": "none",
+            "pwlfilter": " ",
+            "isnoisyNoiseModel": " ",
+            "noiseEntryMethod": "File",
+            "noiseModelInterMethod": " ",
+            "FNpairs": "0",
+            "trigger": "Internal",
+            "lfsrmode": "PN32",
+            "lfsrseed": "1 3 5 7 9 11 13 15 17 19 21 23 25 27 29 31",
+            "nPeriodicJitter": "0",
+            "pjtype1": "sine",
+            "pjtype2": "sine",
+            "pjtype3": "sine",
+            "rptstart": "1",
+            "rpttimes": "0"
+          },
+          "terms": {
+            "PLUS": "VCM",
+            "MINUS": "VSS"
+          }
+        },
+        {
+          "name": "I5",
+          "lib": "analogLib",
+          "cell": "ideal_balun",
+          "xy": [
+            -1.0,
+            -1.4375
+          ],
+          "orient": "R0",
+          "bBox": [
+            [
+              -0.525,
+              -1.275
+            ],
+            [
+              0.19375,
+              -0.85
+            ]
+          ],
+          "numInst": 1,
+          "view": "symbol",
+          "params": {},
+          "terms": {
+            "c": "net12",
+            "d": "VCM",
+            "n": "VIN",
+            "p": "VIP"
+          }
+        },
+        {
+          "name": "I0",
+          "lib": "SAR9B_400MV",
+          "cell": "TOP_9B_ADC",
+          "xy": [
+            -3.25,
+            0.6875
+          ],
+          "orient": "R0",
+          "bBox": [
+            [
+              -3.275,
+              -0.125
+            ],
+            [
+              -0.8,
+              1.275
+            ]
+          ],
+          "numInst": 1,
+          "view": "symbol",
+          "params": {},
+          "terms": {
+            "DOUTN<8:0>": "biN<8:0>",
+            "DOUTP<8:0>": "biP<8:0>",
+            "VIP": "VIP",
+            "CLKIN": "clks",
+            "VIN": "VIN",
+            "VDD": "VDD",
+            "VSS": "VSS",
+            "Vcm": "Vcm",
+            "VrefN": "VSS",
+            "VrefP": "VDD",
+            "EN": "EN"
+          }
+        },
+        {
+          "name": "I16",
+          "lib": "basic",
+          "cell": "noConn",
+          "xy": [
+            4.0,
+            1.125
+          ],
+          "orient": "R90",
+          "bBox": [
+            [
+              3.975,
+              1.0625
+            ],
+            [
+              4.3125,
+              1.1875
+            ]
+          ],
+          "numInst": 1,
+          "view": "symbol",
+          "params": {},
+          "terms": {
+            "noConn": "out"
+          }
+        }
+      ],
+      "nets": {
+        "net12": {
+          "connections": [
+            "V6.PLUS",
+            "I5.c"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "VCM": {
+          "connections": [
+            "I5.d",
+            "V8.PLUS"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "VIP": {
+          "connections": [
+            "I5.p",
+            "I0.VIP"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "biN<8:0>": {
+          "connections": [
+            "I0.DOUTN<8:0>"
+          ],
+          "numBits": 9,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "biP<8:0>": {
+          "connections": [
+            "I0.DOUTP<8:0>"
+          ],
+          "numBits": 9,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "EN": {
+          "connections": [
+            "V4.PLUS",
+            "I0.EN"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "VIN": {
+          "connections": [
+            "I5.n",
+            "I0.VIN"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "VSS": {
+          "connections": [
+            "V6.MINUS",
+            "V8.MINUS",
+            "V2.MINUS",
+            "I0.VSS",
+            "I0.VrefN",
+            "V4.MINUS",
+            "V0.MINUS",
+            "V1.PLUS",
+            "V3.MINUS"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "Vcm": {
+          "connections": [
+            "I0.Vcm",
+            "V3.PLUS"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "clks": {
+          "connections": [
+            "V2.PLUS",
+            "I0.CLKIN"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "out": {
+          "connections": [
+            "I16.noConn",
+            "I15.out"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "VDD": {
+          "connections": [
+            "I15.vdd",
+            "I0.VDD",
+            "I0.VrefP",
+            "V0.PLUS"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "biP<0>": {
+          "connections": [
+            "I15.b0"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "biP<1>": {
+          "connections": [
+            "I15.b1"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "biP<2>": {
+          "connections": [
+            "I15.b2"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "biP<3>": {
+          "connections": [
+            "I15.b3"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "biP<4>": {
+          "connections": [
+            "I15.b4"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "biP<5>": {
+          "connections": [
+            "I15.b5"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "biP<6>": {
+          "connections": [
+            "I15.b6"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "biP<7>": {
+          "connections": [
+            "I15.b7"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "biP<8>": {
+          "connections": [
+            "I15.b8"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": false
+        },
+        "gnd!": {
+          "connections": [
+            "V1.MINUS",
+            "I2.gnd!"
+          ],
+          "numBits": 1,
+          "sigType": "signal",
+          "isGlobal": true
+        }
+      },
+      "pins": {},
+      "notes": []
+    }
+  }
+}

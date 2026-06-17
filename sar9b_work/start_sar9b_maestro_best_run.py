@@ -80,8 +80,8 @@ let((cv i0 i14 i15 out)
   i15 = dbGetInstByName(cv "I15")
   out = list(
     "I0" i0~>libName i0~>cellName i0~>viewName length(i0~>instTerms)
-    "I14" i14~>libName i14~>cellName
-    "I15" i15~>libName i15~>cellName)
+    "I14" if(i14 list(i14~>libName i14~>cellName) "ABSENT")
+    "I15" i15~>libName i15~>cellName i15~>instTerms~>name i15~>instTerms~>net~>name)
   dbClose(cv)
   out)
 ''',
@@ -92,8 +92,10 @@ let((cv i0 i14 i15 out)
     tb_output = tb.output or ""
     for expected in [
         f'"I0" "{LIB}" "{TOP_CELL}"',
-        f'"I14" "{LIB}" "decode_redun9to8"',
-        f'"I15" "{LIB}" "DAC8b_va"',
+        '"I14" "ABSENT"',
+        f'"I15" "{LIB}" "DAC9b_va"',
+        '"b8"',
+        '"biP<8>"',
     ]:
         if expected not in tb_output:
             raise RuntimeError(f"unexpected SAR9B TB reference: {tb_output}")

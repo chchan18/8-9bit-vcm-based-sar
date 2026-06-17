@@ -31,14 +31,14 @@ def remote_file_exists(client: VirtuosoClient, path: str) -> bool:
 
 def remote_tail(client: VirtuosoClient, path: str, lines: int = 30) -> str:
     command = f"test -f {path} && tail -n {lines} {path} || true"
-    return ssh(client, command, timeout=20)
+    return ssh(client, command, timeout=60)
 
 
 def remote_processes(client: VirtuosoClient) -> str:
     return ssh(
         client,
         "ps -ef | grep -E 'spectre|runSimulation|maestro' | grep -v grep || true",
-        timeout=20,
+        timeout=60,
     )
 
 

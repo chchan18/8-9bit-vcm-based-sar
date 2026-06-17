@@ -1,0 +1,9 @@
+{
+  "library": "SAR9B_400MV",
+  "source_cell": "DAC8b_va",
+  "destination_cell": "DAC9b_va",
+  "remote_va": "/home/IC/Desktop/Project/SAR9B_400MV/DAC9b_va/veriloga/veriloga.va",
+  "rebuild": "(\"veriloga\" \"symbol\")",
+  "patch": "(\"ahdlUpdateViewInfo\" (t) \"views\" (\"veriloga\" \"symbol\") \"cdf\" ((viewInfo (nil veriloga (nil termMapping (nil b8 \"\\\\:b8\" b7 \"\\\\:b7\" b6 \"\\\\:b6\" b5 \"\\\\:b5\" b4 \"\\\\:b4\" b3 \"\\\\:b3\" b2 \"\\\\:b2\" b1 \"\\\\:b1\" b0 \"\\\\:b0\" vdd \"\\\\:vdd\" out \"\\\\:out\") moduleName \"DAC9b_va\" namePrefix \"ahdl\" termOrder (\"out\" \"vdd\" \"b0\" \"b1\" \"b2\" \"b3\" \"b4\" \"b5\" \"b6\" \"b7\" \"b8\") stringParameterList nil parameterList (VFS VTH trise tfall td rout)))) nil))",
+  "verify": "(\"views\" (\"veriloga\" \"symbol\") \"cdf\" ((viewInfo (nil veriloga (nil termMapping (nil b8 \"\\\\:b8\" b7 \"\\\\:b7\" b6 \"\\\\:b6\" b5 \"\\\\:b5\" b4 \"\\\\:b4\" b3 \"\\\\:b3\" b2 \"\\\\:b2\" b1 \"\\\\:b1\" b0 \"\\\\:b0\" vdd \"\\\\:vdd\" out \"\\\\:out\") moduleName \"DAC9b_va\" namePrefix \"ahdl\" termOrder (\"out\" \"vdd\" \"b0\" \"b1\" \"b2\" \"b3\" \"b4\" \"b5\" \"b6\" \"b7\" \"b8\") stringParameterList nil parameterList (VFS VTH trise tfall td rout)))) nil) \"symbol_portOrder\" (\"out\" \"vdd\" \"b0\" \"b1\" \"b2\" \"b3\" \"b4\" \"b5\" \"b6\" \"b7\" \"b8\") \"symbol_terms\" (\"b8\" \"b7\" \"b6\" \"b5\" \"b4\" \"b3\" \"b2\" \"b1\" \"b0\" \"vdd\" \"out\") \"veriloga_open\" t \"veriloga_props\" (\"portOrder\" \"lastSchematicExtraction\" \"connectivityLastUpdated\" \"nlAction\" \"schHDLViewName\" \"interfaceLastChanged\") ((\"out\" \"vdd\" \"b0\" \"b1\" \"b2\" \"b3\" \"b4\" \"b5\" \"b6\" \"b7\" \"b8\") \"Feb 14 00:37:27 2026\" 24 \"stop\" \"_veriloga\" \"Feb 14 00:37:27 2026\") \"veriloga_terms\" (\"out\" \"vdd\" \"b0\" \"b1\" \"b2\" \"b3\" \"b4\" \"b5\" \"b6\" \"b7\") \"veriloga_portOrder\" (\"out\" \"vdd\" \"b0\" \"b1\" \"b2\" \"b3\" \"b4\" \"b5\" \"b6\" \"b7\" \"b8\") \"spectre_open\" nil)"
+}

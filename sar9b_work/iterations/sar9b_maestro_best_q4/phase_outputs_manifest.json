@@ -1,0 +1,33 @@
+{
+  "date": "2026-06-17",
+  "library": "SAR9B_400MV",
+  "testbench_cell": "ADC_9B_tb_best_q4",
+  "test_name": "Vcmbased_ADC_tb_1",
+  "final_history": "Interactive.11",
+  "phase_ps": 2200.0,
+  "start_s": 2.82e-08,
+  "stop_s": 2.5882e-06,
+  "nsamples": 1024,
+  "fstart_hz": 390600,
+  "fstop_hz": 200000000.0,
+  "maestro_outputs": {
+    "spectrum_enob": "spectrumMeasurement(v(\"/out\" ?result \"tran\") t 2.82e-08 2.5882e-06 1024 390600 2e+08 0 \"Rectangular\" 0 0 1 \"enob\")",
+    "spectrum_sinad": "spectrumMeasurement(v(\"/out\" ?result \"tran\") t 2.82e-08 2.5882e-06 1024 390600 2e+08 0 \"Rectangular\" 0 0 1 \"sinad\")"
+  },
+  "patch_method": "Clean active.state patch. Earlier maeAddOutput attempts were kept out of the final loaded setup because they produced malformed output serialization.",
+  "backup_dir": "sar9b_work/iterations/sar9b_maestro_best_q4/maestro_files_before_phase_outputs_1781677546",
+  "patched_dir": "sar9b_work/iterations/sar9b_maestro_best_q4/maestro_files_phase_p2200_patched",
+  "loaded_verified_dir": "sar9b_work/iterations/sar9b_maestro_best_q4/maestro_files_loaded_phase_p2200",
+  "maestro_result": {
+    "history": "Interactive.11",
+    "sinad_db": 49.08,
+    "enob_bits": 7.86,
+    "source": "sar9b_work/iterations/sar9b_maestro_best_q4/logs/Interactive.11.log"
+  },
+  "spectre": {
+    "errors": 0,
+    "warnings": 40,
+    "notices": 8,
+    "elapsed": "1h 49m 18s"
+  }
+}
