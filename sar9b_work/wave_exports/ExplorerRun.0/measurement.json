@@ -1,0 +1,41 @@
+{
+  "history": "ExplorerRun.0",
+  "sample_start": 2.6e-08,
+  "sample_stop": 2.586e-06,
+  "nsamples": 1024,
+  "fund_bin": 7,
+  "maestro_scalar_outputs": {
+    "spectrum_enob": "",
+    "spectrum_sinad": "",
+    "vtime": ""
+  },
+  "dac8_out_offline": {
+    "sinad_db": 26.377378036771006,
+    "enob_bits": 4.089265454613124,
+    "dc": 0.4500727050839754,
+    "signal_power": 80832.6881726007,
+    "noise_dist_power": 186.1440754977375
+  },
+  "doutp9_code_offline": {
+    "sinad_db": 16.81427997594693,
+    "enob_bits": 2.5007109594596235,
+    "dc": 255.5205078125,
+    "signal_power": 30336149376.67474,
+    "noise_dist_power": 631731389.3252373
+  },
+  "code_min": 10,
+  "code_max": 503,
+  "code_mean": 255.5205078125,
+  "exports": {
+    "out": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports\\ExplorerRun.0\\out.txt",
+    "DOUTP0": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports\\ExplorerRun.0\\DOUTP0.txt",
+    "DOUTP1": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports\\ExplorerRun.0\\DOUTP1.txt",
+    "DOUTP2": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports\\ExplorerRun.0\\DOUTP2.txt",
+    "DOUTP3": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports\\ExplorerRun.0\\DOUTP3.txt",
+    "DOUTP4": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports\\ExplorerRun.0\\DOUTP4.txt",
+    "DOUTP5": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports\\ExplorerRun.0\\DOUTP5.txt",
+    "DOUTP6": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports\\ExplorerRun.0\\DOUTP6.txt",
+    "DOUTP7": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports\\ExplorerRun.0\\DOUTP7.txt",
+    "DOUTP8": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports\\ExplorerRun.0\\DOUTP8.txt"
+  }
+}

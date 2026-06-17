@@ -1,0 +1,24 @@
+{
+  "history": "ExplorerRun.0",
+  "exports": {
+    "out": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\out.txt",
+    "DAC_B0": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\DAC_B0.txt",
+    "DAC_B1": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\DAC_B1.txt",
+    "DAC_B2": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\DAC_B2.txt",
+    "DAC_B3": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\DAC_B3.txt",
+    "DAC_B4": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\DAC_B4.txt",
+    "DAC_B5": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\DAC_B5.txt",
+    "DAC_B6": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\DAC_B6.txt",
+    "DAC_B7": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\DAC_B7.txt",
+    "BIP0": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\BIP0.txt",
+    "BIP1": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\BIP1.txt",
+    "BIP2": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\BIP2.txt",
+    "BIP3": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\BIP3.txt",
+    "BIP4": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\BIP4.txt",
+    "BIP5": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\BIP5.txt",
+    "BIP6": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\BIP6.txt",
+    "BIP7": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\BIP7.txt",
+    "BIP8": "E:\\8bitvcmvirtuoso\\sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes\\BIP8.txt"
+  },
+  "errors": {}
+}

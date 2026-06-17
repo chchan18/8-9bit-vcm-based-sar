@@ -1,0 +1,7 @@
+binary: applying 16 CDAC weights
+Maestro session: fnxSession9
+Running Maestro simulation; this normally takes about 25 minutes.
+[cmd] C:\Windows\System32\OpenSSH\ssh.EXE -o BatchMode=yes -o StrictHostKeyChecking=no -o ConnectTimeout=30 -o GSSAPIAuthentication=no -o HostbasedAuthentication=no -o ControlMaster=auto -o ControlPath=C:\Users\CHONGH~1\AppData\Local\Temp/vb_ssh_IC@192.168.225.132_direct -o ControlPersist=3600 IC@192.168.225.132 sh -l
+[cmd] C:\Windows\System32\OpenSSH\ssh.EXE -o BatchMode=yes -o StrictHostKeyChecking=no -o ConnectTimeout=30 -o GSSAPIAuthentication=no -o HostbasedAuthentication=no IC@192.168.225.132 sh -l
+restore: applying 16 CDAC weights
+restore-snapshot: applying 18 CDAC weights

@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "additionalDirectories": ["E:\\8bitvcmvirtuoso"],
+    "defaultMode": "acceptEdits"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$t=Get-Date -Format 'yyyy-MM-dd_HHmmss';$p=\"E:\\8bitvcmvirtuoso\\logs\\sessions\\$t.md\";\"# 会话日志 - $t`n`n**开始时间**: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')`n`n## Prompt`n`n`n`n## 执行过程`n`n`n`n## 变更内容`n`n`n`n## 备注`n\" | Out-File $p -Encoding utf8",
+            "shell": "powershell"
+          }
+        ]
+      }
+    ]
+  }
+}

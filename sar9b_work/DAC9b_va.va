@@ -1,0 +1,45 @@
+// 9-bit ideal DAC for offline/standalone Spectre experiments.
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module DAC9b_va(out, vdd, b0, b1, b2, b3, b4, b5, b6, b7, b8);
+  output out;
+  input vdd;
+  input b0, b1, b2, b3, b4, b5, b6, b7, b8;
+
+  electrical out, vdd;
+  electrical b0, b1, b2, b3, b4, b5, b6, b7, b8;
+
+  parameter real VFS = 0.9;
+  parameter real VTH = 0.45;
+  parameter real trise = 1n;
+  parameter real tfall = 1n;
+  parameter real td = 0;
+  parameter real rout = 1.0;
+
+  integer code;
+  real vout_target;
+
+  analog begin
+    code = 0;
+    if (V(b0) > VTH) code = code + 1;
+    if (V(b1) > VTH) code = code + 2;
+    if (V(b2) > VTH) code = code + 4;
+    if (V(b3) > VTH) code = code + 8;
+    if (V(b4) > VTH) code = code + 16;
+    if (V(b5) > VTH) code = code + 32;
+    if (V(b6) > VTH) code = code + 64;
+    if (V(b7) > VTH) code = code + 128;
+    if (V(b8) > VTH) code = code + 256;
+
+    vout_target = VFS * code / 511.0;
+    if (vout_target > V(vdd)) vout_target = V(vdd);
+    if (vout_target < 0.0) vout_target = 0.0;
+
+    V(out) <+ transition(vout_target, td, trise, tfall);
+    if (rout > 0.0) begin
+      I(out) <+ (V(out) - transition(vout_target, td, trise, tfall)) / rout;
+    end
+  end
+endmodule

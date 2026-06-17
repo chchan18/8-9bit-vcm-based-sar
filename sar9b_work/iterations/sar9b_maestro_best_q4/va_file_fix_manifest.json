@@ -1,0 +1,12 @@
+{
+  "DAC8b_va": {
+    "source": "/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/DAC8b_va/veriloga/veriloga.va",
+    "destination": "/home/IC/Desktop/Project/SAR9B_400MV/DAC8b_va/veriloga/veriloga.va",
+    "wc_l": "54 /home/IC/Desktop/Project/SAR9B_400MV/DAC8b_va/veriloga/veriloga.va"
+  },
+  "decode_redun9to8": {
+    "source": "/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/decode_redun9to8/veriloga/veriloga.va",
+    "destination": "/home/IC/Desktop/Project/SAR9B_400MV/decode_redun9to8/veriloga/veriloga.va",
+    "wc_l": "84 /home/IC/Desktop/Project/SAR9B_400MV/decode_redun9to8/veriloga/veriloga.va"
+  }
+}

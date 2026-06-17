@@ -1,0 +1,15 @@
+{
+  "library": "8BIT400MVcmredundancySAR",
+  "testbench_cell": "ADC_9B_tb_best_q4",
+  "top_cell": "TOP_9B_BINARY",
+  "test_name": "Vcmbased_ADC_tb_1",
+  "run_log_remote": "/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/results/maestro/ExplorerRun.0.log",
+  "results_dir_remote": "/home/IC/simulation/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/results/maestro/ExplorerRun.0/psf/Vcmbased_ADC_tb_1/psf",
+  "netlist_remote": "/home/IC/simulation/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/results/maestro/ExplorerRun.0/psf/Vcmbased_ADC_tb_1/netlist/input.scs",
+  "start_epoch": 1781658581,
+  "setup": {
+    "testbench": "(\"I0\" \"8BIT400MVcmredundancySAR\" \"TOP_9B_BINARY\" \"symbol\" 11 \"I14\" \"8BIT400MVcmredundancySAR\" \"decode_redun9to8\" \"I15\" \"8BIT400MVcmredundancySAR\" \"DAC8b_va\")",
+    "caps": "(\"C10=Cunit*2\" \"C5=Cunit*2\" \"C9=Cunit*1\" \"C6=Cunit*1\" \"C11=Cunit*8\" \"C4=Cunit*8\" \"C12=Cunit*4\" \"C3=Cunit*4\" \"C2=Cunit*64\" \"C17=Cunit*64\" \"C14=Cunit*32\" \"C0=Cunit*32\" \"C13=Cunit*16\" \"C1=Cunit*16\" \"C7=Cunit*0.5\" \"C8=Cunit*0.5\" \"C16=Cunit*0.25\" \"C15=Cunit*0.25\")",
+    "maestro_refs": "/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/active.state:5:\t\t\t<field Name=\"designInfo\" Type=\"list\">(\"8BIT400MVcmredundancySAR\" \"ADC_9B_tb_best_q4\" \"schematic\" \"spectre\")</field>\n/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/active.state:7:\t\t\t<field Name=\"projectDir\" Type=\"string\">\"/home/IC/simulation/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/results/maestro/.tmpADEDir_IC/Vcmbased_ADC_tb_1/simulation\"</field>\n/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/maestro.sdb:15:\t\t\t\t\t\t<value>ADC_9B_tb_best_q4</value>\n/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/maestro.sdb:52:\t\t\t\t\t\t<value>ADC_9B_tb_best_q4</value>\n/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/maestro.sdb:344:\t\t\t\t\t\t\t\t<value>ADC_9B_tb_best_q4</value>\n/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/maestro.sdb:381:\t\t\t\t\t\t\t\t<value>ADC_9B_tb_best_q4</value>\n/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/maestro.sdb:714:\t\t\t<resultsname>/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/results/maestro/ExplorerRun.0.rdb</resultsname>\n/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/maestro.sdb:722:\t\t\t<psfdir>/home/IC/simulation/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/results/maestro/ExplorerRun.0</psfdir>\n/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/maestro.sdb:723:\t\t\t<simdir>$AXL_PROJECT_DIR/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/results/maestro/ExplorerRun.0</simdir>\n/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/maestro.sdb:725:\t\t\t<runlog>/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/results/maestro/ExplorerRun.0.log</runlog>\n"
+  }
+}

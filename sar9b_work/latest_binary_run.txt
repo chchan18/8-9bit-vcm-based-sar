@@ -1,0 +1,3 @@
+PID=29316
+LOG=sar9b_work\binary_run_20260616_230735.log
+ERR=sar9b_work\binary_run_20260616_230735.err

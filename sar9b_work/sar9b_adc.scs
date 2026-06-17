@@ -1,0 +1,350 @@
+// 9-bit Binary SAR ADC — 400mV, 400MS/s
+// CDAC: 256/128/64/32/16/8/4/2/1 Cu  (binary weighted, no redundancy)
+// Generated from: 8BIT400MVcmredundancySAR netlist
+// PDK: TSMC 28nm HPC+ (CRN28HPC+ v1.0)
+
+simulator lang=spectre
+global 0
+
+// ---- Design Parameters ----
+parameters fs=400M Vpk=450m Cunit=1f TSTOP=2.7u
+
+// ---- PDK Models ----
+include "/home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/toplevel.scs"
+
+// ============================================================
+// Standard Cells
+// ============================================================
+
+subckt INVX1 IN VDD VSS ZN
+    M0 (ZN IN VSS VSS) nch_mac l=30n w=100n multi=1 nf=1
+    M1 (ZN IN VDD VDD) pch_mac l=30n w=200n multi=1 nf=1
+ends INVX1
+
+subckt INVX2 IN VDD VSS ZN
+    M0 (ZN IN VSS VSS) nch_mac l=30n w=200n multi=1 nf=1
+    M1 (ZN IN VDD VDD) pch_mac l=30n w=400n multi=1 nf=1
+ends INVX2
+
+subckt INVX4 IN VDD VSS ZN
+    M0 (ZN IN VSS VSS) nch_mac l=30n w=400n multi=1 nf=1
+    M1 (ZN IN VDD VDD) pch_mac l=30n w=800n multi=1 nf=1
+ends INVX4
+
+subckt INVX8 IN VDD VSS ZN
+    M0 (ZN IN VSS VSS) nch_mac l=30n w=800n multi=1 nf=2
+    M1 (ZN IN VDD VDD) pch_mac l=30n w=1.6u multi=1 nf=2
+ends INVX8
+
+subckt NAND2X1 A B VDD VSS ZN
+    M3 (ZN A net1 VSS) nch_mac l=30n w=100n multi=1 nf=1
+    M0 (net1 B VSS VSS) nch_mac l=30n w=100n multi=1 nf=1
+    M2 (ZN B VDD VDD) pch_mac l=30n w=200n multi=1 nf=1
+    M1 (ZN A VDD VDD) pch_mac l=30n w=200n multi=1 nf=1
+ends NAND2X1
+
+subckt NOR2X1 A B VDD VSS ZN
+    M3 (ZN A VSS VSS) nch_mac l=30n w=100n multi=1 nf=1
+    M0 (ZN B VSS VSS) nch_mac l=30n w=100n multi=1 nf=1
+    M2 (ZN B net2 VDD) pch_mac l=30n w=200n multi=1 nf=1
+    M1 (net2 A VDD VDD) pch_mac l=30n w=200n multi=1 nf=1
+ends NOR2X1
+
+subckt TRIGATEX1 IN OE OEN VDD VSS Z
+    M0 (IN OE Z VSS) nch_mac l=30n w=100n multi=1 nf=1
+    M2 (IN OEN Z VDD) pch_mac l=30n w=200n multi=1 nf=1
+ends TRIGATEX1
+
+subckt DELAY_1 IN VDD VSS Z
+    M4 (Z net1 VSS VSS) nch_mac l=100n w=100n multi=1 nf=1
+    M0 (net1 IN VSS VSS) nch_mac l=100n w=100n multi=1 nf=1
+    M5 (Z net1 VDD VDD) pch_mac l=100n w=200n multi=1 nf=1
+    M1 (net1 IN VDD VDD) pch_mac l=100n w=200n multi=1 nf=1
+ends DELAY_1
+
+subckt OR3X1 A B C VDD VSS Z
+    M9  (Z net3 VSS VSS) nch_mac l=30n w=400n multi=1 nf=1
+    M5  (net3 B VSS VSS) nch_mac l=30n w=400n multi=1 nf=1
+    M3  (net3 A VSS VSS) nch_mac l=30n w=400n multi=1 nf=1
+    M8  (net3 C VSS VSS) nch_mac l=30n w=400n multi=1 nf=1
+    M10 (Z net3 VDD VDD) pch_mac l=30n w=400n multi=1 nf=1
+    M7  (net3 C net1 VDD) pch_mac l=30n w=400n multi=1 nf=1
+    M6  (net1 B net2 VDD) pch_mac l=30n w=400n multi=1 nf=1
+    M1  (net2 A VDD VDD) pch_mac l=30n w=400n multi=1 nf=1
+ends OR3X1
+
+subckt DFF CLK D Q VDD VSS
+    I12 (net7 VDD VSS Q) INVX4
+    I11 (net6 VDD VSS net7) INVX1
+    I13 (net1 VDD VSS net6) INVX1
+    I14 (net8 VDD VSS net2) INVX1
+    I8  (net9 CLK CLKN VDD VSS net8) TRIGATEX1
+    I6  (D CLKN CLK VDD VSS net8) TRIGATEX1
+    I4  (net3 CLKN CLK VDD VSS net1) TRIGATEX1
+    I1  (net2 CLK CLKN VDD VSS net1) TRIGATEX1
+    I9  (CLK VDD VSS CLKN) INVX2
+    I7  (net6 VDD VSS net3) INVX2
+    I2  (net2 VDD VSS net9) INVX2
+ends DFF
+
+subckt DFFRN CLK D Q RN VDD VSS
+    I12 (net7 VDD VSS Q) INVX4
+    I0  (R net3 VDD VSS net2) NAND2X1
+    I14 (D CLKP CLKN VDD VSS net3) TRIGATEX1
+    I15 (net3 CLKN CLKP VDD VSS net9) TRIGATEX1
+    I4  (net2 CLKN CLKP VDD VSS net8) TRIGATEX1
+    I1  (net8 CLKP CLKN VDD VSS net1) TRIGATEX1
+    I5  (RN net8 VDD VSS net6) NOR2X1
+    I11 (net6 VDD VSS net7) INVX1
+    I13 (CLK VDD VSS CLKP) INVX2
+    I10 (RN VDD VSS R) INVX2
+    I9  (CLKP VDD VSS CLKN) INVX2
+    I7  (net6 VDD VSS net1) INVX2
+    I2  (net2 VDD VSS net9) INVX2
+ends DFFRN
+
+// ============================================================
+// control — Per-bit CDAC switch cell
+// ============================================================
+subckt control Bi Vcm Vcomp VrefN VrefP cap clki
+    I6 (clki VrefP VrefN clkis) INVX8
+    M5 (Vcm clkis cap VrefN) nch_mac l=30n w=800n multi=2 nf=1
+    M3 (net6 clki VrefN VrefN) nch_mac l=30n w=800n multi=2 nf=1
+    M0 (cap Bi net6 VrefN) nch_mac l=30n w=800n multi=2 nf=1
+    M4 (Vcm clki cap VrefP) pch_mac l=30n w=800n multi=4 nf=1
+    M2 (net12 clkis VrefP VrefP) pch_mac l=30n w=800n multi=4 nf=1
+    M1 (cap Bi net12 VrefP) pch_mac l=30n w=800n multi=4 nf=1
+    I4 (Vcomp VrefP VrefN net3) DELAY_1
+    I5 (clki net3 Bi VrefP VrefN) DFF
+ends control
+
+// ============================================================
+// COMPARATOR — StrongArm latch comparator
+// ============================================================
+subckt COMPARATOR CLKC VDD VN VON VOP VP VSS
+    M15 (VOP VAN1 VDD VDD) pch_mac l=30n w=2u multi=1 nf=2
+    M13 (VON VAP1 VDD VDD) pch_mac l=30n w=2u multi=1 nf=2
+    M12 (VAP1 VAN VDD VDD) pch_mac l=30n w=2u multi=1 nf=2
+    M9  (VAP1 VAN1 VDD VDD) pch_mac l=30n w=2u multi=1 nf=2
+    M8  (VAN1 VAP VDD VDD) pch_mac l=30n w=2u multi=1 nf=2
+    M5  (VAN1 VAP1 VDD VDD) pch_mac l=30n w=2u multi=1 nf=2
+    M18 (VAP VN net2 VDD) pch_mac l=30n w=2u multi=1 nf=2
+    M0  (net2 CLKC VDD VDD) pch_mac l=30n w=2u multi=1 nf=2
+    M2  (VAN VP net2 VDD) pch_mac l=30n w=2u multi=1 nf=2
+    M16 (VOP VAN1 VSS VSS) nch_mac l=30n w=1u multi=1 nf=1
+    M14 (VON VAP1 VSS VSS) nch_mac l=30n w=1u multi=1 nf=1
+    M11 (VAP1 VAN net8 VSS) nch_mac l=30n w=1u multi=1 nf=1
+    M10 (net8 VAN1 VSS VSS) nch_mac l=30n w=1u multi=1 nf=1
+    M7  (VAN1 VAP net6 VSS) nch_mac l=30n w=1u multi=1 nf=1
+    M6  (net6 VAP1 VSS VSS) nch_mac l=30n w=1u multi=1 nf=1
+    M1  (VAP CLKC VSS VSS) nch_mac l=30n w=1u multi=1 nf=1
+    M3  (VAN CLKC VSS VSS) nch_mac l=30n w=1u multi=1 nf=1
+ends COMPARATOR
+
+// ============================================================
+// BOOTSTRAP_DIFF — Differential bootstrapped sampling switch
+// ============================================================
+subckt BOOTSTRAP_DIFF CLKS CLKSB VDD VIN VIP VOUTN VOUTP VSS
+    M35 (VIP VSS VOUTN VSS) nch_mac l=30n w=1u multi=2 nf=1
+    M34 (VIN VSS VOUTP VSS) nch_mac l=30n w=1u multi=2 nf=1
+    M32 (net6 CLKSB VSS VSS) nch_mac l=30n w=400n multi=1 nf=1
+    M31 (NG VDD net6 VSS) nch_mac l=30n w=200n multi=1 nf=1
+    M27 (net4 CLKS B B) nch_mac l=30n w=400n multi=1 nf=1
+    M26 (net4 NG B VSS) nch_mac l=30n w=210n multi=1 nf=1
+    M25 (B NG VIN VSS) nch_mac l=30n w=500n multi=1 nf=1
+    M24 (B CLKSB VSS VSS) nch_mac l=30n w=2u multi=1 nf=2
+    M23 (VIN NG VOUTN B) nch_mac l=30n w=1u multi=2 nf=1
+    M9  (VIP PG VOUTP A) nch_mac l=30n w=1u multi=2 nf=1
+    M8  (A PG VIP VSS) nch_mac l=30n w=500n multi=1 nf=1
+    M7  (net1 PG A VSS) nch_mac l=30n w=210n multi=1 nf=1
+    M5  (net2 CLKSB VSS VSS) nch_mac l=30n w=400n multi=1 nf=1
+    M4  (PG VDD net2 VSS) nch_mac l=30n w=200n multi=1 nf=1
+    M3  (A CLKSB VSS VSS) nch_mac l=30n w=2u multi=1 nf=2
+    M0  (net1 CLKS A A) nch_mac l=30n w=400n multi=1 nf=1
+    M33 (net6 CLKSB VDD VDD) pch_mac l=30n w=200n multi=1 nf=1
+    M30 (VDD NG net5 net5) pch_mac l=30n w=2u multi=1 nf=2
+    M29 (NG net4 net5 net5) pch_mac l=30n w=500n multi=1 nf=1
+    M28 (net4 CLKS VDD VDD) pch_mac l=30n w=800n multi=1 nf=1
+    M12 (net2 CLKSB VDD VDD) pch_mac l=30n w=200n multi=1 nf=1
+    M6  (PG net1 net3 net3) pch_mac l=30n w=500n multi=1 nf=1
+    M2  (VDD PG net3 net3) pch_mac l=30n w=2u multi=1 nf=2
+    M1  (net1 CLKS VDD VDD) pch_mac l=30n w=800n multi=1 nf=1
+    C2  (net5 B) cfmom_2t nr=70 lr=10u w=50n s=50n stm=1 spm=7 multi=1
+    C0  (net3 A) cfmom_2t nr=70 lr=10u w=50n s=50n stm=1 spm=7 multi=1
+ends BOOTSTRAP_DIFF
+
+// ============================================================
+// CLK_NOOVERLAP — Non-overlapping clock generator
+// ============================================================
+subckt CLK_NOOVERLAP CLKIN CLKON CLKOP VDD VSS
+    I15 (net10 VDD VSS VDD VSS net11) TRIGATEX1
+    I11 (net4 VDD VSS net13) INVX1
+    I8  (CLKIN VDD VSS net10) INVX1
+    I4  (net6 VDD VSS net7) INVX1
+    I2  (net2 VDD VSS net3) INVX1
+    I0  (CLKIN VDD VSS net2) INVX1
+    I10 (net6 net11 VDD VSS net12) NAND2X1
+    I3  (net3 net4 VDD VSS net5) NAND2X1
+    I17 (net14 VDD VSS CLKON) INVX8
+    I16 (net8 VDD VSS CLKOP) INVX8
+    I13 (net13 VDD VSS net14) INVX4
+    I6  (net7 VDD VSS net8) INVX4
+    I12 (net12 VDD VSS net4) DELAY_1
+    I5  (net5 VDD VSS net6) DELAY_1
+ends CLK_NOOVERLAP
+
+// ============================================================
+// Asycontrol_logic_9clk — Asynchronous SAR control
+// ============================================================
+subckt Asycontrol_logic_9clk CLKC CLKO\<8\> CLKO\<7\> CLKO\<6\> CLKO\<5\> \
+        CLKO\<4\> CLKO\<3\> CLKO\<2\> CLKO\<1\> CLKO\<0\> CLKS VALID VDD VSS
+    I10 (CLKS VALID CLKO\<0\> VDD VSS CLKC) OR3X1
+    I11 (VALID CLKO\<8\> CLKO\<7\> CLKS VDD VSS) DFFRN
+    I7  (VALID CLKO\<1\> CLKO\<0\> CLKS VDD VSS) DFFRN
+    I6  (VALID CLKO\<2\> CLKO\<1\> CLKS VDD VSS) DFFRN
+    I5  (VALID CLKO\<3\> CLKO\<2\> CLKS VDD VSS) DFFRN
+    I4  (VALID CLKO\<4\> CLKO\<3\> CLKS VDD VSS) DFFRN
+    I3  (VALID CLKO\<5\> CLKO\<4\> CLKS VDD VSS) DFFRN
+    I2  (VALID CLKO\<6\> CLKO\<5\> CLKS VDD VSS) DFFRN
+    I1  (VALID CLKO\<7\> CLKO\<6\> CLKS VDD VSS) DFFRN
+    I0  (VALID VDD CLKO\<8\> CLKS VDD VSS) DFFRN
+ends Asycontrol_logic_9clk
+
+// ============================================================
+// TOP_9B_ADC — 9-bit Binary SAR ADC
+// ============================================================
+//   CDAC weights: 256/128/64/32/16/8/4/2/1 Cu  (pure binary)
+//   Total: 511 Cu per side
+
+subckt TOP_9B_ADC CLKIN DOUTN\<8\> DOUTN\<7\> DOUTN\<6\> DOUTN\<5\> \
+        DOUTN\<4\> DOUTN\<3\> DOUTN\<2\> DOUTN\<1\> DOUTN\<0\> \
+        DOUTP\<8\> DOUTP\<7\> DOUTP\<6\> DOUTP\<5\> DOUTP\<4\> \
+        DOUTP\<3\> DOUTP\<2\> DOUTP\<1\> DOUTP\<0\> \
+        EN VDD VIN VIP VSS Vcm VrefN VrefP
+
+    // Binary CDAC — Bit 8 (MSB) to Bit 0 (LSB)
+    // Positive side (net5 = VP input of comparator)
+    C2  (net13 net5) capacitor c=Cunit*256   // Bit 8 MSB
+    C0  (net25 net5) capacitor c=Cunit*128   // Bit 7
+    C1  (net26 net5) capacitor c=Cunit*64    // Bit 6
+    C4  (net1  net5) capacitor c=Cunit*32    // Bit 5
+    C3  (net22 net5) capacitor c=Cunit*16    // Bit 4
+    C5  (net23 net5) capacitor c=Cunit*8     // Bit 3
+    C6  (net24 net5) capacitor c=Cunit*4     // Bit 2
+    C7  (net11 net5) capacitor c=Cunit*2     // Bit 1
+    C15 (net14 net5) capacitor c=Cunit*1     // Bit 0 LSB
+
+    // Negative side (net7 = VN input of comparator)
+    C17 (net12 net7) capacitor c=Cunit*256   // Bit 8 MSB
+    C14 (net19 net7) capacitor c=Cunit*128   // Bit 7
+    C13 (net20 net7) capacitor c=Cunit*64    // Bit 6
+    C11 (net21 net7) capacitor c=Cunit*32    // Bit 5
+    C12 (net4  net7) capacitor c=Cunit*16    // Bit 4
+    C10 (net9  net7) capacitor c=Cunit*8     // Bit 3
+    C9  (net10 net7) capacitor c=Cunit*4     // Bit 2
+    C8  (net17 net7) capacitor c=Cunit*2     // Bit 1
+    C16 (net18 net7) capacitor c=Cunit*1     // Bit 0 LSB
+
+    // Control cells — Positive side (DOUTP)
+    I43 (DOUTP\<8\> Vcm VcompP VrefN VrefP net13 clki\<8\>) control
+    I1  (DOUTP\<7\> Vcm VcompP VrefN VrefP net25 clki\<7\>) control
+    I2  (DOUTP\<6\> Vcm VcompP VrefN VrefP net26 clki\<6\>) control
+    I3  (DOUTP\<5\> Vcm VcompP VrefN VrefP net1  clki\<5\>) control
+    I4  (DOUTP\<4\> Vcm VcompP VrefN VrefP net22 clki\<4\>) control
+    I5  (DOUTP\<3\> Vcm VcompP VrefN VrefP net23 clki\<3\>) control
+    I6  (DOUTP\<2\> Vcm VcompP VrefN VrefP net24 clki\<2\>) control
+    I7  (DOUTP\<1\> Vcm VcompP VrefN VrefP net11 clki\<1\>) control
+    I31 (DOUTP\<0\> Vcm VcompP VrefN VrefP net14 clki\<0\>) control
+
+    // Control cells — Negative side (DOUTN)
+    I42 (DOUTN\<8\> Vcm VcompN VrefN VrefP net12 clki\<8\>) control
+    I16 (DOUTN\<7\> Vcm VcompN VrefN VrefP net19 clki\<7\>) control
+    I17 (DOUTN\<6\> Vcm VcompN VrefN VrefP net20 clki\<6\>) control
+    I18 (DOUTN\<5\> Vcm VcompN VrefN VrefP net21 clki\<5\>) control
+    I19 (DOUTN\<4\> Vcm VcompN VrefN VrefP net4  clki\<4\>) control
+    I20 (DOUTN\<3\> Vcm VcompN VrefN VrefP net9  clki\<3\>) control
+    I21 (DOUTN\<2\> Vcm VcompN VrefN VrefP net10 clki\<2\>) control
+    I22 (DOUTN\<1\> Vcm VcompN VrefN VrefP net17 clki\<1\>) control
+    I32 (DOUTN\<0\> Vcm VcompN VrefN VrefP net18 clki\<0\>) control
+
+    // Peripheral
+    I29 (VcompP VcompN VDD VSS net6) NOR2X1
+    I28 (net6 EN VDD VSS VALID) NAND2X1
+    I0  (CLKC VDD net7 VcompN VcompP net5 VSS) COMPARATOR
+    I37 (clks CLKON VDD VIN VIP net7 net5 VSS) BOOTSTRAP_DIFF
+    I36 (CLKIN CLKON clks VDD VSS) CLK_NOOVERLAP
+    I27 (CLKC clki\<8\> clki\<7\> clki\<6\> clki\<5\> clki\<4\> clki\<3\> \
+         clki\<2\> clki\<1\> clki\<0\> clks VALID VDD VSS) \
+         Asycontrol_logic_9clk
+ends TOP_9B_ADC
+
+// ============================================================
+// 9-bit Ideal DAC (Verilog-A behavioral model)
+// ============================================================
+ahdl_include "DAC9b_va.va"
+
+// ============================================================
+// 9-bit SAR ADC Testbench
+// ============================================================
+
+// Power Supplies
+V0 (VDD VSS) vsource dc=900.0m type=dc
+V1 (VSS 0)   vsource dc=0 type=dc
+
+// ADC common-mode
+V3 (Vcm VSS) vsource dc=450m type=dc
+
+// Enable (always on)
+V4 (EN VSS) vsource dc=900.0m type=dc
+
+// Clock — 400MHz, 20% duty
+V2 (clks VSS) vsource dc=0 type=pulse \
+    val0=0 val1=900.0m period=1/fs \
+    delay=1p rise=1p fall=1p width=0.2/fs
+
+// Input — coherent sine, 7/1024 * fs ≈ 2.734 MHz
+V8 (VCM VSS) vsource type=sine \
+    delay=50p freq=(7/1024)*fs ampl=Vpk sinedc=0
+
+// Balun — single-ended to differential
+V6 (net12 VSS) vsource dc=450.0m type=dc
+I5 (VCM net12 VIP VIN) ideal_balun
+subckt ideal_balun d c p n
+    K0 (d 0 p c) transformer n1=2
+    K1 (d 0 c n) transformer n1=2
+ends ideal_balun
+
+// DUT — 9-bit Binary SAR ADC
+I0 (clks DOUTN\<8\> DOUTN\<7\> DOUTN\<6\> DOUTN\<5\> DOUTN\<4\> \
+        DOUTN\<3\> DOUTN\<2\> DOUTN\<1\> DOUTN\<0\> \
+        DOUTP\<8\> DOUTP\<7\> DOUTP\<6\> DOUTP\<5\> DOUTP\<4\> \
+        DOUTP\<3\> DOUTP\<2\> DOUTP\<1\> DOUTP\<0\> \
+        EN VDD VIN VIP VSS Vcm VSS VDD) TOP_9B_ADC
+
+// 9-bit Ideal DAC for reconstruction.
+// DAC9b_va ports are ordered b0..b8, so net9 is LSB and net18 is MSB.
+I15 (out VDD net9 net10 net11 net13 net14 net15 net16 net17 net18) \
+     DAC9b_va VFS=0.9 VTH=0.45 trise=1e-09 tfall=1e-09 td=0 rout=1
+
+// Connect DOUTP outputs to DAC inputs via voltage-controlled sources
+E_D8 (net18 VSS DOUTP\<8\> VSS) vcvs gain=1.0
+E_D7 (net17 VSS DOUTP\<7\> VSS) vcvs gain=1.0
+E_D6 (net16 VSS DOUTP\<6\> VSS) vcvs gain=1.0
+E_D5 (net15 VSS DOUTP\<5\> VSS) vcvs gain=1.0
+E_D4 (net14 VSS DOUTP\<4\> VSS) vcvs gain=1.0
+E_D3 (net13 VSS DOUTP\<3\> VSS) vcvs gain=1.0
+E_D2 (net11 VSS DOUTP\<2\> VSS) vcvs gain=1.0
+E_D1 (net10 VSS DOUTP\<1\> VSS) vcvs gain=1.0
+E_D0 (net9  VSS DOUTP\<0\> VSS) vcvs gain=1.0
+
+// Simulation Setup
+simulatorOptions options \
+    psfversion="1.1.0" reltol=1e-3 vabstol=1e-6 iabstol=1e-12 \
+    temp=27 tnom=27 scalem=1.0 scale=1.0 gmin=1e-12 rforce=1 \
+    maxnotes=5 maxwarns=5 digits=5 cols=80 pivrel=1e-3
+
+tran tran stop=TSTOP errpreset=moderate \
+    write="spectre.ic" writefinal="spectre.fc" \
+    annotate=status maxiters=5
+
+saveOptions options save=allpub

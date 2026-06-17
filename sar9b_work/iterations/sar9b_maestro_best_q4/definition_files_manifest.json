@@ -1,0 +1,14 @@
+{
+  "library": "SAR9B_400MV",
+  "testbench_cell": "ADC_9B_tb_best_q4",
+  "test_name": "Vcmbased_ADC_tb_1",
+  "session": "fnxSession18",
+  "definition_files": [
+    "/home/IC/Desktop/Project/SAR9B_400MV/DAC8b_va/veriloga/veriloga.va",
+    "/home/IC/Desktop/Project/SAR9B_400MV/decode_redun9to8/veriloga/veriloga.va"
+  ],
+  "before": "nil",
+  "set_result": "t",
+  "after": "(\"/home/IC/Desktop/Project/SAR9B_400MV/DAC8b_va/veriloga/veriloga.va\" \"/home/IC/Desktop/Project/SAR9B_400MV/decode_redun9to8/veriloga/veriloga.va\")",
+  "grep": "/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/active.state:293:\t\t\t\t<field Name=\"definitionFiles\" Type=\"list\">nil</field>\n/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/active.state:299:\t\t\t\t<field Name=\"definitionFiles\" Type=\"list\">(\"/home/IC/Desktop/Project/SAR9B_400MV/DAC8b_va/veriloga/veriloga.va\" \"/home/IC/Desktop/Project/SAR9B_400MV/decode_redun9to8/veriloga/veriloga.va\")</field>\n/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/active.state:750:\t\t\t<field Name=\"definitionFiles\" Type=\"list\">nil</field>\n/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/active.state:755:\t\t\t<field Name=\"allDefinitionFiles\" Type=\"list\">nil</field>\n/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/active.state:756:\t\t\t<field Name=\"definitionFiles\" Type=\"list\">(\"/home/IC/Desktop/Project/SAR9B_400MV/DAC8b_va/veriloga/veriloga.va\" \"/home/IC/Desktop/Project/SAR9B_400MV/decode_redun9to8/veriloga/veriloga.va\")</field>\n/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/active.state:757:\t\t\t<field Name=\"allDefinitionFiles\" Type=\"list\">(\"/home/IC/Desktop/Project/SAR9B_400MV/DAC8b_va/veriloga/veriloga.va\" \"/home/IC/Desktop/Project/SAR9B_400MV/decode_redun9to8/veriloga/veriloga.va\")</field>\n"
+}

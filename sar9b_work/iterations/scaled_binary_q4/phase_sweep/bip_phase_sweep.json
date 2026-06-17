@@ -1,0 +1,223 @@
+{
+  "history": "ExplorerRun.0",
+  "results_dir": "/home/IC/simulation/8BIT400MVcmredundancySAR/ADC_redun1_tb/maestro/results/maestro/ExplorerRun.0/1/Vcmbased_ADC_tb_1/psf",
+  "offsets_ps": [
+    -1500.0,
+    -1200.0,
+    -900.0,
+    -600.0,
+    -300.0,
+    0.0,
+    300.0,
+    600.0,
+    900.0,
+    1200.0,
+    1500.0
+  ],
+  "results": [
+    {
+      "offset_ps": -1500.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\scaled_binary_q4\\phase_sweep\\bip_phase_m1500ps.txt",
+      "time_start": 2.45e-08,
+      "time_stop": 2.582e-06,
+      "code_min": 24,
+      "code_max": 487,
+      "code_mean": 255.4970703125,
+      "midband_values": 14,
+      "direct_binary_metrics": {
+        "sinad_db": 40.12290768312414,
+        "enob_bits": 6.372576027097034,
+        "dc": 255.4970703125,
+        "signal_power": 28060532900.34625,
+        "noise_dist_power": 2727753.6538467407
+      }
+    },
+    {
+      "offset_ps": -1200.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\scaled_binary_q4\\phase_sweep\\bip_phase_m1200ps.txt",
+      "time_start": 2.48e-08,
+      "time_stop": 2.5823e-06,
+      "code_min": 24,
+      "code_max": 487,
+      "code_mean": 255.5009765625,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 46.58677861146144,
+        "enob_bits": 7.446308739445423,
+        "dc": 255.5009765625,
+        "signal_power": 28061985404.796604,
+        "noise_dist_power": 615801.2033996582
+      }
+    },
+    {
+      "offset_ps": -900.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\scaled_binary_q4\\phase_sweep\\bip_phase_m900ps.txt",
+      "time_start": 2.51e-08,
+      "time_stop": 2.5826e-06,
+      "code_min": 24,
+      "code_max": 487,
+      "code_mean": 255.5009765625,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 54.234701791435924,
+        "enob_bits": 8.71672787233155,
+        "dc": 255.5009765625,
+        "signal_power": 28061995662.35513,
+        "noise_dist_power": 105839.64488220215
+      }
+    },
+    {
+      "offset_ps": -600.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\scaled_binary_q4\\phase_sweep\\bip_phase_m600ps.txt",
+      "time_start": 2.54e-08,
+      "time_stop": 2.5829e-06,
+      "code_min": 24,
+      "code_max": 487,
+      "code_mean": 255.5009765625,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 54.234701791435924,
+        "enob_bits": 8.71672787233155,
+        "dc": 255.5009765625,
+        "signal_power": 28061995662.35513,
+        "noise_dist_power": 105839.64488220215
+      }
+    },
+    {
+      "offset_ps": -300.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\scaled_binary_q4\\phase_sweep\\bip_phase_m300ps.txt",
+      "time_start": 2.57e-08,
+      "time_stop": 2.5832e-06,
+      "code_min": 24,
+      "code_max": 487,
+      "code_mean": 255.5009765625,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 54.234701791435924,
+        "enob_bits": 8.71672787233155,
+        "dc": 255.5009765625,
+        "signal_power": 28061995662.35513,
+        "noise_dist_power": 105839.64488220215
+      }
+    },
+    {
+      "offset_ps": 0.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\scaled_binary_q4\\phase_sweep\\bip_phase_p0ps.txt",
+      "time_start": 2.6e-08,
+      "time_stop": 2.5835e-06,
+      "code_min": 0,
+      "code_max": 511,
+      "code_mean": 255.5009765625,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 16.301894732405056,
+        "enob_bits": 2.415597131628747,
+        "dc": 255.5009765625,
+        "signal_power": 28057141216.758163,
+        "noise_dist_power": 657436701.2418251
+      }
+    },
+    {
+      "offset_ps": 300.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\scaled_binary_q4\\phase_sweep\\bip_phase_p300ps.txt",
+      "time_start": 2.63e-08,
+      "time_stop": 2.5838e-06,
+      "code_min": 0,
+      "code_max": 511,
+      "code_mean": 255.5009765625,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 18.941893662430225,
+        "enob_bits": 2.8541351598721305,
+        "dc": 255.5009765625,
+        "signal_power": 28060208870.25315,
+        "noise_dist_power": 358015255.74687195
+      }
+    },
+    {
+      "offset_ps": 600.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\scaled_binary_q4\\phase_sweep\\bip_phase_p600ps.txt",
+      "time_start": 2.66e-08,
+      "time_stop": 2.5841e-06,
+      "code_min": 16,
+      "code_max": 495,
+      "code_mean": 255.5009765625,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 27.163817253543392,
+        "enob_bits": 4.219903198263022,
+        "dc": 255.5009765625,
+        "signal_power": 28061660183.503403,
+        "noise_dist_power": 53917734.49659729
+      }
+    },
+    {
+      "offset_ps": 900.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\scaled_binary_q4\\phase_sweep\\bip_phase_p900ps.txt",
+      "time_start": 2.69e-08,
+      "time_stop": 2.5844e-06,
+      "code_min": 24,
+      "code_max": 487,
+      "code_mean": 255.5009765625,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 34.725328180336724,
+        "enob_bits": 5.47596813626856,
+        "dc": 255.5009765625,
+        "signal_power": 28061364428.697098,
+        "noise_dist_power": 9453137.302921295
+      }
+    },
+    {
+      "offset_ps": 1200.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\scaled_binary_q4\\phase_sweep\\bip_phase_p1200ps.txt",
+      "time_start": 2.72e-08,
+      "time_stop": 2.5847e-06,
+      "code_min": 24,
+      "code_max": 487,
+      "code_mean": 255.5517578125,
+      "midband_values": 338,
+      "direct_binary_metrics": {
+        "sinad_db": 43.93593754519817,
+        "enob_bits": 7.005969691893385,
+        "dc": 255.5517578125,
+        "signal_power": 28060039083.474655,
+        "noise_dist_power": 1133690.5252990723
+      }
+    },
+    {
+      "offset_ps": 1500.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\scaled_binary_q4\\phase_sweep\\bip_phase_p1500ps.txt",
+      "time_start": 2.75e-08,
+      "time_stop": 2.585e-06,
+      "code_min": 24,
+      "code_max": 487,
+      "code_mean": 255.5009765625,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 54.23470179143593,
+        "enob_bits": 8.716727872331552,
+        "dc": 255.5009765625,
+        "signal_power": 28061995662.355175,
+        "noise_dist_power": 105839.64488220215
+      }
+    }
+  ],
+  "best_by_sinad": {
+    "offset_ps": 1500.0,
+    "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\scaled_binary_q4\\phase_sweep\\bip_phase_p1500ps.txt",
+    "time_start": 2.75e-08,
+    "time_stop": 2.585e-06,
+    "code_min": 24,
+    "code_max": 487,
+    "code_mean": 255.5009765625,
+    "midband_values": 0,
+    "direct_binary_metrics": {
+      "sinad_db": 54.23470179143593,
+      "enob_bits": 8.716727872331552,
+      "dc": 255.5009765625,
+      "signal_power": 28061995662.355175,
+      "noise_dist_power": 105839.64488220215
+    }
+  }
+}

@@ -1,0 +1,14 @@
+ERROR: restore failed: Failed to set C2=Cunit*56: status=<ExecutionStatus.ERROR: 'error'> output='' errors=['Socket timeout after 20s'] warnings=[] execution_time=20.014999999999418 metadata={}
+ERROR: snapshot restore failed: Failed to set C10=Cunit*3: status=<ExecutionStatus.ERROR: 'error'> output='' errors=['SKILL execution timeout in Virtuoso'] warnings=[] execution_time=20.06300000000192 metadata={}
+WARNING: CDAC restore was not confirmed.
+Traceback (most recent call last):
+  File "E:\8bitvcmvirtuoso\sar9b_work\dout9_offline_measure.py", line 467, in <module>
+    main()
+  File "E:\8bitvcmvirtuoso\sar9b_work\dout9_offline_measure.py", line 463, in main
+    run_measurement(args)
+  File "E:\8bitvcmvirtuoso\sar9b_work\dout9_offline_measure.py", line 392, in run_measurement
+    history = run_explorer_and_wait(client, timeout=args.timeout)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\8bitvcmvirtuoso\sar9b_work\dout9_offline_measure.py", line 180, in run_explorer_and_wait
+    raise RuntimeError(f"sevRun failed: {r}")
+RuntimeError: sevRun failed: status=<ExecutionStatus.ERROR: 'error'> output='' errors=['Socket timeout after 60s'] warnings=[] execution_time=60.03199999999924 metadata={}

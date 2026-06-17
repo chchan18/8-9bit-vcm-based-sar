@@ -1,0 +1,4 @@
+// Generated SAR9B Verilog-A AHDL include wrapper.
+simulator lang=spectre
+ahdl_include "/home/IC/Desktop/Project/SAR9B_400MV/DAC8b_va/veriloga/veriloga.va"
+ahdl_include "/home/IC/Desktop/Project/SAR9B_400MV/decode_redun9to8/veriloga/veriloga.va"

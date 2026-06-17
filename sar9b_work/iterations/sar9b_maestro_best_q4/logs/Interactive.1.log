@@ -1,0 +1,17 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Wed Jun 17 10:17:24 2026 
+Best design point: 1
+Design specs: 
+	Vcmbased_ADC_tb_1	corner	Nominal - 
+Design parameters: 
+	fs		400M
+	Vpk		450m
+	Cunit		1f
+	TSTOP		2.7u
+
+Interactive.1
+Number of points completed: 1
+Number of simulation errors: 1
+Interactive.1 completed. 
+Current time: Wed Jun 17 10:17:25 2026 

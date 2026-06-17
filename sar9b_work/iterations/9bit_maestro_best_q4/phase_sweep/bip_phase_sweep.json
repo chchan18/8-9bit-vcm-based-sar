@@ -1,0 +1,259 @@
+{
+  "history": "Interactive.1",
+  "results_dir": "/home/IC/simulation/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.1/1/Vcmbased_ADC_tb_1/psf",
+  "offsets_ps": [
+    -1200.0,
+    -900.0,
+    -600.0,
+    -300.0,
+    0.0,
+    300.0,
+    600.0,
+    900.0,
+    1200.0,
+    1500.0,
+    1800.0,
+    2100.0,
+    2400.0
+  ],
+  "results": [
+    {
+      "offset_ps": -1200.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\9bit_maestro_best_q4\\phase_sweep\\bip_phase_m1200ps.txt",
+      "time_start": 2.48e-08,
+      "time_stop": 2.5823e-06,
+      "code_min": 124,
+      "code_max": 387,
+      "code_mean": 255.501953125,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 41.308172651246394,
+        "enob_bits": 6.56946389555588,
+        "dc": 255.501953125,
+        "signal_power": 8897295462.393702,
+        "noise_dist_power": 658325.606300354
+      }
+    },
+    {
+      "offset_ps": -900.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\9bit_maestro_best_q4\\phase_sweep\\bip_phase_m900ps.txt",
+      "time_start": 2.51e-08,
+      "time_stop": 2.5826e-06,
+      "code_min": 125,
+      "code_max": 386,
+      "code_mean": 255.501953125,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 49.45136137222534,
+        "enob_bits": 7.922153051864676,
+        "dc": 255.501953125,
+        "signal_power": 8897230243.124847,
+        "noise_dist_power": 100952.8751449585
+      }
+    },
+    {
+      "offset_ps": -600.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\9bit_maestro_best_q4\\phase_sweep\\bip_phase_m600ps.txt",
+      "time_start": 2.54e-08,
+      "time_stop": 2.5829e-06,
+      "code_min": 125,
+      "code_max": 386,
+      "code_mean": 255.501953125,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 49.45136137222534,
+        "enob_bits": 7.922153051864676,
+        "dc": 255.501953125,
+        "signal_power": 8897230243.124847,
+        "noise_dist_power": 100952.8751449585
+      }
+    },
+    {
+      "offset_ps": -300.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\9bit_maestro_best_q4\\phase_sweep\\bip_phase_m300ps.txt",
+      "time_start": 2.57e-08,
+      "time_stop": 2.5832e-06,
+      "code_min": 125,
+      "code_max": 386,
+      "code_mean": 255.501953125,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 49.45136137222534,
+        "enob_bits": 7.922153051864676,
+        "dc": 255.501953125,
+        "signal_power": 8897230243.124847,
+        "noise_dist_power": 100952.8751449585
+      }
+    },
+    {
+      "offset_ps": 0.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\9bit_maestro_best_q4\\phase_sweep\\bip_phase_p0ps.txt",
+      "time_start": 2.6e-08,
+      "time_stop": 2.5835e-06,
+      "code_min": 0,
+      "code_max": 511,
+      "code_mean": 255.501953125,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 11.09379489707778,
+        "enob_bits": 1.5504642686175716,
+        "dc": 255.501953125,
+        "signal_power": 8895045211.36092,
+        "noise_dist_power": 691462560.639082
+      }
+    },
+    {
+      "offset_ps": 300.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\9bit_maestro_best_q4\\phase_sweep\\bip_phase_p300ps.txt",
+      "time_start": 2.63e-08,
+      "time_stop": 2.5838e-06,
+      "code_min": 64,
+      "code_max": 447,
+      "code_mean": 255.501953125,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 15.061189644547424,
+        "enob_bits": 2.209499940954722,
+        "dc": 255.501953125,
+        "signal_power": 8896370079.447964,
+        "noise_dist_power": 277391964.55202293
+      }
+    },
+    {
+      "offset_ps": 600.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\9bit_maestro_best_q4\\phase_sweep\\bip_phase_p600ps.txt",
+      "time_start": 2.66e-08,
+      "time_stop": 2.5841e-06,
+      "code_min": 112,
+      "code_max": 399,
+      "code_mean": 255.501953125,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 22.900428466110313,
+        "enob_bits": 3.511699080749221,
+        "dc": 255.501953125,
+        "signal_power": 8897350447.005938,
+        "noise_dist_power": 45626572.994047165
+      }
+    },
+    {
+      "offset_ps": 900.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\9bit_maestro_best_q4\\phase_sweep\\bip_phase_p900ps.txt",
+      "time_start": 2.69e-08,
+      "time_stop": 2.5844e-06,
+      "code_min": 120,
+      "code_max": 391,
+      "code_mean": 255.501953125,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 28.150318045521388,
+        "enob_bits": 4.383773761714516,
+        "dc": 255.501953125,
+        "signal_power": 8897095689.899914,
+        "noise_dist_power": 13621234.100082397
+      }
+    },
+    {
+      "offset_ps": 1200.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\9bit_maestro_best_q4\\phase_sweep\\bip_phase_p1200ps.txt",
+      "time_start": 2.72e-08,
+      "time_stop": 2.5847e-06,
+      "code_min": 124,
+      "code_max": 387,
+      "code_mean": 255.583984375,
+      "midband_values": 375,
+      "direct_binary_metrics": {
+        "sinad_db": 38.25042296789573,
+        "enob_bits": 6.06153205446773,
+        "dc": 255.583984375,
+        "signal_power": 8904539940.73576,
+        "noise_dist_power": 1332199.2642326355
+      }
+    },
+    {
+      "offset_ps": 1500.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\9bit_maestro_best_q4\\phase_sweep\\bip_phase_p1500ps.txt",
+      "time_start": 2.75e-08,
+      "time_stop": 2.585e-06,
+      "code_min": 125,
+      "code_max": 386,
+      "code_mean": 255.501953125,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 49.45136137222535,
+        "enob_bits": 7.922153051864677,
+        "dc": 255.501953125,
+        "signal_power": 8897230243.124857,
+        "noise_dist_power": 100952.8751449585
+      }
+    },
+    {
+      "offset_ps": 1800.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\9bit_maestro_best_q4\\phase_sweep\\bip_phase_p1800ps.txt",
+      "time_start": 2.78e-08,
+      "time_stop": 2.5853e-06,
+      "code_min": 125,
+      "code_max": 386,
+      "code_mean": 255.501953125,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 49.45136137222535,
+        "enob_bits": 7.922153051864677,
+        "dc": 255.501953125,
+        "signal_power": 8897230243.124857,
+        "noise_dist_power": 100952.8751449585
+      }
+    },
+    {
+      "offset_ps": 2100.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\9bit_maestro_best_q4\\phase_sweep\\bip_phase_p2100ps.txt",
+      "time_start": 2.81e-08,
+      "time_stop": 2.5856e-06,
+      "code_min": 125,
+      "code_max": 386,
+      "code_mean": 255.501953125,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 49.45136137222535,
+        "enob_bits": 7.922153051864677,
+        "dc": 255.501953125,
+        "signal_power": 8897230243.124857,
+        "noise_dist_power": 100952.8751449585
+      }
+    },
+    {
+      "offset_ps": 2400.0,
+      "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\9bit_maestro_best_q4\\phase_sweep\\bip_phase_p2400ps.txt",
+      "time_start": 2.84e-08,
+      "time_stop": 2.5859e-06,
+      "code_min": 0,
+      "code_max": 511,
+      "code_mean": 255.501953125,
+      "midband_values": 0,
+      "direct_binary_metrics": {
+        "sinad_db": 9.891376626202673,
+        "enob_bits": 1.350727014319381,
+        "dc": 255.501953125,
+        "signal_power": 8901605391.505573,
+        "noise_dist_power": 912705516.4944248
+      }
+    }
+  ],
+  "best_by_sinad": {
+    "offset_ps": 1500.0,
+    "path": "E:\\8bitvcmvirtuoso\\sar9b_work\\iterations\\9bit_maestro_best_q4\\phase_sweep\\bip_phase_p1500ps.txt",
+    "time_start": 2.75e-08,
+    "time_stop": 2.585e-06,
+    "code_min": 125,
+    "code_max": 386,
+    "code_mean": 255.501953125,
+    "midband_values": 0,
+    "direct_binary_metrics": {
+      "sinad_db": 49.45136137222535,
+      "enob_bits": 7.922153051864677,
+      "dc": 255.501953125,
+      "signal_power": 8897230243.124857,
+      "noise_dist_power": 100952.8751449585
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "library": "8BIT400MVcmredundancySAR",
+  "testbench_cell": "ADC_9B_tb_best_q4",
+  "session": "fnxSession17",
+  "run_output": "\"Interactive.1\"",
+  "history": "Interactive.1",
+  "run_log_remote": "/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.1.log",
+  "start_epoch": 1781659017
+}

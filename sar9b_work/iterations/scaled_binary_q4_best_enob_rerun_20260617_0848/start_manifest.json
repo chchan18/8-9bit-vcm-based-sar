@@ -1,0 +1,26 @@
+{
+  "iteration": "scaled_binary_q4_best_enob_rerun_20260617_0848",
+  "start_epoch": 1781657299,
+  "run_log_remote": "/home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_redun1_tb/maestro/results/maestro/ExplorerRun.0.log",
+  "target": "binary CDAC scaled to 1/4 total load, about 127.75 Cunit per side",
+  "weights": {
+    "C0": "Cunit*32",
+    "C1": "Cunit*16",
+    "C10": "Cunit*2",
+    "C11": "Cunit*8",
+    "C12": "Cunit*4",
+    "C13": "Cunit*16",
+    "C14": "Cunit*32",
+    "C15": "Cunit*0.25",
+    "C16": "Cunit*0.25",
+    "C17": "Cunit*64",
+    "C2": "Cunit*64",
+    "C3": "Cunit*4",
+    "C4": "Cunit*8",
+    "C5": "Cunit*2",
+    "C6": "Cunit*1",
+    "C7": "Cunit*0.5",
+    "C8": "Cunit*0.5",
+    "C9": "Cunit*1"
+  }
+}

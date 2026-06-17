@@ -1,0 +1,547 @@
+
+Spectre (R) Circuit Simulator
+Version 18.1.0.077 64bit -- 1 Aug 2018
+Copyright (C) 1989-2018 Cadence Design Systems, Inc. All rights reserved worldwide. Cadence and Spectre are registered trademarks of Cadence Design Systems, Inc. All others are the property of their respective holders.
+
+Includes RSA BSAFE(R) Cryptographic or Security Protocol Software from RSA Security, Inc.
+
+User: IC   Host: IC   HostID: 7F0100   PID: 48555
+Memory  available: 640.7127 MB  physical: 16.7718 GB
+Linux   : CentOS Linux release 7.7.1908 (Core)
+CPU Type: Intel(R) Core(TM) i9-14900HX
+All processors running at 2419.2 MHz
+        Socket: Processors
+        0:       0,  1,  2,  3
+        1:       4,  5,  6,  7
+        2:       8,  9, 10, 11
+        3:      12, 13, 14, 15
+        
+System load averages (1min, 5min, 15min) : 0.3 %, 0.5 %, 0.8 %
+HPC is enabled
+This is a virtual machine
+
+
+Simulating `input.scs' on IC at 10:34:06 AM, Wed Jun 17, 2026 (process id: 48555).
+Current working directory: /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/1/Vcmbased_ADC_tb_1/netlist
+Environment variable:
+    SPECTRE_DEFAULTS=-E
+Command line:
+    /opt/eda/cadence/SPECTRE181/tools.lnx86/bin/spectre -64 input.scs  \
+        +escchars +log ../psf/spectre.out -format psfxl -raw ../psf  \
+        +aps +lqtimeout 900 -maxw 5 -maxn 5 -ahdllibdir  \
+        /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/sharedData/CDS/ahdl/input.ahdlSimDB  \
+        +logstatus
+
+Loading /opt/eda/cadence/SPECTRE181/tools.lnx86/cmi/lib/64bit/5.0/libinfineon_sh.so ...
+Loading /opt/eda/cadence/SPECTRE181/tools.lnx86/cmi/lib/64bit/5.0/libphilips_o_sh.so ...
+Loading /opt/eda/cadence/SPECTRE181/tools.lnx86/cmi/lib/64bit/5.0/libphilips_sh.so ...
+Loading /opt/eda/cadence/SPECTRE181/tools.lnx86/cmi/lib/64bit/5.0/libsparam_sh.so ...
+Loading /opt/eda/cadence/SPECTRE181/tools.lnx86/cmi/lib/64bit/5.0/libstmodels_sh.so ...
+Reading file:  /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/1/Vcmbased_ADC_tb_1/netlist/input.scs
+Reading file:  /opt/eda/cadence/SPECTRE181/tools.lnx86/spectre/etc/configs/mapsubckt.cfg
+Reading file:  /opt/eda/cadence/SPECTRE181/tools.lnx86/spectre/etc/configs/spectre.cfg
+Reading file:  /usr/include/stdc-predef.h
+Reading file:  /home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/sar9b_va_ahdl.scs
+Reading file:  /home/IC/Desktop/Project/SAR9B_400MV/DAC8b_va/veriloga/veriloga.va
+Reading file:  /opt/eda/cadence/SPECTRE181/tools.lnx86/spectre/etc/ahdl/constants.vams
+Reading file:  /opt/eda/cadence/SPECTRE181/tools.lnx86/spectre/etc/ahdl/disciplines.vams
+Reading file:  /home/IC/Desktop/Project/SAR9B_400MV/decode_redun9to8/veriloga/veriloga.va
+Reading file:  /home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/toplevel.scs
+Reading file:  /home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/crn28hpcp_lct_1d8_elk_v1d0_2p2_shrink0d9_embedded_usage.scs
+Reading file:  /home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/crn28hpcp_lct_1d8_elk_v1d0_2p2.scs
+Reading file:  /home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/res_metal.scs
+Reading file:  /home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/cln28hpcp_hv_1d8_elk_v0d1_2p1_shrink0d9_embedded_usage.scs
+Reading file:  /home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/cln28hpcp_hv_1d8_elk_v0d1_2p1.scs
+Time for NDB Parsing: CPU = 960.532 ms, elapsed = 544.218 ms.
+Time accumulated: CPU = 973.072 ms, elapsed = 544.222 ms.
+Peak resident memory used = 90 Mbytes.
+
+Opening directory /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/sharedData/CDS/ahdl/input.ahdlSimDB (775)
+Created directory /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/sharedData/CDS/ahdl/input.ahdlSimDB/ddb734a8153ec2583ac004b6baf69302.decode_redun9to8.ahdlcmi/ (775)
+Reading file:  /home/IC/simulation/8BIT400MVcmredundancySAR/ADC_redun1_tb/maestro/results/maestro/ExplorerRun.0/sharedData/CDS/ahdl/input.ahdlSimDB/ddb734a8153ec2583ac004b6baf69302.decode_redun9to8.ahdlcmi/Linux-64/obj/optimize/5.0/libahdlcmi_decode_redun9to8.so
+Created directory /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/sharedData/CDS/ahdl/input.ahdlSimDB/ddb734a8153ec2583ac004b6baf69302.decode_redun9to8.ahdlcmi/Linux-64/obj/optimize/5.0 
+Copying files from directory /home/IC/simulation/8BIT400MVcmredundancySAR/ADC_redun1_tb/maestro/results/maestro/ExplorerRun.0/sharedData/CDS/ahdl/input.ahdlSimDB/ddb734a8153ec2583ac004b6baf69302.decode_redun9to8.ahdlcmi/Linux-64/ to directory /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/sharedData/CDS/ahdl/input.ahdlSimDB/ddb734a8153ec2583ac004b6baf69302.decode_redun9to8.ahdlcmi/Linux-64/
+Finished copying files from /home/IC/simulation/8BIT400MVcmredundancySAR/ADC_redun1_tb/maestro/results/maestro/ExplorerRun.0/sharedData/CDS/ahdl/input.ahdlSimDB/ddb734a8153ec2583ac004b6baf69302.decode_redun9to8.ahdlcmi/Linux-64/ to /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/sharedData/CDS/ahdl/input.ahdlSimDB/ddb734a8153ec2583ac004b6baf69302.decode_redun9to8.ahdlcmi/Linux-64/.
+The simulator has reused the existing Verilog-A libraries for this simulation run. If you do not want to use these libraries, set the 'CDS_AHDL_REUSE_LIB' environment variable to 'NO' and rerun the simulation.
+Existing shared object for module decode_redun9to8 is up to date.
+Installed compiled interface for decode_redun9to8.
+Opening directory /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/sharedData/CDS/ahdl/input.ahdlSimDB (775)
+Created directory /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/sharedData/CDS/ahdl/input.ahdlSimDB/b76778535b6fa2bfac3090b337a26702.DAC8b_va.ahdlcmi/ (775)
+Reading file:  /home/IC/simulation/8BIT400MVcmredundancySAR/ADC_redun1_tb/maestro/results/maestro/ExplorerRun.0/sharedData/CDS/ahdl/input.ahdlSimDB/b76778535b6fa2bfac3090b337a26702.DAC8b_va.ahdlcmi/Linux-64/obj/optimize/5.0/libahdlcmi_DAC8b_va.so
+Created directory /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/sharedData/CDS/ahdl/input.ahdlSimDB/b76778535b6fa2bfac3090b337a26702.DAC8b_va.ahdlcmi/Linux-64/obj/optimize/5.0 
+Copying files from directory /home/IC/simulation/8BIT400MVcmredundancySAR/ADC_redun1_tb/maestro/results/maestro/ExplorerRun.0/sharedData/CDS/ahdl/input.ahdlSimDB/b76778535b6fa2bfac3090b337a26702.DAC8b_va.ahdlcmi/Linux-64/ to directory /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/sharedData/CDS/ahdl/input.ahdlSimDB/b76778535b6fa2bfac3090b337a26702.DAC8b_va.ahdlcmi/Linux-64/
+Finished copying files from /home/IC/simulation/8BIT400MVcmredundancySAR/ADC_redun1_tb/maestro/results/maestro/ExplorerRun.0/sharedData/CDS/ahdl/input.ahdlSimDB/b76778535b6fa2bfac3090b337a26702.DAC8b_va.ahdlcmi/Linux-64/ to /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/sharedData/CDS/ahdl/input.ahdlSimDB/b76778535b6fa2bfac3090b337a26702.DAC8b_va.ahdlcmi/Linux-64/.
+Existing shared object for module DAC8b_va is up to date.
+Installed compiled interface for DAC8b_va.
+Reading link:  /opt/eda/cadence/SPECTRE181/tools.lnx86/spectre/etc/ahdl/discipline.h
+Reading link:  /opt/eda/cadence/SPECTRE181/tools.lnx86/spectre/etc/ahdl/constants.h
+
+Warning from spectre during hierarchy flattening.
+    WARNING (SFE-1131): Duplicate scope option `scalefactor' with scope `TopCircuit'. (using last value specified).
+    WARNING (SFE-1131): Duplicate scope option `scalefactor' with scope `TopCircuit'. (using last value specified).
+    WARNING (SFE-1131): Duplicate scope option `scalefactor' with scope `TopCircuit'. (using last value specified).
+    WARNING (SFE-1131): Duplicate scope option `scalefactor' with scope `TopCircuit'. (using last value specified).
+
+Opening directory /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/sharedData/CDS/ahdl/input.ahdlSimDB (775)
+Created directory /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/sharedData/CDS/ahdl/input.ahdlSimDB/bsource_965053.va.bsource_965053.ahdlcmi/ (775)
+Reading file:  /home/IC/simulation/8BIT400MVcmredundancySAR/ADC_redun1_tb/maestro/results/maestro/ExplorerRun.0/sharedData/CDS/ahdl/input.ahdlSimDB/bsource_965053.va.bsource_965053.ahdlcmi/Linux-64/obj/optimize/5.0/libahdlcmi_bsource_965053.so
+Created directory /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/sharedData/CDS/ahdl/input.ahdlSimDB/bsource_965053.va.bsource_965053.ahdlcmi/Linux-64/obj/optimize/5.0 
+Copying files from directory /home/IC/simulation/8BIT400MVcmredundancySAR/ADC_redun1_tb/maestro/results/maestro/ExplorerRun.0/sharedData/CDS/ahdl/input.ahdlSimDB/bsource_965053.va.bsource_965053.ahdlcmi/Linux-64/ to directory /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/sharedData/CDS/ahdl/input.ahdlSimDB/bsource_965053.va.bsource_965053.ahdlcmi/Linux-64/
+Finished copying files from /home/IC/simulation/8BIT400MVcmredundancySAR/ADC_redun1_tb/maestro/results/maestro/ExplorerRun.0/sharedData/CDS/ahdl/input.ahdlSimDB/bsource_965053.va.bsource_965053.ahdlcmi/Linux-64/ to /home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.5/sharedData/CDS/ahdl/input.ahdlSimDB/bsource_965053.va.bsource_965053.ahdlcmi/Linux-64/.
+Existing shared object for module bsource_965053 is up to date.
+Installed compiled interface for bsource_965053.
+Time for Elaboration: CPU = 205.382 ms, elapsed = 133.076 ms.
+Time accumulated: CPU = 1.17867 s, elapsed = 677.405 ms.
+Peak resident memory used = 115 Mbytes.
+
+
+Warning from spectre during hierarchy flattening.
+    WARNING (SPECTRE-17101): The value 'psf' specified using the 'checklimitdest' option will no longer be supported in future releases.
+
+
+
+Warning from spectre during hierarchy flattening.
+    WARNING (SPECTRE-8527): There are some nodes and instances removed from the netlist topology check. Check the circuit and correct the topology. Or use preserve_inst to keep them if necessary.
+
+***********************************************
+  Total removed instances 2 ( dangling 2, terminals connected together 0)  
+
+Warning from spectre during hierarchy flattening.
+    WARNING (SPECTRE-8529): Dangling instance. I0.C15 is removed.
+    WARNING (SPECTRE-8529): Dangling instance. I0.C16 is removed.
+
+
+  Total removed nodes 2 ( dangling nodes 2, floating nodes 0 )
+
+Warning from spectre during hierarchy flattening.
+    WARNING (SPECTRE-8530): Dangling node. I0.net15 is removed.
+    WARNING (SPECTRE-8530): Dangling node. I0.net16 is removed.
+
+***********************************************
+Time for EDB Visiting: CPU = 15.45 ms, elapsed = 15.451 ms.
+Time accumulated: CPU = 1.19429 s, elapsed = 693.023 ms.
+Peak resident memory used = 119 Mbytes.
+
+
+Notice from spectre during topology check.
+    Only one connection to node `out'.
+Notice from spectre during initial setup.
+    Multithreading is disabled due to the size of the design being too small.
+
+
+Global user options:
+         psfversion = 1.1.0
+            vabstol = 1e-06
+            iabstol = 1e-12
+               temp = 27
+               gmin = 1e-12
+             rforce = 1
+           maxnotes = 5
+           maxwarns = 5
+             digits = 5
+               cols = 80
+             pivrel = 0.001
+           sensfile = ../psf/sens.output
+     checklimitdest = psf
+               save = allpub
+        scalefactor = 0.9
+        scalefactor = 0.9
+        scalefactor = 0.9
+        scalefactor = 0.9
+        scalefactor = 0.9
+             reltol = 0.001
+               tnom = 27
+             scalem = 1
+              scale = 1
+
+Scoped user options:
+
+Circuit inventory:
+              nodes 454
+              bsim4 975   
+     bsource_965053 2     
+          capacitor 20    
+           DAC8b_va 1     
+   decode_redun9to8 1     
+        transformer 2     
+            vsource 7     
+
+Analysis and control statement inventory:
+               info 7     
+               tran 1     
+
+Output statements:
+             .probe 0     
+           .measure 0     
+               save 0     
+
+
+Notice from spectre during initial setup.
+    1 vsources are short because their absolute value is less than or equal to 'vabsshort'.
+    APS Enabled.
+
+Time for parsing: CPU = 5.36 ms, elapsed = 5.87606 ms.
+Time accumulated: CPU = 1.19976 s, elapsed = 699.008 ms.
+Peak resident memory used = 121 Mbytes.
+
+~~~~~~~~~~~~~~~~~~~~~~
+Pre-Simulation Summary
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+
+*************************************************
+Transient Analysis `tran': time = (0 s -> 2.7 us)
+*************************************************
+Trying `homotopy = gmin' for initial conditions.
+
+Notice from spectre during IC analysis, during transient analysis `tran'.
+    GminDC = 1 pS is large enough to noticeably affect the DC solution.
+        dV(I0.net7) = 241.053 uV
+        Use the `gmin_check' option to eliminate or expand this report.
+    Bad pivoting is found during DC analysis. Option dc_pivot_check=yes is recommended for possible improvement of convergence.
+
+DC simulation time: CPU = 328.119 ms, elapsed = 328.122 ms.
+
+Opening the PSFXL file ../psf/tran.tran.tran ...
+Important parameter values:
+    start = 0 s
+    outputstart = 0 s
+    stop = 2.7 us
+    step = 2.7 ns
+    maxstep = 54 ns
+    ic = all
+    useprevic = no
+    skipdc = no
+    reltol = 1e-03
+    abstol(V) = 1 uV
+    abstol(I) = 1 pA
+    temp = 27 C
+    tnom = 27 C
+    tempeffects = all
+    errpreset = moderate
+    method = traponly
+    lteratio = 3.5
+    relref = sigglobal
+    cmin = 0 F
+    gmin = 1 pS
+    rabsshort = 1 mOhm
+
+
+Notice from spectre during transient analysis `tran'.
+    Multithreading is disabled due to the size of the design being too small.
+
+
+Output and IC/nodeset summary:
+                 save   6       (current)
+                 save   451     (voltage)
+
+
+Warning from spectre at time = 1.75013 ps during transient analysis `tran'.
+    WARNING (CMI-2754): I0.I36.I2.M1: Vgd(=994.624 mV) has exceeded vgd_max(=990 mV).
+    WARNING (CMI-2751): I0.I36.I0.M0: Vds(=1.01013 V) has exceeded vds_max(=990 mV).
+    WARNING (CMI-2755): I0.I36.I0.M0: Vbd(=-1.01013 V) has exceeded vbd_max(=990 mV).
+    WARNING (CMI-2752): I0.I36.I2.M0: Vgs(=1.01013 V) has exceeded vgs_max(=990 mV).
+    WARNING (CMI-2753): I0.I36.I2.M0: Vgb(=1.01013 V) has exceeded vgb_max(=990 mV).
+    WARNING (CMI-2754): I0.I36.I2.M0: Vgd(=994.624 mV) has exceeded vgd_max(=990 mV).
+Warning from spectre at time = 1.99991 ps during transient analysis `tran'.
+    WARNING (CMI-2751): I0.I36.I0.M0: Vds(=999.018 mV) has exceeded vds_max(=990 mV).
+    WARNING (CMI-2755): I0.I36.I0.M0: Vbd(=-999.018 mV) has exceeded vbd_max(=990 mV).
+    WARNING (CMI-2752): I0.I36.I2.M0: Vgs(=999.018 mV) has exceeded vgs_max(=990 mV).
+    WARNING (CMI-2753): I0.I36.I2.M0: Vgb(=999.018 mV) has exceeded vgb_max(=990 mV).
+Warning from spectre at time = 103.8 ps during transient analysis `tran'.
+    WARNING (CMI-2751): I0.I27.I0.I5.M2: Vds(=-991.671 mV) has exceeded vds_max(=990 mV).
+    WARNING (CMI-2751): I0.I27.I1.I5.M2: Vds(=-991.568 mV) has exceeded vds_max(=990 mV).
+    WARNING (CMI-2751): I0.I27.I2.I5.M2: Vds(=-991.568 mV) has exceeded vds_max(=990 mV).
+        Further occurrences of this warning will be suppressed.
+Warning from spectre at time = 110.862 ps during transient analysis `tran'.
+    WARNING (CMI-2753): I0.I37.M8: Vgb(=1.00462 V) has exceeded vgb_max(=990 mV).
+    WARNING (CMI-2753): I0.I37.M25: Vgb(=1.00448 V) has exceeded vgb_max(=990 mV).
+    WARNING (CMI-2753): I0.I37.M7: Vgb(=1.00462 V) has exceeded vgb_max(=990 mV).
+        Further occurrences of this warning will be suppressed.
+    WARNING (CMI-2755): I0.I37.M4: Vbd(=-1.00462 V) has exceeded vbd_max(=990 mV).
+    WARNING (CMI-2755): I0.I37.M31: Vbd(=-1.00448 V) has exceeded vbd_max(=990 mV).
+Warning from spectre at time = 111.602 ps during transient analysis `tran'.
+    WARNING (CMI-2755): I0.I37.M4: Vbd(=-1.03627 V) has exceeded vbd_max(=990 mV).
+        Further occurrences of this warning will be suppressed.
+Warning from spectre at time = 513.493 ps during transient analysis `tran'.
+    WARNING (CMI-2754): I0.I36.I5.M5: Vgd(=995.565 mV) has exceeded vgd_max(=990 mV).
+    WARNING (CMI-2752): I0.I36.I5.M4: Vgs(=1.00342 V) has exceeded vgs_max(=990 mV).
+    WARNING (CMI-2754): I0.I36.I5.M4: Vgd(=995.565 mV) has exceeded vgd_max(=990 mV).
+Warning from spectre at time = 514.4 ps during transient analysis `tran'.
+    WARNING (CMI-2754): I0.I36.I5.M5: Vgd(=1.00581 V) has exceeded vgd_max(=990 mV).
+        Further occurrences of this warning will be suppressed.
+    WARNING (CMI-2752): I0.I36.I5.M4: Vgs(=1.01328 V) has exceeded vgs_max(=990 mV).
+Warning from spectre at time = 592.433 ps during transient analysis `tran'.
+    WARNING (CMI-2752): I0.I37.M7: Vgs(=1.00529 V) has exceeded vgs_max(=990 mV).
+        Further occurrences of this warning will be suppressed.
+
+    tran: time = 16.28 ns    (603 m%), step = 834.3 fs    (30.9 u%)
+    tran: time = 31.79 ns    (1.18 %), step = 1.982 ps    (73.4 u%)
+    tran: time = 48.21 ns    (1.79 %), step = 1.109 ps    (41.1 u%)
+    tran: time = 63.41 ns    (2.35 %), step = 1.503 ps    (55.7 u%)
+    tran: time = 67.5 ns      (2.5 %), step = 10.3 ps      (381 u%)
+
+Warning from spectre at time = 83.4708 ns during transient analysis `tran'.
+    WARNING (CMI-2756): I0.I42.M5: Vbs(=-992.169 mV) has exceeded vbs_max (=990 mV).
+Warning from spectre at time = 83.4734 ns during transient analysis `tran'.
+    WARNING (CMI-2756): I0.I43.M4: Vbs(=993.1 mV) has exceeded vbs_max (=990 mV).
+    WARNING (CMI-2756): I0.I42.M5: Vbs(=-993.762 mV) has exceeded vbs_max (=990 mV).
+Warning from spectre at time = 83.4752 ns during transient analysis `tran'.
+    WARNING (CMI-2756): I0.I43.M4: Vbs(=996.381 mV) has exceeded vbs_max (=990 mV).
+    WARNING (CMI-2756): I0.I42.M5: Vbs(=-992.35 mV) has exceeded vbs_max (=990 mV).
+        Further occurrences of this warning will be suppressed.
+
+    tran: time = 84.2 ns     (3.12 %), step = 1.497 ps    (55.4 u%)
+    tran: time = 101.2 ns    (3.75 %), step = 944.4 fs      (35 u%)
+    tran: time = 116.5 ns    (4.31 %), step = 745.5 fs    (27.6 u%)
+    tran: time = 131.9 ns    (4.89 %), step = 1.298 ps    (48.1 u%)
+    tran: time = 149.3 ns    (5.53 %), step = 991.2 fs    (36.7 u%)
+    tran: time = 166.9 ns    (6.18 %), step = 1.483 ps    (54.9 u%)
+    tran: time = 183.8 ns    (6.81 %), step = 1.775 ps    (65.7 u%)
+    tran: time = 200.9 ns    (7.44 %), step = 1.621 ps    (60.1 u%)
+    tran: time = 202.5 ns     (7.5 %), step = 6.337 ps     (235 u%)
+    tran: time = 220.1 ns    (8.15 %), step = 1.963 ps    (72.7 u%)
+    tran: time = 226.2 ns    (8.38 %), step = 1.618 ps    (59.9 u%)
+    tran: time = 229.3 ns    (8.49 %), step = 1.846 ps    (68.4 u%)
+    tran: time = 232.6 ns    (8.61 %), step = 1.516 ps    (56.2 u%)
+    tran: time = 235.8 ns    (8.73 %), step = 1.555 ps    (57.6 u%)
+    tran: time = 238.9 ns    (8.85 %), step = 4.478 ps     (166 u%)
+    tran: time = 242 ns      (8.96 %), step = 1.586 ps    (58.7 u%)
+    tran: time = 245.6 ns     (9.1 %), step = 1.106 ps      (41 u%)
+    tran: time = 248.4 ns     (9.2 %), step = 990.1 fs    (36.7 u%)
+    tran: time = 251.5 ns    (9.31 %), step = 1.169 ps    (43.3 u%)
+    tran: time = 254.8 ns    (9.44 %), step = 1.122 ps    (41.6 u%)
+    tran: time = 258.5 ns    (9.57 %), step = 1.265 ps    (46.9 u%)
+    tran: time = 261.6 ns    (9.69 %), step = 4.479 ps     (166 u%)
+    tran: time = 264.9 ns    (9.81 %), step = 1.678 ps    (62.2 u%)
+    tran: time = 268.4 ns    (9.94 %), step = 1.718 ps    (63.6 u%)
+    tran: time = 271.3 ns      (10 %), step = 965.1 fs    (35.7 u%)
+    tran: time = 274.4 ns    (10.2 %), step = 739.6 fs    (27.4 u%)
+    tran: time = 277.7 ns    (10.3 %), step = 1.311 ps    (48.5 u%)
+    tran: time = 281 ns      (10.4 %), step = 1.993 ps    (73.8 u%)
+    tran: time = 284.1 ns    (10.5 %), step = 2.737 ps     (101 u%)
+    tran: time = 287.3 ns    (10.6 %), step = 2.345 ps    (86.8 u%)
+    tran: time = 290.9 ns    (10.8 %), step = 1.643 ps    (60.9 u%)
+    tran: time = 293.9 ns    (10.9 %), step = 1.683 ps    (62.3 u%)
+    tran: time = 297 ns        (11 %), step = 983.4 fs    (36.4 u%)
+    tran: time = 300.6 ns    (11.1 %), step = 1.141 ps    (42.2 u%)
+    tran: time = 303.7 ns    (11.2 %), step = 856.7 fs    (31.7 u%)
+    tran: time = 306.7 ns    (11.4 %), step = 1.563 ps    (57.9 u%)
+    tran: time = 309.9 ns    (11.5 %), step = 1.062 ps    (39.3 u%)
+    tran: time = 313.3 ns    (11.6 %), step = 1.22 ps     (45.2 u%)
+    tran: time = 316.3 ns    (11.7 %), step = 2.365 ps    (87.6 u%)
+    tran: time = 319.2 ns    (11.8 %), step = 963.5 fs    (35.7 u%)
+    tran: time = 322.3 ns    (11.9 %), step = 891.2 fs      (33 u%)
+    tran: time = 325.8 ns    (12.1 %), step = 879.4 fs    (32.6 u%)
+    tran: time = 328.8 ns    (12.2 %), step = 773.6 fs    (28.7 u%)
+    tran: time = 331.9 ns    (12.3 %), step = 2.23 ps     (82.6 u%)
+    tran: time = 335.1 ns    (12.4 %), step = 1.918 ps      (71 u%)
+    tran: time = 337.5 ns    (12.5 %), step = 12.38 ps     (459 u%)
+    tran: time = 354.5 ns    (13.1 %), step = 1.335 ps    (49.4 u%)
+    tran: time = 371.8 ns    (13.8 %), step = 1.792 ps    (66.4 u%)
+    tran: time = 388.3 ns    (14.4 %), step = 2.381 ps    (88.2 u%)
+    tran: time = 406.3 ns      (15 %), step = 885.7 fs    (32.8 u%)
+    tran: time = 422.2 ns    (15.6 %), step = 1.924 ps    (71.3 u%)
+    tran: time = 437.4 ns    (16.2 %), step = 1.282 ps    (47.5 u%)
+    tran: time = 453.1 ns    (16.8 %), step = 1.038 ps    (38.5 u%)
+    tran: time = 468.6 ns    (17.4 %), step = 2.077 ps    (76.9 u%)
+    tran: time = 472.5 ns    (17.5 %), step = 9.665 ps     (358 u%)
+    tran: time = 489 ns      (18.1 %), step = 1.713 ps    (63.4 u%)
+    tran: time = 505.7 ns    (18.7 %), step = 1.173 ps    (43.4 u%)
+    tran: time = 523.1 ns    (19.4 %), step = 1.332 ps    (49.3 u%)
+    tran: time = 540.5 ns      (20 %), step = 58.94 fs    (2.18 u%)
+    tran: time = 558.2 ns    (20.7 %), step = 857 fs      (31.7 u%)
+    tran: time = 575 ns      (21.3 %), step = 2.201 ps    (81.5 u%)
+    tran: time = 592.6 ns    (21.9 %), step = 1.563 ps    (57.9 u%)
+    tran: time = 607.5 ns    (22.5 %), step = 5.743 ps     (213 u%)
+    tran: time = 625.9 ns    (23.2 %), step = 568.6 fs    (21.1 u%)
+    tran: time = 641.7 ns    (23.8 %), step = 862 fs      (31.9 u%)
+    tran: time = 657.7 ns    (24.4 %), step = 1.736 ps    (64.3 u%)
+    tran: time = 673.9 ns      (25 %), step = 750.8 fs    (27.8 u%)
+    tran: time = 689.5 ns    (25.5 %), step = 1.594 ps      (59 u%)
+    tran: time = 705.1 ns    (26.1 %), step = 3.254 ps     (121 u%)
+    tran: time = 720.7 ns    (26.7 %), step = 966.2 fs    (35.8 u%)
+    tran: time = 738 ns      (27.3 %), step = 960.8 fs    (35.6 u%)
+    tran: time = 742.5 ns    (27.5 %), step = 11.71 ps     (434 u%)
+    tran: time = 758.8 ns    (28.1 %), step = 1.64 ps     (60.7 u%)
+    tran: time = 775.7 ns    (28.7 %), step = 889.9 fs      (33 u%)
+    tran: time = 791.5 ns    (29.3 %), step = 1.675 ps    (62.1 u%)
+    tran: time = 807.6 ns    (29.9 %), step = 1.624 ps    (60.1 u%)
+    tran: time = 824 ns      (30.5 %), step = 1.684 ps    (62.4 u%)
+    tran: time = 840.7 ns    (31.1 %), step = 969.2 fs    (35.9 u%)
+    tran: time = 856.5 ns    (31.7 %), step = 1.476 ps    (54.7 u%)
+    tran: time = 873.1 ns    (32.3 %), step = 1.209 ps    (44.8 u%)
+    tran: time = 877.5 ns    (32.5 %), step = 11.3 ps      (418 u%)
+    tran: time = 893.2 ns    (33.1 %), step = 977.5 fs    (36.2 u%)
+    tran: time = 910.6 ns    (33.7 %), step = 779.6 fs    (28.9 u%)
+    tran: time = 927.5 ns    (34.4 %), step = 1.913 ps    (70.9 u%)
+    tran: time = 944.7 ns      (35 %), step = 943.2 fs    (34.9 u%)
+    tran: time = 962.2 ns    (35.6 %), step = 1.234 ps    (45.7 u%)
+    tran: time = 980.1 ns    (36.3 %), step = 1.978 ps    (73.3 u%)
+    tran: time = 998.4 ns      (37 %), step = 1.612 ps    (59.7 u%)
+    tran: time = 1.013 us    (37.5 %), step = 10.57 ps     (392 u%)
+    tran: time = 1.029 us    (38.1 %), step = 2.16 ps       (80 u%)
+    tran: time = 1.045 us    (38.7 %), step = 1.079 ps      (40 u%)
+    tran: time = 1.061 us    (39.3 %), step = 985.1 fs    (36.5 u%)
+    tran: time = 1.078 us    (39.9 %), step = 1.205 ps    (44.6 u%)
+    tran: time = 1.096 us    (40.6 %), step = 1.312 ps    (48.6 u%)
+    tran: time = 1.114 us    (41.2 %), step = 1.77 ps     (65.6 u%)
+    tran: time = 1.131 us    (41.9 %), step = 2.045 ps    (75.7 u%)
+    tran: time = 1.148 us    (42.5 %), step = 15.57 ps     (577 u%)
+    tran: time = 1.165 us    (43.2 %), step = 14.06 ps     (521 u%)
+    tran: time = 1.183 us    (43.8 %), step = 1.54 ps       (57 u%)
+    tran: time = 1.201 us    (44.5 %), step = 1.675 ps      (62 u%)
+    tran: time = 1.219 us    (45.1 %), step = 894.4 fs    (33.1 u%)
+    tran: time = 1.237 us    (45.8 %), step = 1.016 ps    (37.6 u%)
+    tran: time = 1.254 us    (46.5 %), step = 1.757 ps    (65.1 u%)
+    tran: time = 1.259 us    (46.6 %), step = 1.082 ps    (40.1 u%)
+    tran: time = 1.262 us    (46.7 %), step = 943.8 fs      (35 u%)
+    tran: time = 1.266 us    (46.9 %), step = 1.826 ps    (67.6 u%)
+    tran: time = 1.269 us      (47 %), step = 6.015 ps     (223 u%)
+    tran: time = 1.272 us    (47.1 %), step = 676 fs        (25 u%)
+    tran: time = 1.275 us    (47.2 %), step = 2.268 ps      (84 u%)
+    tran: time = 1.279 us    (47.4 %), step = 1.674 ps      (62 u%)
+    tran: time = 1.283 us    (47.5 %), step = 6.473 ps     (240 u%)
+    tran: time = 1.3 us      (48.1 %), step = 727.8 fs      (27 u%)
+    tran: time = 1.318 us    (48.8 %), step = 1.179 ps    (43.7 u%)
+    tran: time = 1.335 us    (49.4 %), step = 11.69 ps     (433 u%)
+    tran: time = 1.353 us    (50.1 %), step = 1.067 ps    (39.5 u%)
+    tran: time = 1.371 us    (50.8 %), step = 1.785 ps    (66.1 u%)
+    tran: time = 1.388 us    (51.4 %), step = 1.24 ps     (45.9 u%)
+    tran: time = 1.404 us      (52 %), step = 1.683 ps    (62.3 u%)
+    tran: time = 1.418 us    (52.5 %), step = 11.82 ps     (438 u%)
+    tran: time = 1.434 us    (53.1 %), step = 1.971 ps      (73 u%)
+    tran: time = 1.449 us    (53.7 %), step = 2.331 ps    (86.3 u%)
+    tran: time = 1.464 us    (54.2 %), step = 2.237 ps    (82.9 u%)
+    tran: time = 1.481 us    (54.8 %), step = 1.333 ps    (49.4 u%)
+    tran: time = 1.496 us    (55.4 %), step = 1.145 ps    (42.4 u%)
+    tran: time = 1.512 us      (56 %), step = 1.135 ps      (42 u%)
+    tran: time = 1.528 us    (56.6 %), step = 1.327 ps    (49.1 u%)
+    tran: time = 1.546 us    (57.2 %), step = 1.215 ps      (45 u%)
+    tran: time = 1.553 us    (57.5 %), step = 8.719 ps     (323 u%)
+    tran: time = 1.571 us    (58.2 %), step = 500 fs      (18.5 u%)
+    tran: time = 1.587 us    (58.8 %), step = 879.9 fs    (32.6 u%)
+    tran: time = 1.605 us    (59.4 %), step = 1.847 ps    (68.4 u%)
+    tran: time = 1.623 us    (60.1 %), step = 3.237 ps     (120 u%)
+    tran: time = 1.64 us     (60.7 %), step = 16.3 ps      (604 u%)
+    tran: time = 1.657 us    (61.4 %), step = 814.2 fs    (30.2 u%)
+    tran: time = 1.674 us      (62 %), step = 2.046 ps    (75.8 u%)
+    tran: time = 1.688 us    (62.5 %), step = 12.1 ps      (448 u%)
+    tran: time = 1.705 us    (63.2 %), step = 1.041 ps    (38.6 u%)
+    tran: time = 1.723 us    (63.8 %), step = 1.045 ps    (38.7 u%)
+    tran: time = 1.741 us    (64.5 %), step = 839 fs      (31.1 u%)
+    tran: time = 1.76 us     (65.2 %), step = 734 fs      (27.2 u%)
+    tran: time = 1.777 us    (65.8 %), step = 1.317 ps    (48.8 u%)
+    tran: time = 1.795 us    (66.5 %), step = 1.452 ps    (53.8 u%)
+    tran: time = 1.813 us    (67.2 %), step = 1.516 ps    (56.1 u%)
+    tran: time = 1.823 us    (67.5 %), step = 9.624 ps     (356 u%)
+    tran: time = 1.841 us    (68.2 %), step = 1.248 ps    (46.2 u%)
+    tran: time = 1.859 us    (68.8 %), step = 1.249 ps    (46.3 u%)
+    tran: time = 1.877 us    (69.5 %), step = 1.9 ps      (70.4 u%)
+    tran: time = 1.894 us    (70.2 %), step = 1.305 ps    (48.3 u%)
+    tran: time = 1.912 us    (70.8 %), step = 573.2 fs    (21.2 u%)
+    tran: time = 1.931 us    (71.5 %), step = 686.6 fs    (25.4 u%)
+    tran: time = 1.948 us    (72.1 %), step = 2.671 ps    (98.9 u%)
+    tran: time = 1.958 us    (72.5 %), step = 7.649 ps     (283 u%)
+    tran: time = 1.975 us    (73.1 %), step = 791.9 fs    (29.3 u%)
+    tran: time = 1.992 us    (73.8 %), step = 1.307 ps    (48.4 u%)
+    tran: time = 2.009 us    (74.4 %), step = 1.882 ps    (69.7 u%)
+    tran: time = 2.026 us      (75 %), step = 1.235 ps    (45.8 u%)
+    tran: time = 2.043 us    (75.7 %), step = 1.229 ps    (45.5 u%)
+    tran: time = 2.061 us    (76.3 %), step = 1.843 ps    (68.2 u%)
+    tran: time = 2.078 us      (77 %), step = 792.1 fs    (29.3 u%)
+    tran: time = 2.093 us    (77.5 %), step = 14.11 ps     (523 u%)
+    tran: time = 2.11 us     (78.1 %), step = 945.3 fs      (35 u%)
+    tran: time = 2.127 us    (78.8 %), step = 639.2 fs    (23.7 u%)
+    tran: time = 2.145 us    (79.4 %), step = 4.213 ps     (156 u%)
+    tran: time = 2.16 us       (80 %), step = 639.9 fs    (23.7 u%)
+    tran: time = 2.176 us    (80.6 %), step = 1.225 ps    (45.4 u%)
+    tran: time = 2.191 us    (81.2 %), step = 713 fs      (26.4 u%)
+    tran: time = 2.208 us    (81.8 %), step = 1.039 ps    (38.5 u%)
+    tran: time = 2.226 us    (82.4 %), step = 1.855 ps    (68.7 u%)
+    tran: time = 2.228 us    (82.5 %), step = 15.45 ps     (572 u%)
+    tran: time = 2.245 us    (83.1 %), step = 942.5 fs    (34.9 u%)
+    tran: time = 2.263 us    (83.8 %), step = 1.433 ps    (53.1 u%)
+    tran: time = 2.279 us    (84.4 %), step = 1.648 ps      (61 u%)
+    tran: time = 2.297 us    (85.1 %), step = 1.222 ps    (45.3 u%)
+    tran: time = 2.313 us    (85.7 %), step = 1.016 ps    (37.6 u%)
+    tran: time = 2.329 us    (86.3 %), step = 1.821 ps    (67.5 u%)
+    tran: time = 2.346 us    (86.9 %), step = 700.3 fs    (25.9 u%)
+    tran: time = 2.363 us    (87.5 %), step = 8.696 ps     (322 u%)
+    tran: time = 2.38 us     (88.1 %), step = 1.022 ps    (37.9 u%)
+    tran: time = 2.397 us    (88.8 %), step = 2.349 ps      (87 u%)
+    tran: time = 2.414 us    (89.4 %), step = 1.255 ps    (46.5 u%)
+    tran: time = 2.431 us    (90.1 %), step = 713.3 fs    (26.4 u%)
+    tran: time = 2.449 us    (90.7 %), step = 1.477 ps    (54.7 u%)
+    tran: time = 2.467 us    (91.4 %), step = 2.01 ps     (74.4 u%)
+    tran: time = 2.484 us      (92 %), step = 670.8 fs    (24.8 u%)
+    tran: time = 2.498 us    (92.5 %), step = 11.81 ps     (437 u%)
+    tran: time = 2.515 us    (93.2 %), step = 1.284 ps    (47.6 u%)
+    tran: time = 2.532 us    (93.8 %), step = 1.269 ps      (47 u%)
+    tran: time = 2.549 us    (94.4 %), step = 967.8 fs    (35.8 u%)
+    tran: time = 2.565 us      (95 %), step = 1.33 ps     (49.3 u%)
+    tran: time = 2.581 us    (95.6 %), step = 1.373 ps    (50.9 u%)
+    tran: time = 2.597 us    (96.2 %), step = 1.46 ps     (54.1 u%)
+    tran: time = 2.614 us    (96.8 %), step = 3.31 ps      (123 u%)
+    tran: time = 2.631 us    (97.4 %), step = 967.7 fs    (35.8 u%)
+    tran: time = 2.633 us    (97.5 %), step = 9.356 ps     (347 u%)
+    tran: time = 2.649 us    (98.1 %), step = 1.442 ps    (53.4 u%)
+    tran: time = 2.665 us    (98.7 %), step = 1.847 ps    (68.4 u%)
+    tran: time = 2.681 us    (99.3 %), step = 2.951 ps     (109 u%)
+    tran: time = 2.696 us    (99.9 %), step = 1.519 ps    (56.2 u%)
+Number of accepted tran steps =             1443507
+
+Maximum value achieved for any signal of each quantity: 
+V: V(I0.I37.net3) = 1.629 V
+I: I(V0:p) = 4.429 mA
+If your circuit contains signals of the same quantity that are vastly different in size (such as high voltage circuitry combined with low voltage control circuitry), you should consider specifying global option `bin_relref=yes'.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Post-Transient Simulation Summary
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   -   To further speed up simulation, consider
+          add ++aps on command line
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+During simulation, the CPU load for active processors is :
+        Spectre  0 (23.7 %)      1 (3.0 %)       2 (51.8 %)      3 (21.8 %)
+        Other    6 (1.1 %)      14 (2.8 %)      15 (1.5 %)      
+Initial condition solution time: CPU = 328.163 ms, elapsed = 328.163 ms.
+Intrinsic tran analysis time:    CPU = 1.94994 ks, elapsed = 1.95 ks.
+Total time required for tran analysis `tran': CPU = 1.95027 ks (32m  30.3s), elapsed = 1.95033 ks (32m  30.3s).
+Time accumulated: CPU = 1.95168 ks (32m  31.7s), elapsed = 1.95124 ks (32m  31.2s).
+Peak resident memory used = 321 Mbytes.
+
+
+Notice from spectre.
+    936476 warnings suppressed.
+
+finalTimeOP: writing operating point information to rawfile.
+
+Opening the PSF file ../psf/finalTimeOP.info ...
+modelParameter: writing model parameter values to rawfile.
+
+Opening the PSF file ../psf/modelParameter.info ...
+element: writing instance parameter values to rawfile.
+
+Opening the PSF file ../psf/element.info ...
+outputParameter: writing output parameter values to rawfile.
+
+Opening the PSF file ../psf/outputParameter.info ...
+designParamVals: writing netlist parameters to rawfile.
+
+Opening the PSFASCII file ../psf/designParamVals.info ...
+primitives: writing primitives to rawfile.
+
+Opening the PSFASCII file ../psf/primitives.info.primitives ...
+subckts: writing subcircuits to rawfile.
+
+Opening the PSFASCII file ../psf/subckts.info.subckts ...
+
+Aggregate audit (11:06:37 AM, Wed Jun 17, 2026):
+Time used: CPU = 1.95 ks (32m  31.8s), elapsed = 1.95 ks (32m  31.3s), util. = 100%.
+Time spent in licensing: elapsed = 14.3 ms.
+Peak memory used = 827 Mbytes.
+Simulation started at: 10:34:06 AM, Wed Jun 17, 2026, ended at: 11:06:37 AM, Wed Jun 17, 2026, with elapsed time (wall clock): 1.95 ks (32m  31.3s).
+spectre completes with 0 errors, 40 warnings, and 8 notices.

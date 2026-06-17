@@ -1,0 +1,1781 @@
+<?xml version="1.0"?>
+<setupdb version="7">maestro
+	<active>Active Setup
+		<jobcontrolmode>LSCS</jobcontrolmode>
+		<corners>
+			<corner enabled="1">_default</corner>
+		</corners>
+		<sharedvarinfo></sharedvarinfo>
+		<overwritehistory>0</overwritehistory>
+		<tests>
+			<test>Vcmbased_ADC_tb_1
+				<tool>ADE</tool>
+				<tooloptions>
+					<option>cell
+						<value>ADC_9B_tb_best_q4</value>
+					</option>
+					<option>lib
+						<value>SAR9B_400MV</value>
+					</option>
+					<option>path
+						<value>$AXL_SETUPDB_DIR</value>
+					</option>
+					<option>sim
+						<value>spectre</value>
+					</option>
+					<option>view
+						<value>schematic</value>
+					</option>
+					<option>state
+						<value>active</value>
+					</option>
+				</tooloptions>
+				<vars>
+					<var>fs
+						<value>400M</value>
+					</var>
+					<var>Vpk
+						<value>800m</value>
+					</var>
+					<var>Cunit
+						<value>1f</value>
+					</var>
+					<var>Vth_sw
+						<value>0.9</value>
+					</var>
+					<var>TSTOP
+						<value>2.7u</value>
+					</var>
+				</vars>
+				<origoptions>
+					<option>cell
+						<value>ADC_9B_tb_best_q4</value>
+					</option>
+					<option>lib
+						<value>SAR9B_400MV</value>
+					</option>
+					<option>path
+						<value>$AXL_SETUPDB_DIR</value>
+					</option>
+					<option>sim
+						<value>spectre</value>
+					</option>
+					<option>view
+						<value>schematic</value>
+					</option>
+					<option>state
+						<value>active</value>
+					</option>
+				</origoptions>
+				<outputs>
+					<output>spectrum_enob
+						<evalType>point</evalType>
+					</output>
+					<output>spectrum_sinad
+						<evalType>point</evalType>
+					</output>
+				</outputs>
+			</test>
+		</tests>
+		<extensions>
+			<extension>Parasitics
+				<callback>_parSetupDBExtensionCB</callback>
+				<iconvalue></iconvalue>
+				<icontype></icontype>
+			</extension>
+		</extensions>
+		<currentmode>Single Run, Sweeps and Corners</currentmode>
+		<checksasserts netlist="0">
+			<test netlist="0" netlistscope="all">Vcmbased_ADC_tb_1</test>
+		</checksasserts>
+		<plottingoptions>
+			<plottingoption>waveformtemplate
+				<value>(None)</value>
+			</plottingoption>
+			<plottingoption>plottingmode
+				<value>Replace</value>
+			</plottingoption>
+			<plottingoption>plottype
+				<value>None</value>
+			</plottingoption>
+			<plottingoption>usewaveformtemplate
+				<value>no</value>
+			</plottingoption>
+			<plottingoption>useMaestroPlottingTemplate
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>allplottingtemplates
+				<value></value>
+			</plottingoption>
+			<plottingoption>defaultplottingtemplate
+				<value></value>
+			</plottingoption>
+			<plottingoption>distributedplot_enabled
+				<value>no</value>
+			</plottingoption>
+		</plottingoptions>
+		<exploreroptions>
+			<exploreroption>waveformtemplate
+				<value>(None)</value>
+			</exploreroption>
+		</exploreroptions>
+		<incrementalsimsetup>
+			<useincremental>0</useincremental>
+			<reusenetlist>0</reusenetlist>
+			<reusesaverunhist>0</reusesaverunhist>
+			<copyreferenceresults>1</copyreferenceresults>
+		</incrementalsimsetup>
+		<overwritehistoryname>ExplorerRun.0</overwritehistoryname>
+		<relxanalysisenabled>0</relxanalysisenabled>
+		<relxanalysis>
+			<relxsetup enabled="1">Reliability0
+				<fresh enabled="0">Reliability0.fresh
+					<testname>Vcmbased_ADC_tb_1</testname>
+				</fresh>
+				<stress enabled="0">Reliability0.stress
+					<testname>Vcmbased_ADC_tb_1</testname>
+				</stress>
+				<stressfile></stressfile>
+				<aged enabled="0">Reliability0.aged
+					<testname>Vcmbased_ADC_tb_1</testname>
+				</aged>
+				<relxOptions>
+					<simulator>spectre</simulator>
+					<component Name="relxOptions" Type="skillTable">tableformat
+						<partition Name="relxOpts">
+							<field Name="mosMinAge" Type="string">""</field>
+							<field Name="gaAgeStepUnit" Type="string">"Years"</field>
+							<field Name="degSortType" Type="string">"threshold"</field>
+							<field Name="mosDevDegVdlinModels" Type="string">""</field>
+							<field Name="nativeMode" Type="string">"Spectre native"</field>
+							<field Name="enableRelXTran" Type="list">nil</field>
+							<field Name="mosAgeModelFilePath" Type="string">""</field>
+							<field Name="presetBlock" Type="string">""</field>
+							<field Name="relxTranStart" Type="string">""</field>
+							<field Name="mosDevDegVdlin" Type="string">""</field>
+							<field Name="enableStress" Type="list">nil</field>
+							<field Name="gaAgeStepTotalStep" Type="string">""</field>
+							<field Name="gaAgePoints" Type="string">""</field>
+							<field Name="gaAgeStepStart" Type="string">""</field>
+							<field Name="uriAppendtype" Type="string">"none"</field>
+							<field Name="mosDevDegVdsatModels" Type="string">""</field>
+							<field Name="uriLibs" Type="string">""</field>
+							<field Name="mosMaskDev" Type="list">nil</field>
+							<field Name="mosDevDegModels" Type="string">""</field>
+							<field Name="presetAgeLevel" Type="string">""</field>
+							<field Name="relxTranStop" Type="string">""</field>
+							<field Name="gaInputStressDir" Type="string">""</field>
+							<field Name="mosHciIgateMethod" Type="string">"calculate"</field>
+							<field Name="gaAlterValue" Type="string">""</field>
+							<field Name="mosDevDegVbconst_nModels" Type="string">""</field>
+							<field Name="gaSkipFresh" Type="list">nil</field>
+							<field Name="mosHciLifeTimeMethodTable" Type="string">""</field>
+							<field Name="relxpertExecName" Type="string">"relxpert"</field>
+							<field Name="enableOutputDevDegInFile" Type="string">"GUI"</field>
+							<field Name="showunageddevices" Type="string">"limit"</field>
+							<field Name="mosHciLifeTimeMethod" Type="string">"calculate"</field>
+							<field Name="gaAlterParam" Type="string">""</field>
+							<field Name="gaSkipLast" Type="list">nil</field>
+							<field Name="mosDevDegVglin" Type="string">""</field>
+							<field Name="enableSelfheating" Type="list">nil</field>
+							<field Name="mosDeltad" Type="string">"0.1"</field>
+							<field Name="mosHciIdMethod" Type="string">"ids"</field>
+							<field Name="aged_var_list" Type="list">nil</field>
+							<field Name="stress_var_list" Type="list">nil</field>
+							<field Name="mosHciAccuracy" Type="string">"liberal (1)"</field>
+							<field Name="enableAging" Type="list">nil</field>
+							<field Name="gaMode" Type="string">"Age points"</field>
+							<field Name="simModeFile" Type="string">"input.bs0"</field>
+							<field Name="mosHciOpMethod" Type="string">"calculate"</field>
+							<field Name="reportModelParamChanged" Type="list">nil</field>
+							<field Name="degSortValue" Type="string">""</field>
+							<field Name="simModeType" Type="string">"all"</field>
+							<field Name="mosOutputDevDegInFilePath" Type="string">""</field>
+							<field Name="mosAgeModelLimitType" Type="string">"age"</field>
+							<field Name="mosDevDegVgstep" Type="string">""</field>
+							<field Name="otherRXOptions" Type="string">""</field>
+							<field Name="tmiAgingType" Type="string">"TMI Aging"</field>
+							<field Name="enableMacroDevice" Type="list">nil</field>
+							<field Name="mosDevDegVbconst_n" Type="string">""</field>
+							<field Name="mosAgeModelLimitNum" Type="string">"10"</field>
+							<field Name="enableAgingForTMI" Type="symbol">t</field>
+							<field Name="mosDevDegVsconstModels" Type="string">""</field>
+							<field Name="macroDevices" Type="string">""</field>
+							<field Name="gaSaveSome" Type="string">""</field>
+							<field Name="gaAlterTime" Type="string">""</field>
+							<field Name="mosOutputSubcktDegInFilePath" Type="string">""</field>
+							<field Name="combinedeg" Type="string">"off"</field>
+							<field Name="mosDevDegIdconstwl" Type="string">""</field>
+							<field Name="gaAlterParamListBox" Type="skillDpl">
+								<field Name="choices" Type="list">nil</field>
+								<field Name="value" Type="list">nil</field>
+							</field>
+							<field Name="mosDevDegIdconst" Type="string">""</field>
+							<field Name="saAgeStepOrTotalStep" Type="string">""</field>
+							<field Name="displayTMIGui" Type="list">nil</field>
+							<field Name="uriDebugMode" Type="string">"0"</field>
+							<field Name="mosDevDegVbconst_p" Type="string">""</field>
+							<field Name="anaMode" Type="string">"Reliability"</field>
+							<field Name="mosDevDegVdconst" Type="string">""</field>
+							<field Name="compactagednetlist" Type="string">"none"</field>
+							<field Name="mosModifyNetlist" Type="list">nil</field>
+							<field Name="mosCompactAgeModel" Type="list">nil</field>
+							<field Name="mosDevDegNeedSimulator" Type="list">nil</field>
+							<field Name="mosAppendDeviceAge" Type="list">nil</field>
+							<field Name="gaSaveResults" Type="string">"all"</field>
+							<field Name="mosDevDegVdconstwl" Type="string">""</field>
+							<field Name="saStepType" Type="string">"Total steps"</field>
+							<field Name="gaPassParam" Type="string">"no"</field>
+							<field Name="mosAgeModelLimit" Type="list">nil</field>
+							<field Name="uriMode" Type="string">"agemos"</field>
+							<field Name="mosDevDegVsconst" Type="string">""</field>
+							<field Name="mosDevDegVglinModels" Type="string">""</field>
+							<field Name="mosDumpAgeModel" Type="list">nil</field>
+							<field Name="outputmethod" Type="string">"single"</field>
+							<field Name="gaAlterHeadListBox" Type="skillDpl">
+								<field Name="choices" Type="list">("#     Time           Param               Value")</field>
+								<field Name="value" Type="list">nil</field>
+							</field>
+							<field Name="gaAgeStepStop" Type="string">""</field>
+							<field Name="mosDevDegSimulatorPath" Type="string">""</field>
+							<field Name="mosDevDegVgstepModels" Type="string">""</field>
+							<field Name="mosDevDegVgsweep_start_n" Type="string">""</field>
+							<field Name="removeTMIAgeSettingInFresh" Type="list">nil</field>
+							<field Name="mosDevDegVbconst_pModels" Type="string">""</field>
+							<field Name="addAdditionalArgumentForTMI" Type="list">nil</field>
+							<field Name="standardAgeType" Type="string">"Age points"</field>
+							<field Name="enableDegSort" Type="list">nil</field>
+							<field Name="mosCalcLifetime" Type="list">nil</field>
+							<field Name="mosDevDegVgsweep_start_nModels" Type="string">""</field>
+							<field Name="enableRelxpert" Type="list">nil</field>
+							<field Name="mosMode" Type="list">(t t t)</field>
+							<field Name="enabledegdata" Type="list">nil</field>
+							<field Name="degdatatype" Type="string">"appendage"</field>
+							<field Name="mosAgingTimeUnit" Type="string">"Years"</field>
+							<field Name="otherTMIRXOptions" Type="string">""</field>
+							<field Name="agingPointsType" Type="string">"Standard aging"</field>
+							<field Name="enableGradualAging" Type="list">nil</field>
+							<field Name="tmiMosMode" Type="list">(t t)</field>
+							<field Name="mosAgingTime" Type="string">"10"</field>
+							<field Name="fresh_data_dir" Type="string">""</field>
+							<field Name="doADELPostProcess" Type="symbol">t</field>
+							<field Name="mosAgeDomain" Type="string">"loglog"</field>
+							<field Name="mosDevDegVdsat" Type="string">""</field>
+							<field Name="mosDevDegVthConstCurrSp" Type="list">nil</field>
+							<field Name="presetValue" Type="string">""</field>
+							<field Name="mosDevDegVthUseId" Type="list">nil</field>
+							<field Name="aged_data_dir" Type="string">""</field>
+							<field Name="mosDevDegVgsatModels" Type="string">""</field>
+							<field Name="stress_data_dir" Type="string">""</field>
+							<field Name="mindtemp" Type="string">""</field>
+							<field Name="mosVthMethod" Type="string">"calculate"</field>
+							<field Name="presetType" Type="string">"lifetime"</field>
+							<field Name="mosDevDegVthUseIs" Type="list">nil</field>
+							<field Name="relusercmdlineoption" Type="string">""</field>
+							<field Name="mosDevDegVgsweep_end_pModels" Type="string">""</field>
+							<field Name="includeFiles" Type="string">""</field>
+							<field Name="mosEffectiveModel" Type="symbol">t</field>
+							<field Name="mosDevDegVgsweep_end_p" Type="string">""</field>
+							<field Name="mosDevDegVdd" Type="string">""</field>
+							<field Name="mosAgeMethod" Type="string">"agemos"</field>
+							<field Name="anaModeClone" Type="string">"Reliability"</field>
+							<field Name="mosMaskDevInclude" Type="string">"include"</field>
+							<field Name="mosDevDegVgsweep_end_n" Type="string">""</field>
+							<field Name="gaAgePointsUnit" Type="string">"Years"</field>
+							<field Name="checknegagingclamp" Type="string">"no"</field>
+							<field Name="mosEnableOutputDevDeg" Type="list">nil</field>
+							<field Name="degCheckException" Type="string">""</field>
+							<field Name="mosDevDegVgsat" Type="string">""</field>
+							<field Name="mosDevDegVgsweep_start_pModels" Type="string">""</field>
+							<field Name="mosDevDegVgsweep_start_p" Type="string">""</field>
+							<field Name="gaAgeStepType" Type="string">"lin"</field>
+							<field Name="enablePreset" Type="list">nil</field>
+							<field Name="mosDevDegVddSetting" Type="list">nil</field>
+							<field Name="mosMaskDevInstance" Type="string">""</field>
+							<field Name="checknegagingtype" Type="string">"error"</field>
+							<field Name="gaIterationNum" Type="string">""</field>
+							<field Name="mosDevDegVgsweep_end_nModels" Type="string">""</field>
+						</partition>
+					</component>
+				</relxOptions>
+			</relxsetup>
+		</relxanalysis>
+		<vars>
+			<var>fs
+				<value>400M</value>
+				<dependentTests>
+					<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>Vpk
+				<value>450m</value>
+				<dependentTests>
+					<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>Cunit
+				<value>1f</value>
+				<dependentTests>
+					<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>TSTOP
+				<value>2.7u</value>
+				<dependentTests>
+					<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+				</dependentTests>
+			</var>
+		</vars>
+		<incrementalsimulationoptions>
+			<incrementalSimulation>0</incrementalSimulation>
+		</incrementalsimulationoptions>
+	</active>
+	<history>History
+		<historyentry assemblerOrExplorer="explorer" roOrView="view" runningOrFinished="finished">ExplorerRun.0
+			<checkpoint>
+				<jobcontrolmode>LSCS</jobcontrolmode>
+				<corners>
+					<corner enabled="1">_default</corner>
+				</corners>
+				<sharedvarinfo></sharedvarinfo>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test>Vcmbased_ADC_tb_1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>ADC_9B_tb_best_q4</value>
+							</option>
+							<option>lib
+								<value>SAR9B_400MV</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>state
+								<value>ExplorerRun.0</value>
+							</option>
+						</tooloptions>
+						<vars>
+							<var>fs
+								<value>400M</value>
+							</var>
+							<var>Vpk
+								<value>800m</value>
+							</var>
+							<var>Cunit
+								<value>1f</value>
+							</var>
+							<var>Vth_sw
+								<value>0.9</value>
+							</var>
+							<var>TSTOP
+								<value>2.7u</value>
+							</var>
+						</vars>
+						<origoptions>
+							<option>cell
+								<value>ADC_9B_tb_best_q4</value>
+							</option>
+							<option>lib
+								<value>SAR9B_400MV</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>state
+								<value>active</value>
+							</option>
+						</origoptions>
+						<outputs>
+							<output>spectrum_enob
+								<evalType>point</evalType>
+							</output>
+							<output>spectrum_sinad
+								<evalType>point</evalType>
+							</output>
+						</outputs>
+					</test>
+				</tests>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<checksasserts netlist="0">
+					<test netlist="0" netlistscope="all">Vcmbased_ADC_tb_1</test>
+				</checksasserts>
+				<plottingoptions>
+					<plottingoption>plottype
+						<value>Auto</value>
+					</plottingoption>
+					<plottingoption>autoplotmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value>(None)</value>
+					</plottingoption>
+					<plottingoption>autoplotsignals
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>autoplotwaveexpr
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>autoplotscalarexpr
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>annotatedesignname
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>annotatesimdate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>annotatedesignvars
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>annotatetemperature
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>annotatescalaroutputs
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>annotatespecmarkers
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>directplotmode
+						<value>Append</value>
+					</plottingoption>
+					<plottingoption>directplotafter
+						<value>All Selections Are Made</value>
+					</plottingoption>
+					<plottingoption>histogramtype
+						<value>pass/fail</value>
+					</plottingoption>
+					<plottingoption>histogrambins
+						<value>10</value>
+					</plottingoption>
+					<plottingoption>showhistogramdensity
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>showhistogramdeviation
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>showhistogrampercentmarkers
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>histogramqqplot
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>showhistogrampoints
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>printafter
+						<value>Each Selection</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+				</plottingoptions>
+				<exploreroptions>
+					<exploreroption>waveformtemplate
+						<value>(None)</value>
+					</exploreroption>
+				</exploreroptions>
+				<incrementalsimsetup>
+					<useincremental>0</useincremental>
+					<reusenetlist>0</reusenetlist>
+					<reusesaverunhist>0</reusesaverunhist>
+					<copyreferenceresults>1</copyreferenceresults>
+				</incrementalsimsetup>
+				<overwritehistoryname>ExplorerRun.0</overwritehistoryname>
+				<relxanalysisenabled>0</relxanalysisenabled>
+				<relxanalysis>
+					<relxsetup enabled="1">Reliability0
+						<fresh enabled="0">Reliability0.fresh
+							<testname>Vcmbased_ADC_tb_1</testname>
+						</fresh>
+						<stress enabled="0">Reliability0.stress
+							<testname>Vcmbased_ADC_tb_1</testname>
+						</stress>
+						<stressfile></stressfile>
+						<aged enabled="0">Reliability0.aged
+							<testname>Vcmbased_ADC_tb_1</testname>
+						</aged>
+						<relxOptions>
+							<simulator>spectre</simulator>
+							<component Name="relxOptions" Type="skillTable">tableformat
+								<partition Name="relxOpts">
+									<field Name="mosMinAge" Type="string">""</field>
+									<field Name="gaAgeStepUnit" Type="string">"Years"</field>
+									<field Name="degSortType" Type="string">"threshold"</field>
+									<field Name="mosDevDegVdlinModels" Type="string">""</field>
+									<field Name="nativeMode" Type="string">"Spectre native"</field>
+									<field Name="enableRelXTran" Type="list">nil</field>
+									<field Name="mosAgeModelFilePath" Type="string">""</field>
+									<field Name="presetBlock" Type="string">""</field>
+									<field Name="relxTranStart" Type="string">""</field>
+									<field Name="mosDevDegVdlin" Type="string">""</field>
+									<field Name="enableStress" Type="list">nil</field>
+									<field Name="gaAgeStepTotalStep" Type="string">""</field>
+									<field Name="gaAgePoints" Type="string">""</field>
+									<field Name="gaAgeStepStart" Type="string">""</field>
+									<field Name="uriAppendtype" Type="string">"none"</field>
+									<field Name="mosDevDegVdsatModels" Type="string">""</field>
+									<field Name="uriLibs" Type="string">""</field>
+									<field Name="mosMaskDev" Type="list">nil</field>
+									<field Name="mosDevDegModels" Type="string">""</field>
+									<field Name="presetAgeLevel" Type="string">""</field>
+									<field Name="relxTranStop" Type="string">""</field>
+									<field Name="gaInputStressDir" Type="string">""</field>
+									<field Name="mosHciIgateMethod" Type="string">"calculate"</field>
+									<field Name="gaAlterValue" Type="string">""</field>
+									<field Name="mosDevDegVbconst_nModels" Type="string">""</field>
+									<field Name="gaSkipFresh" Type="list">nil</field>
+									<field Name="mosHciLifeTimeMethodTable" Type="string">""</field>
+									<field Name="relxpertExecName" Type="string">"relxpert"</field>
+									<field Name="enableOutputDevDegInFile" Type="string">"GUI"</field>
+									<field Name="showunageddevices" Type="string">"limit"</field>
+									<field Name="mosHciLifeTimeMethod" Type="string">"calculate"</field>
+									<field Name="gaAlterParam" Type="string">""</field>
+									<field Name="gaSkipLast" Type="list">nil</field>
+									<field Name="mosDevDegVglin" Type="string">""</field>
+									<field Name="enableSelfheating" Type="list">nil</field>
+									<field Name="mosDeltad" Type="string">"0.1"</field>
+									<field Name="mosHciIdMethod" Type="string">"ids"</field>
+									<field Name="aged_var_list" Type="list">nil</field>
+									<field Name="stress_var_list" Type="list">nil</field>
+									<field Name="mosHciAccuracy" Type="string">"liberal (1)"</field>
+									<field Name="enableAging" Type="list">nil</field>
+									<field Name="gaMode" Type="string">"Age points"</field>
+									<field Name="simModeFile" Type="string">"input.bs0"</field>
+									<field Name="mosHciOpMethod" Type="string">"calculate"</field>
+									<field Name="reportModelParamChanged" Type="list">nil</field>
+									<field Name="degSortValue" Type="string">""</field>
+									<field Name="simModeType" Type="string">"all"</field>
+									<field Name="mosOutputDevDegInFilePath" Type="string">""</field>
+									<field Name="mosAgeModelLimitType" Type="string">"age"</field>
+									<field Name="mosDevDegVgstep" Type="string">""</field>
+									<field Name="otherRXOptions" Type="string">""</field>
+									<field Name="tmiAgingType" Type="string">"TMI Aging"</field>
+									<field Name="enableMacroDevice" Type="list">nil</field>
+									<field Name="mosDevDegVbconst_n" Type="string">""</field>
+									<field Name="mosAgeModelLimitNum" Type="string">"10"</field>
+									<field Name="enableAgingForTMI" Type="symbol">t</field>
+									<field Name="mosDevDegVsconstModels" Type="string">""</field>
+									<field Name="macroDevices" Type="string">""</field>
+									<field Name="gaSaveSome" Type="string">""</field>
+									<field Name="gaAlterTime" Type="string">""</field>
+									<field Name="mosOutputSubcktDegInFilePath" Type="string">""</field>
+									<field Name="combinedeg" Type="string">"off"</field>
+									<field Name="mosDevDegIdconstwl" Type="string">""</field>
+									<field Name="gaAlterParamListBox" Type="skillDpl">
+										<field Name="choices" Type="list">nil</field>
+										<field Name="value" Type="list">nil</field>
+									</field>
+									<field Name="mosDevDegIdconst" Type="string">""</field>
+									<field Name="saAgeStepOrTotalStep" Type="string">""</field>
+									<field Name="displayTMIGui" Type="list">nil</field>
+									<field Name="uriDebugMode" Type="string">"0"</field>
+									<field Name="mosDevDegVbconst_p" Type="string">""</field>
+									<field Name="anaMode" Type="string">"Reliability"</field>
+									<field Name="mosDevDegVdconst" Type="string">""</field>
+									<field Name="compactagednetlist" Type="string">"none"</field>
+									<field Name="mosModifyNetlist" Type="list">nil</field>
+									<field Name="mosCompactAgeModel" Type="list">nil</field>
+									<field Name="mosDevDegNeedSimulator" Type="list">nil</field>
+									<field Name="mosAppendDeviceAge" Type="list">nil</field>
+									<field Name="gaSaveResults" Type="string">"all"</field>
+									<field Name="mosDevDegVdconstwl" Type="string">""</field>
+									<field Name="saStepType" Type="string">"Total steps"</field>
+									<field Name="gaPassParam" Type="string">"no"</field>
+									<field Name="mosAgeModelLimit" Type="list">nil</field>
+									<field Name="uriMode" Type="string">"agemos"</field>
+									<field Name="mosDevDegVsconst" Type="string">""</field>
+									<field Name="mosDevDegVglinModels" Type="string">""</field>
+									<field Name="mosDumpAgeModel" Type="list">nil</field>
+									<field Name="outputmethod" Type="string">"single"</field>
+									<field Name="gaAlterHeadListBox" Type="skillDpl">
+										<field Name="choices" Type="list">("#     Time           Param               Value")</field>
+										<field Name="value" Type="list">nil</field>
+									</field>
+									<field Name="gaAgeStepStop" Type="string">""</field>
+									<field Name="mosDevDegSimulatorPath" Type="string">""</field>
+									<field Name="mosDevDegVgstepModels" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_start_n" Type="string">""</field>
+									<field Name="removeTMIAgeSettingInFresh" Type="list">nil</field>
+									<field Name="mosDevDegVbconst_pModels" Type="string">""</field>
+									<field Name="addAdditionalArgumentForTMI" Type="list">nil</field>
+									<field Name="standardAgeType" Type="string">"Age points"</field>
+									<field Name="enableDegSort" Type="list">nil</field>
+									<field Name="mosCalcLifetime" Type="list">nil</field>
+									<field Name="mosDevDegVgsweep_start_nModels" Type="string">""</field>
+									<field Name="enableRelxpert" Type="list">nil</field>
+									<field Name="mosMode" Type="list">(t t t)</field>
+									<field Name="enabledegdata" Type="list">nil</field>
+									<field Name="degdatatype" Type="string">"appendage"</field>
+									<field Name="mosAgingTimeUnit" Type="string">"Years"</field>
+									<field Name="otherTMIRXOptions" Type="string">""</field>
+									<field Name="agingPointsType" Type="string">"Standard aging"</field>
+									<field Name="enableGradualAging" Type="list">nil</field>
+									<field Name="tmiMosMode" Type="list">(t t)</field>
+									<field Name="mosAgingTime" Type="string">"10"</field>
+									<field Name="fresh_data_dir" Type="string">""</field>
+									<field Name="doADELPostProcess" Type="symbol">t</field>
+									<field Name="mosAgeDomain" Type="string">"loglog"</field>
+									<field Name="mosDevDegVdsat" Type="string">""</field>
+									<field Name="mosDevDegVthConstCurrSp" Type="list">nil</field>
+									<field Name="presetValue" Type="string">""</field>
+									<field Name="mosDevDegVthUseId" Type="list">nil</field>
+									<field Name="aged_data_dir" Type="string">""</field>
+									<field Name="mosDevDegVgsatModels" Type="string">""</field>
+									<field Name="stress_data_dir" Type="string">""</field>
+									<field Name="mindtemp" Type="string">""</field>
+									<field Name="mosVthMethod" Type="string">"calculate"</field>
+									<field Name="presetType" Type="string">"lifetime"</field>
+									<field Name="mosDevDegVthUseIs" Type="list">nil</field>
+									<field Name="relusercmdlineoption" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_end_pModels" Type="string">""</field>
+									<field Name="includeFiles" Type="string">""</field>
+									<field Name="mosEffectiveModel" Type="symbol">t</field>
+									<field Name="mosDevDegVgsweep_end_p" Type="string">""</field>
+									<field Name="mosDevDegVdd" Type="string">""</field>
+									<field Name="mosAgeMethod" Type="string">"agemos"</field>
+									<field Name="anaModeClone" Type="string">"Reliability"</field>
+									<field Name="mosMaskDevInclude" Type="string">"include"</field>
+									<field Name="mosDevDegVgsweep_end_n" Type="string">""</field>
+									<field Name="gaAgePointsUnit" Type="string">"Years"</field>
+									<field Name="checknegagingclamp" Type="string">"no"</field>
+									<field Name="mosEnableOutputDevDeg" Type="list">nil</field>
+									<field Name="degCheckException" Type="string">""</field>
+									<field Name="mosDevDegVgsat" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_start_pModels" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_start_p" Type="string">""</field>
+									<field Name="gaAgeStepType" Type="string">"lin"</field>
+									<field Name="enablePreset" Type="list">nil</field>
+									<field Name="mosDevDegVddSetting" Type="list">nil</field>
+									<field Name="mosMaskDevInstance" Type="string">""</field>
+									<field Name="checknegagingtype" Type="string">"error"</field>
+									<field Name="gaIterationNum" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_end_nModels" Type="string">""</field>
+								</partition>
+							</component>
+						</relxOptions>
+					</relxsetup>
+				</relxanalysis>
+				<vars>
+					<var>fs
+						<value>400M</value>
+						<dependentTests>
+							<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>Vpk
+						<value>450m</value>
+						<dependentTests>
+							<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>Cunit
+						<value>1f</value>
+						<dependentTests>
+							<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>TSTOP
+						<value>2.7u</value>
+						<dependentTests>
+							<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<runnabletests>
+					<test>Vcmbased_ADC_tb_1</test>
+				</runnabletests>
+				<disabledtests></disabledtests>
+				<allsweepsenabled>1</allsweepsenabled>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Jun 16 17:11:57 2026</timestamp>
+			<resultsname>/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/ExplorerRun.0.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/maestro/ExplorerRun.0.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_171157689</localpsfdir>
+			<psfdir>/home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/ExplorerRun.0</psfdir>
+			<simdir>$AXL_PROJECT_DIR/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/ExplorerRun.0</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/ExplorerRun.0.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/maestro/ExplorerRun.0.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="assembler" roOrView="view" runningOrFinished="finished">Interactive.0
+			<checkpoint>
+				<jobcontrolmode>LSCS</jobcontrolmode>
+				<corners>
+					<corner enabled="1">_default</corner>
+				</corners>
+				<sharedvarinfo></sharedvarinfo>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test>Vcmbased_ADC_tb_1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>ADC_9B_tb_best_q4</value>
+							</option>
+							<option>lib
+								<value>SAR9B_400MV</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>state
+								<value>Interactive.0</value>
+							</option>
+						</tooloptions>
+						<vars>
+							<var>fs
+								<value>400M</value>
+							</var>
+							<var>Vpk
+								<value>800m</value>
+							</var>
+							<var>Cunit
+								<value>1f</value>
+							</var>
+							<var>Vth_sw
+								<value>0.9</value>
+							</var>
+							<var>TSTOP
+								<value>2.7u</value>
+							</var>
+						</vars>
+						<origoptions>
+							<option>cell
+								<value>ADC_9B_tb_best_q4</value>
+							</option>
+							<option>lib
+								<value>SAR9B_400MV</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>state
+								<value>active</value>
+							</option>
+						</origoptions>
+						<outputs>
+							<output>spectrum_enob
+								<evalType>point</evalType>
+							</output>
+							<output>spectrum_sinad
+								<evalType>point</evalType>
+							</output>
+						</outputs>
+					</test>
+				</tests>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<checksasserts netlist="0">
+					<test netlist="0" netlistscope="all">Vcmbased_ADC_tb_1</test>
+				</checksasserts>
+				<plottingoptions>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>distributedplot_enabled
+						<value>no</value>
+					</plottingoption>
+				</plottingoptions>
+				<exploreroptions>
+					<exploreroption>waveformtemplate
+						<value>(None)</value>
+					</exploreroption>
+				</exploreroptions>
+				<incrementalsimsetup>
+					<useincremental>0</useincremental>
+					<reusenetlist>0</reusenetlist>
+					<reusesaverunhist>0</reusesaverunhist>
+					<copyreferenceresults>1</copyreferenceresults>
+				</incrementalsimsetup>
+				<overwritehistoryname>ExplorerRun.0</overwritehistoryname>
+				<relxanalysisenabled>0</relxanalysisenabled>
+				<relxanalysis>
+					<relxsetup enabled="1">Reliability0
+						<fresh enabled="0">Reliability0.fresh
+							<testname>Vcmbased_ADC_tb_1</testname>
+						</fresh>
+						<stress enabled="0">Reliability0.stress
+							<testname>Vcmbased_ADC_tb_1</testname>
+						</stress>
+						<stressfile></stressfile>
+						<aged enabled="0">Reliability0.aged
+							<testname>Vcmbased_ADC_tb_1</testname>
+						</aged>
+						<relxOptions>
+							<simulator>spectre</simulator>
+							<component Name="relxOptions" Type="skillTable">tableformat
+								<partition Name="relxOpts">
+									<field Name="mosMinAge" Type="string">""</field>
+									<field Name="gaAgeStepUnit" Type="string">"Years"</field>
+									<field Name="degSortType" Type="string">"threshold"</field>
+									<field Name="mosDevDegVdlinModels" Type="string">""</field>
+									<field Name="nativeMode" Type="string">"Spectre native"</field>
+									<field Name="enableRelXTran" Type="list">nil</field>
+									<field Name="mosAgeModelFilePath" Type="string">""</field>
+									<field Name="presetBlock" Type="string">""</field>
+									<field Name="relxTranStart" Type="string">""</field>
+									<field Name="mosDevDegVdlin" Type="string">""</field>
+									<field Name="enableStress" Type="list">nil</field>
+									<field Name="gaAgeStepTotalStep" Type="string">""</field>
+									<field Name="gaAgePoints" Type="string">""</field>
+									<field Name="gaAgeStepStart" Type="string">""</field>
+									<field Name="uriAppendtype" Type="string">"none"</field>
+									<field Name="mosDevDegVdsatModels" Type="string">""</field>
+									<field Name="uriLibs" Type="string">""</field>
+									<field Name="mosMaskDev" Type="list">nil</field>
+									<field Name="mosDevDegModels" Type="string">""</field>
+									<field Name="presetAgeLevel" Type="string">""</field>
+									<field Name="relxTranStop" Type="string">""</field>
+									<field Name="gaInputStressDir" Type="string">""</field>
+									<field Name="mosHciIgateMethod" Type="string">"calculate"</field>
+									<field Name="gaAlterValue" Type="string">""</field>
+									<field Name="mosDevDegVbconst_nModels" Type="string">""</field>
+									<field Name="gaSkipFresh" Type="list">nil</field>
+									<field Name="mosHciLifeTimeMethodTable" Type="string">""</field>
+									<field Name="relxpertExecName" Type="string">"relxpert"</field>
+									<field Name="enableOutputDevDegInFile" Type="string">"GUI"</field>
+									<field Name="showunageddevices" Type="string">"limit"</field>
+									<field Name="mosHciLifeTimeMethod" Type="string">"calculate"</field>
+									<field Name="gaAlterParam" Type="string">""</field>
+									<field Name="gaSkipLast" Type="list">nil</field>
+									<field Name="mosDevDegVglin" Type="string">""</field>
+									<field Name="enableSelfheating" Type="list">nil</field>
+									<field Name="mosDeltad" Type="string">"0.1"</field>
+									<field Name="mosHciIdMethod" Type="string">"ids"</field>
+									<field Name="aged_var_list" Type="list">nil</field>
+									<field Name="stress_var_list" Type="list">nil</field>
+									<field Name="mosHciAccuracy" Type="string">"liberal (1)"</field>
+									<field Name="enableAging" Type="list">nil</field>
+									<field Name="gaMode" Type="string">"Age points"</field>
+									<field Name="simModeFile" Type="string">"input.bs0"</field>
+									<field Name="mosHciOpMethod" Type="string">"calculate"</field>
+									<field Name="reportModelParamChanged" Type="list">nil</field>
+									<field Name="degSortValue" Type="string">""</field>
+									<field Name="simModeType" Type="string">"all"</field>
+									<field Name="mosOutputDevDegInFilePath" Type="string">""</field>
+									<field Name="mosAgeModelLimitType" Type="string">"age"</field>
+									<field Name="mosDevDegVgstep" Type="string">""</field>
+									<field Name="otherRXOptions" Type="string">""</field>
+									<field Name="tmiAgingType" Type="string">"TMI Aging"</field>
+									<field Name="enableMacroDevice" Type="list">nil</field>
+									<field Name="mosDevDegVbconst_n" Type="string">""</field>
+									<field Name="mosAgeModelLimitNum" Type="string">"10"</field>
+									<field Name="enableAgingForTMI" Type="symbol">t</field>
+									<field Name="mosDevDegVsconstModels" Type="string">""</field>
+									<field Name="macroDevices" Type="string">""</field>
+									<field Name="gaSaveSome" Type="string">""</field>
+									<field Name="gaAlterTime" Type="string">""</field>
+									<field Name="mosOutputSubcktDegInFilePath" Type="string">""</field>
+									<field Name="combinedeg" Type="string">"off"</field>
+									<field Name="mosDevDegIdconstwl" Type="string">""</field>
+									<field Name="gaAlterParamListBox" Type="skillDpl">
+										<field Name="choices" Type="list">nil</field>
+										<field Name="value" Type="list">nil</field>
+									</field>
+									<field Name="mosDevDegIdconst" Type="string">""</field>
+									<field Name="saAgeStepOrTotalStep" Type="string">""</field>
+									<field Name="displayTMIGui" Type="list">nil</field>
+									<field Name="uriDebugMode" Type="string">"0"</field>
+									<field Name="mosDevDegVbconst_p" Type="string">""</field>
+									<field Name="anaMode" Type="string">"Reliability"</field>
+									<field Name="mosDevDegVdconst" Type="string">""</field>
+									<field Name="compactagednetlist" Type="string">"none"</field>
+									<field Name="mosModifyNetlist" Type="list">nil</field>
+									<field Name="mosCompactAgeModel" Type="list">nil</field>
+									<field Name="mosDevDegNeedSimulator" Type="list">nil</field>
+									<field Name="mosAppendDeviceAge" Type="list">nil</field>
+									<field Name="gaSaveResults" Type="string">"all"</field>
+									<field Name="mosDevDegVdconstwl" Type="string">""</field>
+									<field Name="saStepType" Type="string">"Total steps"</field>
+									<field Name="gaPassParam" Type="string">"no"</field>
+									<field Name="mosAgeModelLimit" Type="list">nil</field>
+									<field Name="uriMode" Type="string">"agemos"</field>
+									<field Name="mosDevDegVsconst" Type="string">""</field>
+									<field Name="mosDevDegVglinModels" Type="string">""</field>
+									<field Name="mosDumpAgeModel" Type="list">nil</field>
+									<field Name="outputmethod" Type="string">"single"</field>
+									<field Name="gaAlterHeadListBox" Type="skillDpl">
+										<field Name="choices" Type="list">("#     Time           Param               Value")</field>
+										<field Name="value" Type="list">nil</field>
+									</field>
+									<field Name="gaAgeStepStop" Type="string">""</field>
+									<field Name="mosDevDegSimulatorPath" Type="string">""</field>
+									<field Name="mosDevDegVgstepModels" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_start_n" Type="string">""</field>
+									<field Name="removeTMIAgeSettingInFresh" Type="list">nil</field>
+									<field Name="mosDevDegVbconst_pModels" Type="string">""</field>
+									<field Name="addAdditionalArgumentForTMI" Type="list">nil</field>
+									<field Name="standardAgeType" Type="string">"Age points"</field>
+									<field Name="enableDegSort" Type="list">nil</field>
+									<field Name="mosCalcLifetime" Type="list">nil</field>
+									<field Name="mosDevDegVgsweep_start_nModels" Type="string">""</field>
+									<field Name="enableRelxpert" Type="list">nil</field>
+									<field Name="mosMode" Type="list">(t t t)</field>
+									<field Name="enabledegdata" Type="list">nil</field>
+									<field Name="degdatatype" Type="string">"appendage"</field>
+									<field Name="mosAgingTimeUnit" Type="string">"Years"</field>
+									<field Name="otherTMIRXOptions" Type="string">""</field>
+									<field Name="agingPointsType" Type="string">"Standard aging"</field>
+									<field Name="enableGradualAging" Type="list">nil</field>
+									<field Name="tmiMosMode" Type="list">(t t)</field>
+									<field Name="mosAgingTime" Type="string">"10"</field>
+									<field Name="fresh_data_dir" Type="string">""</field>
+									<field Name="doADELPostProcess" Type="symbol">t</field>
+									<field Name="mosAgeDomain" Type="string">"loglog"</field>
+									<field Name="mosDevDegVdsat" Type="string">""</field>
+									<field Name="mosDevDegVthConstCurrSp" Type="list">nil</field>
+									<field Name="presetValue" Type="string">""</field>
+									<field Name="mosDevDegVthUseId" Type="list">nil</field>
+									<field Name="aged_data_dir" Type="string">""</field>
+									<field Name="mosDevDegVgsatModels" Type="string">""</field>
+									<field Name="stress_data_dir" Type="string">""</field>
+									<field Name="mindtemp" Type="string">""</field>
+									<field Name="mosVthMethod" Type="string">"calculate"</field>
+									<field Name="presetType" Type="string">"lifetime"</field>
+									<field Name="mosDevDegVthUseIs" Type="list">nil</field>
+									<field Name="relusercmdlineoption" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_end_pModels" Type="string">""</field>
+									<field Name="includeFiles" Type="string">""</field>
+									<field Name="mosEffectiveModel" Type="symbol">t</field>
+									<field Name="mosDevDegVgsweep_end_p" Type="string">""</field>
+									<field Name="mosDevDegVdd" Type="string">""</field>
+									<field Name="mosAgeMethod" Type="string">"agemos"</field>
+									<field Name="anaModeClone" Type="string">"Reliability"</field>
+									<field Name="mosMaskDevInclude" Type="string">"include"</field>
+									<field Name="mosDevDegVgsweep_end_n" Type="string">""</field>
+									<field Name="gaAgePointsUnit" Type="string">"Years"</field>
+									<field Name="checknegagingclamp" Type="string">"no"</field>
+									<field Name="mosEnableOutputDevDeg" Type="list">nil</field>
+									<field Name="degCheckException" Type="string">""</field>
+									<field Name="mosDevDegVgsat" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_start_pModels" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_start_p" Type="string">""</field>
+									<field Name="gaAgeStepType" Type="string">"lin"</field>
+									<field Name="enablePreset" Type="list">nil</field>
+									<field Name="mosDevDegVddSetting" Type="list">nil</field>
+									<field Name="mosMaskDevInstance" Type="string">""</field>
+									<field Name="checknegagingtype" Type="string">"error"</field>
+									<field Name="gaIterationNum" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_end_nModels" Type="string">""</field>
+								</partition>
+							</component>
+						</relxOptions>
+					</relxsetup>
+				</relxanalysis>
+				<vars>
+					<var>fs
+						<value>400M</value>
+						<dependentTests>
+							<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>Vpk
+						<value>450m</value>
+						<dependentTests>
+							<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>Cunit
+						<value>1f</value>
+						<dependentTests>
+							<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>TSTOP
+						<value>2.7u</value>
+						<dependentTests>
+							<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<incrementalsimulationoptions>
+					<incrementalSimulation>0</incrementalSimulation>
+				</incrementalsimulationoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Jun 17 10:08:46 2026</timestamp>
+			<resultsname>/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.0.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/maestro/Interactive.0.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_100846448</localpsfdir>
+			<psfdir>/home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.0</psfdir>
+			<simdir>$AXL_PROJECT_DIR/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.0</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.0.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/maestro/Interactive.0.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="assembler" roOrView="view" runningOrFinished="finished">Interactive.1
+			<checkpoint>
+				<jobcontrolmode>LSCS</jobcontrolmode>
+				<corners>
+					<corner enabled="1">_default</corner>
+				</corners>
+				<sharedvarinfo></sharedvarinfo>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test>Vcmbased_ADC_tb_1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>ADC_9B_tb_best_q4</value>
+							</option>
+							<option>lib
+								<value>SAR9B_400MV</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>state
+								<value>Interactive.1</value>
+							</option>
+						</tooloptions>
+						<vars>
+							<var>fs
+								<value>400M</value>
+							</var>
+							<var>Vpk
+								<value>800m</value>
+							</var>
+							<var>Cunit
+								<value>1f</value>
+							</var>
+							<var>Vth_sw
+								<value>0.9</value>
+							</var>
+							<var>TSTOP
+								<value>2.7u</value>
+							</var>
+						</vars>
+						<origoptions>
+							<option>cell
+								<value>ADC_9B_tb_best_q4</value>
+							</option>
+							<option>lib
+								<value>SAR9B_400MV</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>state
+								<value>active</value>
+							</option>
+						</origoptions>
+						<outputs>
+							<output>spectrum_enob
+								<evalType>point</evalType>
+							</output>
+							<output>spectrum_sinad
+								<evalType>point</evalType>
+							</output>
+						</outputs>
+					</test>
+				</tests>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<checksasserts netlist="0">
+					<test netlist="0" netlistscope="all">Vcmbased_ADC_tb_1</test>
+				</checksasserts>
+				<plottingoptions>
+					<plottingoption>waveformtemplate
+						<value>(None)</value>
+					</plottingoption>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>distributedplot_enabled
+						<value>no</value>
+					</plottingoption>
+				</plottingoptions>
+				<exploreroptions>
+					<exploreroption>waveformtemplate
+						<value>(None)</value>
+					</exploreroption>
+				</exploreroptions>
+				<incrementalsimsetup>
+					<useincremental>0</useincremental>
+					<reusenetlist>0</reusenetlist>
+					<reusesaverunhist>0</reusesaverunhist>
+					<copyreferenceresults>1</copyreferenceresults>
+				</incrementalsimsetup>
+				<overwritehistoryname>ExplorerRun.0</overwritehistoryname>
+				<relxanalysisenabled>0</relxanalysisenabled>
+				<relxanalysis>
+					<relxsetup enabled="1">Reliability0
+						<fresh enabled="0">Reliability0.fresh
+							<testname>Vcmbased_ADC_tb_1</testname>
+						</fresh>
+						<stress enabled="0">Reliability0.stress
+							<testname>Vcmbased_ADC_tb_1</testname>
+						</stress>
+						<stressfile></stressfile>
+						<aged enabled="0">Reliability0.aged
+							<testname>Vcmbased_ADC_tb_1</testname>
+						</aged>
+						<relxOptions>
+							<simulator>spectre</simulator>
+							<component Name="relxOptions" Type="skillTable">tableformat
+								<partition Name="relxOpts">
+									<field Name="mosMinAge" Type="string">""</field>
+									<field Name="gaAgeStepUnit" Type="string">"Years"</field>
+									<field Name="degSortType" Type="string">"threshold"</field>
+									<field Name="mosDevDegVdlinModels" Type="string">""</field>
+									<field Name="nativeMode" Type="string">"Spectre native"</field>
+									<field Name="enableRelXTran" Type="list">nil</field>
+									<field Name="mosAgeModelFilePath" Type="string">""</field>
+									<field Name="presetBlock" Type="string">""</field>
+									<field Name="relxTranStart" Type="string">""</field>
+									<field Name="mosDevDegVdlin" Type="string">""</field>
+									<field Name="enableStress" Type="list">nil</field>
+									<field Name="gaAgeStepTotalStep" Type="string">""</field>
+									<field Name="gaAgePoints" Type="string">""</field>
+									<field Name="gaAgeStepStart" Type="string">""</field>
+									<field Name="uriAppendtype" Type="string">"none"</field>
+									<field Name="mosDevDegVdsatModels" Type="string">""</field>
+									<field Name="uriLibs" Type="string">""</field>
+									<field Name="mosMaskDev" Type="list">nil</field>
+									<field Name="mosDevDegModels" Type="string">""</field>
+									<field Name="presetAgeLevel" Type="string">""</field>
+									<field Name="relxTranStop" Type="string">""</field>
+									<field Name="gaInputStressDir" Type="string">""</field>
+									<field Name="mosHciIgateMethod" Type="string">"calculate"</field>
+									<field Name="gaAlterValue" Type="string">""</field>
+									<field Name="mosDevDegVbconst_nModels" Type="string">""</field>
+									<field Name="gaSkipFresh" Type="list">nil</field>
+									<field Name="mosHciLifeTimeMethodTable" Type="string">""</field>
+									<field Name="relxpertExecName" Type="string">"relxpert"</field>
+									<field Name="enableOutputDevDegInFile" Type="string">"GUI"</field>
+									<field Name="showunageddevices" Type="string">"limit"</field>
+									<field Name="mosHciLifeTimeMethod" Type="string">"calculate"</field>
+									<field Name="gaAlterParam" Type="string">""</field>
+									<field Name="gaSkipLast" Type="list">nil</field>
+									<field Name="mosDevDegVglin" Type="string">""</field>
+									<field Name="enableSelfheating" Type="list">nil</field>
+									<field Name="mosDeltad" Type="string">"0.1"</field>
+									<field Name="mosHciIdMethod" Type="string">"ids"</field>
+									<field Name="aged_var_list" Type="list">nil</field>
+									<field Name="stress_var_list" Type="list">nil</field>
+									<field Name="mosHciAccuracy" Type="string">"liberal (1)"</field>
+									<field Name="enableAging" Type="list">nil</field>
+									<field Name="gaMode" Type="string">"Age points"</field>
+									<field Name="simModeFile" Type="string">"input.bs0"</field>
+									<field Name="mosHciOpMethod" Type="string">"calculate"</field>
+									<field Name="reportModelParamChanged" Type="list">nil</field>
+									<field Name="degSortValue" Type="string">""</field>
+									<field Name="simModeType" Type="string">"all"</field>
+									<field Name="mosOutputDevDegInFilePath" Type="string">""</field>
+									<field Name="mosAgeModelLimitType" Type="string">"age"</field>
+									<field Name="mosDevDegVgstep" Type="string">""</field>
+									<field Name="otherRXOptions" Type="string">""</field>
+									<field Name="tmiAgingType" Type="string">"TMI Aging"</field>
+									<field Name="enableMacroDevice" Type="list">nil</field>
+									<field Name="mosDevDegVbconst_n" Type="string">""</field>
+									<field Name="mosAgeModelLimitNum" Type="string">"10"</field>
+									<field Name="enableAgingForTMI" Type="symbol">t</field>
+									<field Name="mosDevDegVsconstModels" Type="string">""</field>
+									<field Name="macroDevices" Type="string">""</field>
+									<field Name="gaSaveSome" Type="string">""</field>
+									<field Name="gaAlterTime" Type="string">""</field>
+									<field Name="mosOutputSubcktDegInFilePath" Type="string">""</field>
+									<field Name="combinedeg" Type="string">"off"</field>
+									<field Name="mosDevDegIdconstwl" Type="string">""</field>
+									<field Name="gaAlterParamListBox" Type="skillDpl">
+										<field Name="choices" Type="list">nil</field>
+										<field Name="value" Type="list">nil</field>
+									</field>
+									<field Name="mosDevDegIdconst" Type="string">""</field>
+									<field Name="saAgeStepOrTotalStep" Type="string">""</field>
+									<field Name="displayTMIGui" Type="list">nil</field>
+									<field Name="uriDebugMode" Type="string">"0"</field>
+									<field Name="mosDevDegVbconst_p" Type="string">""</field>
+									<field Name="anaMode" Type="string">"Reliability"</field>
+									<field Name="mosDevDegVdconst" Type="string">""</field>
+									<field Name="compactagednetlist" Type="string">"none"</field>
+									<field Name="mosModifyNetlist" Type="list">nil</field>
+									<field Name="mosCompactAgeModel" Type="list">nil</field>
+									<field Name="mosDevDegNeedSimulator" Type="list">nil</field>
+									<field Name="mosAppendDeviceAge" Type="list">nil</field>
+									<field Name="gaSaveResults" Type="string">"all"</field>
+									<field Name="mosDevDegVdconstwl" Type="string">""</field>
+									<field Name="saStepType" Type="string">"Total steps"</field>
+									<field Name="gaPassParam" Type="string">"no"</field>
+									<field Name="mosAgeModelLimit" Type="list">nil</field>
+									<field Name="uriMode" Type="string">"agemos"</field>
+									<field Name="mosDevDegVsconst" Type="string">""</field>
+									<field Name="mosDevDegVglinModels" Type="string">""</field>
+									<field Name="mosDumpAgeModel" Type="list">nil</field>
+									<field Name="outputmethod" Type="string">"single"</field>
+									<field Name="gaAlterHeadListBox" Type="skillDpl">
+										<field Name="choices" Type="list">("#     Time           Param               Value")</field>
+										<field Name="value" Type="list">nil</field>
+									</field>
+									<field Name="gaAgeStepStop" Type="string">""</field>
+									<field Name="mosDevDegSimulatorPath" Type="string">""</field>
+									<field Name="mosDevDegVgstepModels" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_start_n" Type="string">""</field>
+									<field Name="removeTMIAgeSettingInFresh" Type="list">nil</field>
+									<field Name="mosDevDegVbconst_pModels" Type="string">""</field>
+									<field Name="addAdditionalArgumentForTMI" Type="list">nil</field>
+									<field Name="standardAgeType" Type="string">"Age points"</field>
+									<field Name="enableDegSort" Type="list">nil</field>
+									<field Name="mosCalcLifetime" Type="list">nil</field>
+									<field Name="mosDevDegVgsweep_start_nModels" Type="string">""</field>
+									<field Name="enableRelxpert" Type="list">nil</field>
+									<field Name="mosMode" Type="list">(t t t)</field>
+									<field Name="enabledegdata" Type="list">nil</field>
+									<field Name="degdatatype" Type="string">"appendage"</field>
+									<field Name="mosAgingTimeUnit" Type="string">"Years"</field>
+									<field Name="otherTMIRXOptions" Type="string">""</field>
+									<field Name="agingPointsType" Type="string">"Standard aging"</field>
+									<field Name="enableGradualAging" Type="list">nil</field>
+									<field Name="tmiMosMode" Type="list">(t t)</field>
+									<field Name="mosAgingTime" Type="string">"10"</field>
+									<field Name="fresh_data_dir" Type="string">""</field>
+									<field Name="doADELPostProcess" Type="symbol">t</field>
+									<field Name="mosAgeDomain" Type="string">"loglog"</field>
+									<field Name="mosDevDegVdsat" Type="string">""</field>
+									<field Name="mosDevDegVthConstCurrSp" Type="list">nil</field>
+									<field Name="presetValue" Type="string">""</field>
+									<field Name="mosDevDegVthUseId" Type="list">nil</field>
+									<field Name="aged_data_dir" Type="string">""</field>
+									<field Name="mosDevDegVgsatModels" Type="string">""</field>
+									<field Name="stress_data_dir" Type="string">""</field>
+									<field Name="mindtemp" Type="string">""</field>
+									<field Name="mosVthMethod" Type="string">"calculate"</field>
+									<field Name="presetType" Type="string">"lifetime"</field>
+									<field Name="mosDevDegVthUseIs" Type="list">nil</field>
+									<field Name="relusercmdlineoption" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_end_pModels" Type="string">""</field>
+									<field Name="includeFiles" Type="string">""</field>
+									<field Name="mosEffectiveModel" Type="symbol">t</field>
+									<field Name="mosDevDegVgsweep_end_p" Type="string">""</field>
+									<field Name="mosDevDegVdd" Type="string">""</field>
+									<field Name="mosAgeMethod" Type="string">"agemos"</field>
+									<field Name="anaModeClone" Type="string">"Reliability"</field>
+									<field Name="mosMaskDevInclude" Type="string">"include"</field>
+									<field Name="mosDevDegVgsweep_end_n" Type="string">""</field>
+									<field Name="gaAgePointsUnit" Type="string">"Years"</field>
+									<field Name="checknegagingclamp" Type="string">"no"</field>
+									<field Name="mosEnableOutputDevDeg" Type="list">nil</field>
+									<field Name="degCheckException" Type="string">""</field>
+									<field Name="mosDevDegVgsat" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_start_pModels" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_start_p" Type="string">""</field>
+									<field Name="gaAgeStepType" Type="string">"lin"</field>
+									<field Name="enablePreset" Type="list">nil</field>
+									<field Name="mosDevDegVddSetting" Type="list">nil</field>
+									<field Name="mosMaskDevInstance" Type="string">""</field>
+									<field Name="checknegagingtype" Type="string">"error"</field>
+									<field Name="gaIterationNum" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_end_nModels" Type="string">""</field>
+								</partition>
+							</component>
+						</relxOptions>
+					</relxsetup>
+				</relxanalysis>
+				<vars>
+					<var>fs
+						<value>400M</value>
+						<dependentTests>
+							<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>Vpk
+						<value>450m</value>
+						<dependentTests>
+							<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>Cunit
+						<value>1f</value>
+						<dependentTests>
+							<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>TSTOP
+						<value>2.7u</value>
+						<dependentTests>
+							<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<incrementalsimulationoptions>
+					<incrementalSimulation>0</incrementalSimulation>
+				</incrementalsimulationoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Jun 17 10:17:24 2026</timestamp>
+			<resultsname>/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.1.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/maestro/Interactive.1.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_101724312</localpsfdir>
+			<psfdir>/home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.1</psfdir>
+			<simdir>$AXL_PROJECT_DIR/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.1</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.1.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/maestro/Interactive.1.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="assembler" roOrView="view" runningOrFinished="finished">Interactive.2
+			<checkpoint>
+				<jobcontrolmode>LSCS</jobcontrolmode>
+				<corners>
+					<corner enabled="1">_default</corner>
+				</corners>
+				<sharedvarinfo></sharedvarinfo>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test>Vcmbased_ADC_tb_1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>ADC_9B_tb_best_q4</value>
+							</option>
+							<option>lib
+								<value>SAR9B_400MV</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>state
+								<value>Interactive.2</value>
+							</option>
+						</tooloptions>
+						<vars>
+							<var>fs
+								<value>400M</value>
+							</var>
+							<var>Vpk
+								<value>800m</value>
+							</var>
+							<var>Cunit
+								<value>1f</value>
+							</var>
+							<var>Vth_sw
+								<value>0.9</value>
+							</var>
+							<var>TSTOP
+								<value>2.7u</value>
+							</var>
+						</vars>
+						<origoptions>
+							<option>cell
+								<value>ADC_9B_tb_best_q4</value>
+							</option>
+							<option>lib
+								<value>SAR9B_400MV</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>state
+								<value>active</value>
+							</option>
+						</origoptions>
+						<outputs>
+							<output>spectrum_enob
+								<evalType>point</evalType>
+							</output>
+							<output>spectrum_sinad
+								<evalType>point</evalType>
+							</output>
+						</outputs>
+					</test>
+				</tests>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<checksasserts netlist="0">
+					<test netlist="0" netlistscope="all">Vcmbased_ADC_tb_1</test>
+				</checksasserts>
+				<plottingoptions>
+					<plottingoption>waveformtemplate
+						<value>(None)</value>
+					</plottingoption>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>distributedplot_enabled
+						<value>no</value>
+					</plottingoption>
+				</plottingoptions>
+				<exploreroptions>
+					<exploreroption>waveformtemplate
+						<value>(None)</value>
+					</exploreroption>
+				</exploreroptions>
+				<incrementalsimsetup>
+					<useincremental>0</useincremental>
+					<reusenetlist>0</reusenetlist>
+					<reusesaverunhist>0</reusesaverunhist>
+					<copyreferenceresults>1</copyreferenceresults>
+				</incrementalsimsetup>
+				<overwritehistoryname>ExplorerRun.0</overwritehistoryname>
+				<relxanalysisenabled>0</relxanalysisenabled>
+				<relxanalysis>
+					<relxsetup enabled="1">Reliability0
+						<fresh enabled="0">Reliability0.fresh
+							<testname>Vcmbased_ADC_tb_1</testname>
+						</fresh>
+						<stress enabled="0">Reliability0.stress
+							<testname>Vcmbased_ADC_tb_1</testname>
+						</stress>
+						<stressfile></stressfile>
+						<aged enabled="0">Reliability0.aged
+							<testname>Vcmbased_ADC_tb_1</testname>
+						</aged>
+						<relxOptions>
+							<simulator>spectre</simulator>
+							<component Name="relxOptions" Type="skillTable">tableformat
+								<partition Name="relxOpts">
+									<field Name="mosMinAge" Type="string">""</field>
+									<field Name="gaAgeStepUnit" Type="string">"Years"</field>
+									<field Name="degSortType" Type="string">"threshold"</field>
+									<field Name="mosDevDegVdlinModels" Type="string">""</field>
+									<field Name="nativeMode" Type="string">"Spectre native"</field>
+									<field Name="enableRelXTran" Type="list">nil</field>
+									<field Name="mosAgeModelFilePath" Type="string">""</field>
+									<field Name="presetBlock" Type="string">""</field>
+									<field Name="relxTranStart" Type="string">""</field>
+									<field Name="mosDevDegVdlin" Type="string">""</field>
+									<field Name="enableStress" Type="list">nil</field>
+									<field Name="gaAgeStepTotalStep" Type="string">""</field>
+									<field Name="gaAgePoints" Type="string">""</field>
+									<field Name="gaAgeStepStart" Type="string">""</field>
+									<field Name="uriAppendtype" Type="string">"none"</field>
+									<field Name="mosDevDegVdsatModels" Type="string">""</field>
+									<field Name="uriLibs" Type="string">""</field>
+									<field Name="mosMaskDev" Type="list">nil</field>
+									<field Name="mosDevDegModels" Type="string">""</field>
+									<field Name="presetAgeLevel" Type="string">""</field>
+									<field Name="relxTranStop" Type="string">""</field>
+									<field Name="gaInputStressDir" Type="string">""</field>
+									<field Name="mosHciIgateMethod" Type="string">"calculate"</field>
+									<field Name="gaAlterValue" Type="string">""</field>
+									<field Name="mosDevDegVbconst_nModels" Type="string">""</field>
+									<field Name="gaSkipFresh" Type="list">nil</field>
+									<field Name="mosHciLifeTimeMethodTable" Type="string">""</field>
+									<field Name="relxpertExecName" Type="string">"relxpert"</field>
+									<field Name="enableOutputDevDegInFile" Type="string">"GUI"</field>
+									<field Name="showunageddevices" Type="string">"limit"</field>
+									<field Name="mosHciLifeTimeMethod" Type="string">"calculate"</field>
+									<field Name="gaAlterParam" Type="string">""</field>
+									<field Name="gaSkipLast" Type="list">nil</field>
+									<field Name="mosDevDegVglin" Type="string">""</field>
+									<field Name="enableSelfheating" Type="list">nil</field>
+									<field Name="mosDeltad" Type="string">"0.1"</field>
+									<field Name="mosHciIdMethod" Type="string">"ids"</field>
+									<field Name="aged_var_list" Type="list">nil</field>
+									<field Name="stress_var_list" Type="list">nil</field>
+									<field Name="mosHciAccuracy" Type="string">"liberal (1)"</field>
+									<field Name="enableAging" Type="list">nil</field>
+									<field Name="gaMode" Type="string">"Age points"</field>
+									<field Name="simModeFile" Type="string">"input.bs0"</field>
+									<field Name="mosHciOpMethod" Type="string">"calculate"</field>
+									<field Name="reportModelParamChanged" Type="list">nil</field>
+									<field Name="degSortValue" Type="string">""</field>
+									<field Name="simModeType" Type="string">"all"</field>
+									<field Name="mosOutputDevDegInFilePath" Type="string">""</field>
+									<field Name="mosAgeModelLimitType" Type="string">"age"</field>
+									<field Name="mosDevDegVgstep" Type="string">""</field>
+									<field Name="otherRXOptions" Type="string">""</field>
+									<field Name="tmiAgingType" Type="string">"TMI Aging"</field>
+									<field Name="enableMacroDevice" Type="list">nil</field>
+									<field Name="mosDevDegVbconst_n" Type="string">""</field>
+									<field Name="mosAgeModelLimitNum" Type="string">"10"</field>
+									<field Name="enableAgingForTMI" Type="symbol">t</field>
+									<field Name="mosDevDegVsconstModels" Type="string">""</field>
+									<field Name="macroDevices" Type="string">""</field>
+									<field Name="gaSaveSome" Type="string">""</field>
+									<field Name="gaAlterTime" Type="string">""</field>
+									<field Name="mosOutputSubcktDegInFilePath" Type="string">""</field>
+									<field Name="combinedeg" Type="string">"off"</field>
+									<field Name="mosDevDegIdconstwl" Type="string">""</field>
+									<field Name="gaAlterParamListBox" Type="skillDpl">
+										<field Name="choices" Type="list">nil</field>
+										<field Name="value" Type="list">nil</field>
+									</field>
+									<field Name="mosDevDegIdconst" Type="string">""</field>
+									<field Name="saAgeStepOrTotalStep" Type="string">""</field>
+									<field Name="displayTMIGui" Type="list">nil</field>
+									<field Name="uriDebugMode" Type="string">"0"</field>
+									<field Name="mosDevDegVbconst_p" Type="string">""</field>
+									<field Name="anaMode" Type="string">"Reliability"</field>
+									<field Name="mosDevDegVdconst" Type="string">""</field>
+									<field Name="compactagednetlist" Type="string">"none"</field>
+									<field Name="mosModifyNetlist" Type="list">nil</field>
+									<field Name="mosCompactAgeModel" Type="list">nil</field>
+									<field Name="mosDevDegNeedSimulator" Type="list">nil</field>
+									<field Name="mosAppendDeviceAge" Type="list">nil</field>
+									<field Name="gaSaveResults" Type="string">"all"</field>
+									<field Name="mosDevDegVdconstwl" Type="string">""</field>
+									<field Name="saStepType" Type="string">"Total steps"</field>
+									<field Name="gaPassParam" Type="string">"no"</field>
+									<field Name="mosAgeModelLimit" Type="list">nil</field>
+									<field Name="uriMode" Type="string">"agemos"</field>
+									<field Name="mosDevDegVsconst" Type="string">""</field>
+									<field Name="mosDevDegVglinModels" Type="string">""</field>
+									<field Name="mosDumpAgeModel" Type="list">nil</field>
+									<field Name="outputmethod" Type="string">"single"</field>
+									<field Name="gaAlterHeadListBox" Type="skillDpl">
+										<field Name="choices" Type="list">("#     Time           Param               Value")</field>
+										<field Name="value" Type="list">nil</field>
+									</field>
+									<field Name="gaAgeStepStop" Type="string">""</field>
+									<field Name="mosDevDegSimulatorPath" Type="string">""</field>
+									<field Name="mosDevDegVgstepModels" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_start_n" Type="string">""</field>
+									<field Name="removeTMIAgeSettingInFresh" Type="list">nil</field>
+									<field Name="mosDevDegVbconst_pModels" Type="string">""</field>
+									<field Name="addAdditionalArgumentForTMI" Type="list">nil</field>
+									<field Name="standardAgeType" Type="string">"Age points"</field>
+									<field Name="enableDegSort" Type="list">nil</field>
+									<field Name="mosCalcLifetime" Type="list">nil</field>
+									<field Name="mosDevDegVgsweep_start_nModels" Type="string">""</field>
+									<field Name="enableRelxpert" Type="list">nil</field>
+									<field Name="mosMode" Type="list">(t t t)</field>
+									<field Name="enabledegdata" Type="list">nil</field>
+									<field Name="degdatatype" Type="string">"appendage"</field>
+									<field Name="mosAgingTimeUnit" Type="string">"Years"</field>
+									<field Name="otherTMIRXOptions" Type="string">""</field>
+									<field Name="agingPointsType" Type="string">"Standard aging"</field>
+									<field Name="enableGradualAging" Type="list">nil</field>
+									<field Name="tmiMosMode" Type="list">(t t)</field>
+									<field Name="mosAgingTime" Type="string">"10"</field>
+									<field Name="fresh_data_dir" Type="string">""</field>
+									<field Name="doADELPostProcess" Type="symbol">t</field>
+									<field Name="mosAgeDomain" Type="string">"loglog"</field>
+									<field Name="mosDevDegVdsat" Type="string">""</field>
+									<field Name="mosDevDegVthConstCurrSp" Type="list">nil</field>
+									<field Name="presetValue" Type="string">""</field>
+									<field Name="mosDevDegVthUseId" Type="list">nil</field>
+									<field Name="aged_data_dir" Type="string">""</field>
+									<field Name="mosDevDegVgsatModels" Type="string">""</field>
+									<field Name="stress_data_dir" Type="string">""</field>
+									<field Name="mindtemp" Type="string">""</field>
+									<field Name="mosVthMethod" Type="string">"calculate"</field>
+									<field Name="presetType" Type="string">"lifetime"</field>
+									<field Name="mosDevDegVthUseIs" Type="list">nil</field>
+									<field Name="relusercmdlineoption" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_end_pModels" Type="string">""</field>
+									<field Name="includeFiles" Type="string">""</field>
+									<field Name="mosEffectiveModel" Type="symbol">t</field>
+									<field Name="mosDevDegVgsweep_end_p" Type="string">""</field>
+									<field Name="mosDevDegVdd" Type="string">""</field>
+									<field Name="mosAgeMethod" Type="string">"agemos"</field>
+									<field Name="anaModeClone" Type="string">"Reliability"</field>
+									<field Name="mosMaskDevInclude" Type="string">"include"</field>
+									<field Name="mosDevDegVgsweep_end_n" Type="string">""</field>
+									<field Name="gaAgePointsUnit" Type="string">"Years"</field>
+									<field Name="checknegagingclamp" Type="string">"no"</field>
+									<field Name="mosEnableOutputDevDeg" Type="list">nil</field>
+									<field Name="degCheckException" Type="string">""</field>
+									<field Name="mosDevDegVgsat" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_start_pModels" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_start_p" Type="string">""</field>
+									<field Name="gaAgeStepType" Type="string">"lin"</field>
+									<field Name="enablePreset" Type="list">nil</field>
+									<field Name="mosDevDegVddSetting" Type="list">nil</field>
+									<field Name="mosMaskDevInstance" Type="string">""</field>
+									<field Name="checknegagingtype" Type="string">"error"</field>
+									<field Name="gaIterationNum" Type="string">""</field>
+									<field Name="mosDevDegVgsweep_end_nModels" Type="string">""</field>
+								</partition>
+							</component>
+						</relxOptions>
+					</relxsetup>
+				</relxanalysis>
+				<vars>
+					<var>fs
+						<value>400M</value>
+						<dependentTests>
+							<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>Vpk
+						<value>450m</value>
+						<dependentTests>
+							<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>Cunit
+						<value>1f</value>
+						<dependentTests>
+							<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>TSTOP
+						<value>2.7u</value>
+						<dependentTests>
+							<dependentTest omitted="0">Vcmbased_ADC_tb_1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<incrementalsimulationoptions>
+					<incrementalSimulation>0</incrementalSimulation>
+				</incrementalsimulationoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Jun 17 10:20:56 2026</timestamp>
+			<resultsname>/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.2.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/maestro/Interactive.2.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_102056964</localpsfdir>
+			<psfdir>/home/IC/simulation/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.2</psfdir>
+			<simdir>$AXL_PROJECT_DIR/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.2</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/results/maestro/Interactive.2.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/maestro/Interactive.2.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+	</history>
+</setupdb>

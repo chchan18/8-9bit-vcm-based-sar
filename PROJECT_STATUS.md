@@ -1,0 +1,569 @@
+# 8bitvcmvirtuoso — Project Status & Handoff
+
+> **Date**: 2026-06-17  
+> **Session span**: Initial setup → SAR9B 9-bit Maestro validation → raw `biP<8:0>` ENOB measurement  
+> **Bridge**: IC@192.168.225.132 (Virtuoso IC618, Spectre 18.1, TSMC 28nm HPC+)
+
+---
+
+## 1. Environment
+
+| Item | Value |
+|------|-------|
+| **Remote host** | 192.168.225.132 |
+| **SSH user** | IC |
+| **SSH auth** | Key-based (`~/.ssh/id_ed25519`, no passphrase) |
+| **Virtuoso** | IC618 (`/opt/eda/cadence/IC618/`) |
+| **Spectre** | 18.1 (`/opt/eda/cadence/SPECTRE181/bin/spectre`) |
+| **PDK** | TSMC 28nm HPC+ (CRN28HPC+ v1.0_2p2) |
+| **PDK path** | `/home/IC/Desktop/Project/project_tsmcN28_NEW/.../CRN28HPCp/models/spectre/` |
+| **Python venv** | `E:\8bitvcmvirtuoso\.venv` (Python 3.12.7) |
+| **Bridge CLI** | `virtuoso-bridge` (v0.7.0, installed editable from `virtuoso-bridge-lite/`) |
+| **Bridge .env** | `~\.virtuoso-bridge\.env` (VB_REMOTE_HOST=192.168.225.132, VB_REMOTE_USER=IC) |
+
+### Daemon status check
+```bash
+.venv\Scripts\virtuoso-bridge.exe status
+```
+If daemon shows "NO RESPONSE", reload in Virtuoso CIW:
+```lisp
+RBStopAll()
+load("/tmp/virtuoso_bridge_IC/Chonghao_Chen/virtuoso_bridge/virtuoso_setup.il")
+```
+
+---
+
+## 2. Directory Structure
+
+```
+E:\8bitvcmvirtuoso\
+├── .claude/
+│   ├── settings.json              # Project config: acceptEdits, SessionStart hook
+│   ├── settings.local.json        # Personal overrides
+│   └── skills/                    # NTFS Junctions to virtuoso-bridge-lite/skills/
+│       ├── virtuoso/
+│       ├── spectre/
+│       └── optimizer/
+├── .venv/                         # Python 3.12.7 + virtuoso-bridge v0.7.0
+├── virtuoso-bridge-lite/          # Cloned from https://github.com/Arcadia-1/virtuoso-bridge-lite
+├── logs/sessions/                 # Auto-created session log templates
+├── versions/
+│   ├── v001_initial-setup/        # Git, logging, hooks setup
+│   ├── v002_virtuoso-bridge-lite/ # Bridge installation
+│   └── v003_ADC_documentation/    # ADC design README + netlist + input.scs
+└── sar9b_work/                    # Working directory for 9-bit SAR development
+    ├── *.py                       # Python scripts (TB fixes, netlist mods, sim runs)
+    ├── *.sh                       # Shell scripts for remote execution
+    └── netlist_standalone/        # Standalone netlist attempt (incomplete)
+```
+
+---
+
+## 3. Libraries in Virtuoso
+
+### 3.1 `8BIT400MVcmredundancySAR` (original, WORKING)
+
+The original 8-bit redundant SAR ADC design.
+
+| Cell | Type | Description |
+|------|------|-------------|
+| `TOP_redun1_ADC` | schematic+symbol | 9-bit redundant CDAC SAR ADC → decoded to 8-bit |
+| `ADC_redun1_tb` | schematic+maestro | Testbench: coherent sampling, FFT → ENOB/SINAD |
+| `TOP_9B_BINARY` | schematic+symbol | **Binary CDAC version** (256/128/64/32/16/8/4/2/1 = 511Cu) |
+| `ADC_9B_tb_v2` | schematic (corrupted) | Attempted 9-bit TB — **DO NOT USE** |
+| Standard cells | schematic | INVX1/2/4/8, NAND2X1, NOR2X1, TRIGATEX1, DELAY_1, OR3X1, DFF, DFFRN |
+| Sub-blocks | schematic | BOOTSTRAP_DIFF, CLK_NOOVERLAP, COMPARATOR, Asycontrol_logic_9clk, control |
+| `decode_redun9to8` | veriloga+symbol | 9-bit redundant → 8-bit (Verilog-A) |
+| `DAC8b_va` | veriloga+symbol | 8-bit ideal DAC (Verilog-A) |
+
+**Key result**: Maestro simulation of `ADC_redun1_tb` gives **ENOB=7.82 bits, SINAD=48.84 dB** (measured with original redundant weights).
+
+### 3.2 `SAR9B_400MV` (new library, WORKING FOR 9-BIT VALIDATION)
+
+Created for 9-bit ADC development. Contains copies of all sub-cells.
+
+| Cell | Status | Description |
+|------|--------|-------------|
+| `TOP_9B_ADC` | ✅ schematic+symbol | 9-bit binary SAR ADC; active best run uses q4-scaled binary CDAC |
+| `ADC_9B_tb_best_q4` | ✅ schematic+maestro | Current validated SAR9B Maestro testbench |
+| `ADC_9B_tb` | ❌ corrupted | Failed TB — DO NOT USE |
+| All sub-cells | ✅ schematic | Copied from 8BIT400MVcmredundancySAR |
+| VA cells | ✅ veriloga+symbol | `decode_redun9to8`, `DAC8b_va`; Maestro uses `sar9b_va_ahdl.scs` wrapper for AHDL include |
+| `simulation/` | ✅ | Contains Verilog-A files and netlist attempt |
+
+---
+
+## 4. SKILL Bridge Capabilities (CRITICAL)
+
+### What WORKS reliably:
+- `execute_skill("expr")` — basic SKILL evaluation
+- `inst~>c = "value"` — modifying instance parameters (capacitors, etc.)
+- `dbOpenCellViewByType(... "r")` — opening cells in read mode
+- `dbCopyCellView` — copying cells between libraries
+- `dbGetInstByName(cv "name")` — reading instance properties
+- `ddGetObj("lib" "cell")~>views~>name` — listing views
+- Reading instance terminals and net connections
+- `maeGetAnalysis`, `maeGetEnabledAnalysis` — reading Maestro config
+- `open_gui_session` — opening Maestro GUI (WORKS but needs daemon)
+
+### What DOES NOT WORK reliably:
+- `schCreateInst` — **ALWAYS FAILS** (returns ERROR/empty)
+- `schReplaceInst` — **FAILS** (returns ERROR)
+- `dbOpenCellViewByType(... "a")` — **UNRELIABLE** (succeeds for some cells, fails for others due to locks)
+- `dbCreateInst` — **FAILS**
+- `schHiReplace` — returns nil, no matches found
+- `run_and_wait` — fragile (SSH timeout issues, bridge disconnects)
+- `close_gui_session` — can leave locked sessions
+
+### Key insight:
+**Modifying existing instance PARAMETERS works. Creating/deleting/replacing instances does NOT work through the bridge.** Design changes requiring instance manipulation must be done in the Virtuoso GUI.
+
+---
+
+## 5. PDK / Spectre Limitations
+
+### Direct spectre invocation:
+Spectre 18.1 CANNOT run the Maestro-generated `input.scs` directly because the PDK `toplevel.scs` uses `library tsmclib` which is only supported through Maestro's netlist pre-processor. All attempts to run spectre from command line fail with `SFE-675: Illegal library definition`.
+
+### The `ihnl` / `blockdirmap` mechanism:
+Maestro generates netlist fragments in `ihnl/cds*/netlist` directories with a `blockdirmap` index. These are auto-discovered by spectre when run through Maestro but NOT when run standalone.
+
+### Workaround:
+The ONLY way to run simulations with this PDK is through Maestro (either GUI or bridge API).
+
+---
+
+## 6. CDAC Weight Modification (PROVEN APPROACH)
+
+This is the ONLY reliable way to change the ADC design through the bridge:
+
+```python
+# Works for TOP_redun1_ADC and TOP_9B_ADC
+for cap_name, new_val in binary_weights.items():
+    c.execute_skill(f'''
+      let((cv inst)
+        cv = dbOpenCellViewByType("{LIB}" "{CELL}" "schematic" "" "a")
+        inst = dbGetInstByName(cv "{cap_name}")
+        when(inst inst~>c = "{new_val}")
+        dbSave(cv) dbClose(cv) t)
+    ''', timeout=10)
+```
+
+### Binary weights (9-bit):
+```
+C2,C17: Cunit*256   (MSB)
+C0,C14: Cunit*128
+C1,C13: Cunit*64
+C4,C11: Cunit*32
+C5,C10: Cunit*8
+C3,C12: Cunit*16
+C6,C9:  Cunit*4
+C7,C8:  Cunit*2
+C15,C16: Cunit*1   (LSB)
+Total: 511 Cu per side
+```
+
+### Original redundant weights (8-bit decoded):
+```
+C2,C17: Cunit*56    C1,C13: Cunit*18    C6,C9:  Cunit*2
+C0,C14: Cunit*32    C4,C11: Cunit*10    C7,C8:  Cunit*1
+                    C3,C12: Cunit*5     C15,C16: Cunit*1
+                    C5,C10: Cunit*3
+Total: 128 Cu per side
+```
+
+---
+
+## 7. Simulation Results
+
+### 8-bit Redundant (original): `ADC_redun1_tb`
+| Metric | Value |
+|--------|-------|
+| ENOB | 7.82 bits |
+| SINAD | 48.84 dB |
+| Runtime | ~25 min |
+| Date | 2026-06-16 |
+
+### 9-bit Binary (modified CDAC only): `ADC_redun1_tb` with binary TOP
+| Metric | Value |
+|--------|-------|
+| ENOB | 4.09 bits |
+| SINAD | 26.37 dB |
+| Runtime | ~25 min |
+| Date | 2026-06-16 |
+| ⚠️ Caveat | Measurement through `decode_redun9to8` chain — ENOB artificially low due to decode mismatch |
+
+### 9-bit Binary raw-code measurement (latest handoff update)
+
+Run completed through Maestro/ADE Explorer with binary CDAC weights verified in the active netlist:
+
+| Item | Value |
+|------|-------|
+| Run history | `ExplorerRun.0` |
+| Start → end | 2026-06-16 23:14:07 → 23:51:09 |
+| Spectre status | 0 errors, 40 warnings, 8 notices |
+| Spectre elapsed | 36m 49.9s |
+| Active netlist evidence | `sar9b_work/wave_exports_binary/ExplorerRun.0/input.scs` |
+| Offline waveform exports | `sar9b_work/wave_exports_binary/ExplorerRun.0/` |
+
+The binary weights in the captured netlist are:
+
+```
+C2,C17: Cunit*256
+C0,C14: Cunit*128
+C1,C13: Cunit*64
+C4,C11: Cunit*32
+C3,C12: Cunit*16
+C5,C10: Cunit*8
+C6,C9:  Cunit*4
+C7,C8:  Cunit*2
+C15,C16: Cunit*1
+```
+
+Offline measurement used the same FFT window as the Maestro outputs:
+
+```
+start = 26 ns
+stop  = 2.586 us
+N     = 1024
+fundamental bin = 7
+```
+
+Results:
+
+| Measurement path | SINAD | ENOB | Notes |
+|------------------|-------|------|-------|
+| Existing `/out` through `decode_redun9to8` + `DAC8b_va` | 26.377 dB | 4.089 bits | Matches Maestro log (`26.37 dB`, `4.087 bits`), validates the offline FFT script |
+| Raw `DOUTP<8:0>` reconstructed offline | 16.814 dB | 2.501 bits | Uses saved internal DFF nodes because top-level `DOUTP<*>` nets are not saved directly |
+
+Raw-bit reconstruction details:
+
+```
+DOUTP0 = inverse of /I0/I31/I5/net7
+DOUTP1 = inverse of /I0/I7/I5/net7
+DOUTP2 = inverse of /I0/I6/I5/net7
+DOUTP3 = inverse of /I0/I5/I5/net7
+DOUTP4 = inverse of /I0/I4/I5/net7
+DOUTP5 = inverse of /I0/I3/I5/net7
+DOUTP6 = inverse of /I0/I2/I5/net7
+DOUTP7 = inverse of /I0/I1/I5/net7
+DOUTP8 = inverse of /I0/I43/I5/net7
+```
+
+The direct raw 9-bit result is much worse than the original redundant decode result. Treat it as a real measurement of the current binary-weight/raw-DOUTP configuration, but verify bit mapping and sample phase before making architectural conclusions.
+
+### 9-bit Binary raw-code validation update (2026-06-17)
+
+Additional netlist/Maestro logic checks were performed without rerunning Spectre:
+
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Maestro `/out` chain | `I0(TOP_redun1_ADC)` → `I14(decode_redun9to8)` → `I15(DAC8b_va)` | Captured netlist lines 783-792 |
+| DAC8 input reconstruction | `DAC_B0..7` gives `SINAD=26.338 dB`, `ENOB=4.083 bits` | Matches `/out` within `0.138 mV rms`, `0.618 mV max` |
+| Top-level raw bits | `VT("/biP<0>")` ... `VT("/biP<8>")` export successfully | No need to rely only on internal DFF nodes |
+| Internal DFF mapping | Inverse `/I0/<control>/I5/net7` exactly matches top-level `biP<*>` at the sampled points | 0 mismatches on all 9 bits |
+| Direct binary sample phase | Best tested phase is `-900 ps` to `-300 ps` relative to Maestro FFT grid | `SINAD=29.160 dB`, `ENOB=4.551 bits`, code range `20..491` |
+| Default FFT grid raw binary | `0 ps` offset remains poor | `SINAD=16.814 dB`, `ENOB=2.501 bits`, code range `10..503` |
+
+Artifacts:
+
+| File | Content |
+|------|---------|
+| `sar9b_work/analyze_dout_logic.py` | Local analysis of `/out`, decoder outputs, top-level `biP`, and internal DFF node mapping |
+| `sar9b_work/export_decoder_nodes.py` | Exports `DAC_B0..7` and `biP<0..8>` from an existing Maestro history |
+| `sar9b_work/export_bip_phase_sweep.py` | Direct-PSF phase sweep of top-level `biP<8:0>` without opening/closing ADE GUI |
+| `sar9b_work/wave_exports_binary/ExplorerRun.0/dout_logic_analysis.json` | Decoder/DAC/BIP mapping results |
+| `sar9b_work/wave_exports_binary/ExplorerRun.0/phase_sweep/bip_phase_sweep.json` | Raw binary phase sweep results |
+
+Interpretation:
+
+1. The raw bit mapping is now validated: top-level `biP<*>` is exportable and matches the earlier inverse-DFF reconstruction exactly.
+2. Sampling phase matters. The original `26 ns + k/fs` grid catches the direct binary output at a poor point; sampling about `0.3 ns` to `0.9 ns` earlier improves raw binary ENOB from `2.50` to `4.55` bits.
+3. The remaining loss is not explained by bit order, polarity, or basic sample phase. The strongest current hypothesis is that the binary CDAC change increased total CDAC load from `128 fF` to `511 fF` per side while leaving the original switch sizing and asynchronous timing unchanged.
+4. Next simulation experiment: keep binary ratios but reduce total capacitance near the original load, e.g. set `Cunit=0.25f` for the binary-weight run (or equivalently scale all binary cap values by 1/4), then export `biP<8:0>` with the `-900 ps` phase window.
+
+### Iteration result: scaled 9-bit binary CDAC reaches target (2026-06-17)
+
+The next experiment kept binary ratios but scaled the total CDAC load down by
+4x so the per-side total is close to the original redundant design:
+
+| Bit | P cap | N cap | Weight |
+|-----|-------|-------|--------|
+| 8 | C2 | C17 | `Cunit*64` |
+| 7 | C0 | C14 | `Cunit*32` |
+| 6 | C1 | C13 | `Cunit*16` |
+| 5 | C4 | C11 | `Cunit*8` |
+| 4 | C3 | C12 | `Cunit*4` |
+| 3 | C5 | C10 | `Cunit*2` |
+| 2 | C6 | C9 | `Cunit*1` |
+| 1 | C7 | C8 | `Cunit*0.5` |
+| 0 | C15 | C16 | `Cunit*0.25` |
+
+Per-side total: `127.75*Cunit` with `Cunit=1f`.
+
+| Item | Value |
+|------|-------|
+| Iteration label | `scaled_binary_q4` |
+| Run history | `ExplorerRun.0` |
+| Run time | 2026-06-17 00:58:53 → 01:26:54 |
+| Spectre result | 0 errors, 40 warnings, 8 notices |
+| Spectre elapsed | 27m 49.0s |
+| Maestro legacy `/out` result | SINAD 23.18 dB, ENOB 3.558 bits |
+| Raw top-level `biP<8:0>` best result | SINAD 54.235 dB, ENOB 8.717 bits |
+| Best raw-code sample phase | `+1500 ps` relative to the original Maestro FFT grid |
+| Stable high-ENOB window | `+1500 ps` through `+2100 ps` all gave ENOB 8.717 bits |
+| First phase above 7-bit target | `+1200 ps`: SINAD 43.936 dB, ENOB 7.006 bits |
+| Best code range | 24 to 487 |
+
+Artifacts:
+
+| File | Content |
+|------|---------|
+| `sar9b_work/iterations/scaled_binary_q4/README.md` | Iteration summary |
+| `sar9b_work/iterations/scaled_binary_q4/input.scs` | Captured Maestro netlist proving scaled weights |
+| `sar9b_work/iterations/scaled_binary_q4/logs/ExplorerRun.0.log` | Maestro run log |
+| `sar9b_work/iterations/scaled_binary_q4/logs/spectre.out` | Spectre log |
+| `sar9b_work/iterations/scaled_binary_q4/phase_sweep_fine/bip_phase_sweep.json` | Validated raw-code phase sweep |
+
+Interpretation: the full-size binary CDAC (`511 fF` per side) was primarily
+limited by CDAC/switch settling and load, not by raw-bit mapping or polarity.
+Keeping binary ratios while reducing the total CDAC load near the original
+`128 fF` per side restores enough settling margin to exceed the 7-bit target.
+After this run, `sar9b_work/restore.py` was executed successfully and restored
+all 18 CDAC capacitors to their original redundant weights.
+
+### Original-library 9-bit Maestro validation update (2026-06-17, superseded)
+
+The previous q4 result was obtained by temporarily modifying the 8-bit
+`ADC_redun1_tb` DUT path. A clean real 9-bit Maestro testbench was therefore
+created and run in the original library. This result is preserved as a
+reference, but the requested active target is now the `SAR9B_400MV` run in the
+next section.
+
+| Item | Value |
+|------|-------|
+| Library | `8BIT400MVcmredundancySAR` |
+| Maestro cell | `ADC_9B_tb_best_q4` |
+| DUT instance | `I0 -> TOP_9B_BINARY` |
+| CDAC weights | q4-scaled binary weights on `TOP_9B_BINARY` |
+| History | `Interactive.1` |
+| Run time | 2026-06-17 09:16:56 -> 09:42:42 |
+| Spectre result | 0 errors, 40 warnings, 8 notices |
+| Spectre elapsed | 25m 44.6s |
+| Maestro legacy `/out` result | SINAD 16 dB, ENOB 2.365 bits |
+| Raw top-level `biP<8:0>` best result | SINAD 49.451 dB, ENOB 7.922 bits |
+| Best raw-code sample phase | `+1500 ps` relative to the original Maestro FFT grid |
+| Stable high-ENOB window | `+1500 ps` through `+2250 ps` all gave ENOB 7.922 bits |
+| Best code range | 125 to 386 |
+
+The netlist for `Interactive.1` explicitly contains:
+
+```
+I0 (...) TOP_9B_BINARY
+```
+
+and the `TOP_9B_BINARY` subckt contains the q4 weights:
+
+```
+C2,C17:   Cunit*64
+C0,C14:   Cunit*32
+C1,C13:   Cunit*16
+C4,C11:   Cunit*8
+C3,C12:   Cunit*4
+C5,C10:   Cunit*2
+C6,C9:    Cunit*1
+C7,C8:    Cunit*0.5
+C15,C16:  Cunit*0.25
+```
+
+The legacy Maestro `/out` value is still low because this repaired testbench
+keeps the old `decode_redun9to8 -> DAC8b_va` measurement chain. The valid
+9-bit metric is the raw `biP<8:0>` offline FFT from the same PSF result.
+
+Artifacts:
+
+| File | Content |
+|------|---------|
+| `sar9b_work/iterations/9bit_maestro_best_q4/README.md` | Real 9-bit Maestro run summary |
+| `sar9b_work/iterations/9bit_maestro_best_q4/run_complete_manifest.json` | Final run paths and key metrics |
+| `sar9b_work/iterations/9bit_maestro_best_q4/input.scs` | Captured netlist proving `TOP_9B_BINARY` and q4 weights |
+| `sar9b_work/iterations/9bit_maestro_best_q4/logs/Interactive.1.log` | Maestro run log |
+| `sar9b_work/iterations/9bit_maestro_best_q4/logs/spectre.out` | Spectre log |
+| `sar9b_work/iterations/9bit_maestro_best_q4/phase_sweep/bip_phase_sweep.json` | Broad raw-code phase sweep |
+| `sar9b_work/iterations/9bit_maestro_best_q4/phase_sweep_fine/bip_phase_sweep.json` | Fine raw-code phase sweep |
+
+### SAR9B_400MV 9-bit Maestro validation update (2026-06-17, current)
+
+The requested SAR9B library/cell was then repaired and run directly:
+
+| Item | Value |
+|------|-------|
+| Library | `SAR9B_400MV` |
+| Maestro cell | `ADC_9B_tb_best_q4` |
+| DUT instance | `I0 -> SAR9B_400MV/TOP_9B_ADC` |
+| CDAC weights | q4-scaled binary weights on `TOP_9B_ADC` |
+| Verilog-A include method | `ADC_9B_tb_best_q4/maestro/sar9b_va_ahdl.scs` wrapper |
+| History | `Interactive.5` |
+| Run time | 2026-06-17 10:34:06 -> 11:06:37 |
+| Spectre result | 0 errors, 40 warnings, 8 notices |
+| Spectre elapsed | 32m 31.3s |
+| Maestro legacy `/out` result | SINAD 16 dB, ENOB 2.365 bits |
+| Raw top-level `biP<8:0>` best result | SINAD 49.451 dB, ENOB 7.922 bits |
+| Best raw-code sample phase | `+1500 ps` relative to the original Maestro FFT grid |
+| Fine-sweep high-ENOB window | `+1500 ps` through `+1800 ps` all gave ENOB 7.922 bits |
+| Best code range | 125 to 386 |
+
+Netlist evidence from `Interactive.5`:
+
+```
+include "/home/IC/Desktop/Project/SAR9B_400MV/ADC_9B_tb_best_q4/maestro/sar9b_va_ahdl.scs"
+I0 (...) TOP_9B_ADC
+```
+
+The wrapper contains:
+
+```
+ahdl_include "/home/IC/Desktop/Project/SAR9B_400MV/DAC8b_va/veriloga/veriloga.va"
+ahdl_include "/home/IC/Desktop/Project/SAR9B_400MV/decode_redun9to8/veriloga/veriloga.va"
+```
+
+The legacy Maestro `/out` value is still low because the testbench keeps the
+old `decode_redun9to8 -> DAC8b_va` measurement chain. The valid SAR9B 9-bit
+metric is the raw `biP<8:0>` offline FFT from the same PSF result.
+
+Artifacts:
+
+| File | Content |
+|------|---------|
+| `sar9b_work/iterations/sar9b_maestro_best_q4/README.md` | Current SAR9B run summary |
+| `sar9b_work/iterations/sar9b_maestro_best_q4/run_complete_manifest.json` | Final remote paths and Spectre summary |
+| `sar9b_work/iterations/sar9b_maestro_best_q4/input.scs` | Captured SAR9B netlist proving wrapper, DUT, and q4 weights |
+| `sar9b_work/iterations/sar9b_maestro_best_q4/sar9b_va_ahdl.scs` | Local copy of the AHDL wrapper |
+| `sar9b_work/iterations/sar9b_maestro_best_q4/logs/Interactive.5.log` | Maestro run log |
+| `sar9b_work/iterations/sar9b_maestro_best_q4/logs/spectre.out` | Spectre log |
+| `sar9b_work/iterations/sar9b_maestro_best_q4/phase_sweep/bip_phase_sweep.json` | Broad raw-code phase sweep |
+| `sar9b_work/iterations/sar9b_maestro_best_q4/phase_sweep_fine/bip_phase_sweep.json` | Fine raw-code phase sweep |
+
+---
+
+## 8. Remaining Tasks
+
+### Priority 1: Proper 9-bit measurement
+Raw-code measurement was first completed without editing the schematic:
+
+1. Binary CDAC weights were applied to `TOP_redun1_ADC`.
+2. Maestro/ADE Explorer was run through the GUI `Update and Run` path.
+3. The active binary netlist was captured locally.
+4. `/out` and the 9 raw DOUTP-equivalent internal DFF nodes were exported at the 1024 FFT sample points.
+5. Offline FFT produced raw-code `ENOB=2.501 bits`, `SINAD=16.814 dB`.
+6. CDAC weights were restored to the original redundant values and verified.
+
+Target-achieved validation work:
+
+1. Done: `SAR9B_400MV/ADC_9B_tb_best_q4` was repaired and run through
+   Maestro as history `Interactive.5`.
+2. Done: `I0` points to `SAR9B_400MV/TOP_9B_ADC`; TOP internals point to
+   SAR9B cells; q4-scaled binary weights are in the captured netlist.
+3. Done: raw `biP<8:0>` measurement from the SAR9B Maestro PSF gives
+   `ENOB=7.922 bits`, `SINAD=49.451 dB` at `+1500 ps`.
+4. Add a deterministic output sampling/VALID measurement path around
+   `+1500 ps` to `+2250 ps` relative to the existing FFT grid.
+5. Sweep PVT/input amplitude and confirm the high-ENOB plateau is robust.
+6. Decide whether fractional `Cunit*0.5` and `Cunit*0.25` values are acceptable
+   physically, or replace them with an explicit smaller `Cunit` and integer
+   binary weights.
+7. Optional cleanup: replace/remove the legacy `decode_redun9to8 -> DAC8b_va`
+   output path with a true `DAC9b_va` measurement path so the Maestro `/out`
+   result reflects the raw 9-bit code directly.
+
+### Priority 2: Standalone netlist
+Investigate if Spectre 19+ or `-lib` flag can bypass the PDK `library` statement issue.
+
+### Priority 3: Documentation
+- Update `versions/v003_ADC_documentation/README_TOP_redun1_ADC.md` with 9-bit results
+
+---
+
+## 9. Quick Reference Commands
+
+### Check bridge status
+```powershell
+.venv\Scripts\virtuoso-bridge.exe status
+```
+
+### Run Python script through bridge
+```powershell
+.venv\Scripts\python.exe sar9b_work\script_name.py
+```
+
+### Check simulation results via SSH
+```powershell
+ssh IC@192.168.225.132 'cat /home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_redun1_tb/maestro/results/maestro/ExplorerRun.0.log'
+ssh IC@192.168.225.132 'sqlite3 /home/IC/Desktop/Project/8BIT400MVcmredundancySAR/ADC_redun1_tb/maestro/results/maestro/ExplorerRun.0.rdb "SELECT * FROM resultValue;"'
+```
+
+### Modify CDAC weights (reliable)
+```powershell
+.venv\Scripts\python.exe -c "
+from virtuoso_bridge import VirtuosoClient
+c = VirtuosoClient.from_env()
+# ... see Section 6 for the pattern
+"
+```
+
+### Common SKILL expressions
+```lisp
+; Check views
+ddGetObj("LIB" "CELL")~>views~>name
+
+; Read instance
+let((cv inst) cv=dbOpenCellViewByType("LIB" "CELL" "schematic" "" "r") inst=dbGetInstByName(cv "I0") ...)
+
+; Maestro
+maeGetSetup(?session "fnxSession1")
+maeGetAnalysis("test" "tran" ?session "fnxSession1")
+maeGetOutputValue("ENOB" "test" ?history "historyName")
+```
+
+---
+
+## 10. Key Files
+
+| File | Location | Content |
+|------|----------|---------|
+| Netlist (original, 8-bit) | `versions/v003_ADC_documentation/input.scs` | Complete Spectre netlist (818 lines) |
+| README (8-bit ADC) | `versions/v003_ADC_documentation/README_TOP_redun1_ADC.md` | Full ADC documentation |
+| DAC9b VA model | `sar9b_work/DAC9b_va.va` | 9-bit ideal DAC (local) |
+| CDAC modify script | `sar9b_work/modify_netlist3.py` | Binary weight modification |
+| Maestro run script | `sar9b_work/run_binary_final.py` | Modify weights → run → restore |
+| Raw 9-bit offline script | `sar9b_work/dout9_offline_measure.py` | Export sampled `/out` + raw DOUTP-equivalent nodes, calculate FFT/SINAD/ENOB |
+| DOUT logic analyzer | `sar9b_work/analyze_dout_logic.py` | Reconstruct decoder/DAC/raw-bit paths from exported waveforms |
+| Phase sweep exporter | `sar9b_work/export_bip_phase_sweep.py` | Export top-level `biP<8:0>` directly from a PSF result at phase offsets |
+| Iteration starter | `sar9b_work/start_scaled_binary_run.py` | Apply the 1/4-scaled binary CDAC point and trigger ADE Explorer run |
+| Best iteration summary | `sar9b_work/iterations/scaled_binary_q4/README.md` | Achieved ENOB 8.717 bits raw-code |
+| Current SAR9B best run | `sar9b_work/iterations/sar9b_maestro_best_q4/README.md` | SAR9B `Interactive.5`, raw-code ENOB 7.922 bits |
+| SAR9B Maestro launcher | `sar9b_work/start_sar9b_maestro_best_run.py` | Starts `SAR9B_400MV/ADC_9B_tb_best_q4` Maestro runs |
+| SAR9B result checker | `sar9b_work/check_sar9b_maestro_run.py` | Polls and archives SAR9B Maestro/Spectre status; success requires 0 run errors and 0 Spectre errors |
+| SAR9B AHDL wrapper setup | `sar9b_work/set_sar9b_ahdl_wrapper.py` | Uploads `sar9b_va_ahdl.scs` and sets Maestro definitionFiles to the wrapper |
+| CIW X11 typing helper | `sar9b_work/x11_type_text.py` | Recovery helper for reloading bridge / pressing modal dialogs through X11 |
+| Latest binary raw-code results | `sar9b_work/wave_exports_binary/ExplorerRun.0/measurement.json` | Offline `/out` and raw 9-bit code metrics |
+| Latest binary active netlist | `sar9b_work/wave_exports_binary/ExplorerRun.0/input.scs` | Captured binary-weight netlist from the completed Maestro run |
+| Restore script | `sar9b_work/restore.py` | Restore original CDAC weights |
+| Working netlist dir (remote) | `/home/IC/Desktop/Project/SAR9B_400MV/netlist_sim/` | Modified ihdl + input.scs with binary weights |
+
+---
+
+## 11. Known Pitfalls
+
+1. **Never use `schCreateInst` or `schReplaceInst`** — they corrupt instances (I0 was corrupted and had to be restored)
+2. **Always restore CDAC weights** after simulation — use `restore.py` if needed
+3. **PowerShell quoting**: Use Python script files, not inline `-c` commands
+4. **CIW blocking**: If SKILL times out, reload bridge in CIW (`RBStopAll()` then `load(...)`)
+5. **"a" mode failures**: `dbOpenCellViewByType` with "a" fails for locked cells — purge `.cdslck` files via SSH first
+6. **SAR9B VA cells**: Plain Maestro `definitionFiles` directly including `.va` files generates Spectre `include`, which is wrong for Verilog-A. Use `sar9b_work/set_sar9b_ahdl_wrapper.py` so Maestro includes a wrapper containing `ahdl_include` lines.
+7. **Large `ocnPrint` exports can block CIW**: Always export sampled waveforms with `?from`, `?to`, and `?step`; full `/out` prints trigger >10000-point modal warnings.
+8. **Top-level `biP<*>` nets are exportable**: Use `VT("/biP<0>")` ... `VT("/biP<8>")` for raw-code work. The inverse saved DFF nodes are still a validated fallback.
+9. **Avoid opening/closing ADE just for exports**: `close_gui_session` can trigger an `ADE Explorer Save Setup` modal and block the bridge. For existing histories, call `openResults("<...>/psf")` directly.
+10. **`maeRunSimulation` / `run_and_wait` is fragile here**: ADE Explorer may require the GUI `Update and Run` dialog. When it appears, pressing `Update and Run` starts the run; poll `ExplorerRun.0.log` and `spectre.out` through SSH.
+11. **Always verify restore after failed runs**: If a script times out while a modal is open, restore can fail silently; run `sar9b_work/restore.py` and read back all cap values.
+12. **SAR9B target discipline**: For the requested 9-bit flow, modify and run `SAR9B_400MV/ADC_9B_tb_best_q4`, not the older `8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4` reference cell.

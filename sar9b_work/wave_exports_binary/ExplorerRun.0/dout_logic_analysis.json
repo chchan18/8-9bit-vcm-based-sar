@@ -1,0 +1,222 @@
+{
+  "export_dir": "sar9b_work\\wave_exports_binary\\ExplorerRun.0",
+  "samples": 1024,
+  "time_start": 2.6e-08,
+  "time_stop": 2.5835e-06,
+  "bit_stats_net7": {
+    "DOUTP0_net7": {
+      "min": 1.127127815311944e-06,
+      "max": 0.8999991354979153,
+      "mean": 0.44912252088087395,
+      "high_count": 511,
+      "midband_count": 0,
+      "transitions": 512
+    },
+    "DOUTP1_net7": {
+      "min": -1.182481107470708e-05,
+      "max": 0.9000098708733933,
+      "mean": 0.4517589884305116,
+      "high_count": 514,
+      "midband_count": 0,
+      "transitions": 476
+    },
+    "DOUTP2_net7": {
+      "min": -2.267125890413473e-05,
+      "max": 0.9000185607490584,
+      "mean": 0.4482435076272926,
+      "high_count": 510,
+      "midband_count": 0,
+      "transitions": 494
+    },
+    "DOUTP3_net7": {
+      "min": -3.320059657496182e-05,
+      "max": 0.9000280346894763,
+      "mean": 0.45175935185957,
+      "high_count": 514,
+      "midband_count": 0,
+      "transitions": 447
+    },
+    "DOUTP4_net7": {
+      "min": -5.254816644523547e-05,
+      "max": 0.9000399207705753,
+      "mean": 0.4500018646789787,
+      "high_count": 512,
+      "midband_count": 0,
+      "transitions": 298
+    },
+    "DOUTP5_net7": {
+      "min": -4.55252043106203e-05,
+      "max": 0.9000365119766663,
+      "mean": 0.44912330764619207,
+      "high_count": 511,
+      "midband_count": 0,
+      "transitions": 210
+    },
+    "DOUTP6_net7": {
+      "min": -5.72597405587481e-05,
+      "max": 0.9000514413057651,
+      "mean": 0.4482450570265478,
+      "high_count": 510,
+      "midband_count": 0,
+      "transitions": 98
+    },
+    "DOUTP7_net7": {
+      "min": -2.645262240704877e-05,
+      "max": 0.8999876641850114,
+      "mean": 0.45087634150276834,
+      "high_count": 513,
+      "midband_count": 0,
+      "transitions": 42
+    },
+    "DOUTP8_net7": {
+      "min": -0.000121669786285662,
+      "max": 0.9000784458578694,
+      "mean": 0.45000310030635465,
+      "high_count": 512,
+      "midband_count": 0,
+      "transitions": 14
+    }
+  },
+  "path_metrics": {
+    "maestro_out": {
+      "sinad_db": 26.377378036770658,
+      "enob_bits": 4.0892654546130665,
+      "dc": 0.45007270508397534,
+      "signal_power": 80832.68817260061,
+      "noise_dist_power": 186.14407549775206
+    },
+    "offline_decode_redun9to8_code": {
+      "sinad_db": 15.519257662624238,
+      "enob_bits": 2.285590973857847,
+      "dc": 127.5205078125,
+      "signal_power": 6493036866.80472,
+      "noise_dist_power": 182188979.19527054
+    },
+    "offline_decode_redun9to8_as_dac8": {
+      "sinad_db": 15.519257662624245,
+      "enob_bits": 2.285590973857848,
+      "dc": 0.4500723805147059,
+      "signal_power": 80882.12014012816,
+      "noise_dist_power": 2269.482093781917
+    },
+    "direct_binary_code": {
+      "sinad_db": 16.81427997594693,
+      "enob_bits": 2.5007109594596235,
+      "dc": 255.5205078125,
+      "signal_power": 30336149376.67474,
+      "noise_dist_power": 631731389.3252373
+    },
+    "direct_binary_code_reversed_order": {
+      "sinad_db": -15.927134320378826,
+      "enob_bits": -2.938062179464922,
+      "dc": 255.576171875,
+      "signal_power": 819289034.4688458,
+      "noise_dist_power": 32073811629.531185
+    },
+    "noninverted_binary_code": {
+      "sinad_db": 16.81427997594693,
+      "enob_bits": 2.5007109594596235,
+      "dc": 255.4794921875,
+      "signal_power": 30336149376.67474,
+      "noise_dist_power": 631731389.3252373
+    },
+    "noninverted_binary_code_reversed_order": {
+      "sinad_db": -15.927134320378826,
+      "enob_bits": -2.938062179464922,
+      "dc": 255.423828125,
+      "signal_power": 819289034.4688458,
+      "noise_dist_power": 32073811629.531185
+    }
+  },
+  "code_ranges": {
+    "decoder": {
+      "min": 8,
+      "max": 249,
+      "mean": 127.5205078125
+    },
+    "direct_binary": {
+      "min": 10,
+      "max": 503,
+      "mean": 255.5205078125
+    },
+    "direct_binary_reversed_order": {
+      "min": 1,
+      "max": 510,
+      "mean": 255.576171875
+    }
+  },
+  "decoder_vs_maestro_out": {
+    "rmse_v": 0.04230480050632449,
+    "max_abs_error_v": 0.22606472961751217
+  },
+  "decoder_node_checks": {
+    "decoder_dir": "sar9b_work\\wave_exports_binary\\ExplorerRun.0\\decoder_nodes",
+    "path_metrics": {
+      "dac_input_code": {
+        "sinad_db": 26.338468996688093,
+        "enob_bits": 4.0828021589182875,
+        "dc": 127.5205078125,
+        "signal_power": 6489150439.073899,
+        "noise_dist_power": 15077902.926095009
+      },
+      "dac_input_code_as_out": {
+        "sinad_db": 26.33846899668803,
+        "enob_bits": 4.082802158918277,
+        "dc": 0.4500723805147059,
+        "signal_power": 80833.7078915782,
+        "noise_dist_power": 187.8216281451314
+      },
+      "bip_direct_binary_code": {
+        "sinad_db": 16.81427997594693,
+        "enob_bits": 2.5007109594596235,
+        "dc": 255.5205078125,
+        "signal_power": 30336149376.67474,
+        "noise_dist_power": 631731389.3252373
+      },
+      "bip_decode_redun9to8_code": {
+        "sinad_db": 15.519257662624238,
+        "enob_bits": 2.285590973857847,
+        "dc": 127.5205078125,
+        "signal_power": 6493036866.80472,
+        "noise_dist_power": 182188979.19527054
+      }
+    },
+    "code_ranges": {
+      "dac_input_code": {
+        "min": 14,
+        "max": 241,
+        "mean": 127.5205078125
+      },
+      "bip_direct_binary": {
+        "min": 10,
+        "max": 503,
+        "mean": 255.5205078125
+      },
+      "bip_decode_redun9to8": {
+        "min": 8,
+        "max": 249,
+        "mean": 127.5205078125
+      }
+    },
+    "dac_input_vs_maestro_out": {
+      "rmse_v": 0.00013838040622820612,
+      "max_abs_error_v": 0.0006183204472974824
+    },
+    "internal_net7_inverse_vs_bip_mismatches": {
+      "bit0": 0,
+      "bit1": 0,
+      "bit2": 0,
+      "bit3": 0,
+      "bit4": 0,
+      "bit5": 0,
+      "bit6": 0,
+      "bit7": 0,
+      "bit8": 0
+    },
+    "bip_decoder_vs_dac_code_best_shift": {
+      "shift": 0,
+      "mismatches": 42,
+      "total": 1024
+    }
+  }
+}
