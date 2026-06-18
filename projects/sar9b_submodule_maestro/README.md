@@ -1,6 +1,6 @@
 # SAR9B Submodule Maestro Testbenches
 
-Date: 2026-06-17
+Date: 2026-06-18
 
 This project creates standalone Maestro transient testbenches for key
 `SAR9B_400MV` submodules, so each block can be checked independently before the
@@ -34,7 +34,7 @@ Nominal variables:
 | `scripts/inspect_submodule_symbols.py` | Reads DUT symbol terminals and selected schematic instances. |
 | `scripts/inspect_adc_tb_sources.py` | Reads known ADC testbench source parameter names for reuse. |
 | `scripts/create_schematic_smoke.py` | Creates a small RC schematic to verify schematic creation APIs. |
-| `scripts/create_submodule_maestro_tests.py` | Creates/rebuilds the four schematic testbenches and corresponding Maestro `TRAN` views. Use `--rebuild-schematics` after changing stimulus wiring. |
+| `scripts/create_submodule_maestro_tests.py` | Creates/rebuilds the four schematic testbenches and corresponding Maestro `TRAN` views. Use `--cell` to update one testbench or `--rebuild-schematics` after changing stimulus wiring. |
 | `scripts/run_submodule_maestro_tests.py` | Runs Maestro, downloads logs/netlists/waveforms, and computes quick metrics. Supports `--trigger callback`, `--trigger gui-button`, and `--trigger mae`. |
 | `scripts/archive_submodule_history.py` | Copies an existing remote Maestro history into this project. |
 | `scripts/inspect_fix_schematic_props.py` | Inspects/fixes schematic extraction metadata using `dbSetConnCurrent`; needed after bridge-created schematics. |
@@ -63,10 +63,10 @@ run manifest: `runs/submodule_run_manifest.json`.
 
 | Testbench | Latest history | Spectre | Quick metric |
 |-----------|----------------|---------|--------------|
-| `TB_SUBMOD_COMPARATOR_PERF` | `Interactive.8` | 0 errors, 5 warnings | `CLKC` rise to decision crossing: `3.923 ps` |
-| `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `Interactive.3` | 0 errors, 30 warnings | no simultaneous-high time; total both-low window `176 ps` |
-| `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `Interactive.7` | 0 errors, 10 warnings | `VALID` pulses and `CLKC` toggles, but `CLKO<0..8>` do not yet reach rail |
-| `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `Interactive.4` | 0 errors, 30 warnings | final differential tracking: `100.000067 mV` for `100 mV` input |
+| `TB_SUBMOD_COMPARATOR_PERF` | `Interactive.9` | 0 errors, 5 warnings | `CLKC` rise to decision crossing: `3.923 ps` |
+| `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `Interactive.4` | 0 errors, 30 warnings | no simultaneous-high time; total both-low window `176 ps` |
+| `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `Interactive.9` | 0 errors, 10 warnings | all nine `CLKO<0..8>` reach rail; first rises step from `CLKO<8>` at `542 ps` to `CLKO<0>` at `20543 ps` |
+| `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `Interactive.5` | 0 errors, 30 warnings | final differential tracking: `100.000067 mV` for `100 mV` input |
 
 Important fixes made during this pass:
 
@@ -78,11 +78,12 @@ Important fixes made during this pass:
    wire labels were not sufficient and produced floating `_net0` references.
 3. Public supply/ground source placement was moved away from local stimulus
    sources to avoid accidental wire shorts through vertical connection lines.
+4. ASYCTRL uses an active-high `DFFRN` reset. `CLKS` is now driven high only
+   during the initial reset window, then held low so `VALID` pulses advance
+   the 9-bit shift chain.
 
 ## Recommended Next Step
 
-Continue with ASYCTRL functional stimulus. The current standalone testbench
-proves the Maestro/netlist/Spectre path is healthy, but the DFFRN reset/seed
-conditions still do not generate rail-to-rail `CLKO<0..8>` sequencing. A useful
-next pass is to build a smaller `DFFRN` unit test or replay the exact top-level
-`VALID`/`clks` startup timing from the full ADC run.
+Continue with robustness checks: sweep ASYCTRL `VALID` pulse spacing, compare
+the standalone `CLKS`/`VALID` timing against the full ADC run, and add corner
+runs for the comparator and clock blocks.

@@ -269,13 +269,15 @@ def create_asyctrl_tb(client: VirtuosoClient, rebuild: bool = False) -> dict[str
     params = [
         ("VDD_SRC", "vdc", "vdd"),
         ("VSS_SRC", "vdc", "0"),
-        ("VCLKS", "v1", "0"),
-        ("VCLKS", "v2", "vdd"),
+        # DFFRN reset is active-high in this library. Start with a short reset
+        # pulse, then hold CLKS low so VALID pulses can advance the shift chain.
+        ("VCLKS", "v1", "vdd"),
+        ("VCLKS", "v2", "0"),
         ("VCLKS", "td", "100p"),
         ("VCLKS", "tr", "5p"),
         ("VCLKS", "tf", "5p"),
-        ("VCLKS", "pw", "50n"),
-        ("VCLKS", "per", "50n"),
+        ("VCLKS", "pw", "99n"),
+        ("VCLKS", "per", "100n"),
         ("VVALID", "v1", "0"),
         ("VVALID", "v2", "vdd"),
         ("VVALID", "td", "500p"),
@@ -431,6 +433,27 @@ let((obj)
         close_session(client, session)
 
 
+def merge_manifest_entries(
+    base: dict[str, object],
+    specs: list[dict[str, object]],
+    maestro: list[dict[str, object]],
+) -> dict[str, object]:
+    def merge_by_cell(old: list[dict[str, object]], new: list[dict[str, object]]) -> list[dict[str, object]]:
+        merged = {str(item["cell"]): item for item in old}
+        for item in new:
+            merged[str(item["cell"])] = item
+        return list(merged.values())
+
+    return {
+        **base,
+        "library": LIB,
+        "test_name": TEST_NAME,
+        "model_file": MODEL_FILE,
+        "testbenches": merge_by_cell(list(base.get("testbenches", [])), specs),
+        "maestro": merge_by_cell(list(base.get("maestro", [])), maestro),
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -438,25 +461,30 @@ def main() -> None:
         action="store_true",
         help="clear and rebuild generated submodule schematics before saving Maestro setup",
     )
+    parser.add_argument("--cell", help="only create/update one generated testbench cell")
     args = parser.parse_args()
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     client = VirtuosoClient.from_env()
-    specs = [
-        create_comparator_tb(client, rebuild=args.rebuild_schematics),
-        create_clk_nooverlap_tb(client, rebuild=args.rebuild_schematics),
-        create_asyctrl_tb(client, rebuild=args.rebuild_schematics),
-        create_bootstrap_tb(client, rebuild=args.rebuild_schematics),
+    creators = [
+        ("TB_SUBMOD_COMPARATOR_PERF", create_comparator_tb),
+        ("TB_SUBMOD_CLK_NOOVERLAP_PERF", create_clk_nooverlap_tb),
+        ("TB_SUBMOD_ASYCTRL_9CLK_PERF", create_asyctrl_tb),
+        ("TB_SUBMOD_BOOTSTRAP_DIFF_PERF", create_bootstrap_tb),
     ]
+    specs = [
+        creator(client, rebuild=args.rebuild_schematics)
+        for cell, creator in creators
+        if args.cell in (None, cell)
+    ]
+    if not specs:
+        raise SystemExit(f"Unknown --cell value: {args.cell}")
     maestro = [ensure_maestro_setup(client, spec) for spec in specs]
-    manifest = {
-        "library": LIB,
-        "test_name": TEST_NAME,
-        "model_file": MODEL_FILE,
-        "testbenches": specs,
-        "maestro": maestro,
-    }
     out_path = OUT_DIR / "submodule_maestro_setup_manifest.json"
+    base_manifest: dict[str, object] = {}
+    if args.cell and out_path.exists():
+        base_manifest = json.loads(out_path.read_text(encoding="utf-8"))
+    manifest = merge_manifest_entries(base_manifest, specs, maestro)
     out_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     print(json.dumps(manifest, indent=2), flush=True)
     print(f"Saved: {out_path}", flush=True)

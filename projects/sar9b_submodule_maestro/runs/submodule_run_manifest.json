@@ -6,8 +6,8 @@
   "runs": [
     {
       "cell": "TB_SUBMOD_COMPARATOR_PERF",
-      "history": "Interactive.8",
-      "session": "fnxSession75",
+      "history": "Interactive.9",
+      "session": "fnxSession86",
       "signals": [
         "/CLKC",
         "/VP",
@@ -15,10 +15,10 @@
         "/VOP",
         "/VON"
       ],
-      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.8.log",
-      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.8/1/TRAN/psf",
-      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.8/1/TRAN/psf/spectre.out",
-      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.8/1/TRAN/netlist/input.scs",
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.9.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.9/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.9/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.9/1/TRAN/netlist/input.scs",
       "completed": true,
       "run_errors": 0,
       "spectre_summary": {
@@ -38,17 +38,17 @@
     },
     {
       "cell": "TB_SUBMOD_CLK_NOOVERLAP_PERF",
-      "history": "Interactive.3",
-      "session": "fnxSession76",
+      "history": "Interactive.4",
+      "session": "fnxSession87",
       "signals": [
         "/CLKIN",
         "/CLKOP",
         "/CLKON"
       ],
-      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.3.log",
-      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.3/1/TRAN/psf",
-      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.3/1/TRAN/psf/spectre.out",
-      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.3/1/TRAN/netlist/input.scs",
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.4.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.4/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.4/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.4/1/TRAN/netlist/input.scs",
       "completed": true,
       "run_errors": 0,
       "spectre_summary": {
@@ -87,8 +87,8 @@
     },
     {
       "cell": "TB_SUBMOD_ASYCTRL_9CLK_PERF",
-      "history": "Interactive.7",
-      "session": "fnxSession77",
+      "history": "Interactive.9",
+      "session": "fnxSession88",
       "signals": [
         "/CLKS",
         "/VALID",
@@ -103,16 +103,16 @@
         "/CLKO<7>",
         "/CLKO<8>"
       ],
-      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.7.log",
-      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.7/1/TRAN/psf",
-      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.7/1/TRAN/psf/spectre.out",
-      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.7/1/TRAN/netlist/input.scs",
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.9.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.9/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.9/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.9/1/TRAN/netlist/input.scs",
       "completed": true,
       "run_errors": 0,
       "spectre_summary": {
         "errors": 0,
         "warnings": 10,
-        "notices": 10
+        "notices": 6
       },
       "waveform_points": 14001,
       "metrics": {
@@ -124,6 +124,46 @@
           10502.5
         ],
         "clko_first_rise_ps": {
+          "/CLKO<0>": 20542.688294692638,
+          "/CLKO<1>": 18042.3485451305,
+          "/CLKO<2>": 15542.348547635871,
+          "/CLKO<3>": 13042.348547635393,
+          "/CLKO<4>": 10542.34854763802,
+          "/CLKO<5>": 8042.348547648864,
+          "/CLKO<6>": 5542.348547629362,
+          "/CLKO<7>": 3042.3485470882433,
+          "/CLKO<8>": 542.3388336153756
+        },
+        "clko_rises_ps": {
+          "/CLKO<0>": [
+            20542.688294692638
+          ],
+          "/CLKO<1>": [
+            18042.3485451305
+          ],
+          "/CLKO<2>": [
+            15542.348547635871
+          ],
+          "/CLKO<3>": [
+            13042.348547635393
+          ],
+          "/CLKO<4>": [
+            10542.34854763802
+          ],
+          "/CLKO<5>": [
+            8042.348547648864
+          ],
+          "/CLKO<6>": [
+            5542.348547629362
+          ],
+          "/CLKO<7>": [
+            3042.3485470882433
+          ],
+          "/CLKO<8>": [
+            542.3388336153756
+          ]
+        },
+        "clko_first_fall_ps": {
           "/CLKO<0>": null,
           "/CLKO<1>": null,
           "/CLKO<2>": null,
@@ -134,7 +174,7 @@
           "/CLKO<7>": null,
           "/CLKO<8>": null
         },
-        "clko_rises_ps": {
+        "clko_falls_ps": {
           "/CLKO<0>": [],
           "/CLKO<1>": [],
           "/CLKO<2>": [],
@@ -145,14 +185,48 @@
           "/CLKO<7>": [],
           "/CLKO<8>": []
         },
-        "clkc_min": -0.02560255317336815,
-        "clkc_max": 0.9155083559035436
+        "clko_min_v": {
+          "/CLKO<0>": -0.03925825350177099,
+          "/CLKO<1>": -0.01553661545343681,
+          "/CLKO<2>": -0.01553665752686281,
+          "/CLKO<3>": -0.01553665741697557,
+          "/CLKO<4>": -0.01553665721315477,
+          "/CLKO<5>": -0.0155366567443464,
+          "/CLKO<6>": -0.01553665605020784,
+          "/CLKO<7>": -0.01553667424154217,
+          "/CLKO<8>": -0.01539673887452891
+        },
+        "clko_max_v": {
+          "/CLKO<0>": 0.9043423033216017,
+          "/CLKO<1>": 0.9059518092565155,
+          "/CLKO<2>": 0.9059517314885711,
+          "/CLKO<3>": 0.9059517314854281,
+          "/CLKO<4>": 0.905951731485435,
+          "/CLKO<5>": 0.9059517314854353,
+          "/CLKO<6>": 0.9059517314854341,
+          "/CLKO<7>": 0.9059517314950734,
+          "/CLKO<8>": 0.9059518932983508
+        },
+        "clko_final_v": {
+          "/CLKO<0>": 0.8999989712104565,
+          "/CLKO<1>": 0.899998546412942,
+          "/CLKO<2>": 0.8999985463372462,
+          "/CLKO<3>": 0.8999985463372068,
+          "/CLKO<4>": 0.8999985463372547,
+          "/CLKO<5>": 0.8999985463372219,
+          "/CLKO<6>": 0.8999985463372335,
+          "/CLKO<7>": 0.8999985463378299,
+          "/CLKO<8>": 0.8999985473742348
+        },
+        "clko_rail_count": 9,
+        "clkc_min": -0.02804793070156442,
+        "clkc_max": 0.9162595506075792
       }
     },
     {
       "cell": "TB_SUBMOD_BOOTSTRAP_DIFF_PERF",
-      "history": "Interactive.4",
-      "session": "fnxSession78",
+      "history": "Interactive.5",
+      "session": "fnxSession89",
       "signals": [
         "/CLKS",
         "/CLKSB",
@@ -161,10 +235,10 @@
         "/VOUTP",
         "/VOUTN"
       ],
-      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.4.log",
-      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.4/1/TRAN/psf",
-      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.4/1/TRAN/psf/spectre.out",
-      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.4/1/TRAN/netlist/input.scs",
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.5.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.5/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.5/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.5/1/TRAN/netlist/input.scs",
       "completed": true,
       "run_errors": 0,
       "spectre_summary": {

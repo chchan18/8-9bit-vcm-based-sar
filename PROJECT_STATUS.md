@@ -1,6 +1,6 @@
 # 8bitvcmvirtuoso — Project Status & Handoff
 
-> **Date**: 2026-06-17  
+> **Date**: 2026-06-18
 > **Session span**: Initial setup → SAR9B 9-bit Maestro validation → DAC9 `/out` ENOB measurement repair
 > **Bridge**: IC@192.168.225.132 (Virtuoso IC618, Spectre 18.1, TSMC 28nm HPC+)
 
@@ -581,11 +581,15 @@ Status:
    reference through `analogLib/gnd`; plain `"0"` labels produced floating
    `_net0` references.
 4. Done: all four Maestro testbenches now run through Spectre with zero errors:
-   comparator `Interactive.8`, clock non-overlap `Interactive.3`, ASYCTRL
-   `Interactive.7`, and bootstrap `Interactive.4`.
-5. Remaining: ASYCTRL standalone stimulus is not yet functionally exercising
-   `CLKO<0..8>` rail-to-rail sequencing. Build a smaller `DFFRN` unit test or
-   replay the full ADC startup timing.
+   comparator `Interactive.9`, clock non-overlap `Interactive.4`, ASYCTRL
+   `Interactive.9`, and bootstrap `Interactive.5`.
+5. Done: ASYCTRL standalone stimulus now exercises the full 9-step sequence.
+   `DFFRN.RN` is active-high in this implementation, so `CLKS` is held high
+   only for startup reset and then kept low while `VALID` pulses advance the
+   chain. In `Interactive.9`, all nine `CLKO<0..8>` outputs reach rail; first
+   rises progress from `CLKO<8>` at `542 ps` to `CLKO<0>` at `20543 ps`.
+6. Remaining: add robustness sweeps for ASYCTRL `VALID` spacing, comparator
+   input overdrive, non-overlap timing, and bootstrap tracking across corners.
 
 ### Priority 1: Proper 9-bit measurement
 Raw-code measurement was first completed without editing the schematic:
@@ -722,3 +726,4 @@ maeGetOutputValue("ENOB" "test" ?history "historyName")
 12. **SAR9B target discipline**: For the requested 9-bit flow, modify and run `SAR9B_400MV/ADC_9B_tb_best_q4`, not the older `8BIT400MVcmredundancySAR/ADC_9B_tb_best_q4` reference cell.
 13. **Bridge-created schematics may need extraction metadata repair**: If new schematic testbenches fail netlisting with `OSSHNL-108` or `OSSHNL-109`, run `schCheck`, `dbSave`, `dbSetConnCurrent`, then `dbSave`; manual `connectivityLastUpdated` edits are brittle because `dbSave` advances `schGeometryLastUpdated`.
 14. **Do not use text `"0"` labels as Spectre ground in generated TBs**: Wire a local `VSS_SRC` minus terminal to an `analogLib/gnd` symbol so the netlist emits `VSS_SRC (VSS 0)`. Text labels can netlist as floating `_net0`.
+15. **ASYCTRL `DFFRN.RN` is active-high reset here**: In standalone ASYCTRL tests, drive `CLKS` high only for startup reset, then hold it low so `VALID` pulses can advance `CLKO<8:0>`.

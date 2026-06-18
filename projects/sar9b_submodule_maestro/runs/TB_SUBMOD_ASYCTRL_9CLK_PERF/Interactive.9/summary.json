@@ -1,0 +1,138 @@
+{
+  "cell": "TB_SUBMOD_ASYCTRL_9CLK_PERF",
+  "history": "Interactive.9",
+  "session": "fnxSession88",
+  "signals": [
+    "/CLKS",
+    "/VALID",
+    "/CLKC",
+    "/CLKO<0>",
+    "/CLKO<1>",
+    "/CLKO<2>",
+    "/CLKO<3>",
+    "/CLKO<4>",
+    "/CLKO<5>",
+    "/CLKO<6>",
+    "/CLKO<7>",
+    "/CLKO<8>"
+  ],
+  "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.9.log",
+  "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.9/1/TRAN/psf",
+  "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.9/1/TRAN/psf/spectre.out",
+  "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.9/1/TRAN/netlist/input.scs",
+  "completed": true,
+  "run_errors": 0,
+  "spectre_summary": {
+    "errors": 0,
+    "warnings": 10,
+    "notices": 6
+  },
+  "waveform_points": 14001,
+  "metrics": {
+    "valid_rise_ps": [
+      502.50000000000006,
+      3002.5000000000005,
+      5502.500000000001,
+      8002.5,
+      10502.5
+    ],
+    "clko_first_rise_ps": {
+      "/CLKO<0>": 20542.688294692638,
+      "/CLKO<1>": 18042.3485451305,
+      "/CLKO<2>": 15542.348547635871,
+      "/CLKO<3>": 13042.348547635393,
+      "/CLKO<4>": 10542.34854763802,
+      "/CLKO<5>": 8042.348547648864,
+      "/CLKO<6>": 5542.348547629362,
+      "/CLKO<7>": 3042.3485470882433,
+      "/CLKO<8>": 542.3388336153756
+    },
+    "clko_rises_ps": {
+      "/CLKO<0>": [
+        20542.688294692638
+      ],
+      "/CLKO<1>": [
+        18042.3485451305
+      ],
+      "/CLKO<2>": [
+        15542.348547635871
+      ],
+      "/CLKO<3>": [
+        13042.348547635393
+      ],
+      "/CLKO<4>": [
+        10542.34854763802
+      ],
+      "/CLKO<5>": [
+        8042.348547648864
+      ],
+      "/CLKO<6>": [
+        5542.348547629362
+      ],
+      "/CLKO<7>": [
+        3042.3485470882433
+      ],
+      "/CLKO<8>": [
+        542.3388336153756
+      ]
+    },
+    "clko_first_fall_ps": {
+      "/CLKO<0>": null,
+      "/CLKO<1>": null,
+      "/CLKO<2>": null,
+      "/CLKO<3>": null,
+      "/CLKO<4>": null,
+      "/CLKO<5>": null,
+      "/CLKO<6>": null,
+      "/CLKO<7>": null,
+      "/CLKO<8>": null
+    },
+    "clko_falls_ps": {
+      "/CLKO<0>": [],
+      "/CLKO<1>": [],
+      "/CLKO<2>": [],
+      "/CLKO<3>": [],
+      "/CLKO<4>": [],
+      "/CLKO<5>": [],
+      "/CLKO<6>": [],
+      "/CLKO<7>": [],
+      "/CLKO<8>": []
+    },
+    "clko_min_v": {
+      "/CLKO<0>": -0.03925825350177099,
+      "/CLKO<1>": -0.01553661545343681,
+      "/CLKO<2>": -0.01553665752686281,
+      "/CLKO<3>": -0.01553665741697557,
+      "/CLKO<4>": -0.01553665721315477,
+      "/CLKO<5>": -0.0155366567443464,
+      "/CLKO<6>": -0.01553665605020784,
+      "/CLKO<7>": -0.01553667424154217,
+      "/CLKO<8>": -0.01539673887452891
+    },
+    "clko_max_v": {
+      "/CLKO<0>": 0.9043423033216017,
+      "/CLKO<1>": 0.9059518092565155,
+      "/CLKO<2>": 0.9059517314885711,
+      "/CLKO<3>": 0.9059517314854281,
+      "/CLKO<4>": 0.905951731485435,
+      "/CLKO<5>": 0.9059517314854353,
+      "/CLKO<6>": 0.9059517314854341,
+      "/CLKO<7>": 0.9059517314950734,
+      "/CLKO<8>": 0.9059518932983508
+    },
+    "clko_final_v": {
+      "/CLKO<0>": 0.8999989712104565,
+      "/CLKO<1>": 0.899998546412942,
+      "/CLKO<2>": 0.8999985463372462,
+      "/CLKO<3>": 0.8999985463372068,
+      "/CLKO<4>": 0.8999985463372547,
+      "/CLKO<5>": 0.8999985463372219,
+      "/CLKO<6>": 0.8999985463372335,
+      "/CLKO<7>": 0.8999985463378299,
+      "/CLKO<8>": 0.8999985473742348
+    },
+    "clko_rail_count": 9,
+    "clkc_min": -0.02804793070156442,
+    "clkc_max": 0.9162595506075792
+  }
+}

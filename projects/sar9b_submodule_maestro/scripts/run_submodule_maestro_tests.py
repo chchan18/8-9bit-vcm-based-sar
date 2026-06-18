@@ -430,13 +430,27 @@ def quick_metrics(cell: str, times: list[float], waves: dict[str, list[float]]) 
         }
     if cell == "TB_SUBMOD_ASYCTRL_9CLK_PERF":
         rises = {}
+        falls = {}
+        clko_min = {}
+        clko_max = {}
+        clko_final = {}
         for bit in range(9):
             sig = f"/CLKO<{bit}>"
             rises[sig] = [x * 1e12 for x in all_crossings(times, waves[sig], edge="rising")[:3]]
+            falls[sig] = [x * 1e12 for x in all_crossings(times, waves[sig], edge="falling")[:3]]
+            clko_min[sig] = min(waves[sig])
+            clko_max[sig] = max(waves[sig])
+            clko_final[sig] = waves[sig][-1]
         return {
             "valid_rise_ps": [x * 1e12 for x in all_crossings(times, waves["/VALID"], edge="rising")[:5]],
             "clko_first_rise_ps": {sig: (vals[0] if vals else None) for sig, vals in rises.items()},
             "clko_rises_ps": rises,
+            "clko_first_fall_ps": {sig: (vals[0] if vals else None) for sig, vals in falls.items()},
+            "clko_falls_ps": falls,
+            "clko_min_v": clko_min,
+            "clko_max_v": clko_max,
+            "clko_final_v": clko_final,
+            "clko_rail_count": sum(1 for value in clko_max.values() if value > VTH),
             "clkc_min": min(waves["/CLKC"]),
             "clkc_max": max(waves["/CLKC"]),
         }
@@ -537,6 +551,20 @@ def run_one(client: VirtuosoClient, spec: dict[str, object], trigger: str) -> di
             print(f"WARNING: close_gui_session failed for {cell}: {exc}", flush=True)
 
 
+def merge_run_manifest(base: dict[str, object], summaries: list[dict[str, object]], trigger: str) -> dict[str, object]:
+    merged = {str(item["cell"]): item for item in list(base.get("runs", []))}
+    for item in summaries:
+        merged[str(item["cell"])] = item
+    return {
+        **base,
+        "library": LIB,
+        "test_name": TEST_NAME,
+        "sample_step_s": SAMPLE_STEP,
+        "trigger": trigger,
+        "runs": list(merged.values()),
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cell", help="run only one testbench cell")
@@ -555,15 +583,12 @@ def main() -> None:
         if args.cell and spec["cell"] != args.cell:
             continue
         summaries.append(run_one(client, spec, args.trigger))
-    run_manifest = {
-        "library": LIB,
-        "test_name": TEST_NAME,
-        "sample_step_s": SAMPLE_STEP,
-        "trigger": args.trigger,
-        "runs": summaries,
-    }
     RUN_ROOT.mkdir(parents=True, exist_ok=True)
     out_path = RUN_ROOT / "submodule_run_manifest.json"
+    base_manifest: dict[str, object] = {}
+    if args.cell and out_path.exists():
+        base_manifest = json.loads(out_path.read_text(encoding="utf-8"))
+    run_manifest = merge_run_manifest(base_manifest, summaries, args.trigger)
     out_path.write_text(json.dumps(run_manifest, indent=2), encoding="utf-8")
     print(json.dumps(run_manifest, indent=2), flush=True)
     print(f"Saved: {out_path}", flush=True)

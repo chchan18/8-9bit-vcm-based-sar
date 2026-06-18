@@ -25,18 +25,22 @@ Each cell has a schematic and Maestro `TRAN` view in library `SAR9B_400MV`.
   Labeling a terminal `"0"` was not enough; it produced floating `_net0`.
 - Public supply sources were moved left of the local stimulus sources to avoid
   accidental vertical-wire shorts.
-- Final four-testbench run completed through Maestro/Spectre with zero Spectre
-  errors for all four cells:
-  - comparator `Interactive.8`: decision delay `3.923 ps`;
-  - clock non-overlap `Interactive.3`: no simultaneous-high window, both-low
+- First four-testbench run completed through Maestro/Spectre with zero Spectre
+  errors for all four cells.
+- 2026-06-18 continuation: ASYCTRL stimulus was repaired after identifying
+  `DFFRN.RN` as active-high reset. `CLKS` now starts high for reset and then
+  stays low while `VALID` pulses advance the shift chain.
+- Final four-testbench callback run completed with zero Spectre errors:
+  - comparator `Interactive.9`: decision delay `3.923 ps`;
+  - clock non-overlap `Interactive.4`: no simultaneous-high window, both-low
     total `176 ps`;
-  - ASYCTRL `Interactive.7`: Spectre-clean, `VALID`/`CLKC` active, but
-    `CLKO<0..8>` still do not reach rail;
-  - bootstrap `Interactive.4`: final differential output `100.000067 mV` for
+  - ASYCTRL `Interactive.9`: all nine `CLKO<0..8>` outputs reach rail; first
+    rises progress from `CLKO<8>` at `542 ps` to `CLKO<0>` at `20543 ps`;
+  - bootstrap `Interactive.5`: final differential output `100.000067 mV` for
     `100 mV` input.
 
 ## Next
 
-Investigate ASYCTRL reset/seed conditions with a smaller `DFFRN` unit test or
-by replaying top-level ADC startup timing. The Maestro run/export pipeline is
-now healthy enough for repeated block-level iterations.
+Continue with robustness checks: sweep ASYCTRL `VALID` timing, compare the
+standalone startup timing against the full ADC run, and add PVT/corner coverage
+for comparator, non-overlap clock, and bootstrap switch behavior.

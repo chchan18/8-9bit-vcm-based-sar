@@ -1,6 +1,6 @@
 # v006 - SAR9B Submodule Maestro Testbenches
 
-Date: 2026-06-17
+Date: 2026-06-18
 
 ## Summary
 
@@ -40,10 +40,10 @@ testbenches. Latest histories:
 
 | Testbench | Latest history | Spectre result | Quick result |
 |-----------|----------------|----------------|--------------|
-| `TB_SUBMOD_COMPARATOR_PERF` | `Interactive.8` | 0 errors, 5 warnings | decision crossing delay `3.923 ps` |
-| `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `Interactive.3` | 0 errors, 30 warnings | no simultaneous-high window; both-low total `176 ps` |
-| `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `Interactive.7` | 0 errors, 10 warnings | `VALID` and `CLKC` active; `CLKO<0..8>` still not rail-to-rail |
-| `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `Interactive.4` | 0 errors, 30 warnings | final differential output `100.000067 mV` for `100 mV` input |
+| `TB_SUBMOD_COMPARATOR_PERF` | `Interactive.9` | 0 errors, 5 warnings | decision crossing delay `3.923 ps` |
+| `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `Interactive.4` | 0 errors, 30 warnings | no simultaneous-high window; both-low total `176 ps` |
+| `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `Interactive.9` | 0 errors, 10 warnings | all nine `CLKO<0..8>` reach rail in order |
+| `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `Interactive.5` | 0 errors, 30 warnings | final differential output `100.000067 mV` for `100 mV` input |
 
 Key repair details:
 
@@ -52,5 +52,7 @@ Key repair details:
    `schGeometryLastUpdated`.
 2. The testbenches were rebuilt with a real `VSS_SRC (VSS 0)` reference using
    an `analogLib/gnd` wire. Plain `"0"` labels produced floating `_net0`.
-3. ASYCTRL still needs a functional stimulus/initialization pass. The current
-   result proves the Maestro/Spectre chain, but not the 9-step sequence.
+3. ASYCTRL required an active-high reset interpretation for `DFFRN`: `CLKS`
+   is high during startup reset and then held low. With that stimulus,
+   `CLKO<8>` rises at `542 ps` and the chain advances down to `CLKO<0>` at
+   `20543 ps`, with all nine outputs reaching about `0.9 V`.
