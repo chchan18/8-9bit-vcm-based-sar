@@ -1,0 +1,23 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Thu Jun 18 11:24:44 2026
+Best design point: 1
+Design specs:
+	TRAN	corner	Nominal -
+	cmp_clk_rise_s		1.003n
+	cmp_decision_cross_s		1.007n
+	cmp_decision_delay_ps		4.482
+	cmp_vop_max_v		940m
+	cmp_von_min_v		-7.969m
+	cmp_final_diff_v		-760.1n
+Design parameters:
+	vdd		900m
+	vcm		450m
+	vdiff		2m
+	cload		2f
+
+Interactive.2
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.2 completed.
+Current time: Thu Jun 18 11:24:50 2026

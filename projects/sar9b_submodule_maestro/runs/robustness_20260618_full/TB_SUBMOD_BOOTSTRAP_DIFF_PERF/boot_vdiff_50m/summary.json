@@ -1,0 +1,57 @@
+{
+  "cell": "TB_SUBMOD_BOOTSTRAP_DIFF_PERF",
+  "case_id": "boot_vdiff_50m",
+  "history": "Interactive.2",
+  "session": "fnxSession122",
+  "variables": {
+    "vdd": "900m",
+    "vcm": "450m",
+    "vdiff": "50m",
+    "cload": "5f"
+  },
+  "overrides": {
+    "vdiff": "50m"
+  },
+  "signals": [
+    "/CLKS",
+    "/CLKSB",
+    "/VIP",
+    "/VIN",
+    "/VOUTP",
+    "/VOUTN"
+  ],
+  "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.2.log",
+  "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.2/1/TRAN/psf",
+  "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.2/1/TRAN/psf/spectre.out",
+  "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.2/1/TRAN/netlist/input.scs",
+  "completed": true,
+  "run_errors": 0,
+  "spectre_summary": {
+    "errors": 0,
+    "warnings": 30,
+    "notices": 10
+  },
+  "maestro_metrics": {
+    "boot_diff_final_v": "50m",
+    "boot_diff_final_error_mv": "-30.75u",
+    "boot_track_error_on_avg_mv": "50.44u",
+    "boot_track_error_on_max_mv": "14.15m",
+    "boot_settle_error_2p5n_mv": "6.122u",
+    "boot_clk_overlap_product_peak_v2": "202.5m"
+  },
+  "waveform_points": 6001,
+  "metrics": {
+    "vip": 0.475,
+    "vin": 0.425,
+    "voutp_final": 0.4749998826050318,
+    "voutn_final": 0.4249999133544213,
+    "diff_in_v": 0.04999999999999999,
+    "diff_out_final_v": 0.04999996925061051,
+    "max_on_diff_error_mv": 50.12063987909837,
+    "mean_on_diff_error_mv": 0.18718879873828717,
+    "offline": {
+      "boot_avg_power_w": 2.1874872984354034e-06,
+      "boot_energy_j": 2.6249847581224843e-14
+    }
+  }
+}

@@ -1,0 +1,295 @@
+// Generated for: spectre
+// Generated on: Jun 18 11:48:11 2026
+// Design library name: SAR9B_400MV
+// Design cell name: TB_SUBMOD_ASYCTRL_9CLK_PERF
+// Design view name: schematic
+simulator lang=spectre
+global 0
+parameters valid_per=2.5n valid_pw=1n valid_td=500p cload=1f vdd=900m
+include "/home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/toplevel.scs" section=top_tt
+
+// Library name: SAR9B_400MV
+// Cell name: NAND2X1
+// View name: schematic
+subckt NAND2X1 A B VDD VSS ZN
+    M3 (ZN A net1 VSS) nch_mac l=30n w=100n multi=1 nf=1 sd=100n \
+        ad=7.5e-15 as=7.5e-15 pd=350n ps=350n nrd=2.576626 nrs=2.576626 \
+        sa=75n sb=75n sa1=75n sa2=75n sa3=75n sa4=75n sb1=75n sb2=75n \
+        sb3=75n spa=100n spa1=100n spa2=100n spa3=100n sap=91.9776n \
+        sapb=114.444n spba=115.715168n spba1=117.042727n dfm_flag=0 \
+        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
+        spomb=0 spomb1=1.11111e+60
+    M0 (net1 B VSS VSS) nch_mac l=30n w=100n multi=1 nf=1 sd=100n \
+        ad=7.5e-15 as=7.5e-15 pd=350n ps=350n nrd=2.576626 nrs=2.576626 \
+        sa=75n sb=75n sa1=75n sa2=75n sa3=75n sa4=75n sb1=75n sb2=75n \
+        sb3=75n spa=100n spa1=100n spa2=100n spa3=100n sap=91.9776n \
+        sapb=114.444n spba=115.715168n spba1=117.042727n dfm_flag=0 \
+        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
+        spomb=0 spomb1=1.11111e+60
+    M2 (ZN B VDD VDD) pch_mac l=30n w=200n multi=1 nf=1 sd=100n ad=1.5e-14 \
+        as=1.5e-14 pd=550.0n ps=550.0n nrd=1.688887 nrs=1.688887 sa=75.0n \
+        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
+        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
+        sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n dfm_flag=0 \
+        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
+        spomb=0 spomb1=1.11111e+60
+    M1 (ZN A VDD VDD) pch_mac l=30n w=200n multi=1 nf=1 sd=100n ad=1.5e-14 \
+        as=1.5e-14 pd=550.0n ps=550.0n nrd=1.688887 nrs=1.688887 sa=75.0n \
+        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
+        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
+        sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n dfm_flag=0 \
+        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
+        spomb=0 spomb1=1.11111e+60
+ends NAND2X1
+// End of subcircuit definition.
+
+// Library name: SAR9B_400MV
+// Cell name: TRIGATEX1
+// View name: schematic
+subckt TRIGATEX1 IN OE OEN VDD VSS Z
+    M0 (IN OE Z VSS) nch_mac l=30n w=100n multi=1 nf=1 sd=100n ad=7.5e-15 \
+        as=7.5e-15 pd=350n ps=350n nrd=2.576626 nrs=2.576626 sa=75n sb=75n \
+        sa1=75n sa2=75n sa3=75n sa4=75n sb1=75n sb2=75n sb3=75n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=91.9776n sapb=114.444n \
+        spba=115.715168n spba1=117.042727n dfm_flag=0 spmt=1.11111e+15 \
+        spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 \
+        spomb1=1.11111e+60
+    M2 (IN OEN Z VDD) pch_mac l=30n w=200n multi=1 nf=1 sd=100n ad=1.5e-14 \
+        as=1.5e-14 pd=550.0n ps=550.0n nrd=1.688887 nrs=1.688887 sa=75.0n \
+        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
+        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
+        sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n dfm_flag=0 \
+        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
+        spomb=0 spomb1=1.11111e+60
+ends TRIGATEX1
+// End of subcircuit definition.
+
+// Library name: SAR9B_400MV
+// Cell name: NOR2X1
+// View name: schematic
+subckt NOR2X1 A B VDD VSS ZN
+    M3 (ZN A VSS VSS) nch_mac l=30n w=100n multi=1 nf=1 sd=100n ad=7.5e-15 \
+        as=7.5e-15 pd=350n ps=350n nrd=2.576626 nrs=2.576626 sa=75n sb=75n \
+        sa1=75n sa2=75n sa3=75n sa4=75n sb1=75n sb2=75n sb3=75n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=91.9776n sapb=114.444n \
+        spba=115.715168n spba1=117.042727n dfm_flag=0 spmt=1.11111e+15 \
+        spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 \
+        spomb1=1.11111e+60
+    M0 (ZN B VSS VSS) nch_mac l=30n w=100n multi=1 nf=1 sd=100n ad=7.5e-15 \
+        as=7.5e-15 pd=350n ps=350n nrd=2.576626 nrs=2.576626 sa=75n sb=75n \
+        sa1=75n sa2=75n sa3=75n sa4=75n sb1=75n sb2=75n sb3=75n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=91.9776n sapb=114.444n \
+        spba=115.715168n spba1=117.042727n dfm_flag=0 spmt=1.11111e+15 \
+        spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 \
+        spomb1=1.11111e+60
+    M2 (ZN B net2 VDD) pch_mac l=30n w=200n multi=1 nf=1 sd=100n \
+        ad=1.5e-14 as=1.5e-14 pd=550.0n ps=550.0n nrd=1.688887 \
+        nrs=1.688887 sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n \
+        sa4=75.0n sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n \
+        spa2=100n spa3=100n sap=91.9776n sapb=114.444n spba=115.715n \
+        spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M1 (net2 A VDD VDD) pch_mac l=30n w=200n multi=1 nf=1 sd=100n \
+        ad=1.5e-14 as=1.5e-14 pd=550.0n ps=550.0n nrd=1.688887 \
+        nrs=1.688887 sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n \
+        sa4=75.0n sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n \
+        spa2=100n spa3=100n sap=91.9776n sapb=114.444n spba=115.715n \
+        spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+ends NOR2X1
+// End of subcircuit definition.
+
+// Library name: SAR9B_400MV
+// Cell name: INVX1
+// View name: schematic
+subckt INVX1 IN VDD VSS ZN
+    M0 (ZN IN VSS VSS) nch_mac l=30n w=100n multi=1 nf=1 sd=100n \
+        ad=7.5e-15 as=7.5e-15 pd=350n ps=350n nrd=2.576626 nrs=2.576626 \
+        sa=75n sb=75n sa1=75n sa2=75n sa3=75n sa4=75n sb1=75n sb2=75n \
+        sb3=75n spa=100n spa1=100n spa2=100n spa3=100n sap=91.9776n \
+        sapb=114.444n spba=115.715168n spba1=117.042727n dfm_flag=0 \
+        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
+        spomb=0 spomb1=1.11111e+60
+    M1 (ZN IN VDD VDD) pch_mac l=30n w=200n multi=1 nf=1 sd=100n \
+        ad=1.5e-14 as=1.5e-14 pd=550.0n ps=550.0n nrd=1.688887 \
+        nrs=1.688887 sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n \
+        sa4=75.0n sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n \
+        spa2=100n spa3=100n sap=91.9776n sapb=114.444n spba=115.715n \
+        spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+ends INVX1
+// End of subcircuit definition.
+
+// Library name: SAR9B_400MV
+// Cell name: INVX2
+// View name: schematic
+subckt INVX2 IN VDD VSS ZN
+    M0 (ZN IN VSS VSS) nch_mac l=30n w=200n multi=1 nf=1 sd=100n \
+        ad=1.5e-14 as=1.5e-14 pd=550.0n ps=550.0n nrd=2.828877 \
+        nrs=2.828877 sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n \
+        sa4=75.0n sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n \
+        spa2=100n spa3=100n sap=91.9776n sapb=114.444n spba=115.715n \
+        spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M1 (ZN IN VDD VDD) pch_mac l=30n w=400n multi=1 nf=1 sd=100n ad=3e-14 \
+        as=3e-14 pd=950.0n ps=950.0n nrd=0.522453 nrs=0.522453 sa=75.0n \
+        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
+        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
+        sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n dfm_flag=0 \
+        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
+        spomb=0 spomb1=1.11111e+60
+ends INVX2
+// End of subcircuit definition.
+
+// Library name: SAR9B_400MV
+// Cell name: INVX4
+// View name: schematic
+subckt INVX4 IN VDD VSS ZN
+    M0 (ZN IN VSS VSS) nch_mac l=30n w=400n multi=1 nf=1 sd=100n ad=3e-14 \
+        as=3e-14 pd=950.0n ps=950.0n nrd=0.896976 nrs=0.896976 sa=75.0n \
+        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
+        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
+        sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n dfm_flag=0 \
+        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
+        spomb=0 spomb1=1.11111e+60
+    M1 (ZN IN VDD VDD) pch_mac l=30n w=800n multi=1 nf=1 sd=100n ad=6e-14 \
+        as=6e-14 pd=1.75u ps=1.75u nrd=0.214332 nrs=0.214332 sa=75.0n \
+        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
+        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
+        sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n dfm_flag=0 \
+        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
+        spomb=0 spomb1=1.11111e+60
+ends INVX4
+// End of subcircuit definition.
+
+// Library name: SAR9B_400MV
+// Cell name: DFFRN
+// View name: schematic
+subckt DFFRN CLK D Q RN VDD VSS
+    I0 (R net3 VDD VSS net2) NAND2X1
+    I14 (D CLKP CLKN VDD VSS net3) TRIGATEX1
+    I15 (net3 CLKN CLKP VDD VSS net9) TRIGATEX1
+    I4 (net2 CLKN CLKP VDD VSS net8) TRIGATEX1
+    I1 (net8 CLKP CLKN VDD VSS net1) TRIGATEX1
+    I5 (RN net8 VDD VSS net6) NOR2X1
+    I11 (net6 VDD VSS net7) INVX1
+    I13 (CLK VDD VSS CLKP) INVX2
+    I10 (RN VDD VSS R) INVX2
+    I9 (CLKP VDD VSS CLKN) INVX2
+    I7 (net6 VDD VSS net1) INVX2
+    I2 (net2 VDD VSS net9) INVX2
+    I12 (net7 VDD VSS Q) INVX4
+ends DFFRN
+// End of subcircuit definition.
+
+// Library name: SAR9B_400MV
+// Cell name: OR3X1
+// View name: schematic
+subckt OR3X1 A B C VDD VSS Z
+    M9 (Z net3 VSS VSS) nch_mac l=30n w=400n multi=1 nf=1 sd=100n ad=3e-14 \
+        as=3e-14 pd=950.0n ps=950.0n nrd=0.896976 nrs=0.896976 sa=75.0n \
+        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
+        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
+        sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n dfm_flag=0 \
+        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
+        spomb=0 spomb1=1.11111e+60
+    M5 (net3 B VSS VSS) nch_mac l=30n w=400n multi=1 nf=1 sd=100n ad=3e-14 \
+        as=3e-14 pd=950.0n ps=950.0n nrd=0.896976 nrs=0.896976 sa=75.0n \
+        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
+        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
+        sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n dfm_flag=0 \
+        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
+        spomb=0 spomb1=1.11111e+60
+    M3 (net3 A VSS VSS) nch_mac l=30n w=400n multi=1 nf=1 sd=100n ad=3e-14 \
+        as=3e-14 pd=950.0n ps=950.0n nrd=0.896976 nrs=0.896976 sa=75.0n \
+        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
+        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
+        sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n dfm_flag=0 \
+        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
+        spomb=0 spomb1=1.11111e+60
+    M8 (net3 C VSS VSS) nch_mac l=30n w=400n multi=1 nf=1 sd=100n ad=3e-14 \
+        as=3e-14 pd=950.0n ps=950.0n nrd=0.896976 nrs=0.896976 sa=75.0n \
+        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
+        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
+        sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n dfm_flag=0 \
+        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
+        spomb=0 spomb1=1.11111e+60
+    M10 (Z net3 VDD VDD) pch_mac l=30n w=400n multi=1 nf=1 sd=100n \
+        ad=3e-14 as=3e-14 pd=950.0n ps=950.0n nrd=0.522453 nrs=0.522453 \
+        sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n \
+        sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n \
+        spa3=100n sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n \
+        dfm_flag=0 spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 \
+        spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M7 (net3 C net1 VDD) pch_mac l=30n w=400n multi=1 nf=1 sd=100n \
+        ad=3e-14 as=3e-14 pd=950.0n ps=950.0n nrd=0.522453 nrs=0.522453 \
+        sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n \
+        sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n \
+        spa3=100n sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n \
+        dfm_flag=0 spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 \
+        spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M6 (net1 B net2 VDD) pch_mac l=30n w=400n multi=1 nf=1 sd=100n \
+        ad=3e-14 as=3e-14 pd=950.0n ps=950.0n nrd=0.522453 nrs=0.522453 \
+        sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n \
+        sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n \
+        spa3=100n sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n \
+        dfm_flag=0 spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 \
+        spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M1 (net2 A VDD VDD) pch_mac l=30n w=400n multi=1 nf=1 sd=100n ad=3e-14 \
+        as=3e-14 pd=950.0n ps=950.0n nrd=0.522453 nrs=0.522453 sa=75.0n \
+        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
+        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
+        sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n dfm_flag=0 \
+        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
+        spomb=0 spomb1=1.11111e+60
+ends OR3X1
+// End of subcircuit definition.
+
+// Library name: SAR9B_400MV
+// Cell name: Asycontrol_logic_9clk
+// View name: schematic
+subckt Asycontrol_logic_9clk CLKC CLKO\<8\> CLKO\<7\> CLKO\<6\> CLKO\<5\> \
+        CLKO\<4\> CLKO\<3\> CLKO\<2\> CLKO\<1\> CLKO\<0\> CLKS VALID VDD \
+        VSS
+    I11 (VALID CLKO\<8\> CLKO\<7\> CLKS VDD VSS) DFFRN
+    I7 (VALID CLKO\<1\> CLKO\<0\> CLKS VDD VSS) DFFRN
+    I6 (VALID CLKO\<2\> CLKO\<1\> CLKS VDD VSS) DFFRN
+    I5 (VALID CLKO\<3\> CLKO\<2\> CLKS VDD VSS) DFFRN
+    I4 (VALID CLKO\<4\> CLKO\<3\> CLKS VDD VSS) DFFRN
+    I3 (VALID CLKO\<5\> CLKO\<4\> CLKS VDD VSS) DFFRN
+    I2 (VALID CLKO\<6\> CLKO\<5\> CLKS VDD VSS) DFFRN
+    I1 (VALID CLKO\<7\> CLKO\<6\> CLKS VDD VSS) DFFRN
+    I0 (VALID VDD CLKO\<8\> CLKS VDD VSS) DFFRN
+    I10 (CLKS VALID CLKO\<0\> VDD VSS CLKC) OR3X1
+ends Asycontrol_logic_9clk
+// End of subcircuit definition.
+
+// Library name: SAR9B_400MV
+// Cell name: TB_SUBMOD_ASYCTRL_9CLK_PERF
+// View name: schematic
+VSS_SRC (VSS 0) vsource dc=0 type=dc
+VDD_SRC (VDD VSS) vsource dc=vdd type=dc
+XASY (CLKC CLKO\<8\> CLKO\<7\> CLKO\<6\> CLKO\<5\> CLKO\<4\> CLKO\<3\> \
+        CLKO\<2\> CLKO\<1\> CLKO\<0\> CLKS VALID VDD VSS) \
+        Asycontrol_logic_9clk
+VVALID (VALID VSS) vsource type=pulse val0=0 val1=vdd period=valid_per \
+        delay=valid_td rise=5p fall=5p width=valid_pw
+VCLKS (CLKS VSS) vsource type=pulse val0=vdd val1=0 period=100n delay=100p \
+        rise=5p fall=5p width=99n
+C_CLKC (CLKC VSS) capacitor c=cload
+simulatorOptions options psfversion="1.1.0" reltol=1e-3 vabstol=1e-6 \
+    iabstol=1e-12 temp=27 tnom=27 scalem=1.0 scale=1.0 gmin=1e-12 rforce=1 \
+    maxnotes=5 maxwarns=5 digits=5 cols=80 pivrel=1e-3 \
+    sensfile="../psf/sens.output" checklimitdest=psf
+tran tran stop=28n errpreset=moderate write="spectre.ic" \
+    writefinal="spectre.fc" annotate=status maxiters=5
+finalTimeOP info what=oppoint where=rawfile
+modelParameter info what=models where=rawfile
+element info what=inst where=rawfile
+outputParameter info what=output where=rawfile
+designParamVals info what=parameters where=rawfile
+primitives info what=primitives where=rawfile
+subckts info what=subckts where=rawfile
+save CLKS VALID CLKC CLKO\<0\> CLKO\<1\> CLKO\<2\> CLKO\<3\> CLKO\<4\> \
+    CLKO\<5\> CLKO\<6\> CLKO\<7\> CLKO\<8\>
+saveOptions options save=allpub

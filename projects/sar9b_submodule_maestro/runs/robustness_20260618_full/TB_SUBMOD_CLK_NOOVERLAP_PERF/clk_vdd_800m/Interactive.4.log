@@ -1,0 +1,22 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Thu Jun 18 11:39:48 2026
+Best design point: 1
+Design specs:
+	TRAN	corner	Nominal -
+	clk_clkop_delay_ps		113.6
+	clk_clkon_delay_ps		2.113K
+	clk_gap_op_after_on_ps		44.86
+	clk_gap_on_after_op_ps		44.93
+	clk_clkop_duty_pct		39.1
+	clk_clkon_duty_pct		59.11
+	clk_overlap_product_peak_v2		5.103u
+Design parameters:
+	vdd		800m
+	cload		2f
+
+Interactive.4
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.4 completed.
+Current time: Thu Jun 18 11:39:55 2026

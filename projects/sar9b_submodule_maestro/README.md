@@ -24,7 +24,7 @@ Nominal variables:
 |----------------|-----------|
 | `TB_SUBMOD_COMPARATOR_PERF` | `vdd=900m`, `vcm=450m`, `vdiff=10m`, `cload=2f` |
 | `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `vdd=900m`, `cload=2f` |
-| `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `vdd=900m`, `cload=1f` |
+| `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `vdd=900m`, `cload=1f`, `valid_td=500p`, `valid_pw=1n`, `valid_per=2.5n` |
 | `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `vdd=900m`, `vcm=450m`, `vdiff=100m`, `cload=5f` |
 
 ## Scripts
@@ -36,6 +36,7 @@ Nominal variables:
 | `scripts/create_schematic_smoke.py` | Creates a small RC schematic to verify schematic creation APIs. |
 | `scripts/create_submodule_maestro_tests.py` | Creates/rebuilds the four schematic testbenches and corresponding Maestro `TRAN` views. Use `--cell` to update one testbench, `--rebuild-schematics` after changing stimulus wiring, or `--reset-maestro` to rebuild generated ADE outputs from scratch. |
 | `scripts/run_submodule_maestro_tests.py` | Runs Maestro, downloads logs/netlists/waveforms, records Maestro point outputs, exports PSF waveforms, and computes quick/offline metrics. Supports `--trigger callback`, `--trigger gui-button`, and `--trigger mae`. |
+| `scripts/run_submodule_robustness_sweeps.py` | Runs the nominal plus robustness matrix for the four submodule testbenches and writes one merged manifest. Supports `--cell` and `--case` for restartable partial reruns. |
 | `scripts/archive_submodule_history.py` | Copies an existing remote Maestro history into this project. |
 | `scripts/inspect_fix_schematic_props.py` | Inspects/fixes schematic extraction metadata using `dbSetConnCurrent`; needed after bridge-created schematics. |
 | `scripts/check_submodule_remote_status.py` | Polls remote Maestro histories, logs, and process state for a selected cell. |
@@ -52,10 +53,12 @@ Nominal variables:
 | `artifacts/submodule_maestro_setup_manifest.json` | Manifest proving the four schematic and Maestro views were created. |
 | `artifacts/schematic_props_fix_manifest.json` | Manifest showing `connectivityLastUpdated` was repaired for all four new schematics. |
 | `docs/performance_metrics.md` | Online metric references and mapping to Maestro/offline measurements. |
+| `docs/robustness_sweep_20260618.md` | First complete submodule robustness sweep report. |
 | `runs/TB_SUBMOD_COMPARATOR_PERF/Interactive.0` | Archived pre-fix failed run: `OSSHNL-108`. |
 | `runs/TB_SUBMOD_COMPARATOR_PERF/Interactive.1` | Archived pre-fix failed run: `OSSHNL-108`. |
 | `runs/TB_SUBMOD_COMPARATOR_PERF/Interactive.2` | Background run attempt stopped immediately by Maestro. |
 | `runs/submodule_run_manifest.json` | Latest four-testbench Maestro run summary. |
+| `runs/submodule_robustness_manifest.json` | Latest 20-case robustness sweep manifest. |
 
 ## Current Run Status
 
@@ -69,6 +72,22 @@ errors and through Spectre with zero simulator errors. Latest run manifest:
 | `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 30 warnings | `clk_gap_op_after_on_ps=35.08`, `clk_gap_on_after_op_ps=35.27`, `clk_overlap_product_peak_v2=6.792u` | `clk_avg_power_w=3.639 uW`, `clk_energy_j=43.66 fJ` |
 | `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 10 warnings | `asy_sequence_span_ps=20K`; all `CLKO<8:0>` reach about 0.905-0.907 V | `asy_avg_power_w=8.261 uW`, `asy_energy_j=231.30 fJ` |
 | `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 30 warnings | `boot_diff_final_v=100m`, `boot_settle_error_2p5n_mv=86.49u`, `boot_clk_overlap_product_peak_v2=202.5m` | `boot_avg_power_w=2.188 uW`, `boot_energy_j=26.25 fJ` |
+
+## Robustness Sweep Status
+
+The first restartable robustness matrix has also completed. Tag:
+`robustness_20260618_full`. All 20 cases finished with zero ADE run errors
+and zero Spectre errors:
+
+| Testbench | Cases | Sweep variables | Highlights |
+|-----------|-------|-----------------|------------|
+| `TB_SUBMOD_COMPARATOR_PERF` | 6 | `vdiff=2m/5m/20m`, `cload=5f`, `vdd=800m` | Decision delay stayed at `4.482-4.514 ps` at 900 mV and became `5.335 ps` at 800 mV. |
+| `TB_SUBMOD_CLK_NOOVERLAP_PERF` | 4 | `cload=1f/5f`, `vdd=800m` | Offline simultaneous-high time stayed `0 ps`; non-overlap gap was `34.4-44.86 ps`. |
+| `TB_SUBMOD_ASYCTRL_9CLK_PERF` | 5 | `valid_per=2n/3n`, `cload=3f`, `vdd=800m` | All cases reached `clko_rail_count=9`; sequence span tracked `valid_per` as `16 ns`, `20 ns`, and `24 ns`. |
+| `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | 5 | `vdiff=50m/200m`, `cload=10f`, `vdd=800m` | Final differential error stayed in the raw Maestro range `-248.9u` to `438u` for the `_mv` output. |
+
+Detailed per-case results and artifact paths are in
+`docs/robustness_sweep_20260618.md`.
 
 ## Maestro Measurements Added
 
@@ -103,6 +122,6 @@ Important fixes made during this pass:
 
 ## Recommended Next Step
 
-Continue with robustness checks: sweep ASYCTRL `VALID` pulse spacing, compare
-the standalone `CLKS`/`VALID` timing against the full ADC run, and add corner
-runs for the comparator and clock blocks.
+Extend the same measurement matrix to PVT/corner coverage, then compare the
+standalone `CLKS`/`VALID` timing against the full ADC run to close the block to
+top-level timing link.

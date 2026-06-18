@@ -30,9 +30,12 @@ and section `top_tt`.
 | `projects/sar9b_submodule_maestro/README.md` | Detailed submodule Maestro handoff. |
 | `projects/sar9b_submodule_maestro/scripts/create_submodule_maestro_tests.py` | Creates the four testbenches and Maestro views; `--reset-maestro` rebuilds generated ADE outputs from scratch. |
 | `projects/sar9b_submodule_maestro/scripts/run_submodule_maestro_tests.py` | Run/export/metric automation with Maestro point-output parsing and offline PSF supply metrics. |
+| `projects/sar9b_submodule_maestro/scripts/run_submodule_robustness_sweeps.py` | Restartable nominal plus robustness matrix runner. |
 | `projects/sar9b_submodule_maestro/docs/performance_metrics.md` | Online metric references and mapping to Maestro/offline measurements. |
+| `projects/sar9b_submodule_maestro/docs/robustness_sweep_20260618.md` | First complete robustness sweep report. |
 | `projects/sar9b_submodule_maestro/artifacts/submodule_maestro_setup_manifest.json` | Setup manifest. |
 | `projects/sar9b_submodule_maestro/artifacts/schematic_props_fix_manifest.json` | Schematic property fix manifest. |
+| `projects/sar9b_submodule_maestro/runs/submodule_robustness_manifest.json` | Latest 20-case robustness sweep manifest. |
 
 ## Run Status
 
@@ -46,6 +49,17 @@ histories:
 | `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 30 warnings | Maestro non-overlap gaps about `35 ps`; offline power `3.639 uW` |
 | `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 10 warnings | `CLKO<8>` to `CLKO<0>` span `20 ns`; offline power `8.261 uW` |
 | `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 30 warnings | final differential output `100 mV`; offline power `2.188 uW` |
+
+The first robustness matrix was then completed under tag
+`robustness_20260618_full`. It contains 20 Maestro cases with zero ADE run
+errors and zero Spectre errors:
+
+| Testbench | Cases | Result highlight |
+|-----------|-------|------------------|
+| `TB_SUBMOD_COMPARATOR_PERF` | 6 | Delay stayed `4.482-4.514 ps` at 900 mV and became `5.335 ps` at 800 mV. |
+| `TB_SUBMOD_CLK_NOOVERLAP_PERF` | 4 | Offline simultaneous-high time stayed `0 ps`; non-overlap gap was `34.4-44.86 ps`. |
+| `TB_SUBMOD_ASYCTRL_9CLK_PERF` | 5 | All cases reached `clko_rail_count=9`; sequence span tracked `valid_per` from `16 ns` to `24 ns`. |
+| `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | 5 | Final differential error stayed in the raw Maestro range `-248.9u` to `438u` for the `_mv` output. |
 
 Key repair details:
 

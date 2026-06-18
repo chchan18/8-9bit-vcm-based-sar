@@ -1,0 +1,39 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Thu Jun 18 11:48:42 2026
+Best design point: 1
+Design specs:
+	TRAN	corner	Nominal -
+	asy_valid_to_clko8_ps		39.84
+	asy_sequence_span_ps		16K
+	asy_clkc_max_v		916.7m
+	asy_clko8_rise_ps		542.3
+	asy_clko7_rise_ps		2.542K
+	asy_clko6_rise_ps		4.542K
+	asy_clko5_rise_ps		6.542K
+	asy_clko4_rise_ps		8.542K
+	asy_clko3_rise_ps		10.54K
+	asy_clko2_rise_ps		12.54K
+	asy_clko1_rise_ps		14.54K
+	asy_clko0_rise_ps		16.54K
+	asy_clko8_max_v		906.9m
+	asy_clko7_max_v		906.9m
+	asy_clko6_max_v		906.9m
+	asy_clko5_max_v		906.9m
+	asy_clko4_max_v		906.9m
+	asy_clko3_max_v		906.9m
+	asy_clko2_max_v		906.9m
+	asy_clko1_max_v		906.9m
+	asy_clko0_max_v		905m
+Design parameters:
+	vdd		900m
+	cload		1f
+	valid_td		500p
+	valid_pw		1n
+	valid_per		2n
+
+Interactive.2
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.2 completed.
+Current time: Thu Jun 18 11:48:57 2026

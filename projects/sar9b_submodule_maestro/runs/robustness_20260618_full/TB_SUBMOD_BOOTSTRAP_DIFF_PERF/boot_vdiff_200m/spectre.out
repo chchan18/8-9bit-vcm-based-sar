@@ -1,0 +1,316 @@
+
+Spectre (R) Circuit Simulator
+Version 18.1.0.077 64bit -- 1 Aug 2018
+Copyright (C) 1989-2018 Cadence Design Systems, Inc. All rights reserved worldwide. Cadence and Spectre are registered trademarks of Cadence Design Systems, Inc. All others are the property of their respective holders.
+
+Includes RSA BSAFE(R) Cryptographic or Security Protocol Software from RSA Security, Inc.
+
+User: IC   Host: IC   HostID: 7F0100   PID: 34521
+Memory  available: 180.2526 MB  physical: 16.7718 GB
+Linux   : CentOS Linux release 7.7.1908 (Core)
+CPU Type: Intel(R) Core(TM) i9-14900HX
+All processors running at 2419.2 MHz
+        Socket: Processors
+        0:       0,  1,  2,  3
+        1:       4,  5,  6,  7
+        2:       8,  9, 10, 11
+        3:      12, 13, 14, 15
+
+System load averages (1min, 5min, 15min) : 14.3 %, 15.1 %, 15.5 %
+This is a virtual machine
+
+
+Simulating `input.scs' on IC at 12:00:36 PM, Thur Jun 18, 2026 (process id: 34521).
+Current working directory: /home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.3/1/TRAN/netlist
+Environment variable:
+    SPECTRE_DEFAULTS=-E
+Command line:
+    /opt/eda/cadence/SPECTRE181/tools.lnx86/bin/spectre -64 input.scs  \
+        +escchars +log ../psf/spectre.out -format psfxl -raw ../psf  \
+        +lqtimeout 900 -maxw 5 -maxn 5 -ahdllibdir  \
+        /home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.3/sharedData/CDS/ahdl/input.ahdlSimDB  \
+        +logstatus
+
+Loading /opt/eda/cadence/SPECTRE181/tools.lnx86/cmi/lib/64bit/5.0/libinfineon_sh.so ...
+Loading /opt/eda/cadence/SPECTRE181/tools.lnx86/cmi/lib/64bit/5.0/libphilips_o_sh.so ...
+Loading /opt/eda/cadence/SPECTRE181/tools.lnx86/cmi/lib/64bit/5.0/libphilips_sh.so ...
+Loading /opt/eda/cadence/SPECTRE181/tools.lnx86/cmi/lib/64bit/5.0/libsparam_sh.so ...
+Loading /opt/eda/cadence/SPECTRE181/tools.lnx86/cmi/lib/64bit/5.0/libstmodels_sh.so ...
+Reading file:  /home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.3/1/TRAN/netlist/input.scs
+Reading file:  /opt/eda/cadence/SPECTRE181/tools.lnx86/spectre/etc/configs/mapsubckt.cfg
+Reading file:  /opt/eda/cadence/SPECTRE181/tools.lnx86/spectre/etc/configs/spectre.cfg
+Reading file:  /usr/include/stdc-predef.h
+Reading file:  /home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/toplevel.scs
+Reading file:  /home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/crn28hpcp_lct_1d8_elk_v1d0_2p2_shrink0d9_embedded_usage.scs
+Reading file:  /home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/crn28hpcp_lct_1d8_elk_v1d0_2p2.scs
+Reading file:  /home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/res_metal.scs
+Reading file:  /home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/cln28hpcp_hv_1d8_elk_v0d1_2p1_shrink0d9_embedded_usage.scs
+Reading file:  /home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/cln28hpcp_hv_1d8_elk_v0d1_2p1.scs
+Time for NDB Parsing: CPU = 3.85621 s, elapsed = 2.12654 s.
+Time accumulated: CPU = 3.91891 s, elapsed = 2.12656 s.
+Peak resident memory used = 83.4 Mbytes.
+
+Reading link:  /opt/eda/cadence/SPECTRE181/tools.lnx86/spectre/etc/ahdl/discipline.h
+Reading file:  /opt/eda/cadence/SPECTRE181/tools.lnx86/spectre/etc/ahdl/disciplines.vams
+Reading link:  /opt/eda/cadence/SPECTRE181/tools.lnx86/spectre/etc/ahdl/constants.h
+Reading file:  /opt/eda/cadence/SPECTRE181/tools.lnx86/spectre/etc/ahdl/constants.vams
+
+Warning from spectre during hierarchy flattening.
+    WARNING (SFE-1131): Duplicate scope option `scalefactor' with scope `TopCircuit'. (using last value specified).
+    WARNING (SFE-1131): Duplicate scope option `scalefactor' with scope `TopCircuit'. (using last value specified).
+    WARNING (SFE-1131): Duplicate scope option `scalefactor' with scope `TopCircuit'. (using last value specified).
+    WARNING (SFE-1131): Duplicate scope option `scalefactor' with scope `TopCircuit'. (using last value specified).
+
+Existing shared object for module bsource_965053 is up to date.
+Installed compiled interface for bsource_965053.
+Time for Elaboration: CPU = 482.799 ms, elapsed = 241.399 ms.
+Time accumulated: CPU = 4.40506 s, elapsed = 2.36963 s.
+Peak resident memory used = 97.8 Mbytes.
+
+
+Warning from spectre during hierarchy flattening.
+    WARNING (SPECTRE-17101): The value 'psf' specified using the 'checklimitdest' option will no longer be supported in future releases.
+
+
+Time for EDB Visiting: CPU = 13.562 ms, elapsed = 6.78182 ms.
+Time accumulated: CPU = 4.42354 s, elapsed = 2.37887 s.
+Peak resident memory used = 98.8 Mbytes.
+
+
+Notice from spectre during topology check.
+    Only one connection to node `0'.
+
+
+Global user options:
+         psfversion = 1.1.0
+            vabstol = 1e-06
+            iabstol = 1e-12
+               temp = 27
+               gmin = 1e-12
+             rforce = 1
+           maxnotes = 5
+           maxwarns = 5
+             digits = 5
+               cols = 80
+             pivrel = 0.001
+           sensfile = ../psf/sens.output
+     checklimitdest = psf
+               save = allpub
+        scalefactor = 0.9
+        scalefactor = 0.9
+        scalefactor = 0.9
+        scalefactor = 0.9
+        scalefactor = 0.9
+             reltol = 0.001
+               tnom = 27
+             scalem = 1
+              scale = 1
+
+Scoped user options:
+
+Circuit inventory:
+              nodes 18
+              bsim4 24
+     bsource_965053 2
+          capacitor 4
+            vsource 6
+
+Analysis and control statement inventory:
+               info 7
+               tran 1
+
+Output statements:
+             .probe 0
+           .measure 0
+               save 1
+
+Time for parsing: CPU = 26.521 ms, elapsed = 14.1671 ms.
+Time accumulated: CPU = 4.45077 s, elapsed = 2.39339 s.
+Peak resident memory used = 100 Mbytes.
+
+~~~~~~~~~~~~~~~~~~~~~~
+Pre-Simulation Summary
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+
+************************************************
+Transient Analysis `tran': time = (0 s -> 12 ns)
+************************************************
+
+Notice from spectre during IC analysis, during transient analysis `tran'.
+    GminDC = 1 pS is large enough to noticeably affect the DC solution.
+        dV(XBOOT.M35:int_s) = 253.373 uV
+        Use the `gmin_check' option to eliminate or expand this report.
+
+DC simulation time: CPU = 8.055 ms, elapsed = 4.02999 ms.
+
+Opening the PSFXL file ../psf/tran.tran.tran ...
+Important parameter values:
+    start = 0 s
+    outputstart = 0 s
+    stop = 12 ns
+    step = 12 ps
+    maxstep = 240 ps
+    ic = all
+    useprevic = no
+    skipdc = no
+    reltol = 1e-03
+    abstol(V) = 1 uV
+    abstol(I) = 1 pA
+    temp = 27 C
+    tnom = 27 C
+    tempeffects = all
+    errpreset = moderate
+    method = traponly
+    lteratio = 3.5
+    relref = sigglobal
+    cmin = 0 F
+    gmin = 1 pS
+
+
+Output and IC/nodeset summary:
+                 save   6       (current)
+                 save   24      (voltage)
+
+    tran: time = 340 ps      (2.83 %), step = 160 ps       (1.33 %)
+
+Warning from spectre at time = 519.781 ps during transient analysis `tran'.
+    WARNING (CMI-2753): XBOOT.M8: Vgb(=1.04895 V) has exceeded vgb_max(=990 mV).
+    WARNING (CMI-2753): XBOOT.M7: Vgb(=1.04895 V) has exceeded vgb_max(=990 mV).
+    WARNING (CMI-2755): XBOOT.M4: Vbd(=-1.04895 V) has exceeded vbd_max(=990 mV).
+Warning from spectre at time = 521.493 ps during transient analysis `tran'.
+    WARNING (CMI-2753): XBOOT.M8: Vgb(=1.13114 V) has exceeded vgb_max(=990 mV).
+    WARNING (CMI-2753): XBOOT.M25: Vgb(=1.0257 V) has exceeded vgb_max(=990 mV).
+    WARNING (CMI-2753): XBOOT.M7: Vgb(=1.13114 V) has exceeded vgb_max(=990 mV).
+        Further occurrences of this warning will be suppressed.
+    WARNING (CMI-2755): XBOOT.M4: Vbd(=-1.13114 V) has exceeded vbd_max(=990 mV).
+    WARNING (CMI-2755): XBOOT.M31: Vbd(=-1.0257 V) has exceeded vbd_max(=990 mV).
+Warning from spectre at time = 523.279 ps during transient analysis `tran'.
+    WARNING (CMI-2755): XBOOT.M4: Vbd(=-1.201 V) has exceeded vbd_max(=990 mV).
+    WARNING (CMI-2755): XBOOT.M31: Vbd(=-1.07416 V) has exceeded vbd_max(=990 mV).
+        Further occurrences of this warning will be suppressed.
+Notice from spectre at time = 806.265 ps during transient analysis `tran'.
+    Found trapezoidal ringing on node VDD_SRC:p.
+Notice from spectre at time = 1.04627 ns during transient analysis `tran'.
+    Found trapezoidal ringing on node VDD_SRC:p.
+
+    tran: time = 1.046 ns    (8.72 %), step = 240 ps          (2 %)
+
+Notice from spectre at time = 1.28627 ns during transient analysis `tran'.
+    Found trapezoidal ringing on node VDD_SRC:p.
+Notice from spectre at time = 1.52627 ns during transient analysis `tran'.
+    Found trapezoidal ringing on node VDD_SRC:p.
+
+    tran: time = 1.526 ns    (12.7 %), step = 240 ps          (2 %)
+
+Notice from spectre at time = 1.76627 ns during transient analysis `tran'.
+    Found trapezoidal ringing on node VDD_SRC:p.
+        Further occurrences of this notice will be suppressed.
+
+    tran: time = 2.246 ns    (18.7 %), step = 240 ps          (2 %)
+
+Warning from spectre at time = 2.51 ns during transient analysis `tran'.
+    WARNING (CMI-2754): XBOOT.M8: Vgd(=1.0105 V) has exceeded vgd_max(=990 mV).
+    WARNING (CMI-2752): XBOOT.M7: Vgs(=1.0105 V) has exceeded vgs_max(=990 mV).
+    WARNING (CMI-2751): XBOOT.M4: Vds(=1.00632 V) has exceeded vds_max(=990 mV).
+Warning from spectre at time = 2.51015 ns during transient analysis `tran'.
+    WARNING (CMI-2754): XBOOT.M8: Vgd(=1.01933 V) has exceeded vgd_max(=990 mV).
+    WARNING (CMI-2752): XBOOT.M7: Vgs(=1.01933 V) has exceeded vgs_max(=990 mV).
+    WARNING (CMI-2751): XBOOT.M4: Vds(=1.03523 V) has exceeded vds_max(=990 mV).
+Warning from spectre at time = 2.51035 ns during transient analysis `tran'.
+    WARNING (CMI-2754): XBOOT.M8: Vgd(=1.03036 V) has exceeded vgd_max(=990 mV).
+    WARNING (CMI-2754): XBOOT.M25: Vgd(=991.056 mV) has exceeded vgd_max(=990 mV).
+    WARNING (CMI-2752): XBOOT.M7: Vgs(=1.03036 V) has exceeded vgs_max(=990 mV).
+    WARNING (CMI-2752): XBOOT.M26: Vgs(=991.056 mV) has exceeded vgs_max(=990 mV).
+    WARNING (CMI-2751): XBOOT.M4: Vds(=1.06849 V) has exceeded vds_max(=990 mV).
+Warning from spectre at time = 2.51054 ns during transient analysis `tran'.
+    WARNING (CMI-2754): XBOOT.M8: Vgd(=1.03816 V) has exceeded vgd_max(=990 mV).
+        Further occurrences of this warning will be suppressed.
+    WARNING (CMI-2752): XBOOT.M7: Vgs(=1.03816 V) has exceeded vgs_max(=990 mV).
+        Further occurrences of this warning will be suppressed.
+    WARNING (CMI-2751): XBOOT.M4: Vds(=1.08826 V) has exceeded vds_max(=990 mV).
+Warning from spectre at time = 2.51086 ns during transient analysis `tran'.
+    WARNING (CMI-2751): XBOOT.M4: Vds(=1.10424 V) has exceeded vds_max(=990 mV).
+        Further occurrences of this warning will be suppressed.
+
+    tran: time = 2.71 ns     (22.6 %), step = 60.76 ps     (506 m%)
+    tran: time = 3.312 ns    (27.6 %), step = 240 ps          (2 %)
+    tran: time = 4.032 ns    (33.6 %), step = 240 ps          (2 %)
+    tran: time = 4.512 ns    (37.6 %), step = 240 ps          (2 %)
+    tran: time = 5.232 ns    (43.6 %), step = 240 ps          (2 %)
+    tran: time = 5.715 ns    (47.6 %), step = 75.09 ps     (626 m%)
+    tran: time = 6.345 ns    (52.9 %), step = 240 ps          (2 %)
+    tran: time = 7.065 ns    (58.9 %), step = 240 ps          (2 %)
+    tran: time = 7.505 ns    (62.5 %), step = 200.2 ps     (1.67 %)
+    tran: time = 8.312 ns    (69.3 %), step = 240 ps          (2 %)
+    tran: time = 8.792 ns    (73.3 %), step = 240 ps          (2 %)
+    tran: time = 9.512 ns    (79.3 %), step = 240 ps          (2 %)
+    tran: time = 9.992 ns    (83.3 %), step = 240 ps          (2 %)
+    tran: time = 10.5 ns     (87.5 %), step = 134.2 ps     (1.12 %)
+    tran: time = 11.1 ns     (92.5 %), step = 240 ps          (2 %)
+    tran: time = 11.82 ns    (98.5 %), step = 240 ps          (2 %)
+Number of accepted tran steps =             245
+
+Notice from spectre during transient analysis `tran'.
+    Trapezoidal ringing is detected during tran analysis.
+        Please use method=trap for better results and performance.
+
+
+Maximum value achieved for any signal of each quantity:
+V: V(XBOOT.net3) = 1.445 V
+I: I(VDD_SRC:p) = 983.5 uA
+If your circuit contains signals of the same quantity that are vastly different in size (such as high voltage circuitry combined with low voltage control circuitry), you should consider specifying global option `bin_relref=yes'.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Post-Transient Simulation Summary
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   -   To further speed up simulation, consider
+          add ++aps on command line
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+During simulation, the CPU load for active processors is :
+        Spectre  0 (6.6 %)       1 (11.7 %)      2 (20.1 %)      3 (84.5 %)
+                 4 (2.9 %)       5 (96.7 %)      6 (5.8 %)       7 (2.5 %)
+                 8 (93.8 %)      9 (17.5 %)     10 (8.0 %)      11 (6.2 %)
+                12 (4.6 %)      13 (7.5 %)      14 (4.2 %)      15 (2.1 %)
+        Other
+Initial condition solution time: CPU = 8.472 ms, elapsed = 4.2429 ms.
+Intrinsic tran analysis time:    CPU = 317.981 ms, elapsed = 159.408 ms.
+Total time required for tran analysis `tran': CPU = 336.989 ms, elapsed = 168.895 ms.
+Time accumulated: CPU = 4.81848 s, elapsed = 2.57835 s.
+Peak resident memory used = 103 Mbytes.
+
+
+Notice from spectre.
+    34 notices suppressed.
+    744 warnings suppressed.
+
+finalTimeOP: writing operating point information to rawfile.
+
+Opening the PSF file ../psf/finalTimeOP.info ...
+modelParameter: writing model parameter values to rawfile.
+
+Opening the PSF file ../psf/modelParameter.info ...
+element: writing instance parameter values to rawfile.
+
+Opening the PSF file ../psf/element.info ...
+outputParameter: writing output parameter values to rawfile.
+
+Opening the PSF file ../psf/outputParameter.info ...
+designParamVals: writing netlist parameters to rawfile.
+
+Opening the PSFASCII file ../psf/designParamVals.info ...
+primitives: writing primitives to rawfile.
+
+Opening the PSFASCII file ../psf/primitives.info.primitives ...
+subckts: writing subcircuits to rawfile.
+
+Opening the PSFASCII file ../psf/subckts.info.subckts ...
+
+Aggregate audit (12:00:38 PM, Thur Jun 18, 2026):
+Time used: CPU = 5.14 s, elapsed = 5.14 s, util. = 100%.
+Time spent in licensing: elapsed = 76.9 ms.
+Peak memory used = 108 Mbytes.
+Simulation started at: 12:00:36 PM, Thur Jun 18, 2026, ended at: 12:00:38 PM, Thur Jun 18, 2026, with elapsed time (wall clock): 5.14 s.
+spectre completes with 0 errors, 30 warnings, and 10 notices.

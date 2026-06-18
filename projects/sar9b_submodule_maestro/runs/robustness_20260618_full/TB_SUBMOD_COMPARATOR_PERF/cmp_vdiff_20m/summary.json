@@ -1,0 +1,54 @@
+{
+  "cell": "TB_SUBMOD_COMPARATOR_PERF",
+  "case_id": "cmp_vdiff_20m",
+  "history": "Interactive.4",
+  "session": "fnxSession119",
+  "variables": {
+    "vdd": "900m",
+    "vcm": "450m",
+    "vdiff": "20m",
+    "cload": "2f"
+  },
+  "overrides": {
+    "vdiff": "20m"
+  },
+  "signals": [
+    "/CLKC",
+    "/VP",
+    "/VN",
+    "/VOP",
+    "/VON"
+  ],
+  "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.4.log",
+  "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.4/1/TRAN/psf",
+  "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.4/1/TRAN/psf/spectre.out",
+  "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.4/1/TRAN/netlist/input.scs",
+  "completed": true,
+  "run_errors": 0,
+  "spectre_summary": {
+    "errors": 0,
+    "warnings": 5,
+    "notices": 9
+  },
+  "maestro_metrics": {
+    "cmp_clk_rise_s": "1.003n",
+    "cmp_decision_cross_s": "1.007n",
+    "cmp_decision_delay_ps": "4.484",
+    "cmp_vop_max_v": "939.9m",
+    "cmp_von_min_v": "-5.707m",
+    "cmp_final_diff_v": "-843.9n"
+  },
+  "waveform_points": 4001,
+  "metrics": {
+    "clk_rise_s": 1.0025e-09,
+    "decision_cross_s": 1.0064226148643203e-09,
+    "decision_delay_ps": 3.9226148643203445,
+    "final_vop": 3.309323075869844e-06,
+    "final_von": 4.153252645990137e-06,
+    "final_diff_v": -8.439295701202931e-07,
+    "offline": {
+      "cmp_avg_power_w": 3.1743770080909445e-05,
+      "cmp_energy_j": 2.5395016064727556e-13
+    }
+  }
+}

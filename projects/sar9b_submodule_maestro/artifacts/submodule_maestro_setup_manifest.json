@@ -160,7 +160,10 @@
       "stop": "28n",
       "vars": {
         "vdd": "900m",
-        "cload": "1f"
+        "cload": "1f",
+        "valid_td": "500p",
+        "valid_pw": "1n",
+        "valid_per": "2.5n"
       },
       "signals": [
         "/CLKS",
@@ -563,7 +566,7 @@
     },
     {
       "cell": "TB_SUBMOD_ASYCTRL_9CLK_PERF",
-      "session": "fnxSession112",
+      "session": "fnxSession118",
       "views": "(\"maestro\" \"schematic\")",
       "outputs": [
         {

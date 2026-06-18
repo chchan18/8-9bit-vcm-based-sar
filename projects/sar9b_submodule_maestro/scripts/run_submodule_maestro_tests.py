@@ -400,7 +400,7 @@ def export_waveforms(
     )
     result = client.execute_skill(cmd, timeout=240)
     if not skill_ok(result):
-        raise RuntimeError(f"ocnPrint failed for {signals}: {result}")
+        raise RuntimeError(f"ocnPrint failed for {[name for name, _ in wave_defs]}: {result}")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     client.download_file(remote_path, str(out_path))
     client.execute_skill(f'deleteFile("{remote_path}")', timeout=10)

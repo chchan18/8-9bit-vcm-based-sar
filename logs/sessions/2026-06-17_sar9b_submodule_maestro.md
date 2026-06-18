@@ -66,8 +66,27 @@ Each cell has a schematic and Maestro `TRAN` view in library `SAR9B_400MV`.
   - bootstrap `Interactive.0`: final differential output `100 mV`, settle
     error `86.49 uV`, offline power `2.188 uW`.
 
+- 2026-06-18 robustness continuation: added ASYCTRL `valid_td`, `valid_pw`,
+  and `valid_per` Maestro variables so the `VALID` stimulus can be swept
+  without schematic edits.
+- Added `run_submodule_robustness_sweeps.py`, a restartable matrix runner that
+  keeps per-case `summary.json` files and rebuilds the merged manifest from
+  completed cases after interruptions.
+- Completed tag `robustness_20260618_full`: 20 Maestro cases, zero ADE run
+  errors, and zero Spectre errors.
+  - comparator: 6 cases, decision delay `4.482-4.514 ps` at 900 mV and
+    `5.335 ps` at 800 mV;
+  - clock non-overlap: 4 cases, offline simultaneous-high time `0 ps` and gap
+    `34.4-44.86 ps`;
+  - ASYCTRL: 5 cases, all nine `CLKO<8:0>` outputs reach rail and sequence
+    span tracks `valid_per` as `16 ns`, `20 ns`, and `24 ns`;
+  - bootstrap: 5 cases, final differential error stays in the raw Maestro
+    range `-248.9u` to `438u` for the `_mv` output.
+- Opening a fresh Maestro cell occasionally reset the bridge daemon. The
+  affected cell was restarted after `scripts/reload_bridge_ciw.py`; no
+  completed case was reused without its own `summary.json` and Spectre log.
+
 ## Next
 
-Continue with robustness checks: sweep ASYCTRL `VALID` timing, comparator
-input overdrive, non-overlap loading, and bootstrap acquisition window; then add
-PVT/corner coverage for the same Maestro measurement outputs.
+Extend the same Maestro measurement outputs to PVT/corner coverage and compare
+standalone ASYCTRL timing against the full SAR9B ADC run.

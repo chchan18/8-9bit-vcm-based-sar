@@ -1,0 +1,1892 @@
+{
+  "library": "SAR9B_400MV",
+  "test_name": "TRAN",
+  "sample_step_s": 2e-12,
+  "trigger": "callback",
+  "tag": "robustness_20260618_full",
+  "matrix": {
+    "TB_SUBMOD_COMPARATOR_PERF": [
+      {
+        "id": "cmp_nominal",
+        "vars": {}
+      },
+      {
+        "id": "cmp_vdiff_2m",
+        "vars": {
+          "vdiff": "2m"
+        }
+      },
+      {
+        "id": "cmp_vdiff_5m",
+        "vars": {
+          "vdiff": "5m"
+        }
+      },
+      {
+        "id": "cmp_vdiff_20m",
+        "vars": {
+          "vdiff": "20m"
+        }
+      },
+      {
+        "id": "cmp_cload_5f",
+        "vars": {
+          "cload": "5f"
+        }
+      },
+      {
+        "id": "cmp_vdd_800m",
+        "vars": {
+          "vdd": "800m"
+        }
+      }
+    ],
+    "TB_SUBMOD_CLK_NOOVERLAP_PERF": [
+      {
+        "id": "clk_nominal",
+        "vars": {}
+      },
+      {
+        "id": "clk_cload_1f",
+        "vars": {
+          "cload": "1f"
+        }
+      },
+      {
+        "id": "clk_cload_5f",
+        "vars": {
+          "cload": "5f"
+        }
+      },
+      {
+        "id": "clk_vdd_800m",
+        "vars": {
+          "vdd": "800m"
+        }
+      }
+    ],
+    "TB_SUBMOD_ASYCTRL_9CLK_PERF": [
+      {
+        "id": "asy_nominal",
+        "vars": {}
+      },
+      {
+        "id": "asy_valid_per_2n",
+        "vars": {
+          "valid_per": "2n"
+        }
+      },
+      {
+        "id": "asy_valid_per_3n",
+        "vars": {
+          "valid_per": "3n"
+        }
+      },
+      {
+        "id": "asy_cload_3f",
+        "vars": {
+          "cload": "3f"
+        }
+      },
+      {
+        "id": "asy_vdd_800m",
+        "vars": {
+          "vdd": "800m"
+        }
+      }
+    ],
+    "TB_SUBMOD_BOOTSTRAP_DIFF_PERF": [
+      {
+        "id": "boot_nominal",
+        "vars": {}
+      },
+      {
+        "id": "boot_vdiff_50m",
+        "vars": {
+          "vdiff": "50m"
+        }
+      },
+      {
+        "id": "boot_vdiff_200m",
+        "vars": {
+          "vdiff": "200m"
+        }
+      },
+      {
+        "id": "boot_cload_10f",
+        "vars": {
+          "cload": "10f"
+        }
+      },
+      {
+        "id": "boot_vdd_800m",
+        "vars": {
+          "vdd": "800m"
+        }
+      }
+    ]
+  },
+  "runs": [
+    {
+      "cell": "TB_SUBMOD_COMPARATOR_PERF",
+      "case_id": "cmp_nominal",
+      "history": "Interactive.1",
+      "session": "fnxSession119",
+      "variables": {
+        "vdd": "900m",
+        "vcm": "450m",
+        "vdiff": "10m",
+        "cload": "2f"
+      },
+      "overrides": {},
+      "signals": [
+        "/CLKC",
+        "/VP",
+        "/VN",
+        "/VOP",
+        "/VON"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.1.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.1/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.1/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.1/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 5,
+        "notices": 9
+      },
+      "maestro_metrics": {
+        "cmp_clk_rise_s": "1.003n",
+        "cmp_decision_cross_s": "1.007n",
+        "cmp_decision_delay_ps": "4.483",
+        "cmp_vop_max_v": "940m",
+        "cmp_von_min_v": "-7.177m",
+        "cmp_final_diff_v": "-794n"
+      },
+      "waveform_points": 4001,
+      "metrics": {
+        "clk_rise_s": 1.0025e-09,
+        "decision_cross_s": 1.0064230309591008e-09,
+        "decision_delay_ps": 3.9230309591008004,
+        "final_vop": 3.361434385704241e-06,
+        "final_von": 4.155453536741088e-06,
+        "final_diff_v": -7.940191510368473e-07,
+        "offline": {
+          "cmp_avg_power_w": 3.1828778060200376e-05,
+          "cmp_energy_j": 2.54630224481603e-13
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_COMPARATOR_PERF",
+      "case_id": "cmp_vdiff_2m",
+      "history": "Interactive.2",
+      "session": "fnxSession119",
+      "variables": {
+        "vdd": "900m",
+        "vcm": "450m",
+        "vdiff": "2m",
+        "cload": "2f"
+      },
+      "overrides": {
+        "vdiff": "2m"
+      },
+      "signals": [
+        "/CLKC",
+        "/VP",
+        "/VN",
+        "/VOP",
+        "/VON"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.2.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.2/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.2/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.2/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 5,
+        "notices": 9
+      },
+      "maestro_metrics": {
+        "cmp_clk_rise_s": "1.003n",
+        "cmp_decision_cross_s": "1.007n",
+        "cmp_decision_delay_ps": "4.482",
+        "cmp_vop_max_v": "940m",
+        "cmp_von_min_v": "-7.969m",
+        "cmp_final_diff_v": "-760.1n"
+      },
+      "waveform_points": 4001,
+      "metrics": {
+        "clk_rise_s": 1.0025e-09,
+        "decision_cross_s": 1.0064235441142547e-09,
+        "decision_delay_ps": 3.9235441142546854,
+        "final_vop": 3.387501455281736e-06,
+        "final_von": 4.14759864765426e-06,
+        "final_diff_v": -7.600971923725239e-07,
+        "offline": {
+          "cmp_avg_power_w": 3.207178839562865e-05,
+          "cmp_energy_j": 2.565743071650292e-13
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_COMPARATOR_PERF",
+      "case_id": "cmp_vdiff_5m",
+      "history": "Interactive.3",
+      "session": "fnxSession119",
+      "variables": {
+        "vdd": "900m",
+        "vcm": "450m",
+        "vdiff": "5m",
+        "cload": "2f"
+      },
+      "overrides": {
+        "vdiff": "5m"
+      },
+      "signals": [
+        "/CLKC",
+        "/VP",
+        "/VN",
+        "/VOP",
+        "/VON"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.3.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.3/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.3/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.3/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 5,
+        "notices": 9
+      },
+      "maestro_metrics": {
+        "cmp_clk_rise_s": "1.003n",
+        "cmp_decision_cross_s": "1.007n",
+        "cmp_decision_delay_ps": "4.483",
+        "cmp_vop_max_v": "940m",
+        "cmp_von_min_v": "-7.577m",
+        "cmp_final_diff_v": "-775.3n"
+      },
+      "waveform_points": 4001,
+      "metrics": {
+        "clk_rise_s": 1.0025e-09,
+        "decision_cross_s": 1.0064233326533033e-09,
+        "decision_delay_ps": 3.9233326533032753,
+        "final_vop": 3.375323456107035e-06,
+        "final_von": 4.150667978058328e-06,
+        "final_diff_v": -7.75344521951293e-07,
+        "offline": {
+          "cmp_avg_power_w": 3.192379025162718e-05,
+          "cmp_energy_j": 2.5539032201301746e-13
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_COMPARATOR_PERF",
+      "case_id": "cmp_vdiff_20m",
+      "history": "Interactive.4",
+      "session": "fnxSession119",
+      "variables": {
+        "vdd": "900m",
+        "vcm": "450m",
+        "vdiff": "20m",
+        "cload": "2f"
+      },
+      "overrides": {
+        "vdiff": "20m"
+      },
+      "signals": [
+        "/CLKC",
+        "/VP",
+        "/VN",
+        "/VOP",
+        "/VON"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.4.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.4/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.4/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.4/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 5,
+        "notices": 9
+      },
+      "maestro_metrics": {
+        "cmp_clk_rise_s": "1.003n",
+        "cmp_decision_cross_s": "1.007n",
+        "cmp_decision_delay_ps": "4.484",
+        "cmp_vop_max_v": "939.9m",
+        "cmp_von_min_v": "-5.707m",
+        "cmp_final_diff_v": "-843.9n"
+      },
+      "waveform_points": 4001,
+      "metrics": {
+        "clk_rise_s": 1.0025e-09,
+        "decision_cross_s": 1.0064226148643203e-09,
+        "decision_delay_ps": 3.9226148643203445,
+        "final_vop": 3.309323075869844e-06,
+        "final_von": 4.153252645990137e-06,
+        "final_diff_v": -8.439295701202931e-07,
+        "offline": {
+          "cmp_avg_power_w": 3.1743770080909445e-05,
+          "cmp_energy_j": 2.5395016064727556e-13
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_COMPARATOR_PERF",
+      "case_id": "cmp_cload_5f",
+      "history": "Interactive.5",
+      "session": "fnxSession119",
+      "variables": {
+        "vdd": "900m",
+        "vcm": "450m",
+        "vdiff": "10m",
+        "cload": "5f"
+      },
+      "overrides": {
+        "cload": "5f"
+      },
+      "signals": [
+        "/CLKC",
+        "/VP",
+        "/VN",
+        "/VOP",
+        "/VON"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.5.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.5/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.5/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.5/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 5,
+        "notices": 9
+      },
+      "maestro_metrics": {
+        "cmp_clk_rise_s": "1.003n",
+        "cmp_decision_cross_s": "1.007n",
+        "cmp_decision_delay_ps": "4.514",
+        "cmp_vop_max_v": "931.1m",
+        "cmp_von_min_v": "-6.338m",
+        "cmp_final_diff_v": "173.1n"
+      },
+      "waveform_points": 4001,
+      "metrics": {
+        "clk_rise_s": 1.0025e-09,
+        "decision_cross_s": 1.0064438115989777e-09,
+        "decision_delay_ps": 3.943811598977661,
+        "final_vop": 4.540622655872367e-06,
+        "final_von": 4.367502934247291e-06,
+        "final_diff_v": 1.7311972162507553e-07,
+        "offline": {
+          "cmp_avg_power_w": 3.2130512607117675e-05,
+          "cmp_energy_j": 2.570441008569414e-13
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_COMPARATOR_PERF",
+      "case_id": "cmp_vdd_800m",
+      "history": "Interactive.6",
+      "session": "fnxSession119",
+      "variables": {
+        "vdd": "800m",
+        "vcm": "450m",
+        "vdiff": "10m",
+        "cload": "2f"
+      },
+      "overrides": {
+        "vdd": "800m"
+      },
+      "signals": [
+        "/CLKC",
+        "/VP",
+        "/VN",
+        "/VOP",
+        "/VON"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.6.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.6/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.6/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.6/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 5,
+        "notices": 9
+      },
+      "maestro_metrics": {
+        "cmp_clk_rise_s": "1.003n",
+        "cmp_decision_cross_s": "1.008n",
+        "cmp_decision_delay_ps": "5.335",
+        "cmp_vop_max_v": "842.9m",
+        "cmp_von_min_v": "-2.252m",
+        "cmp_final_diff_v": "-992.4n"
+      },
+      "waveform_points": 4001,
+      "metrics": {
+        "clk_rise_s": 1.0028125000000001e-09,
+        "decision_cross_s": 1.0080485559272996e-09,
+        "decision_delay_ps": 5.23605592729943,
+        "final_vop": 2.707561519050239e-06,
+        "final_von": 3.69993768870668e-06,
+        "final_diff_v": -9.923761696564407e-07,
+        "offline": {
+          "cmp_avg_power_w": 1.5881801786727786e-05,
+          "cmp_energy_j": 1.270544142938223e-13
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_CLK_NOOVERLAP_PERF",
+      "case_id": "clk_nominal",
+      "history": "Interactive.1",
+      "session": "fnxSession120",
+      "variables": {
+        "vdd": "900m",
+        "cload": "2f"
+      },
+      "overrides": {},
+      "signals": [
+        "/CLKIN",
+        "/CLKOP",
+        "/CLKON"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.1.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.1/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.1/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.1/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 30,
+        "notices": 10
+      },
+      "maestro_metrics": {
+        "clk_clkop_delay_ps": "91.81",
+        "clk_clkon_delay_ps": "2.093K",
+        "clk_gap_op_after_on_ps": "35.08",
+        "clk_gap_on_after_op_ps": "35.27",
+        "clk_clkop_duty_pct": "39.31",
+        "clk_clkon_duty_pct": "59.28",
+        "clk_overlap_product_peak_v2": "6.792u"
+      },
+      "waveform_points": 6001,
+      "metrics": {
+        "clkin_rise_ps": [
+          502.50000000000006,
+          5502.500000000001,
+          10502.5
+        ],
+        "clkop_rise_ps": [
+          594.3345629369733,
+          5594.336710395191,
+          10594.336717934731
+        ],
+        "clkon_rise_ps": [
+          2595.307265315768,
+          7595.305017661819
+        ],
+        "clkop_fall_ps": [
+          2560.0509656673735,
+          7560.05641325786
+        ],
+        "clkon_fall_ps": [
+          559.235075042873,
+          5559.233578791824,
+          10559.233580052347
+        ],
+        "both_high_total_ps": 0.0,
+        "both_low_total_ps": 176.0,
+        "offline": {
+          "clk_avg_power_w": 3.638671932613395e-06,
+          "clk_energy_j": 4.366406319136074e-14
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_CLK_NOOVERLAP_PERF",
+      "case_id": "clk_cload_1f",
+      "history": "Interactive.2",
+      "session": "fnxSession120",
+      "variables": {
+        "vdd": "900m",
+        "cload": "1f"
+      },
+      "overrides": {
+        "cload": "1f"
+      },
+      "signals": [
+        "/CLKIN",
+        "/CLKOP",
+        "/CLKON"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.2.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.2/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.2/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.2/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 30,
+        "notices": 10
+      },
+      "maestro_metrics": {
+        "clk_clkop_delay_ps": "91.06",
+        "clk_clkon_delay_ps": "2.092K",
+        "clk_gap_op_after_on_ps": "35.29",
+        "clk_gap_on_after_op_ps": "35.47",
+        "clk_clkop_duty_pct": "39.31",
+        "clk_clkon_duty_pct": "59.27",
+        "clk_overlap_product_peak_v2": "8.221u"
+      },
+      "waveform_points": 6001,
+      "metrics": {
+        "clkin_rise_ps": [
+          502.50000000000006,
+          5502.500000000001,
+          10502.5
+        ],
+        "clkop_rise_ps": [
+          593.5237475196442,
+          5593.522516962155,
+          10593.522518394037
+        ],
+        "clkon_rise_ps": [
+          2594.5897459611892,
+          7594.590972945189
+        ],
+        "clkop_fall_ps": [
+          2559.0968751789146,
+          7559.095530150471
+        ],
+        "clkon_fall_ps": [
+          558.2982121732376,
+          5558.297654262364,
+          10558.29765522736
+        ],
+        "both_high_total_ps": 0.0,
+        "both_low_total_ps": 174.0,
+        "offline": {
+          "clk_avg_power_w": 3.2872603142603115e-06,
+          "clk_energy_j": 3.944712377112374e-14
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_CLK_NOOVERLAP_PERF",
+      "case_id": "clk_cload_5f",
+      "history": "Interactive.3",
+      "session": "fnxSession120",
+      "variables": {
+        "vdd": "900m",
+        "cload": "5f"
+      },
+      "overrides": {
+        "cload": "5f"
+      },
+      "signals": [
+        "/CLKIN",
+        "/CLKOP",
+        "/CLKON"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.3.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.3/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.3/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.3/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 30,
+        "notices": 10
+      },
+      "maestro_metrics": {
+        "clk_clkop_delay_ps": "93.63",
+        "clk_clkon_delay_ps": "2.095K",
+        "clk_gap_op_after_on_ps": "34.4",
+        "clk_gap_on_after_op_ps": "34.57",
+        "clk_clkop_duty_pct": "39.33",
+        "clk_clkon_duty_pct": "59.29",
+        "clk_overlap_product_peak_v2": "5.883u"
+      },
+      "waveform_points": 6001,
+      "metrics": {
+        "clkin_rise_ps": [
+          502.50000000000006,
+          5502.500000000001,
+          10502.5
+        ],
+        "clkop_rise_ps": [
+          596.1412387275199,
+          5596.135340373607,
+          10596.135338971486
+        ],
+        "clkon_rise_ps": [
+          2597.147280590867,
+          7597.149404001665
+        ],
+        "clkop_fall_ps": [
+          2562.5818371047167,
+          7562.5811080317235
+        ],
+        "clkon_fall_ps": [
+          561.7448406424832,
+          5561.741189140658,
+          10561.741187868429
+        ],
+        "both_high_total_ps": 0.0,
+        "both_low_total_ps": 176.0,
+        "offline": {
+          "clk_avg_power_w": 4.676748600886587e-06,
+          "clk_energy_j": 5.6120983210639043e-14
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_CLK_NOOVERLAP_PERF",
+      "case_id": "clk_vdd_800m",
+      "history": "Interactive.4",
+      "session": "fnxSession120",
+      "variables": {
+        "vdd": "800m",
+        "cload": "2f"
+      },
+      "overrides": {
+        "vdd": "800m"
+      },
+      "signals": [
+        "/CLKIN",
+        "/CLKOP",
+        "/CLKON"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.4.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.4/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.4/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.4/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 5,
+        "notices": 9
+      },
+      "maestro_metrics": {
+        "clk_clkop_delay_ps": "113.6",
+        "clk_clkon_delay_ps": "2.113K",
+        "clk_gap_op_after_on_ps": "44.86",
+        "clk_gap_on_after_op_ps": "44.93",
+        "clk_clkop_duty_pct": "39.1",
+        "clk_clkon_duty_pct": "59.11",
+        "clk_overlap_product_peak_v2": "5.103u"
+      },
+      "waveform_points": 6001,
+      "metrics": {
+        "clkin_rise_ps": [
+          502.8125,
+          5502.8125,
+          10502.8125
+        ],
+        "clkop_rise_ps": [
+          616.4237833615938,
+          5616.428071642567,
+          10616.428058836686
+        ],
+        "clkon_rise_ps": [
+          2616.2897793715733,
+          7616.302614773026
+        ],
+        "clkop_fall_ps": [
+          2571.3198615531105,
+          7571.328147351159
+        ],
+        "clkon_fall_ps": [
+          571.5143189733346,
+          5571.518840640271,
+          10571.518828188198
+        ],
+        "both_high_total_ps": 0.0,
+        "both_low_total_ps": 230.0,
+        "offline": {
+          "clk_avg_power_w": 3.176827130953904e-06,
+          "clk_energy_j": 3.812192557144685e-14
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_ASYCTRL_9CLK_PERF",
+      "case_id": "asy_nominal",
+      "history": "Interactive.1",
+      "session": "fnxSession121",
+      "variables": {
+        "vdd": "900m",
+        "cload": "1f",
+        "valid_td": "500p",
+        "valid_pw": "1n",
+        "valid_per": "2.5n"
+      },
+      "overrides": {},
+      "signals": [
+        "/CLKS",
+        "/VALID",
+        "/CLKC",
+        "/CLKO<0>",
+        "/CLKO<1>",
+        "/CLKO<2>",
+        "/CLKO<3>",
+        "/CLKO<4>",
+        "/CLKO<5>",
+        "/CLKO<6>",
+        "/CLKO<7>",
+        "/CLKO<8>"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.1.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.1/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.1/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.1/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 10,
+        "notices": 6
+      },
+      "maestro_metrics": {
+        "asy_valid_to_clko8_ps": "39.84",
+        "asy_sequence_span_ps": "20K",
+        "asy_clkc_max_v": "916.7m",
+        "asy_clko8_rise_ps": "542.3",
+        "asy_clko7_rise_ps": "3.042K",
+        "asy_clko6_rise_ps": "5.542K",
+        "asy_clko5_rise_ps": "8.042K",
+        "asy_clko4_rise_ps": "10.54K",
+        "asy_clko3_rise_ps": "13.04K",
+        "asy_clko2_rise_ps": "15.54K",
+        "asy_clko1_rise_ps": "18.04K",
+        "asy_clko0_rise_ps": "20.54K",
+        "asy_clko8_max_v": "906.9m",
+        "asy_clko7_max_v": "906.9m",
+        "asy_clko6_max_v": "906.9m",
+        "asy_clko5_max_v": "906.9m",
+        "asy_clko4_max_v": "906.9m",
+        "asy_clko3_max_v": "906.9m",
+        "asy_clko2_max_v": "906.9m",
+        "asy_clko1_max_v": "906.9m",
+        "asy_clko0_max_v": "905m"
+      },
+      "waveform_points": 14001,
+      "metrics": {
+        "valid_rise_ps": [
+          502.50000000000006,
+          3002.5000000000005,
+          5502.500000000001,
+          8002.5,
+          10502.5
+        ],
+        "clko_first_rise_ps": {
+          "/CLKO<0>": 20542.688294692638,
+          "/CLKO<1>": 18042.3485451305,
+          "/CLKO<2>": 15542.348547635871,
+          "/CLKO<3>": 13042.348547635393,
+          "/CLKO<4>": 10542.34854763802,
+          "/CLKO<5>": 8042.348547648864,
+          "/CLKO<6>": 5542.348547629362,
+          "/CLKO<7>": 3042.3485470882433,
+          "/CLKO<8>": 542.3388336153756
+        },
+        "clko_rises_ps": {
+          "/CLKO<0>": [
+            20542.688294692638
+          ],
+          "/CLKO<1>": [
+            18042.3485451305
+          ],
+          "/CLKO<2>": [
+            15542.348547635871
+          ],
+          "/CLKO<3>": [
+            13042.348547635393
+          ],
+          "/CLKO<4>": [
+            10542.34854763802
+          ],
+          "/CLKO<5>": [
+            8042.348547648864
+          ],
+          "/CLKO<6>": [
+            5542.348547629362
+          ],
+          "/CLKO<7>": [
+            3042.3485470882433
+          ],
+          "/CLKO<8>": [
+            542.3388336153756
+          ]
+        },
+        "clko_first_fall_ps": {
+          "/CLKO<0>": null,
+          "/CLKO<1>": null,
+          "/CLKO<2>": null,
+          "/CLKO<3>": null,
+          "/CLKO<4>": null,
+          "/CLKO<5>": null,
+          "/CLKO<6>": null,
+          "/CLKO<7>": null,
+          "/CLKO<8>": null
+        },
+        "clko_falls_ps": {
+          "/CLKO<0>": [],
+          "/CLKO<1>": [],
+          "/CLKO<2>": [],
+          "/CLKO<3>": [],
+          "/CLKO<4>": [],
+          "/CLKO<5>": [],
+          "/CLKO<6>": [],
+          "/CLKO<7>": [],
+          "/CLKO<8>": []
+        },
+        "clko_min_v": {
+          "/CLKO<0>": -0.03925825350177099,
+          "/CLKO<1>": -0.01553661545343681,
+          "/CLKO<2>": -0.01553665752686281,
+          "/CLKO<3>": -0.01553665741697557,
+          "/CLKO<4>": -0.01553665721315477,
+          "/CLKO<5>": -0.0155366567443464,
+          "/CLKO<6>": -0.01553665605020784,
+          "/CLKO<7>": -0.01553667424154217,
+          "/CLKO<8>": -0.01539673887452891
+        },
+        "clko_max_v": {
+          "/CLKO<0>": 0.9043423033216017,
+          "/CLKO<1>": 0.9059518092565155,
+          "/CLKO<2>": 0.9059517314885711,
+          "/CLKO<3>": 0.9059517314854281,
+          "/CLKO<4>": 0.905951731485435,
+          "/CLKO<5>": 0.9059517314854353,
+          "/CLKO<6>": 0.9059517314854341,
+          "/CLKO<7>": 0.9059517314950734,
+          "/CLKO<8>": 0.9059518932983508
+        },
+        "clko_final_v": {
+          "/CLKO<0>": 0.8999989712104565,
+          "/CLKO<1>": 0.899998546412942,
+          "/CLKO<2>": 0.8999985463372462,
+          "/CLKO<3>": 0.8999985463372068,
+          "/CLKO<4>": 0.8999985463372547,
+          "/CLKO<5>": 0.8999985463372219,
+          "/CLKO<6>": 0.8999985463372335,
+          "/CLKO<7>": 0.8999985463378299,
+          "/CLKO<8>": 0.8999985473742348
+        },
+        "clko_rail_count": 9,
+        "clkc_min": -0.02804793070156442,
+        "clkc_max": 0.9162595506075792,
+        "offline": {
+          "asy_avg_power_w": 8.260785785263466e-06,
+          "asy_energy_j": 2.3130200198737703e-13
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_ASYCTRL_9CLK_PERF",
+      "case_id": "asy_valid_per_2n",
+      "history": "Interactive.2",
+      "session": "fnxSession121",
+      "variables": {
+        "vdd": "900m",
+        "cload": "1f",
+        "valid_td": "500p",
+        "valid_pw": "1n",
+        "valid_per": "2n"
+      },
+      "overrides": {
+        "valid_per": "2n"
+      },
+      "signals": [
+        "/CLKS",
+        "/VALID",
+        "/CLKC",
+        "/CLKO<0>",
+        "/CLKO<1>",
+        "/CLKO<2>",
+        "/CLKO<3>",
+        "/CLKO<4>",
+        "/CLKO<5>",
+        "/CLKO<6>",
+        "/CLKO<7>",
+        "/CLKO<8>"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.2.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.2/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.2/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.2/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 10,
+        "notices": 3
+      },
+      "maestro_metrics": {
+        "asy_valid_to_clko8_ps": "39.84",
+        "asy_sequence_span_ps": "16K",
+        "asy_clkc_max_v": "916.7m",
+        "asy_clko8_rise_ps": "542.3",
+        "asy_clko7_rise_ps": "2.542K",
+        "asy_clko6_rise_ps": "4.542K",
+        "asy_clko5_rise_ps": "6.542K",
+        "asy_clko4_rise_ps": "8.542K",
+        "asy_clko3_rise_ps": "10.54K",
+        "asy_clko2_rise_ps": "12.54K",
+        "asy_clko1_rise_ps": "14.54K",
+        "asy_clko0_rise_ps": "16.54K",
+        "asy_clko8_max_v": "906.9m",
+        "asy_clko7_max_v": "906.9m",
+        "asy_clko6_max_v": "906.9m",
+        "asy_clko5_max_v": "906.9m",
+        "asy_clko4_max_v": "906.9m",
+        "asy_clko3_max_v": "906.9m",
+        "asy_clko2_max_v": "906.9m",
+        "asy_clko1_max_v": "906.9m",
+        "asy_clko0_max_v": "905m"
+      },
+      "waveform_points": 14001,
+      "metrics": {
+        "valid_rise_ps": [
+          502.50000000000006,
+          2502.5,
+          4502.500000000001,
+          6502.500000000002,
+          8502.5
+        ],
+        "clko_first_rise_ps": {
+          "/CLKO<0>": 16542.688290271763,
+          "/CLKO<1>": 14542.348546974017,
+          "/CLKO<2>": 12542.348549475464,
+          "/CLKO<3>": 10542.348549491946,
+          "/CLKO<4>": 8542.348549509294,
+          "/CLKO<5>": 6542.348549513792,
+          "/CLKO<6>": 4542.348549827946,
+          "/CLKO<7>": 2542.348550924615,
+          "/CLKO<8>": 542.3388336153756
+        },
+        "clko_rises_ps": {
+          "/CLKO<0>": [
+            16542.688290271763
+          ],
+          "/CLKO<1>": [
+            14542.348546974017
+          ],
+          "/CLKO<2>": [
+            12542.348549475464
+          ],
+          "/CLKO<3>": [
+            10542.348549491946
+          ],
+          "/CLKO<4>": [
+            8542.348549509294
+          ],
+          "/CLKO<5>": [
+            6542.348549513792
+          ],
+          "/CLKO<6>": [
+            4542.348549827946
+          ],
+          "/CLKO<7>": [
+            2542.348550924615
+          ],
+          "/CLKO<8>": [
+            542.3388336153756
+          ]
+        },
+        "clko_first_fall_ps": {
+          "/CLKO<0>": null,
+          "/CLKO<1>": null,
+          "/CLKO<2>": null,
+          "/CLKO<3>": null,
+          "/CLKO<4>": null,
+          "/CLKO<5>": null,
+          "/CLKO<6>": null,
+          "/CLKO<7>": null,
+          "/CLKO<8>": null
+        },
+        "clko_falls_ps": {
+          "/CLKO<0>": [],
+          "/CLKO<1>": [],
+          "/CLKO<2>": [],
+          "/CLKO<3>": [],
+          "/CLKO<4>": [],
+          "/CLKO<5>": [],
+          "/CLKO<6>": [],
+          "/CLKO<7>": [],
+          "/CLKO<8>": []
+        },
+        "clko_min_v": {
+          "/CLKO<0>": -0.03925834764640186,
+          "/CLKO<1>": -0.01553669619960793,
+          "/CLKO<2>": -0.01553673838197775,
+          "/CLKO<3>": -0.01553673854278879,
+          "/CLKO<4>": -0.01553673894190938,
+          "/CLKO<5>": -0.01553673968085541,
+          "/CLKO<6>": -0.01553674038653478,
+          "/CLKO<7>": -0.01553675191347269,
+          "/CLKO<8>": -0.01539673887452891
+        },
+        "clko_max_v": {
+          "/CLKO<0>": 0.904342303271216,
+          "/CLKO<1>": 0.9059516757976417,
+          "/CLKO<2>": 0.9059515979092059,
+          "/CLKO<3>": 0.9059515979060315,
+          "/CLKO<4>": 0.9059515979060382,
+          "/CLKO<5>": 0.9059515979060361,
+          "/CLKO<6>": 0.9059515979060385,
+          "/CLKO<7>": 0.9059515979156813,
+          "/CLKO<8>": 0.905951759751358
+        },
+        "clko_final_v": {
+          "/CLKO<0>": 0.8999989710234501,
+          "/CLKO<1>": 0.8999985447951971,
+          "/CLKO<2>": 0.8999985447188115,
+          "/CLKO<3>": 0.8999985447187998,
+          "/CLKO<4>": 0.8999985447188162,
+          "/CLKO<5>": 0.8999985447187951,
+          "/CLKO<6>": 0.8999985447188212,
+          "/CLKO<7>": 0.8999985447193696,
+          "/CLKO<8>": 0.8999985457559698
+        },
+        "clko_rail_count": 9,
+        "clkc_min": -0.02804799081907891,
+        "clkc_max": 0.9162595505680987,
+        "offline": {
+          "asy_avg_power_w": 9.896846420444618e-06,
+          "asy_energy_j": 2.771116997724493e-13
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_ASYCTRL_9CLK_PERF",
+      "case_id": "asy_valid_per_3n",
+      "history": "Interactive.3",
+      "session": "fnxSession121",
+      "variables": {
+        "vdd": "900m",
+        "cload": "1f",
+        "valid_td": "500p",
+        "valid_pw": "1n",
+        "valid_per": "3n"
+      },
+      "overrides": {
+        "valid_per": "3n"
+      },
+      "signals": [
+        "/CLKS",
+        "/VALID",
+        "/CLKC",
+        "/CLKO<0>",
+        "/CLKO<1>",
+        "/CLKO<2>",
+        "/CLKO<3>",
+        "/CLKO<4>",
+        "/CLKO<5>",
+        "/CLKO<6>",
+        "/CLKO<7>",
+        "/CLKO<8>"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.3.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.3/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.3/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.3/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 10,
+        "notices": 3
+      },
+      "maestro_metrics": {
+        "asy_valid_to_clko8_ps": "39.84",
+        "asy_sequence_span_ps": "24K",
+        "asy_clkc_max_v": "916.7m",
+        "asy_clko8_rise_ps": "542.3",
+        "asy_clko7_rise_ps": "3.542K",
+        "asy_clko6_rise_ps": "6.542K",
+        "asy_clko5_rise_ps": "9.542K",
+        "asy_clko4_rise_ps": "12.54K",
+        "asy_clko3_rise_ps": "15.54K",
+        "asy_clko2_rise_ps": "18.54K",
+        "asy_clko1_rise_ps": "21.54K",
+        "asy_clko0_rise_ps": "24.54K",
+        "asy_clko8_max_v": "906.9m",
+        "asy_clko7_max_v": "906.9m",
+        "asy_clko6_max_v": "906.9m",
+        "asy_clko5_max_v": "906.9m",
+        "asy_clko4_max_v": "906.9m",
+        "asy_clko3_max_v": "906.9m",
+        "asy_clko2_max_v": "906.9m",
+        "asy_clko1_max_v": "906.9m",
+        "asy_clko0_max_v": "905m"
+      },
+      "waveform_points": 14001,
+      "metrics": {
+        "valid_rise_ps": [
+          502.50000000000006,
+          3502.5,
+          6502.500000000001,
+          9502.499999999998,
+          12502.5
+        ],
+        "clko_first_rise_ps": {
+          "/CLKO<0>": 24542.68829105184,
+          "/CLKO<1>": 21542.348547695863,
+          "/CLKO<2>": 18542.348550201175,
+          "/CLKO<3>": 15542.34855020629,
+          "/CLKO<4>": 12542.348550236986,
+          "/CLKO<5>": 9542.348550318839,
+          "/CLKO<6>": 6542.348550532752,
+          "/CLKO<7>": 3542.34854846468,
+          "/CLKO<8>": 542.3388336153756
+        },
+        "clko_rises_ps": {
+          "/CLKO<0>": [
+            24542.68829105184
+          ],
+          "/CLKO<1>": [
+            21542.348547695863
+          ],
+          "/CLKO<2>": [
+            18542.348550201175
+          ],
+          "/CLKO<3>": [
+            15542.34855020629
+          ],
+          "/CLKO<4>": [
+            12542.348550236986
+          ],
+          "/CLKO<5>": [
+            9542.348550318839
+          ],
+          "/CLKO<6>": [
+            6542.348550532752
+          ],
+          "/CLKO<7>": [
+            3542.34854846468
+          ],
+          "/CLKO<8>": [
+            542.3388336153756
+          ]
+        },
+        "clko_first_fall_ps": {
+          "/CLKO<0>": null,
+          "/CLKO<1>": null,
+          "/CLKO<2>": null,
+          "/CLKO<3>": null,
+          "/CLKO<4>": null,
+          "/CLKO<5>": null,
+          "/CLKO<6>": null,
+          "/CLKO<7>": null,
+          "/CLKO<8>": null
+        },
+        "clko_falls_ps": {
+          "/CLKO<0>": [],
+          "/CLKO<1>": [],
+          "/CLKO<2>": [],
+          "/CLKO<3>": [],
+          "/CLKO<4>": [],
+          "/CLKO<5>": [],
+          "/CLKO<6>": [],
+          "/CLKO<7>": [],
+          "/CLKO<8>": []
+        },
+        "clko_min_v": {
+          "/CLKO<0>": -0.03925834583124887,
+          "/CLKO<1>": -0.01553669331204993,
+          "/CLKO<2>": -0.01553673538418766,
+          "/CLKO<3>": -0.01553673543044049,
+          "/CLKO<4>": -0.01553673554508884,
+          "/CLKO<5>": -0.01553673582490932,
+          "/CLKO<6>": -0.01553673642604753,
+          "/CLKO<7>": -0.0155366686644273,
+          "/CLKO<8>": -0.01539673887452891
+        },
+        "clko_max_v": {
+          "/CLKO<0>": 0.9043423032814559,
+          "/CLKO<1>": 0.9059516756162875,
+          "/CLKO<2>": 0.9059515977316874,
+          "/CLKO<3>": 0.9059515977285205,
+          "/CLKO<4>": 0.905951597728524,
+          "/CLKO<5>": 0.9059515977285231,
+          "/CLKO<6>": 0.9059515977285202,
+          "/CLKO<7>": 0.9059515977381701,
+          "/CLKO<8>": 0.9059517595732468
+        },
+        "clko_final_v": {
+          "/CLKO<0>": 0.8999963503774657,
+          "/CLKO<1>": 0.8999971180945816,
+          "/CLKO<2>": 0.8999971179348729,
+          "/CLKO<3>": 0.8999971179350494,
+          "/CLKO<4>": 0.8999971179350293,
+          "/CLKO<5>": 0.8999971179350709,
+          "/CLKO<6>": 0.8999971179350277,
+          "/CLKO<7>": 0.8999971179350397,
+          "/CLKO<8>": 0.8999971192120687
+        },
+        "clko_rail_count": 9,
+        "clkc_min": -0.02804798972393928,
+        "clkc_max": 0.9162595505639376,
+        "offline": {
+          "asy_avg_power_w": 7.373356053319981e-06,
+          "asy_energy_j": 2.0645396949295946e-13
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_ASYCTRL_9CLK_PERF",
+      "case_id": "asy_cload_3f",
+      "history": "Interactive.4",
+      "session": "fnxSession121",
+      "variables": {
+        "vdd": "900m",
+        "cload": "3f",
+        "valid_td": "500p",
+        "valid_pw": "1n",
+        "valid_per": "2.5n"
+      },
+      "overrides": {
+        "cload": "3f"
+      },
+      "signals": [
+        "/CLKS",
+        "/VALID",
+        "/CLKC",
+        "/CLKO<0>",
+        "/CLKO<1>",
+        "/CLKO<2>",
+        "/CLKO<3>",
+        "/CLKO<4>",
+        "/CLKO<5>",
+        "/CLKO<6>",
+        "/CLKO<7>",
+        "/CLKO<8>"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.4.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.4/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.4/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.4/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 10,
+        "notices": 6
+      },
+      "maestro_metrics": {
+        "asy_valid_to_clko8_ps": "39.84",
+        "asy_sequence_span_ps": "20K",
+        "asy_clkc_max_v": "911.9m",
+        "asy_clko8_rise_ps": "542.3",
+        "asy_clko7_rise_ps": "3.042K",
+        "asy_clko6_rise_ps": "5.542K",
+        "asy_clko5_rise_ps": "8.042K",
+        "asy_clko4_rise_ps": "10.54K",
+        "asy_clko3_rise_ps": "13.04K",
+        "asy_clko2_rise_ps": "15.54K",
+        "asy_clko1_rise_ps": "18.04K",
+        "asy_clko0_rise_ps": "20.54K",
+        "asy_clko8_max_v": "906.9m",
+        "asy_clko7_max_v": "906.9m",
+        "asy_clko6_max_v": "906.9m",
+        "asy_clko5_max_v": "906.9m",
+        "asy_clko4_max_v": "906.9m",
+        "asy_clko3_max_v": "906.9m",
+        "asy_clko2_max_v": "906.9m",
+        "asy_clko1_max_v": "906.9m",
+        "asy_clko0_max_v": "905m"
+      },
+      "waveform_points": 14001,
+      "metrics": {
+        "valid_rise_ps": [
+          502.50000000000006,
+          3002.5000000000005,
+          5502.500000000001,
+          8002.5,
+          10502.5
+        ],
+        "clko_first_rise_ps": {
+          "/CLKO<0>": 20542.701449975368,
+          "/CLKO<1>": 18042.35196800536,
+          "/CLKO<2>": 15542.351969119447,
+          "/CLKO<3>": 13042.351969129848,
+          "/CLKO<4>": 10542.351969143363,
+          "/CLKO<5>": 8042.351969164118,
+          "/CLKO<6>": 5542.351968278251,
+          "/CLKO<7>": 3042.3519689819427,
+          "/CLKO<8>": 542.3518305938304
+        },
+        "clko_rises_ps": {
+          "/CLKO<0>": [
+            20542.701449975368
+          ],
+          "/CLKO<1>": [
+            18042.35196800536
+          ],
+          "/CLKO<2>": [
+            15542.351969119447
+          ],
+          "/CLKO<3>": [
+            13042.351969129848
+          ],
+          "/CLKO<4>": [
+            10542.351969143363
+          ],
+          "/CLKO<5>": [
+            8042.351969164118
+          ],
+          "/CLKO<6>": [
+            5542.351968278251
+          ],
+          "/CLKO<7>": [
+            3042.3519689819427
+          ],
+          "/CLKO<8>": [
+            542.3518305938304
+          ]
+        },
+        "clko_first_fall_ps": {
+          "/CLKO<0>": null,
+          "/CLKO<1>": null,
+          "/CLKO<2>": null,
+          "/CLKO<3>": null,
+          "/CLKO<4>": null,
+          "/CLKO<5>": null,
+          "/CLKO<6>": null,
+          "/CLKO<7>": null,
+          "/CLKO<8>": null
+        },
+        "clko_falls_ps": {
+          "/CLKO<0>": [],
+          "/CLKO<1>": [],
+          "/CLKO<2>": [],
+          "/CLKO<3>": [],
+          "/CLKO<4>": [],
+          "/CLKO<5>": [],
+          "/CLKO<6>": [],
+          "/CLKO<7>": [],
+          "/CLKO<8>": []
+        },
+        "clko_min_v": {
+          "/CLKO<0>": -0.03917788562330243,
+          "/CLKO<1>": -0.01542361799971316,
+          "/CLKO<2>": -0.01542373079515504,
+          "/CLKO<3>": -0.01542373064303247,
+          "/CLKO<4>": -0.01542373044951178,
+          "/CLKO<5>": -0.01542372983605081,
+          "/CLKO<6>": -0.01542374512957958,
+          "/CLKO<7>": -0.01542378512318093,
+          "/CLKO<8>": -0.01534881167295321
+        },
+        "clko_max_v": {
+          "/CLKO<0>": 0.904342948245025,
+          "/CLKO<1>": 0.90595180885754,
+          "/CLKO<2>": 0.9059517311854458,
+          "/CLKO<3>": 0.9059517311823055,
+          "/CLKO<4>": 0.905951731182307,
+          "/CLKO<5>": 0.905951731182309,
+          "/CLKO<6>": 0.9059517311823098,
+          "/CLKO<7>": 0.9059517311919489,
+          "/CLKO<8>": 0.9059518929951846
+        },
+        "clko_final_v": {
+          "/CLKO<0>": 0.8999989679046672,
+          "/CLKO<1>": 0.8999985464085853,
+          "/CLKO<2>": 0.8999985463349917,
+          "/CLKO<3>": 0.8999985463349874,
+          "/CLKO<4>": 0.89999854633495,
+          "/CLKO<5>": 0.8999985463349444,
+          "/CLKO<6>": 0.8999985463349189,
+          "/CLKO<7>": 0.8999985463355215,
+          "/CLKO<8>": 0.8999985473719518
+        },
+        "clko_rail_count": 9,
+        "clkc_min": -0.01607689976192316,
+        "clkc_max": 0.9113282524142496,
+        "offline": {
+          "asy_avg_power_w": 8.769899301431051e-06,
+          "asy_energy_j": 2.455571804400694e-13
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_ASYCTRL_9CLK_PERF",
+      "case_id": "asy_vdd_800m",
+      "history": "Interactive.5",
+      "session": "fnxSession121",
+      "variables": {
+        "vdd": "800m",
+        "cload": "1f",
+        "valid_td": "500p",
+        "valid_pw": "1n",
+        "valid_per": "2.5n"
+      },
+      "overrides": {
+        "vdd": "800m"
+      },
+      "signals": [
+        "/CLKS",
+        "/VALID",
+        "/CLKC",
+        "/CLKO<0>",
+        "/CLKO<1>",
+        "/CLKO<2>",
+        "/CLKO<3>",
+        "/CLKO<4>",
+        "/CLKO<5>",
+        "/CLKO<6>",
+        "/CLKO<7>",
+        "/CLKO<8>"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.5.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.5/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.5/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.5/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 5,
+        "notices": 9
+      },
+      "maestro_metrics": {
+        "asy_valid_to_clko8_ps": "50.16",
+        "asy_sequence_span_ps": "20K",
+        "asy_clkc_max_v": "816.5m",
+        "asy_clko8_rise_ps": "553",
+        "asy_clko7_rise_ps": "3.053K",
+        "asy_clko6_rise_ps": "5.553K",
+        "asy_clko5_rise_ps": "8.053K",
+        "asy_clko4_rise_ps": "10.55K",
+        "asy_clko3_rise_ps": "13.05K",
+        "asy_clko2_rise_ps": "15.55K",
+        "asy_clko1_rise_ps": "18.05K",
+        "asy_clko0_rise_ps": "20.55K",
+        "asy_clko8_max_v": "805.7m",
+        "asy_clko7_max_v": "805.7m",
+        "asy_clko6_max_v": "805.7m",
+        "asy_clko5_max_v": "805.7m",
+        "asy_clko4_max_v": "805.7m",
+        "asy_clko3_max_v": "805.7m",
+        "asy_clko2_max_v": "805.7m",
+        "asy_clko1_max_v": "805.7m",
+        "asy_clko0_max_v": "804.9m"
+      },
+      "waveform_points": 14001,
+      "metrics": {
+        "valid_rise_ps": [
+          502.8125,
+          3002.8125000000005,
+          5502.8125,
+          8002.8125,
+          10502.8125
+        ],
+        "clko_first_rise_ps": {
+          "/CLKO<0>": 20553.42073831099,
+          "/CLKO<1>": 18052.986598825337,
+          "/CLKO<2>": 15552.986598612186,
+          "/CLKO<3>": 13052.986598664369,
+          "/CLKO<4>": 10552.98659868725,
+          "/CLKO<5>": 8052.986598666439,
+          "/CLKO<6>": 5552.986599562935,
+          "/CLKO<7>": 3052.98660218786,
+          "/CLKO<8>": 552.9927950792472
+        },
+        "clko_rises_ps": {
+          "/CLKO<0>": [
+            20553.42073831099
+          ],
+          "/CLKO<1>": [
+            18052.986598825337
+          ],
+          "/CLKO<2>": [
+            15552.986598612186
+          ],
+          "/CLKO<3>": [
+            13052.986598664369
+          ],
+          "/CLKO<4>": [
+            10552.98659868725
+          ],
+          "/CLKO<5>": [
+            8052.986598666439
+          ],
+          "/CLKO<6>": [
+            5552.986599562935
+          ],
+          "/CLKO<7>": [
+            3052.98660218786
+          ],
+          "/CLKO<8>": [
+            552.9927950792472
+          ]
+        },
+        "clko_first_fall_ps": {
+          "/CLKO<0>": null,
+          "/CLKO<1>": null,
+          "/CLKO<2>": null,
+          "/CLKO<3>": null,
+          "/CLKO<4>": null,
+          "/CLKO<5>": null,
+          "/CLKO<6>": null,
+          "/CLKO<7>": null,
+          "/CLKO<8>": null
+        },
+        "clko_falls_ps": {
+          "/CLKO<0>": [],
+          "/CLKO<1>": [],
+          "/CLKO<2>": [],
+          "/CLKO<3>": [],
+          "/CLKO<4>": [],
+          "/CLKO<5>": [],
+          "/CLKO<6>": [],
+          "/CLKO<7>": [],
+          "/CLKO<8>": []
+        },
+        "clko_min_v": {
+          "/CLKO<0>": -0.03233735380114989,
+          "/CLKO<1>": -0.01822084582968076,
+          "/CLKO<2>": -0.01822082883547648,
+          "/CLKO<3>": -0.01822083149482693,
+          "/CLKO<4>": -0.0182208319070103,
+          "/CLKO<5>": -0.01822083093791184,
+          "/CLKO<6>": -0.01822082533360053,
+          "/CLKO<7>": -0.01822081374531023,
+          "/CLKO<8>": -0.0181459090566538
+        },
+        "clko_max_v": {
+          "/CLKO<0>": 0.8037392794387913,
+          "/CLKO<1>": 0.8055661783486414,
+          "/CLKO<2>": 0.8055688074604459,
+          "/CLKO<3>": 0.8055688112502506,
+          "/CLKO<4>": 0.8055688121337558,
+          "/CLKO<5>": 0.8055688121663684,
+          "/CLKO<6>": 0.8055688120693452,
+          "/CLKO<7>": 0.8055688115724599,
+          "/CLKO<8>": 0.8055690876729666
+        },
+        "clko_final_v": {
+          "/CLKO<0>": 0.7999989901084992,
+          "/CLKO<1>": 0.799998533119982,
+          "/CLKO<2>": 0.7999985322599268,
+          "/CLKO<3>": 0.7999985322596717,
+          "/CLKO<4>": 0.7999985322596899,
+          "/CLKO<5>": 0.7999985322597074,
+          "/CLKO<6>": 0.7999985322596893,
+          "/CLKO<7>": 0.7999985322597005,
+          "/CLKO<8>": 0.7999985327582596
+        },
+        "clko_rail_count": 9,
+        "clkc_min": -0.02630166304316866,
+        "clkc_max": 0.8161857957539429,
+        "offline": {
+          "asy_avg_power_w": 7.212105517702433e-06,
+          "asy_energy_j": 2.019389544956681e-13
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_BOOTSTRAP_DIFF_PERF",
+      "case_id": "boot_nominal",
+      "history": "Interactive.1",
+      "session": "fnxSession122",
+      "variables": {
+        "vdd": "900m",
+        "vcm": "450m",
+        "vdiff": "100m",
+        "cload": "5f"
+      },
+      "overrides": {},
+      "signals": [
+        "/CLKS",
+        "/CLKSB",
+        "/VIP",
+        "/VIN",
+        "/VOUTP",
+        "/VOUTN"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.1.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.1/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.1/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.1/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 30,
+        "notices": 10
+      },
+      "maestro_metrics": {
+        "boot_diff_final_v": "100m",
+        "boot_diff_final_error_mv": "67.51u",
+        "boot_track_error_on_avg_mv": "184.5u",
+        "boot_track_error_on_max_mv": "30.88m",
+        "boot_settle_error_2p5n_mv": "86.49u",
+        "boot_clk_overlap_product_peak_v2": "202.5m"
+      },
+      "waveform_points": 6001,
+      "metrics": {
+        "vip": 0.5,
+        "vin": 0.4,
+        "voutp_final": 0.4999998693845525,
+        "voutn_final": 0.3999998018774787,
+        "diff_in_v": 0.09999999999999998,
+        "diff_out_final_v": 0.1000000675070738,
+        "max_on_diff_error_mv": 100.09498950735238,
+        "mean_on_diff_error_mv": 0.3741679325665769,
+        "offline": {
+          "boot_avg_power_w": 2.1879031931909745e-06,
+          "boot_energy_j": 2.6254838318291692e-14
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_BOOTSTRAP_DIFF_PERF",
+      "case_id": "boot_vdiff_50m",
+      "history": "Interactive.2",
+      "session": "fnxSession122",
+      "variables": {
+        "vdd": "900m",
+        "vcm": "450m",
+        "vdiff": "50m",
+        "cload": "5f"
+      },
+      "overrides": {
+        "vdiff": "50m"
+      },
+      "signals": [
+        "/CLKS",
+        "/CLKSB",
+        "/VIP",
+        "/VIN",
+        "/VOUTP",
+        "/VOUTN"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.2.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.2/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.2/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.2/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 30,
+        "notices": 10
+      },
+      "maestro_metrics": {
+        "boot_diff_final_v": "50m",
+        "boot_diff_final_error_mv": "-30.75u",
+        "boot_track_error_on_avg_mv": "50.44u",
+        "boot_track_error_on_max_mv": "14.15m",
+        "boot_settle_error_2p5n_mv": "6.122u",
+        "boot_clk_overlap_product_peak_v2": "202.5m"
+      },
+      "waveform_points": 6001,
+      "metrics": {
+        "vip": 0.475,
+        "vin": 0.425,
+        "voutp_final": 0.4749998826050318,
+        "voutn_final": 0.4249999133544213,
+        "diff_in_v": 0.04999999999999999,
+        "diff_out_final_v": 0.04999996925061051,
+        "max_on_diff_error_mv": 50.12063987909837,
+        "mean_on_diff_error_mv": 0.18718879873828717,
+        "offline": {
+          "boot_avg_power_w": 2.1874872984354034e-06,
+          "boot_energy_j": 2.6249847581224843e-14
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_BOOTSTRAP_DIFF_PERF",
+      "case_id": "boot_vdiff_200m",
+      "history": "Interactive.3",
+      "session": "fnxSession122",
+      "variables": {
+        "vdd": "900m",
+        "vcm": "450m",
+        "vdiff": "200m",
+        "cload": "5f"
+      },
+      "overrides": {
+        "vdiff": "200m"
+      },
+      "signals": [
+        "/CLKS",
+        "/CLKSB",
+        "/VIP",
+        "/VIN",
+        "/VOUTP",
+        "/VOUTN"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.3.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.3/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.3/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.3/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 30,
+        "notices": 10
+      },
+      "maestro_metrics": {
+        "boot_diff_final_v": "200m",
+        "boot_diff_final_error_mv": "438u",
+        "boot_track_error_on_avg_mv": "257.7u",
+        "boot_track_error_on_max_mv": "65.62m",
+        "boot_settle_error_2p5n_mv": "87.75u",
+        "boot_clk_overlap_product_peak_v2": "202.5m"
+      },
+      "waveform_points": 6001,
+      "metrics": {
+        "vip": 0.55,
+        "vin": 0.35,
+        "voutp_final": 0.5499998912624002,
+        "voutn_final": 0.3499994532988817,
+        "diff_in_v": 0.20000000000000007,
+        "diff_out_final_v": 0.20000043796351852,
+        "max_on_diff_error_mv": 200.04786567377036,
+        "mean_on_diff_error_mv": 0.7492094430046615,
+        "offline": {
+          "boot_avg_power_w": 2.1782775715186684e-06,
+          "boot_energy_j": 2.613933085822402e-14
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_BOOTSTRAP_DIFF_PERF",
+      "case_id": "boot_cload_10f",
+      "history": "Interactive.4",
+      "session": "fnxSession122",
+      "variables": {
+        "vdd": "900m",
+        "vcm": "450m",
+        "vdiff": "100m",
+        "cload": "10f"
+      },
+      "overrides": {
+        "cload": "10f"
+      },
+      "signals": [
+        "/CLKS",
+        "/CLKSB",
+        "/VIP",
+        "/VIN",
+        "/VOUTP",
+        "/VOUTN"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.4.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.4/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.4/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.4/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 30,
+        "notices": 10
+      },
+      "maestro_metrics": {
+        "boot_diff_final_v": "100m",
+        "boot_diff_final_error_mv": "-248.9u",
+        "boot_track_error_on_avg_mv": "101.6u",
+        "boot_track_error_on_max_mv": "36.92m",
+        "boot_settle_error_2p5n_mv": "8.482u",
+        "boot_clk_overlap_product_peak_v2": "202.5m"
+      },
+      "waveform_points": 6001,
+      "metrics": {
+        "vip": 0.5,
+        "vin": 0.4,
+        "voutp_final": 0.4999998062765226,
+        "voutn_final": 0.4000000551679713,
+        "diff_in_v": 0.09999999999999998,
+        "diff_out_final_v": 0.09999975110855125,
+        "max_on_diff_error_mv": 100.09757129474347,
+        "mean_on_diff_error_mv": 0.38965716276040957,
+        "offline": {
+          "boot_avg_power_w": 2.189502994877583e-06,
+          "boot_energy_j": 2.6274035938530993e-14
+        }
+      }
+    },
+    {
+      "cell": "TB_SUBMOD_BOOTSTRAP_DIFF_PERF",
+      "case_id": "boot_vdd_800m",
+      "history": "Interactive.5",
+      "session": "fnxSession122",
+      "variables": {
+        "vdd": "800m",
+        "vcm": "450m",
+        "vdiff": "100m",
+        "cload": "5f"
+      },
+      "overrides": {
+        "vdd": "800m"
+      },
+      "signals": [
+        "/CLKS",
+        "/CLKSB",
+        "/VIP",
+        "/VIN",
+        "/VOUTP",
+        "/VOUTN"
+      ],
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.5.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.5/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.5/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.5/1/TRAN/netlist/input.scs",
+      "completed": true,
+      "run_errors": 0,
+      "spectre_summary": {
+        "errors": 0,
+        "warnings": 20,
+        "notices": 10
+      },
+      "maestro_metrics": {
+        "boot_diff_final_v": "100m",
+        "boot_diff_final_error_mv": "-189.9u",
+        "boot_track_error_on_avg_mv": "771u",
+        "boot_track_error_on_max_mv": "144.8m",
+        "boot_settle_error_2p5n_mv": "226.5u",
+        "boot_clk_overlap_product_peak_v2": "160m"
+      },
+      "waveform_points": 6001,
+      "metrics": {
+        "vip": 0.5,
+        "vin": 0.4,
+        "voutp_final": 0.4999997553497641,
+        "voutn_final": 0.3999999452261343,
+        "diff_in_v": 0.09999999999999998,
+        "diff_out_final_v": 0.0999998101236298,
+        "max_on_diff_error_mv": 100.02350570943078,
+        "mean_on_diff_error_mv": 0.5008123033010449,
+        "offline": {
+          "boot_avg_power_w": 1.9286613674071027e-06,
+          "boot_energy_j": 2.3143936408885232e-14
+        }
+      }
+    }
+  ]
+}

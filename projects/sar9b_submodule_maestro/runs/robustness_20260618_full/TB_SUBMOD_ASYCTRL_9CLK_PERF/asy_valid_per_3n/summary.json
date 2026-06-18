@@ -1,0 +1,176 @@
+{
+  "cell": "TB_SUBMOD_ASYCTRL_9CLK_PERF",
+  "case_id": "asy_valid_per_3n",
+  "history": "Interactive.3",
+  "session": "fnxSession121",
+  "variables": {
+    "vdd": "900m",
+    "cload": "1f",
+    "valid_td": "500p",
+    "valid_pw": "1n",
+    "valid_per": "3n"
+  },
+  "overrides": {
+    "valid_per": "3n"
+  },
+  "signals": [
+    "/CLKS",
+    "/VALID",
+    "/CLKC",
+    "/CLKO<0>",
+    "/CLKO<1>",
+    "/CLKO<2>",
+    "/CLKO<3>",
+    "/CLKO<4>",
+    "/CLKO<5>",
+    "/CLKO<6>",
+    "/CLKO<7>",
+    "/CLKO<8>"
+  ],
+  "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.3.log",
+  "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.3/1/TRAN/psf",
+  "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.3/1/TRAN/psf/spectre.out",
+  "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.3/1/TRAN/netlist/input.scs",
+  "completed": true,
+  "run_errors": 0,
+  "spectre_summary": {
+    "errors": 0,
+    "warnings": 10,
+    "notices": 3
+  },
+  "maestro_metrics": {
+    "asy_valid_to_clko8_ps": "39.84",
+    "asy_sequence_span_ps": "24K",
+    "asy_clkc_max_v": "916.7m",
+    "asy_clko8_rise_ps": "542.3",
+    "asy_clko7_rise_ps": "3.542K",
+    "asy_clko6_rise_ps": "6.542K",
+    "asy_clko5_rise_ps": "9.542K",
+    "asy_clko4_rise_ps": "12.54K",
+    "asy_clko3_rise_ps": "15.54K",
+    "asy_clko2_rise_ps": "18.54K",
+    "asy_clko1_rise_ps": "21.54K",
+    "asy_clko0_rise_ps": "24.54K",
+    "asy_clko8_max_v": "906.9m",
+    "asy_clko7_max_v": "906.9m",
+    "asy_clko6_max_v": "906.9m",
+    "asy_clko5_max_v": "906.9m",
+    "asy_clko4_max_v": "906.9m",
+    "asy_clko3_max_v": "906.9m",
+    "asy_clko2_max_v": "906.9m",
+    "asy_clko1_max_v": "906.9m",
+    "asy_clko0_max_v": "905m"
+  },
+  "waveform_points": 14001,
+  "metrics": {
+    "valid_rise_ps": [
+      502.50000000000006,
+      3502.5,
+      6502.500000000001,
+      9502.499999999998,
+      12502.5
+    ],
+    "clko_first_rise_ps": {
+      "/CLKO<0>": 24542.68829105184,
+      "/CLKO<1>": 21542.348547695863,
+      "/CLKO<2>": 18542.348550201175,
+      "/CLKO<3>": 15542.34855020629,
+      "/CLKO<4>": 12542.348550236986,
+      "/CLKO<5>": 9542.348550318839,
+      "/CLKO<6>": 6542.348550532752,
+      "/CLKO<7>": 3542.34854846468,
+      "/CLKO<8>": 542.3388336153756
+    },
+    "clko_rises_ps": {
+      "/CLKO<0>": [
+        24542.68829105184
+      ],
+      "/CLKO<1>": [
+        21542.348547695863
+      ],
+      "/CLKO<2>": [
+        18542.348550201175
+      ],
+      "/CLKO<3>": [
+        15542.34855020629
+      ],
+      "/CLKO<4>": [
+        12542.348550236986
+      ],
+      "/CLKO<5>": [
+        9542.348550318839
+      ],
+      "/CLKO<6>": [
+        6542.348550532752
+      ],
+      "/CLKO<7>": [
+        3542.34854846468
+      ],
+      "/CLKO<8>": [
+        542.3388336153756
+      ]
+    },
+    "clko_first_fall_ps": {
+      "/CLKO<0>": null,
+      "/CLKO<1>": null,
+      "/CLKO<2>": null,
+      "/CLKO<3>": null,
+      "/CLKO<4>": null,
+      "/CLKO<5>": null,
+      "/CLKO<6>": null,
+      "/CLKO<7>": null,
+      "/CLKO<8>": null
+    },
+    "clko_falls_ps": {
+      "/CLKO<0>": [],
+      "/CLKO<1>": [],
+      "/CLKO<2>": [],
+      "/CLKO<3>": [],
+      "/CLKO<4>": [],
+      "/CLKO<5>": [],
+      "/CLKO<6>": [],
+      "/CLKO<7>": [],
+      "/CLKO<8>": []
+    },
+    "clko_min_v": {
+      "/CLKO<0>": -0.03925834583124887,
+      "/CLKO<1>": -0.01553669331204993,
+      "/CLKO<2>": -0.01553673538418766,
+      "/CLKO<3>": -0.01553673543044049,
+      "/CLKO<4>": -0.01553673554508884,
+      "/CLKO<5>": -0.01553673582490932,
+      "/CLKO<6>": -0.01553673642604753,
+      "/CLKO<7>": -0.0155366686644273,
+      "/CLKO<8>": -0.01539673887452891
+    },
+    "clko_max_v": {
+      "/CLKO<0>": 0.9043423032814559,
+      "/CLKO<1>": 0.9059516756162875,
+      "/CLKO<2>": 0.9059515977316874,
+      "/CLKO<3>": 0.9059515977285205,
+      "/CLKO<4>": 0.905951597728524,
+      "/CLKO<5>": 0.9059515977285231,
+      "/CLKO<6>": 0.9059515977285202,
+      "/CLKO<7>": 0.9059515977381701,
+      "/CLKO<8>": 0.9059517595732468
+    },
+    "clko_final_v": {
+      "/CLKO<0>": 0.8999963503774657,
+      "/CLKO<1>": 0.8999971180945816,
+      "/CLKO<2>": 0.8999971179348729,
+      "/CLKO<3>": 0.8999971179350494,
+      "/CLKO<4>": 0.8999971179350293,
+      "/CLKO<5>": 0.8999971179350709,
+      "/CLKO<6>": 0.8999971179350277,
+      "/CLKO<7>": 0.8999971179350397,
+      "/CLKO<8>": 0.8999971192120687
+    },
+    "clko_rail_count": 9,
+    "clkc_min": -0.02804798972393928,
+    "clkc_max": 0.9162595505639376,
+    "offline": {
+      "asy_avg_power_w": 7.373356053319981e-06,
+      "asy_energy_j": 2.0645396949295946e-13
+    }
+  }
+}

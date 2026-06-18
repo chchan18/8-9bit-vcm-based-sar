@@ -1,0 +1,163 @@
+// Generated for: spectre
+// Generated on: Jun 18 11:05:51 2026
+// Design library name: SAR9B_400MV
+// Design cell name: TB_SUBMOD_COMPARATOR_PERF
+// Design view name: schematic
+simulator lang=spectre
+global 0
+parameters cload=2f vdiff=2m vcm=450m vdd=900m
+include "/home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/toplevel.scs" section=top_tt
+
+// Library name: SAR9B_400MV
+// Cell name: COMPARATOR
+// View name: schematic
+subckt COMPARATOR CLKC VDD VN VON VOP VP VSS
+    M15 (VOP VAN1 VDD VDD) pch_mac l=30n w=2u multi=1 nf=2 sd=100n \
+        ad=1e-13 as=1.5e-13 pd=2.2u ps=4.3u nrd=0.091833 nrs=0.091833 \
+        sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n \
+        sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M13 (VON VAP1 VDD VDD) pch_mac l=30n w=2u multi=1 nf=2 sd=100n \
+        ad=1e-13 as=1.5e-13 pd=2.2u ps=4.3u nrd=0.091833 nrs=0.091833 \
+        sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n \
+        sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M12 (VAP1 VAN VDD VDD) pch_mac l=30n w=2u multi=1 nf=2 sd=100n \
+        ad=1e-13 as=1.5e-13 pd=2.2u ps=4.3u nrd=0.091833 nrs=0.091833 \
+        sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n \
+        sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M9 (VAP1 VAN1 VDD VDD) pch_mac l=30n w=2u multi=1 nf=2 sd=100n \
+        ad=1e-13 as=1.5e-13 pd=2.2u ps=4.3u nrd=0.091833 nrs=0.091833 \
+        sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n \
+        sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M8 (VAN1 VAP VDD VDD) pch_mac l=30n w=2u multi=1 nf=2 sd=100n ad=1e-13 \
+        as=1.5e-13 pd=2.2u ps=4.3u nrd=0.091833 nrs=0.091833 sa=112.742n \
+        sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n sa4=110.059n \
+        sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n spa1=100n \
+        spa2=100n spa3=100n sap=104.359n sapb=125.813n spba=115.715n \
+        spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M5 (VAN1 VAP1 VDD VDD) pch_mac l=30n w=2u multi=1 nf=2 sd=100n \
+        ad=1e-13 as=1.5e-13 pd=2.2u ps=4.3u nrd=0.091833 nrs=0.091833 \
+        sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n \
+        sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M18 (VAP VN net2 VDD) pch_mac l=30n w=2u multi=1 nf=2 sd=100n ad=1e-13 \
+        as=1.5e-13 pd=2.2u ps=4.3u nrd=0.091833 nrs=0.091833 sa=112.742n \
+        sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n sa4=110.059n \
+        sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n spa1=100n \
+        spa2=100n spa3=100n sap=104.359n sapb=125.813n spba=115.715n \
+        spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M0 (net2 CLKC VDD VDD) pch_mac l=30n w=2u multi=1 nf=2 sd=100n \
+        ad=1e-13 as=1.5e-13 pd=2.2u ps=4.3u nrd=0.091833 nrs=0.091833 \
+        sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n \
+        sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M2 (VAN VP net2 VDD) pch_mac l=30n w=2u multi=1 nf=2 sd=100n ad=1e-13 \
+        as=1.5e-13 pd=2.2u ps=4.3u nrd=0.091833 nrs=0.091833 sa=112.742n \
+        sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n sa4=110.059n \
+        sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n spa1=100n \
+        spa2=100n spa3=100n sap=104.359n sapb=125.813n spba=115.715n \
+        spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M16 (VOP VAN1 VSS VSS) nch_mac l=30n w=1u multi=1 nf=1 sd=100n \
+        ad=7.5e-14 as=7.5e-14 pd=2.15u ps=2.15u nrd=0.289519 nrs=0.289519 \
+        sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n \
+        sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n \
+        spa3=100n sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n \
+        dfm_flag=0 spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 \
+        spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M14 (VON VAP1 VSS VSS) nch_mac l=30n w=1u multi=1 nf=1 sd=100n \
+        ad=7.5e-14 as=7.5e-14 pd=2.15u ps=2.15u nrd=0.289519 nrs=0.289519 \
+        sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n \
+        sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n \
+        spa3=100n sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n \
+        dfm_flag=0 spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 \
+        spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M11 (VAP1 VAN net8 VSS) nch_mac l=30n w=1u multi=1 nf=1 sd=100n \
+        ad=7.5e-14 as=7.5e-14 pd=2.15u ps=2.15u nrd=0.289519 nrs=0.289519 \
+        sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n \
+        sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n \
+        spa3=100n sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n \
+        dfm_flag=0 spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 \
+        spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M10 (net8 VAN1 VSS VSS) nch_mac l=30n w=1u multi=1 nf=1 sd=100n \
+        ad=7.5e-14 as=7.5e-14 pd=2.15u ps=2.15u nrd=0.289519 nrs=0.289519 \
+        sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n \
+        sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n \
+        spa3=100n sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n \
+        dfm_flag=0 spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 \
+        spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M7 (VAN1 VAP net6 VSS) nch_mac l=30n w=1u multi=1 nf=1 sd=100n \
+        ad=7.5e-14 as=7.5e-14 pd=2.15u ps=2.15u nrd=0.289519 nrs=0.289519 \
+        sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n \
+        sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n \
+        spa3=100n sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n \
+        dfm_flag=0 spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 \
+        spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M6 (net6 VAP1 VSS VSS) nch_mac l=30n w=1u multi=1 nf=1 sd=100n \
+        ad=7.5e-14 as=7.5e-14 pd=2.15u ps=2.15u nrd=0.289519 nrs=0.289519 \
+        sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n \
+        sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n \
+        spa3=100n sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n \
+        dfm_flag=0 spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 \
+        spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M1 (VAP CLKC VSS VSS) nch_mac l=30n w=1u multi=1 nf=1 sd=100n \
+        ad=7.5e-14 as=7.5e-14 pd=2.15u ps=2.15u nrd=0.289519 nrs=0.289519 \
+        sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n \
+        sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n \
+        spa3=100n sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n \
+        dfm_flag=0 spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 \
+        spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M3 (VAN CLKC VSS VSS) nch_mac l=30n w=1u multi=1 nf=1 sd=100n \
+        ad=7.5e-14 as=7.5e-14 pd=2.15u ps=2.15u nrd=0.289519 nrs=0.289519 \
+        sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n \
+        sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n \
+        spa3=100n sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n \
+        dfm_flag=0 spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 \
+        spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+ends COMPARATOR
+// End of subcircuit definition.
+
+// Library name: SAR9B_400MV
+// Cell name: TB_SUBMOD_COMPARATOR_PERF
+// View name: schematic
+VVN (VN VSS) vsource dc=vcm-vdiff/2 type=dc
+VVP (VP VSS) vsource dc=vcm+vdiff/2 type=dc
+VSS_SRC (VSS 0) vsource dc=0 type=dc
+VDD_SRC (VDD VSS) vsource dc=vdd type=dc
+XCOMP (CLKC VDD VN VON VOP VP VSS) COMPARATOR
+VCLK (CLKC VSS) vsource type=pulse val0=0 val1=vdd period=5n delay=1n \
+        rise=5p fall=5p width=2n
+C_VON (VON VSS) capacitor c=cload
+C_VOP (VOP VSS) capacitor c=cload
+simulatorOptions options psfversion="1.1.0" reltol=1e-3 vabstol=1e-6 \
+    iabstol=1e-12 temp=27 tnom=27 scalem=1.0 scale=1.0 gmin=1e-12 rforce=1 \
+    maxnotes=5 maxwarns=5 digits=5 cols=80 pivrel=1e-3 \
+    sensfile="../psf/sens.output" checklimitdest=psf
+tran tran stop=8n errpreset=moderate write="spectre.ic" \
+    writefinal="spectre.fc" annotate=status maxiters=5
+finalTimeOP info what=oppoint where=rawfile
+modelParameter info what=models where=rawfile
+element info what=inst where=rawfile
+outputParameter info what=output where=rawfile
+designParamVals info what=parameters where=rawfile
+primitives info what=primitives where=rawfile
+subckts info what=subckts where=rawfile
+save CLKC VP VN VOP VON
+saveOptions options save=allpub

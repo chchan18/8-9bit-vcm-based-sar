@@ -419,11 +419,11 @@ def create_asyctrl_tb(client: VirtuosoClient, rebuild: bool = False) -> dict[str
         ("VCLKS", "per", "100n"),
         ("VVALID", "v1", "0"),
         ("VVALID", "v2", "vdd"),
-        ("VVALID", "td", "500p"),
+        ("VVALID", "td", "valid_td"),
         ("VVALID", "tr", "5p"),
         ("VVALID", "tf", "5p"),
-        ("VVALID", "pw", "1n"),
-        ("VVALID", "per", "2.5n"),
+        ("VVALID", "pw", "valid_pw"),
+        ("VVALID", "per", "valid_per"),
         ("C_CLKC", "c", "cload"),
     ]
     set_instance_params(client, cell, params)
@@ -448,7 +448,13 @@ def create_asyctrl_tb(client: VirtuosoClient, rebuild: bool = False) -> dict[str
     return {
         "cell": cell,
         "stop": "28n",
-        "vars": {"vdd": "900m", "cload": "1f"},
+        "vars": {
+            "vdd": "900m",
+            "cload": "1f",
+            "valid_td": "500p",
+            "valid_pw": "1n",
+            "valid_per": "2.5n",
+        },
         "signals": ["/CLKS", "/VALID", "/CLKC"] + [f"/CLKO<{bit}>" for bit in range(9)],
         "metrics": [
             metric(

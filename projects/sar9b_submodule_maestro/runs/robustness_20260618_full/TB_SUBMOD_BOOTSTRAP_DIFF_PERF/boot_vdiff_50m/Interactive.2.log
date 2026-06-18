@@ -1,0 +1,23 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Thu Jun 18 12:00:09 2026
+Best design point: 1
+Design specs:
+	TRAN	corner	Nominal -
+	boot_diff_final_v		50m
+	boot_diff_final_error_mv		-30.75u
+	boot_track_error_on_avg_mv		50.44u
+	boot_track_error_on_max_mv		14.15m
+	boot_settle_error_2p5n_mv		6.122u
+	boot_clk_overlap_product_peak_v2		202.5m
+Design parameters:
+	vdd		900m
+	vcm		450m
+	vdiff		50m
+	cload		5f
+
+Interactive.2
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.2 completed.
+Current time: Thu Jun 18 12:00:16 2026

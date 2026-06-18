@@ -595,8 +595,13 @@ Status:
 7. Done: supply power and energy are still tracked, but as offline PSF metrics
    computed from `getData("/VDD_SRC/PLUS" ?result "tran")`, because IC618
    Maestro point outputs reject branch-current expressions as `Error No`.
-8. Remaining: add robustness sweeps for ASYCTRL `VALID` spacing, comparator
-   input overdrive, non-overlap timing, and bootstrap tracking across corners.
+8. Done: first robustness sweep matrix completed under tag
+   `robustness_20260618_full` with 20 Maestro cases, zero ADE run errors, and
+   zero Spectre errors. The sweep covers comparator overdrive/load/VDD,
+   non-overlap clock load/VDD, ASYCTRL `VALID` spacing/load/VDD, and
+   bootstrap input/load/VDD.
+9. Remaining: extend the same measurements to PVT/corner coverage and compare
+   standalone ASYCTRL timing against the full ADC run.
 
 ### Priority 1: Proper 9-bit measurement
 Raw-code measurement was first completed without editing the schematic:
@@ -705,6 +710,8 @@ maeGetOutputValue("ENOB" "test" ?history "historyName")
 | SAR9B ENOB recovery project | `projects/sar9b_enob_recovery/README.md` | Final Vpk=800m recovery result with `/out` ENOB 8.678 bits and raw-code ENOB 8.7203 bits |
 | SAR9B submodule Maestro project | `projects/sar9b_submodule_maestro/README.md` | Standalone comparator, clock, async-control, and bootstrap Maestro testbenches |
 | SAR9B submodule metric mapping | `projects/sar9b_submodule_maestro/docs/performance_metrics.md` | Online performance-metric references and mapping to Maestro/offline measurements |
+| SAR9B submodule robustness report | `projects/sar9b_submodule_maestro/docs/robustness_sweep_20260618.md` | First 20-case Maestro robustness sweep summary |
+| SAR9B submodule robustness manifest | `projects/sar9b_submodule_maestro/runs/submodule_robustness_manifest.json` | Latest merged sweep manifest for comparator, clock, ASYCTRL, and bootstrap tests |
 | SAR9B submodule Maestro creator | `projects/sar9b_submodule_maestro/scripts/create_submodule_maestro_tests.py` | Creates four standalone schematic testbenches and Maestro `TRAN` views in `SAR9B_400MV` |
 | SAR9B submodule run helper | `projects/sar9b_submodule_maestro/scripts/run_submodule_maestro_tests.py` | Runs Maestro, archives histories, records ADE point metrics, exports waveforms, and computes quick/offline metrics |
 | SAR9B Maestro launcher | `sar9b_work/start_sar9b_maestro_best_run.py` | Starts `SAR9B_400MV/ADC_9B_tb_best_q4` Maestro runs |
