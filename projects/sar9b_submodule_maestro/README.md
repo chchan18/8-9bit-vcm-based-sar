@@ -17,6 +17,7 @@ with the TSMC 28nm HPC+ `top_tt` model section.
 | `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `CLK_NOOVERLAP` | Non-overlap clock phase timing | `12n` | `/CLKIN`, `/CLKOP`, `/CLKON` |
 | `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `Asycontrol_logic_9clk` | 9-step asynchronous SAR clock sequencing | `28n` | `/CLKS`, `/VALID`, `/CLKC`, `/CLKO<0..8>` |
 | `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `BOOTSTRAP_DIFF` | Differential bootstrap sampling switch tracking | `12n` | `/CLKS`, `/CLKSB`, `/VIP`, `/VIN`, `/VOUTP`, `/VOUTN` |
+| `TB_SUBMOD_BOOTSTRAP_DIFF_FFT` | `BOOTSTRAP_DIFF` | Coherent-sine dynamic FFT for the analog sampler path | `2.7u` | `/CLKS`, `/CLKSB`, `/VIP`, `/VIN`, `/VOUTP`, `/VOUTN` |
 
 Nominal variables:
 
@@ -26,6 +27,7 @@ Nominal variables:
 | `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `vdd=900m`, `cload=2f` |
 | `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `vdd=900m`, `cload=1f`, `valid_td=500p`, `valid_pw=1n`, `valid_per=2.5n` |
 | `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `vdd=900m`, `vcm=450m`, `vdiff=100m`, `cload=5f` |
+| `TB_SUBMOD_BOOTSTRAP_DIFF_FFT` | `vdd=900m`, `vcm=450m`, `Vpk=800m`, `fs=400M`, `fft_bin=7`, `fft_n=1024`, `TSTOP=2.7u`, `cload=5f` |
 
 ## Scripts
 
@@ -37,6 +39,8 @@ Nominal variables:
 | `scripts/create_submodule_maestro_tests.py` | Creates/rebuilds the four schematic testbenches and corresponding Maestro `TRAN` views. Use `--cell` to update one testbench, `--rebuild-schematics` after changing stimulus wiring, or `--reset-maestro` to rebuild generated ADE outputs from scratch. |
 | `scripts/run_submodule_maestro_tests.py` | Runs Maestro, downloads logs/netlists/waveforms, records Maestro point outputs, exports PSF waveforms, and computes quick/offline metrics. Supports `--trigger callback`, `--trigger gui-button`, and `--trigger mae`. |
 | `scripts/run_submodule_robustness_sweeps.py` | Runs the nominal plus robustness matrix for the four submodule testbenches and writes one merged manifest. Supports `--cell` and `--case` for restartable partial reruns. |
+| `scripts/create_bootstrap_fft_test.py` | Creates `TB_SUBMOD_BOOTSTRAP_DIFF_FFT`, configures its Maestro `TRAN` view, and records the coherent-sine FFT sample plan. |
+| `scripts/run_bootstrap_fft_test.py` | Runs the bootstrap FFT Maestro test, exports coherent PSF sample points with OCEAN, and computes input/output SNDR, ENOB, THD, SFDR, gain, and tracking error. |
 | `scripts/archive_submodule_history.py` | Copies an existing remote Maestro history into this project. |
 | `scripts/inspect_fix_schematic_props.py` | Inspects/fixes schematic extraction metadata using `dbSetConnCurrent`; needed after bridge-created schematics. |
 | `scripts/check_submodule_remote_status.py` | Polls remote Maestro histories, logs, and process state for a selected cell. |
@@ -51,14 +55,18 @@ Nominal variables:
 | `artifacts/submodule_symbol_inspection_raw.json` | Symbol terminal/instance inspection for candidate submodules. |
 | `artifacts/adc_tb_sources_raw.json` | Reusable source parameter names from the validated SAR9B ADC testbench. |
 | `artifacts/submodule_maestro_setup_manifest.json` | Manifest proving the four schematic and Maestro views were created. |
+| `artifacts/bootstrap_fft_setup_manifest.json` | Manifest proving the bootstrap coherent-sine FFT Maestro setup and sample plan. |
 | `artifacts/schematic_props_fix_manifest.json` | Manifest showing `connectivityLastUpdated` was repaired for all four new schematics. |
 | `docs/performance_metrics.md` | Online metric references and mapping to Maestro/offline measurements. |
 | `docs/robustness_sweep_20260618.md` | First complete submodule robustness sweep report. |
+| `docs/dynamic_fft_20260618.md` | Dynamic FFT applicability and bootstrap FFT results. |
 | `runs/TB_SUBMOD_COMPARATOR_PERF/Interactive.0` | Archived pre-fix failed run: `OSSHNL-108`. |
 | `runs/TB_SUBMOD_COMPARATOR_PERF/Interactive.1` | Archived pre-fix failed run: `OSSHNL-108`. |
 | `runs/TB_SUBMOD_COMPARATOR_PERF/Interactive.2` | Background run attempt stopped immediately by Maestro. |
 | `runs/submodule_run_manifest.json` | Latest four-testbench Maestro run summary. |
 | `runs/submodule_robustness_manifest.json` | Latest 20-case robustness sweep manifest. |
+| `runs/bootstrap_fft_dynamic/nominal_p2200/summary.json` | Full-scale `Vpk=800m` bootstrap FFT dynamic metrics. |
+| `runs/bootstrap_fft_dynamic/nominal_vpk400/summary.json` | Mid-scale `Vpk=400m` bootstrap FFT dynamic metrics. |
 
 ## Current Run Status
 
@@ -88,6 +96,24 @@ and zero Spectre errors:
 
 Detailed per-case results and artifact paths are in
 `docs/robustness_sweep_20260618.md`.
+
+## Dynamic FFT Status
+
+The analog bootstrap path now has a coherent-sine FFT Maestro testbench:
+`TB_SUBMOD_BOOTSTRAP_DIFF_FFT`. It uses `fs=400M`, `fft_bin=7`,
+`fft_n=1024`, and exports `VIP-VIN` plus `VOUTP-VOUTN` for offline dynamic
+metrics.
+
+| Case | History | ADE/Spectre | Output SNDR | Output ENOB | THD | SFDR |
+|------|---------|-------------|-------------|-------------|-----|------|
+| `Vpk=800m` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 35 warnings | `41.895 dB` | `6.667 bit` | `-41.896 dB` | `41.987 dB` |
+| `Vpk=400m` | `Interactive.1` | 0 ADE errors; 0 Spectre errors, 35 warnings | `50.346 dB` | `8.071 bit` | `-50.398 dB` | `50.400 dB` |
+
+The full-scale result is third-harmonic limited; the largest spur is bin 21
+(`8.203 MHz`). The comparator, non-overlap clock, and ASYCTRL outputs are
+not ADC-style FFT/ENOB targets in their present standalone pulse/digital
+testbenches; their dynamic behavior is covered by timing, rail, and energy
+metrics. Details are in `docs/dynamic_fft_20260618.md`.
 
 ## Maestro Measurements Added
 

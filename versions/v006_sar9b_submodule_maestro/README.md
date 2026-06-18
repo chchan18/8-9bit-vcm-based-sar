@@ -13,6 +13,7 @@ four key `SAR9B_400MV` submodules:
 | `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `CLK_NOOVERLAP` | Non-overlap timing |
 | `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `Asycontrol_logic_9clk` | SAR clock sequencing |
 | `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `BOOTSTRAP_DIFF` | Sampling switch tracking |
+| `TB_SUBMOD_BOOTSTRAP_DIFF_FFT` | `BOOTSTRAP_DIFF` | Coherent-sine dynamic FFT |
 
 The schematic testbenches and Maestro `TRAN` views were created in
 `SAR9B_400MV`, with model file:
@@ -31,11 +32,17 @@ and section `top_tt`.
 | `projects/sar9b_submodule_maestro/scripts/create_submodule_maestro_tests.py` | Creates the four testbenches and Maestro views; `--reset-maestro` rebuilds generated ADE outputs from scratch. |
 | `projects/sar9b_submodule_maestro/scripts/run_submodule_maestro_tests.py` | Run/export/metric automation with Maestro point-output parsing and offline PSF supply metrics. |
 | `projects/sar9b_submodule_maestro/scripts/run_submodule_robustness_sweeps.py` | Restartable nominal plus robustness matrix runner. |
+| `projects/sar9b_submodule_maestro/scripts/create_bootstrap_fft_test.py` | Creates the bootstrap coherent-sine FFT Maestro testbench. |
+| `projects/sar9b_submodule_maestro/scripts/run_bootstrap_fft_test.py` | Runs bootstrap FFT, exports coherent PSF samples, and computes SNDR/ENOB/THD/SFDR. |
 | `projects/sar9b_submodule_maestro/docs/performance_metrics.md` | Online metric references and mapping to Maestro/offline measurements. |
 | `projects/sar9b_submodule_maestro/docs/robustness_sweep_20260618.md` | First complete robustness sweep report. |
+| `projects/sar9b_submodule_maestro/docs/dynamic_fft_20260618.md` | Bootstrap dynamic FFT report and FFT applicability note. |
 | `projects/sar9b_submodule_maestro/artifacts/submodule_maestro_setup_manifest.json` | Setup manifest. |
+| `projects/sar9b_submodule_maestro/artifacts/bootstrap_fft_setup_manifest.json` | Bootstrap FFT setup manifest. |
 | `projects/sar9b_submodule_maestro/artifacts/schematic_props_fix_manifest.json` | Schematic property fix manifest. |
 | `projects/sar9b_submodule_maestro/runs/submodule_robustness_manifest.json` | Latest 20-case robustness sweep manifest. |
+| `projects/sar9b_submodule_maestro/runs/bootstrap_fft_dynamic/nominal_p2200/summary.json` | Full-scale `Vpk=800m` bootstrap FFT result. |
+| `projects/sar9b_submodule_maestro/runs/bootstrap_fft_dynamic/nominal_vpk400/summary.json` | Mid-scale `Vpk=400m` bootstrap FFT result. |
 
 ## Run Status
 
@@ -61,6 +68,17 @@ errors and zero Spectre errors:
 | `TB_SUBMOD_ASYCTRL_9CLK_PERF` | 5 | All cases reached `clko_rail_count=9`; sequence span tracked `valid_per` from `16 ns` to `24 ns`. |
 | `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | 5 | Final differential error stayed in the raw Maestro range `-248.9u` to `438u` for the `_mv` output. |
 
+Dynamic FFT was then added for the analog bootstrap path:
+
+| Case | History | Result | Output SNDR | Output ENOB | THD | SFDR |
+|------|---------|--------|-------------|-------------|-----|------|
+| `Vpk=800m` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 35 warnings | `41.895 dB` | `6.667 bit` | `-41.896 dB` | `41.987 dB` |
+| `Vpk=400m` | `Interactive.1` | 0 ADE errors; 0 Spectre errors, 35 warnings | `50.346 dB` | `8.071 bit` | `-50.398 dB` | `50.400 dB` |
+
+Only `BOOTSTRAP_DIFF` gets ADC-style dynamic FFT/ENOB in this submodule set.
+The comparator, non-overlap clock, and ASYCTRL waveforms are pulse/digital
+signals, so their FFTs are harmonic diagnostics rather than SNDR/ENOB results.
+
 Key repair details:
 
 1. `OSSHNL-109` was fixed by saving schematics with `dbSetConnCurrent`; manual
@@ -78,3 +96,6 @@ Key repair details:
 5. Supply power/energy remains part of the metric set, but is computed from
    PSF current exports after the run because IC618 ADE point outputs rejected
    branch-current expressions while OCEAN evaluation after `openResults` works.
+6. `TB_SUBMOD_BOOTSTRAP_DIFF_FFT` uses the validated ADC coherent stimulus
+   style: `fs=400M`, `fft_bin=7`, `fft_n=1024`, `ideal_balun` differential
+   drive, and OCEAN-exported samples from `28.2 ns` to `2.5857 us`.

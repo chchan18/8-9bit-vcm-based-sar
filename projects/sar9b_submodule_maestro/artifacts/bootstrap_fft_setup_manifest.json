@@ -1,0 +1,59 @@
+{
+  "library": "SAR9B_400MV",
+  "cell": "TB_SUBMOD_BOOTSTRAP_DIFF_FFT",
+  "test_name": "TRAN",
+  "model_file": "/home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/toplevel.scs",
+  "maestro": {
+    "cell": "TB_SUBMOD_BOOTSTRAP_DIFF_FFT",
+    "session": "fnxSession126",
+    "outputs": [
+      {
+        "name": "CLKS",
+        "signal": "/CLKS",
+        "raw": "t"
+      },
+      {
+        "name": "CLKSB",
+        "signal": "/CLKSB",
+        "raw": "t"
+      },
+      {
+        "name": "VIP",
+        "signal": "/VIP",
+        "raw": "t"
+      },
+      {
+        "name": "VIN",
+        "signal": "/VIN",
+        "raw": "t"
+      },
+      {
+        "name": "VOUTP",
+        "signal": "/VOUTP",
+        "raw": "t"
+      },
+      {
+        "name": "VOUTN",
+        "signal": "/VOUTN",
+        "raw": "t"
+      }
+    ]
+  },
+  "variables": {
+    "vdd": "900m",
+    "vcm": "450m",
+    "Vpk": "800m",
+    "fs": "400M",
+    "fft_bin": "7",
+    "fft_n": "1024",
+    "TSTOP": "2.7u",
+    "cload": "5f"
+  },
+  "fft": {
+    "sample_start_s": 2.82e-08,
+    "sample_step_s": 2.5e-09,
+    "samples": 1024,
+    "fundamental_bin": 7,
+    "input_frequency_hz": 2734375.0
+  }
+}
