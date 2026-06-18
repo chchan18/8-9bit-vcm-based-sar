@@ -111,6 +111,25 @@ def parse_run_errors(text: str) -> int | None:
     return None
 
 
+def parse_maestro_metrics(text: str) -> dict[str, str]:
+    metrics: dict[str, str] = {}
+    in_specs = False
+    for line in text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("Design specs"):
+            in_specs = True
+            continue
+        if stripped.startswith("Design parameters"):
+            break
+        if not in_specs or not stripped:
+            continue
+        parts = [part.strip() for part in line.split("\t") if part.strip()]
+        if len(parts) < 2 or parts[0] in {"TRAN", "corner"}:
+            continue
+        metrics[parts[0]] = " ".join(parts[1:])
+    return metrics
+
+
 def latest_history_after(client: VirtuosoClient, cell: str, start_epoch: int) -> str | None:
     base = f"/home/IC/Desktop/Project/{LIB}/{cell}/maestro/results/maestro"
     text = ssh(
@@ -360,12 +379,12 @@ def all_crossings(times: list[float], values: list[float], threshold: float = VT
 def export_waveforms(
     client: VirtuosoClient,
     results_dir: str,
-    signals: list[str],
+    wave_defs: list[tuple[str, str]],
     out_path: Path,
     tstop: float,
 ) -> tuple[list[float], dict[str, list[float]]]:
     remote_path = f"/tmp/submod_wave_{uuid.uuid4().hex}.txt"
-    expressions = " ".join(f'VT("{sig}")' for sig in signals)
+    expressions = " ".join(expr for _, expr in wave_defs)
     client.execute_skill(f'openResults("{results_dir}")', timeout=30)
     client.execute_skill('selectResults("tran")', timeout=30)
     cmd = (
@@ -385,8 +404,8 @@ def export_waveforms(
     out_path.parent.mkdir(parents=True, exist_ok=True)
     client.download_file(remote_path, str(out_path))
     client.execute_skill(f'deleteFile("{remote_path}")', timeout=10)
-    times, cols = parse_waveforms(out_path, len(signals))
-    return times, {signals[idx]: cols[f"c{idx}"] for idx in range(len(signals))}
+    times, cols = parse_waveforms(out_path, len(wave_defs))
+    return times, {wave_defs[idx][0]: cols[f"c{idx}"] for idx in range(len(wave_defs))}
 
 
 def parse_time(value: str) -> float:
@@ -475,6 +494,38 @@ def quick_metrics(cell: str, times: list[float], waves: dict[str, list[float]]) 
     return {}
 
 
+def trapz(times: list[float], values: list[float]) -> float:
+    total = 0.0
+    for idx in range(1, len(times)):
+        total += 0.5 * (values[idx] + values[idx - 1]) * (times[idx] - times[idx - 1])
+    return total
+
+
+def offline_metric_values(
+    spec: dict[str, object],
+    times: list[float],
+    waves: dict[str, list[float]],
+) -> dict[str, object]:
+    values: dict[str, object] = {}
+    duration = times[-1] - times[0] if len(times) > 1 else 0.0
+    for item in list(spec.get("offline_metrics", [])):
+        if str(item.get("source", "")) != "vdd_current_a":
+            continue
+        current = waves.get("vdd_current_a")
+        if not current or duration <= 0:
+            values[str(item["name"])] = None
+            continue
+        vdd = float(str(item.get("vdd", "0.9")))
+        current_integral = trapz(times, current)
+        energy = -vdd * current_integral
+        operation = str(item.get("operation", ""))
+        if operation == "avg_power_from_supply_current":
+            values[str(item["name"])] = energy / duration
+        elif operation == "energy_from_supply_current":
+            values[str(item["name"])] = energy
+    return values
+
+
 def run_one(client: VirtuosoClient, spec: dict[str, object], trigger: str) -> dict[str, object]:
     cell = str(spec["cell"])
     signals = [str(sig) for sig in spec["signals"]]
@@ -496,6 +547,12 @@ def run_one(client: VirtuosoClient, spec: dict[str, object], trigger: str) -> di
         download_if_exists(client, run_log_remote, local_history_dir / f"{history}.log")
         download_if_exists(client, spectre_out_remote, local_history_dir / "spectre.out")
         download_if_exists(client, netlist_remote, local_history_dir / "input.scs")
+        local_run_log = local_history_dir / f"{history}.log"
+        maestro_metrics = {}
+        if local_run_log.exists():
+            maestro_metrics = parse_maestro_metrics(
+                local_run_log.read_text(encoding="utf-8", errors="replace")
+            )
         if status["run_errors"] not in (0, None):
             summary = {
                 "cell": cell,
@@ -509,6 +566,7 @@ def run_one(client: VirtuosoClient, spec: dict[str, object], trigger: str) -> di
                 "completed": status["completed"],
                 "run_errors": status["run_errors"],
                 "spectre_summary": status["spectre_summary"],
+                "maestro_metrics": maestro_metrics,
                 "waveform_points": 0,
                 "metrics": {},
                 "error": "Maestro reported simulation errors; waveform export skipped.",
@@ -517,14 +575,25 @@ def run_one(client: VirtuosoClient, spec: dict[str, object], trigger: str) -> di
                 json.dumps(summary, indent=2), encoding="utf-8"
             )
             return summary
+        wave_defs = [(sig, f'VT("{sig}")') for sig in signals]
+        offline_sources: dict[str, str] = {}
+        for item in list(spec.get("offline_metrics", [])):
+            source = str(item.get("source", ""))
+            expr = str(item.get("waveform_expr", ""))
+            if source and expr and source not in offline_sources:
+                offline_sources[source] = expr
+        wave_defs.extend((source, expr) for source, expr in offline_sources.items())
         times, waves = export_waveforms(
             client,
             results_dir_remote,
-            signals,
+            wave_defs,
             local_history_dir / "waveforms.txt",
             tstop,
         )
         metrics = quick_metrics(cell, times, waves)
+        offline_metrics = offline_metric_values(spec, times, waves)
+        if offline_metrics:
+            metrics["offline"] = offline_metrics
         summary = {
             "cell": cell,
             "history": history,
@@ -537,6 +606,7 @@ def run_one(client: VirtuosoClient, spec: dict[str, object], trigger: str) -> di
             "completed": status["completed"],
             "run_errors": status["run_errors"],
             "spectre_summary": status["spectre_summary"],
+            "maestro_metrics": maestro_metrics,
             "waveform_points": len(times),
             "metrics": metrics,
         }

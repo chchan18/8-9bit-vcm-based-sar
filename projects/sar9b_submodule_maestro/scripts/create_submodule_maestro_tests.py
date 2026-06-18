@@ -133,6 +133,50 @@ def add_load_cap(sch, name: str, net: str, x: float, y: float, ref: str = "VSS")
     sch.add(label_term(name, "MINUS", ref))
 
 
+def skill_string(value: str) -> str:
+    return '"' + value.replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
+def metric(name: str, expr: str, unit: str, description: str) -> dict[str, str]:
+    return {"name": name, "expr": expr, "unit": unit, "description": description}
+
+
+def offline_supply_metrics(prefix: str) -> list[dict[str, str]]:
+    return [
+        {
+            "name": f"{prefix}_avg_power_w",
+            "unit": "W",
+            "description": "Average positive supply power over the transient run",
+            "source": "vdd_current_a",
+            "waveform_expr": 'getData("/VDD_SRC/PLUS" ?result "tran")',
+            "operation": "avg_power_from_supply_current",
+            "vdd": "0.9",
+        },
+        {
+            "name": f"{prefix}_energy_j",
+            "unit": "J",
+            "description": "Positive supply energy over the transient run",
+            "source": "vdd_current_a",
+            "waveform_expr": 'getData("/VDD_SRC/PLUS" ?result "tran")',
+            "operation": "energy_from_supply_current",
+            "vdd": "0.9",
+        },
+    ]
+
+
+def add_point_output(client: VirtuosoClient, session: str, name: str, expr: str) -> str:
+    return run_skill(
+        client,
+        f"add/update metric {name}",
+        (
+            f"maeAddOutput({skill_string(name)} {skill_string(TEST_NAME)} "
+            f'?outputType "point" ?expr {skill_string(expr)} '
+            f"?session {skill_string(session)})"
+        ),
+        timeout=90,
+    )
+
+
 def create_comparator_tb(client: VirtuosoClient, rebuild: bool = False) -> dict[str, object]:
     cell = "TB_SUBMOD_COMPARATOR_PERF"
     exists = cell_exists(client, cell, "schematic")
@@ -189,6 +233,38 @@ def create_comparator_tb(client: VirtuosoClient, rebuild: bool = False) -> dict[
         "stop": "8n",
         "vars": {"vdd": "900m", "vcm": "450m", "vdiff": "10m", "cload": "2f"},
         "signals": ["/CLKC", "/VP", "/VN", "/VOP", "/VON"],
+        "metrics": [
+            metric(
+                "cmp_clk_rise_s",
+                'cross(VT("/CLKC") 0.45 1 "rising" nil nil)',
+                "s",
+                "First comparator clock rising threshold crossing",
+            ),
+            metric(
+                "cmp_decision_cross_s",
+                'cross((VT("/VOP")-VT("/VON")) 0 1 "rising" nil nil)',
+                "s",
+                "First differential output zero crossing",
+            ),
+            metric(
+                "cmp_decision_delay_ps",
+                (
+                    '(cross((VT("/VOP")-VT("/VON")) 0 1 "rising" nil nil)'
+                    '-cross(VT("/CLKC") 0.45 1 "rising" nil nil))*1e12'
+                ),
+                "ps",
+                "Clock-to-decision delay",
+            ),
+            metric("cmp_vop_max_v", 'ymax(VT("/VOP"))', "V", "Maximum VOP swing"),
+            metric("cmp_von_min_v", 'ymin(VT("/VON"))', "V", "Minimum VON swing"),
+            metric(
+                "cmp_final_diff_v",
+                'value((VT("/VOP")-VT("/VON")) 8e-09)',
+                "V",
+                "Final differential output at stop time",
+            ),
+        ],
+        "offline_metrics": offline_supply_metrics("cmp"),
     }
 
 
@@ -237,6 +313,69 @@ def create_clk_nooverlap_tb(client: VirtuosoClient, rebuild: bool = False) -> di
         "stop": "12n",
         "vars": {"vdd": "900m", "cload": "2f"},
         "signals": ["/CLKIN", "/CLKOP", "/CLKON"],
+        "metrics": [
+            metric(
+                "clk_clkop_delay_ps",
+                (
+                    '(cross(VT("/CLKOP") 0.45 1 "rising" nil nil)'
+                    '-cross(VT("/CLKIN") 0.45 1 "rising" nil nil))*1e12'
+                ),
+                "ps",
+                "CLKIN rising to CLKOP rising delay",
+            ),
+            metric(
+                "clk_clkon_delay_ps",
+                (
+                    '(cross(VT("/CLKON") 0.45 1 "rising" nil nil)'
+                    '-cross(VT("/CLKIN") 0.45 1 "rising" nil nil))*1e12'
+                ),
+                "ps",
+                "CLKIN rising to CLKON rising delay",
+            ),
+            metric(
+                "clk_gap_op_after_on_ps",
+                (
+                    '(cross(VT("/CLKOP") 0.45 1 "rising" nil nil)'
+                    '-cross(VT("/CLKON") 0.45 1 "falling" nil nil))*1e12'
+                ),
+                "ps",
+                "Low-low non-overlap gap before CLKOP turns on",
+            ),
+            metric(
+                "clk_gap_on_after_op_ps",
+                (
+                    '(cross(VT("/CLKON") 0.45 1 "rising" nil nil)'
+                    '-cross(VT("/CLKOP") 0.45 1 "falling" nil nil))*1e12'
+                ),
+                "ps",
+                "Low-low non-overlap gap before CLKON turns on",
+            ),
+            metric(
+                "clk_clkop_duty_pct",
+                (
+                    '(cross(VT("/CLKOP") 0.45 1 "falling" nil nil)'
+                    '-cross(VT("/CLKOP") 0.45 1 "rising" nil nil))/5e-09*100'
+                ),
+                "%",
+                "First full CLKOP high-window duty cycle",
+            ),
+            metric(
+                "clk_clkon_duty_pct",
+                (
+                    '(cross(VT("/CLKON") 0.45 2 "falling" nil nil)'
+                    '-cross(VT("/CLKON") 0.45 1 "rising" nil nil))/5e-09*100'
+                ),
+                "%",
+                "First full CLKON high-window duty cycle",
+            ),
+            metric(
+                "clk_overlap_product_peak_v2",
+                'ymax(VT("/CLKOP")*VT("/CLKON"))',
+                "V^2",
+                "Peak product of both phase clocks; near zero indicates no simultaneous high state",
+            ),
+        ],
+        "offline_metrics": offline_supply_metrics("clk"),
     }
 
 
@@ -288,11 +427,53 @@ def create_asyctrl_tb(client: VirtuosoClient, rebuild: bool = False) -> dict[str
         ("C_CLKC", "c", "cload"),
     ]
     set_instance_params(client, cell, params)
+    clko_rise_metrics = [
+        metric(
+            f"asy_clko{bit}_rise_ps",
+            f'cross(VT("/CLKO<{bit}>") 0.45 1 "rising" nil nil)*1e12',
+            "ps",
+            f"First CLKO<{bit}> rising threshold crossing",
+        )
+        for bit in range(8, -1, -1)
+    ]
+    clko_max_metrics = [
+        metric(
+            f"asy_clko{bit}_max_v",
+            f'ymax(VT("/CLKO<{bit}>"))',
+            "V",
+            f"Maximum CLKO<{bit}> output level",
+        )
+        for bit in range(8, -1, -1)
+    ]
     return {
         "cell": cell,
         "stop": "28n",
         "vars": {"vdd": "900m", "cload": "1f"},
         "signals": ["/CLKS", "/VALID", "/CLKC"] + [f"/CLKO<{bit}>" for bit in range(9)],
+        "metrics": [
+            metric(
+                "asy_valid_to_clko8_ps",
+                (
+                    '(cross(VT("/CLKO<8>") 0.45 1 "rising" nil nil)'
+                    '-cross(VT("/VALID") 0.45 1 "rising" nil nil))*1e12'
+                ),
+                "ps",
+                "First VALID edge to MSB clock output delay",
+            ),
+            metric(
+                "asy_sequence_span_ps",
+                (
+                    '(cross(VT("/CLKO<0>") 0.45 1 "rising" nil nil)'
+                    '-cross(VT("/CLKO<8>") 0.45 1 "rising" nil nil))*1e12'
+                ),
+                "ps",
+                "Time from CLKO<8> first rise to CLKO<0> first rise",
+            ),
+            metric("asy_clkc_max_v", 'ymax(VT("/CLKC"))', "V", "Maximum comparator strobe level"),
+        ]
+        + clko_rise_metrics
+        + clko_max_metrics,
+        "offline_metrics": offline_supply_metrics("asy"),
     }
 
 
@@ -362,7 +543,72 @@ def create_bootstrap_tb(client: VirtuosoClient, rebuild: bool = False) -> dict[s
         "stop": "12n",
         "vars": {"vdd": "900m", "vcm": "450m", "vdiff": "100m", "cload": "5f"},
         "signals": ["/CLKS", "/CLKSB", "/VIP", "/VIN", "/VOUTP", "/VOUTN"],
+        "metrics": [
+            metric(
+                "boot_diff_final_v",
+                'value((VT("/VOUTP")-VT("/VOUTN")) 12e-09)',
+                "V",
+                "Final sampled differential output",
+            ),
+            metric(
+                "boot_diff_final_error_mv",
+                (
+                    '(value((VT("/VOUTP")-VT("/VOUTN")) 12e-09)'
+                    '-value((VT("/VIP")-VT("/VIN")) 12e-09))*1e3'
+                ),
+                "mV",
+                "Final differential tracking error",
+            ),
+            metric(
+                "boot_track_error_on_avg_mv",
+                (
+                    'average(abs(clip((VT("/VOUTP")-VT("/VOUTN"))'
+                    '-(VT("/VIP")-VT("/VIN")) 0.55e-09 2.5e-09)))*1e3'
+                ),
+                "mV",
+                "Average absolute tracking error during the first on window",
+            ),
+            metric(
+                "boot_track_error_on_max_mv",
+                (
+                    'ymax(abs(clip((VT("/VOUTP")-VT("/VOUTN"))'
+                    '-(VT("/VIP")-VT("/VIN")) 0.55e-09 2.5e-09)))*1e3'
+                ),
+                "mV",
+                "Peak absolute tracking error during the first on window",
+            ),
+            metric(
+                "boot_settle_error_2p5n_mv",
+                (
+                    'value(abs((VT("/VOUTP")-VT("/VOUTN"))'
+                    '-(VT("/VIP")-VT("/VIN"))) 2.5e-09)*1e3'
+                ),
+                "mV",
+                "Tracking error near the end of the first on window",
+            ),
+            metric(
+                "boot_clk_overlap_product_peak_v2",
+                'ymax(VT("/CLKS")*VT("/CLKSB"))',
+                "V^2",
+                "Peak product of complementary bootstrap clocks",
+            ),
+        ],
+        "offline_metrics": offline_supply_metrics("boot"),
     }
+
+
+def reset_maestro_view(client: VirtuosoClient, cell: str) -> None:
+    run_skill(
+        client,
+        f"reset Maestro view {cell}",
+        f'''
+let((obj)
+  obj = ddGetObj("{LIB}" "{cell}" "maestro")
+  when(obj ddDeleteObj(obj))
+  "ok")
+''',
+        timeout=120,
+    )
 
 
 def ensure_maestro_setup(client: VirtuosoClient, spec: dict[str, object]) -> dict[str, object]:
@@ -400,8 +646,11 @@ def ensure_maestro_setup(client: VirtuosoClient, spec: dict[str, object]) -> dic
             set_var(client, name, value, session=session)
             set_var(client, name, value, type_name="test", type_value=f'("{TEST_NAME}")', session=session)
 
-        # Add waveform outputs only if missing. Scalar metrics are derived offline
-        # from exported waveforms to avoid fragile Maestro expression serialization.
+        # Add waveform outputs plus scalar point measurements. The scalar
+        # measurements mirror common block-level performance metrics. Supply
+        # current based power/energy is computed by the run helper from PSF,
+        # because this ADE point-output path rejects branch-current expressions
+        # in IC618 while the same OCEAN expressions work after the run.
         added_outputs: list[dict[str, str]] = []
         for signal in list(spec["signals"]):
             out_name = signal.strip("/").replace("<", "_").replace(">", "").replace(":", "_")
@@ -417,6 +666,23 @@ def ensure_maestro_setup(client: VirtuosoClient, spec: dict[str, object]) -> dic
                 added_outputs.append({"name": out_name, "signal": signal, "raw": raw})
             except Exception as exc:  # noqa: BLE001
                 added_outputs.append({"name": out_name, "signal": signal, "error": str(exc)})
+        for item in list(spec.get("metrics", [])):
+            name = str(item["name"])
+            expr = str(item["expr"])
+            try:
+                raw = add_point_output(client, session, name, expr)
+                added_outputs.append(
+                    {
+                        "name": name,
+                        "type": "point",
+                        "unit": str(item.get("unit", "")),
+                        "description": str(item.get("description", "")),
+                        "expr": expr,
+                        "raw": raw,
+                    }
+                )
+            except Exception as exc:  # noqa: BLE001
+                added_outputs.append({"name": name, "type": "point", "expr": expr, "error": str(exc)})
         save_setup(client, LIB, cell, session=session)
         views = run_skill(
             client,
@@ -462,6 +728,11 @@ def main() -> None:
         help="clear and rebuild generated submodule schematics before saving Maestro setup",
     )
     parser.add_argument("--cell", help="only create/update one generated testbench cell")
+    parser.add_argument(
+        "--reset-maestro",
+        action="store_true",
+        help="delete and recreate the generated Maestro views before adding outputs",
+    )
     args = parser.parse_args()
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -479,6 +750,9 @@ def main() -> None:
     ]
     if not specs:
         raise SystemExit(f"Unknown --cell value: {args.cell}")
+    if args.reset_maestro:
+        for spec in specs:
+            reset_maestro_view(client, str(spec["cell"]))
     maestro = [ensure_maestro_setup(client, spec) for spec in specs]
     out_path = OUT_DIR / "submodule_maestro_setup_manifest.json"
     base_manifest: dict[str, object] = {}

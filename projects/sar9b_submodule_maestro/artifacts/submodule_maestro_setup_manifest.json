@@ -18,6 +18,64 @@
         "/VN",
         "/VOP",
         "/VON"
+      ],
+      "metrics": [
+        {
+          "name": "cmp_clk_rise_s",
+          "expr": "cross(VT(\"/CLKC\") 0.45 1 \"rising\" nil nil)",
+          "unit": "s",
+          "description": "First comparator clock rising threshold crossing"
+        },
+        {
+          "name": "cmp_decision_cross_s",
+          "expr": "cross((VT(\"/VOP\")-VT(\"/VON\")) 0 1 \"rising\" nil nil)",
+          "unit": "s",
+          "description": "First differential output zero crossing"
+        },
+        {
+          "name": "cmp_decision_delay_ps",
+          "expr": "(cross((VT(\"/VOP\")-VT(\"/VON\")) 0 1 \"rising\" nil nil)-cross(VT(\"/CLKC\") 0.45 1 \"rising\" nil nil))*1e12",
+          "unit": "ps",
+          "description": "Clock-to-decision delay"
+        },
+        {
+          "name": "cmp_vop_max_v",
+          "expr": "ymax(VT(\"/VOP\"))",
+          "unit": "V",
+          "description": "Maximum VOP swing"
+        },
+        {
+          "name": "cmp_von_min_v",
+          "expr": "ymin(VT(\"/VON\"))",
+          "unit": "V",
+          "description": "Minimum VON swing"
+        },
+        {
+          "name": "cmp_final_diff_v",
+          "expr": "value((VT(\"/VOP\")-VT(\"/VON\")) 8e-09)",
+          "unit": "V",
+          "description": "Final differential output at stop time"
+        }
+      ],
+      "offline_metrics": [
+        {
+          "name": "cmp_avg_power_w",
+          "unit": "W",
+          "description": "Average positive supply power over the transient run",
+          "source": "vdd_current_a",
+          "waveform_expr": "getData(\"/VDD_SRC/PLUS\" ?result \"tran\")",
+          "operation": "avg_power_from_supply_current",
+          "vdd": "0.9"
+        },
+        {
+          "name": "cmp_energy_j",
+          "unit": "J",
+          "description": "Positive supply energy over the transient run",
+          "source": "vdd_current_a",
+          "waveform_expr": "getData(\"/VDD_SRC/PLUS\" ?result \"tran\")",
+          "operation": "energy_from_supply_current",
+          "vdd": "0.9"
+        }
       ]
     },
     {
@@ -31,6 +89,70 @@
         "/CLKIN",
         "/CLKOP",
         "/CLKON"
+      ],
+      "metrics": [
+        {
+          "name": "clk_clkop_delay_ps",
+          "expr": "(cross(VT(\"/CLKOP\") 0.45 1 \"rising\" nil nil)-cross(VT(\"/CLKIN\") 0.45 1 \"rising\" nil nil))*1e12",
+          "unit": "ps",
+          "description": "CLKIN rising to CLKOP rising delay"
+        },
+        {
+          "name": "clk_clkon_delay_ps",
+          "expr": "(cross(VT(\"/CLKON\") 0.45 1 \"rising\" nil nil)-cross(VT(\"/CLKIN\") 0.45 1 \"rising\" nil nil))*1e12",
+          "unit": "ps",
+          "description": "CLKIN rising to CLKON rising delay"
+        },
+        {
+          "name": "clk_gap_op_after_on_ps",
+          "expr": "(cross(VT(\"/CLKOP\") 0.45 1 \"rising\" nil nil)-cross(VT(\"/CLKON\") 0.45 1 \"falling\" nil nil))*1e12",
+          "unit": "ps",
+          "description": "Low-low non-overlap gap before CLKOP turns on"
+        },
+        {
+          "name": "clk_gap_on_after_op_ps",
+          "expr": "(cross(VT(\"/CLKON\") 0.45 1 \"rising\" nil nil)-cross(VT(\"/CLKOP\") 0.45 1 \"falling\" nil nil))*1e12",
+          "unit": "ps",
+          "description": "Low-low non-overlap gap before CLKON turns on"
+        },
+        {
+          "name": "clk_clkop_duty_pct",
+          "expr": "(cross(VT(\"/CLKOP\") 0.45 1 \"falling\" nil nil)-cross(VT(\"/CLKOP\") 0.45 1 \"rising\" nil nil))/5e-09*100",
+          "unit": "%",
+          "description": "First full CLKOP high-window duty cycle"
+        },
+        {
+          "name": "clk_clkon_duty_pct",
+          "expr": "(cross(VT(\"/CLKON\") 0.45 2 \"falling\" nil nil)-cross(VT(\"/CLKON\") 0.45 1 \"rising\" nil nil))/5e-09*100",
+          "unit": "%",
+          "description": "First full CLKON high-window duty cycle"
+        },
+        {
+          "name": "clk_overlap_product_peak_v2",
+          "expr": "ymax(VT(\"/CLKOP\")*VT(\"/CLKON\"))",
+          "unit": "V^2",
+          "description": "Peak product of both phase clocks; near zero indicates no simultaneous high state"
+        }
+      ],
+      "offline_metrics": [
+        {
+          "name": "clk_avg_power_w",
+          "unit": "W",
+          "description": "Average positive supply power over the transient run",
+          "source": "vdd_current_a",
+          "waveform_expr": "getData(\"/VDD_SRC/PLUS\" ?result \"tran\")",
+          "operation": "avg_power_from_supply_current",
+          "vdd": "0.9"
+        },
+        {
+          "name": "clk_energy_j",
+          "unit": "J",
+          "description": "Positive supply energy over the transient run",
+          "source": "vdd_current_a",
+          "waveform_expr": "getData(\"/VDD_SRC/PLUS\" ?result \"tran\")",
+          "operation": "energy_from_supply_current",
+          "vdd": "0.9"
+        }
       ]
     },
     {
@@ -53,6 +175,154 @@
         "/CLKO<6>",
         "/CLKO<7>",
         "/CLKO<8>"
+      ],
+      "metrics": [
+        {
+          "name": "asy_valid_to_clko8_ps",
+          "expr": "(cross(VT(\"/CLKO<8>\") 0.45 1 \"rising\" nil nil)-cross(VT(\"/VALID\") 0.45 1 \"rising\" nil nil))*1e12",
+          "unit": "ps",
+          "description": "First VALID edge to MSB clock output delay"
+        },
+        {
+          "name": "asy_sequence_span_ps",
+          "expr": "(cross(VT(\"/CLKO<0>\") 0.45 1 \"rising\" nil nil)-cross(VT(\"/CLKO<8>\") 0.45 1 \"rising\" nil nil))*1e12",
+          "unit": "ps",
+          "description": "Time from CLKO<8> first rise to CLKO<0> first rise"
+        },
+        {
+          "name": "asy_clkc_max_v",
+          "expr": "ymax(VT(\"/CLKC\"))",
+          "unit": "V",
+          "description": "Maximum comparator strobe level"
+        },
+        {
+          "name": "asy_clko8_rise_ps",
+          "expr": "cross(VT(\"/CLKO<8>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "unit": "ps",
+          "description": "First CLKO<8> rising threshold crossing"
+        },
+        {
+          "name": "asy_clko7_rise_ps",
+          "expr": "cross(VT(\"/CLKO<7>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "unit": "ps",
+          "description": "First CLKO<7> rising threshold crossing"
+        },
+        {
+          "name": "asy_clko6_rise_ps",
+          "expr": "cross(VT(\"/CLKO<6>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "unit": "ps",
+          "description": "First CLKO<6> rising threshold crossing"
+        },
+        {
+          "name": "asy_clko5_rise_ps",
+          "expr": "cross(VT(\"/CLKO<5>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "unit": "ps",
+          "description": "First CLKO<5> rising threshold crossing"
+        },
+        {
+          "name": "asy_clko4_rise_ps",
+          "expr": "cross(VT(\"/CLKO<4>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "unit": "ps",
+          "description": "First CLKO<4> rising threshold crossing"
+        },
+        {
+          "name": "asy_clko3_rise_ps",
+          "expr": "cross(VT(\"/CLKO<3>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "unit": "ps",
+          "description": "First CLKO<3> rising threshold crossing"
+        },
+        {
+          "name": "asy_clko2_rise_ps",
+          "expr": "cross(VT(\"/CLKO<2>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "unit": "ps",
+          "description": "First CLKO<2> rising threshold crossing"
+        },
+        {
+          "name": "asy_clko1_rise_ps",
+          "expr": "cross(VT(\"/CLKO<1>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "unit": "ps",
+          "description": "First CLKO<1> rising threshold crossing"
+        },
+        {
+          "name": "asy_clko0_rise_ps",
+          "expr": "cross(VT(\"/CLKO<0>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "unit": "ps",
+          "description": "First CLKO<0> rising threshold crossing"
+        },
+        {
+          "name": "asy_clko8_max_v",
+          "expr": "ymax(VT(\"/CLKO<8>\"))",
+          "unit": "V",
+          "description": "Maximum CLKO<8> output level"
+        },
+        {
+          "name": "asy_clko7_max_v",
+          "expr": "ymax(VT(\"/CLKO<7>\"))",
+          "unit": "V",
+          "description": "Maximum CLKO<7> output level"
+        },
+        {
+          "name": "asy_clko6_max_v",
+          "expr": "ymax(VT(\"/CLKO<6>\"))",
+          "unit": "V",
+          "description": "Maximum CLKO<6> output level"
+        },
+        {
+          "name": "asy_clko5_max_v",
+          "expr": "ymax(VT(\"/CLKO<5>\"))",
+          "unit": "V",
+          "description": "Maximum CLKO<5> output level"
+        },
+        {
+          "name": "asy_clko4_max_v",
+          "expr": "ymax(VT(\"/CLKO<4>\"))",
+          "unit": "V",
+          "description": "Maximum CLKO<4> output level"
+        },
+        {
+          "name": "asy_clko3_max_v",
+          "expr": "ymax(VT(\"/CLKO<3>\"))",
+          "unit": "V",
+          "description": "Maximum CLKO<3> output level"
+        },
+        {
+          "name": "asy_clko2_max_v",
+          "expr": "ymax(VT(\"/CLKO<2>\"))",
+          "unit": "V",
+          "description": "Maximum CLKO<2> output level"
+        },
+        {
+          "name": "asy_clko1_max_v",
+          "expr": "ymax(VT(\"/CLKO<1>\"))",
+          "unit": "V",
+          "description": "Maximum CLKO<1> output level"
+        },
+        {
+          "name": "asy_clko0_max_v",
+          "expr": "ymax(VT(\"/CLKO<0>\"))",
+          "unit": "V",
+          "description": "Maximum CLKO<0> output level"
+        }
+      ],
+      "offline_metrics": [
+        {
+          "name": "asy_avg_power_w",
+          "unit": "W",
+          "description": "Average positive supply power over the transient run",
+          "source": "vdd_current_a",
+          "waveform_expr": "getData(\"/VDD_SRC/PLUS\" ?result \"tran\")",
+          "operation": "avg_power_from_supply_current",
+          "vdd": "0.9"
+        },
+        {
+          "name": "asy_energy_j",
+          "unit": "J",
+          "description": "Positive supply energy over the transient run",
+          "source": "vdd_current_a",
+          "waveform_expr": "getData(\"/VDD_SRC/PLUS\" ?result \"tran\")",
+          "operation": "energy_from_supply_current",
+          "vdd": "0.9"
+        }
       ]
     },
     {
@@ -71,13 +341,71 @@
         "/VIN",
         "/VOUTP",
         "/VOUTN"
+      ],
+      "metrics": [
+        {
+          "name": "boot_diff_final_v",
+          "expr": "value((VT(\"/VOUTP\")-VT(\"/VOUTN\")) 12e-09)",
+          "unit": "V",
+          "description": "Final sampled differential output"
+        },
+        {
+          "name": "boot_diff_final_error_mv",
+          "expr": "(value((VT(\"/VOUTP\")-VT(\"/VOUTN\")) 12e-09)-value((VT(\"/VIP\")-VT(\"/VIN\")) 12e-09))*1e3",
+          "unit": "mV",
+          "description": "Final differential tracking error"
+        },
+        {
+          "name": "boot_track_error_on_avg_mv",
+          "expr": "average(abs(clip((VT(\"/VOUTP\")-VT(\"/VOUTN\"))-(VT(\"/VIP\")-VT(\"/VIN\")) 0.55e-09 2.5e-09)))*1e3",
+          "unit": "mV",
+          "description": "Average absolute tracking error during the first on window"
+        },
+        {
+          "name": "boot_track_error_on_max_mv",
+          "expr": "ymax(abs(clip((VT(\"/VOUTP\")-VT(\"/VOUTN\"))-(VT(\"/VIP\")-VT(\"/VIN\")) 0.55e-09 2.5e-09)))*1e3",
+          "unit": "mV",
+          "description": "Peak absolute tracking error during the first on window"
+        },
+        {
+          "name": "boot_settle_error_2p5n_mv",
+          "expr": "value(abs((VT(\"/VOUTP\")-VT(\"/VOUTN\"))-(VT(\"/VIP\")-VT(\"/VIN\"))) 2.5e-09)*1e3",
+          "unit": "mV",
+          "description": "Tracking error near the end of the first on window"
+        },
+        {
+          "name": "boot_clk_overlap_product_peak_v2",
+          "expr": "ymax(VT(\"/CLKS\")*VT(\"/CLKSB\"))",
+          "unit": "V^2",
+          "description": "Peak product of complementary bootstrap clocks"
+        }
+      ],
+      "offline_metrics": [
+        {
+          "name": "boot_avg_power_w",
+          "unit": "W",
+          "description": "Average positive supply power over the transient run",
+          "source": "vdd_current_a",
+          "waveform_expr": "getData(\"/VDD_SRC/PLUS\" ?result \"tran\")",
+          "operation": "avg_power_from_supply_current",
+          "vdd": "0.9"
+        },
+        {
+          "name": "boot_energy_j",
+          "unit": "J",
+          "description": "Positive supply energy over the transient run",
+          "source": "vdd_current_a",
+          "waveform_expr": "getData(\"/VDD_SRC/PLUS\" ?result \"tran\")",
+          "operation": "energy_from_supply_current",
+          "vdd": "0.9"
+        }
       ]
     }
   ],
   "maestro": [
     {
       "cell": "TB_SUBMOD_COMPARATOR_PERF",
-      "session": "fnxSession82",
+      "session": "fnxSession110",
       "views": "(\"maestro\" \"schematic\")",
       "outputs": [
         {
@@ -104,12 +432,60 @@
           "name": "VON",
           "signal": "/VON",
           "raw": "t"
+        },
+        {
+          "name": "cmp_clk_rise_s",
+          "type": "point",
+          "unit": "s",
+          "description": "First comparator clock rising threshold crossing",
+          "expr": "cross(VT(\"/CLKC\") 0.45 1 \"rising\" nil nil)",
+          "raw": "t"
+        },
+        {
+          "name": "cmp_decision_cross_s",
+          "type": "point",
+          "unit": "s",
+          "description": "First differential output zero crossing",
+          "expr": "cross((VT(\"/VOP\")-VT(\"/VON\")) 0 1 \"rising\" nil nil)",
+          "raw": "t"
+        },
+        {
+          "name": "cmp_decision_delay_ps",
+          "type": "point",
+          "unit": "ps",
+          "description": "Clock-to-decision delay",
+          "expr": "(cross((VT(\"/VOP\")-VT(\"/VON\")) 0 1 \"rising\" nil nil)-cross(VT(\"/CLKC\") 0.45 1 \"rising\" nil nil))*1e12",
+          "raw": "t"
+        },
+        {
+          "name": "cmp_vop_max_v",
+          "type": "point",
+          "unit": "V",
+          "description": "Maximum VOP swing",
+          "expr": "ymax(VT(\"/VOP\"))",
+          "raw": "t"
+        },
+        {
+          "name": "cmp_von_min_v",
+          "type": "point",
+          "unit": "V",
+          "description": "Minimum VON swing",
+          "expr": "ymin(VT(\"/VON\"))",
+          "raw": "t"
+        },
+        {
+          "name": "cmp_final_diff_v",
+          "type": "point",
+          "unit": "V",
+          "description": "Final differential output at stop time",
+          "expr": "value((VT(\"/VOP\")-VT(\"/VON\")) 8e-09)",
+          "raw": "t"
         }
       ]
     },
     {
       "cell": "TB_SUBMOD_CLK_NOOVERLAP_PERF",
-      "session": "fnxSession83",
+      "session": "fnxSession111",
       "views": "(\"maestro\" \"schematic\")",
       "outputs": [
         {
@@ -126,12 +502,68 @@
           "name": "CLKON",
           "signal": "/CLKON",
           "raw": "t"
+        },
+        {
+          "name": "clk_clkop_delay_ps",
+          "type": "point",
+          "unit": "ps",
+          "description": "CLKIN rising to CLKOP rising delay",
+          "expr": "(cross(VT(\"/CLKOP\") 0.45 1 \"rising\" nil nil)-cross(VT(\"/CLKIN\") 0.45 1 \"rising\" nil nil))*1e12",
+          "raw": "t"
+        },
+        {
+          "name": "clk_clkon_delay_ps",
+          "type": "point",
+          "unit": "ps",
+          "description": "CLKIN rising to CLKON rising delay",
+          "expr": "(cross(VT(\"/CLKON\") 0.45 1 \"rising\" nil nil)-cross(VT(\"/CLKIN\") 0.45 1 \"rising\" nil nil))*1e12",
+          "raw": "t"
+        },
+        {
+          "name": "clk_gap_op_after_on_ps",
+          "type": "point",
+          "unit": "ps",
+          "description": "Low-low non-overlap gap before CLKOP turns on",
+          "expr": "(cross(VT(\"/CLKOP\") 0.45 1 \"rising\" nil nil)-cross(VT(\"/CLKON\") 0.45 1 \"falling\" nil nil))*1e12",
+          "raw": "t"
+        },
+        {
+          "name": "clk_gap_on_after_op_ps",
+          "type": "point",
+          "unit": "ps",
+          "description": "Low-low non-overlap gap before CLKON turns on",
+          "expr": "(cross(VT(\"/CLKON\") 0.45 1 \"rising\" nil nil)-cross(VT(\"/CLKOP\") 0.45 1 \"falling\" nil nil))*1e12",
+          "raw": "t"
+        },
+        {
+          "name": "clk_clkop_duty_pct",
+          "type": "point",
+          "unit": "%",
+          "description": "First full CLKOP high-window duty cycle",
+          "expr": "(cross(VT(\"/CLKOP\") 0.45 1 \"falling\" nil nil)-cross(VT(\"/CLKOP\") 0.45 1 \"rising\" nil nil))/5e-09*100",
+          "raw": "t"
+        },
+        {
+          "name": "clk_clkon_duty_pct",
+          "type": "point",
+          "unit": "%",
+          "description": "First full CLKON high-window duty cycle",
+          "expr": "(cross(VT(\"/CLKON\") 0.45 2 \"falling\" nil nil)-cross(VT(\"/CLKON\") 0.45 1 \"rising\" nil nil))/5e-09*100",
+          "raw": "t"
+        },
+        {
+          "name": "clk_overlap_product_peak_v2",
+          "type": "point",
+          "unit": "V^2",
+          "description": "Peak product of both phase clocks; near zero indicates no simultaneous high state",
+          "expr": "ymax(VT(\"/CLKOP\")*VT(\"/CLKON\"))",
+          "raw": "t"
         }
       ]
     },
     {
       "cell": "TB_SUBMOD_ASYCTRL_9CLK_PERF",
-      "session": "fnxSession84",
+      "session": "fnxSession112",
       "views": "(\"maestro\" \"schematic\")",
       "outputs": [
         {
@@ -193,12 +625,180 @@
           "name": "CLKO_8",
           "signal": "/CLKO<8>",
           "raw": "t"
+        },
+        {
+          "name": "asy_valid_to_clko8_ps",
+          "type": "point",
+          "unit": "ps",
+          "description": "First VALID edge to MSB clock output delay",
+          "expr": "(cross(VT(\"/CLKO<8>\") 0.45 1 \"rising\" nil nil)-cross(VT(\"/VALID\") 0.45 1 \"rising\" nil nil))*1e12",
+          "raw": "t"
+        },
+        {
+          "name": "asy_sequence_span_ps",
+          "type": "point",
+          "unit": "ps",
+          "description": "Time from CLKO<8> first rise to CLKO<0> first rise",
+          "expr": "(cross(VT(\"/CLKO<0>\") 0.45 1 \"rising\" nil nil)-cross(VT(\"/CLKO<8>\") 0.45 1 \"rising\" nil nil))*1e12",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clkc_max_v",
+          "type": "point",
+          "unit": "V",
+          "description": "Maximum comparator strobe level",
+          "expr": "ymax(VT(\"/CLKC\"))",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko8_rise_ps",
+          "type": "point",
+          "unit": "ps",
+          "description": "First CLKO<8> rising threshold crossing",
+          "expr": "cross(VT(\"/CLKO<8>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko7_rise_ps",
+          "type": "point",
+          "unit": "ps",
+          "description": "First CLKO<7> rising threshold crossing",
+          "expr": "cross(VT(\"/CLKO<7>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko6_rise_ps",
+          "type": "point",
+          "unit": "ps",
+          "description": "First CLKO<6> rising threshold crossing",
+          "expr": "cross(VT(\"/CLKO<6>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko5_rise_ps",
+          "type": "point",
+          "unit": "ps",
+          "description": "First CLKO<5> rising threshold crossing",
+          "expr": "cross(VT(\"/CLKO<5>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko4_rise_ps",
+          "type": "point",
+          "unit": "ps",
+          "description": "First CLKO<4> rising threshold crossing",
+          "expr": "cross(VT(\"/CLKO<4>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko3_rise_ps",
+          "type": "point",
+          "unit": "ps",
+          "description": "First CLKO<3> rising threshold crossing",
+          "expr": "cross(VT(\"/CLKO<3>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko2_rise_ps",
+          "type": "point",
+          "unit": "ps",
+          "description": "First CLKO<2> rising threshold crossing",
+          "expr": "cross(VT(\"/CLKO<2>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko1_rise_ps",
+          "type": "point",
+          "unit": "ps",
+          "description": "First CLKO<1> rising threshold crossing",
+          "expr": "cross(VT(\"/CLKO<1>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko0_rise_ps",
+          "type": "point",
+          "unit": "ps",
+          "description": "First CLKO<0> rising threshold crossing",
+          "expr": "cross(VT(\"/CLKO<0>\") 0.45 1 \"rising\" nil nil)*1e12",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko8_max_v",
+          "type": "point",
+          "unit": "V",
+          "description": "Maximum CLKO<8> output level",
+          "expr": "ymax(VT(\"/CLKO<8>\"))",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko7_max_v",
+          "type": "point",
+          "unit": "V",
+          "description": "Maximum CLKO<7> output level",
+          "expr": "ymax(VT(\"/CLKO<7>\"))",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko6_max_v",
+          "type": "point",
+          "unit": "V",
+          "description": "Maximum CLKO<6> output level",
+          "expr": "ymax(VT(\"/CLKO<6>\"))",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko5_max_v",
+          "type": "point",
+          "unit": "V",
+          "description": "Maximum CLKO<5> output level",
+          "expr": "ymax(VT(\"/CLKO<5>\"))",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko4_max_v",
+          "type": "point",
+          "unit": "V",
+          "description": "Maximum CLKO<4> output level",
+          "expr": "ymax(VT(\"/CLKO<4>\"))",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko3_max_v",
+          "type": "point",
+          "unit": "V",
+          "description": "Maximum CLKO<3> output level",
+          "expr": "ymax(VT(\"/CLKO<3>\"))",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko2_max_v",
+          "type": "point",
+          "unit": "V",
+          "description": "Maximum CLKO<2> output level",
+          "expr": "ymax(VT(\"/CLKO<2>\"))",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko1_max_v",
+          "type": "point",
+          "unit": "V",
+          "description": "Maximum CLKO<1> output level",
+          "expr": "ymax(VT(\"/CLKO<1>\"))",
+          "raw": "t"
+        },
+        {
+          "name": "asy_clko0_max_v",
+          "type": "point",
+          "unit": "V",
+          "description": "Maximum CLKO<0> output level",
+          "expr": "ymax(VT(\"/CLKO<0>\"))",
+          "raw": "t"
         }
       ]
     },
     {
       "cell": "TB_SUBMOD_BOOTSTRAP_DIFF_PERF",
-      "session": "fnxSession85",
+      "session": "fnxSession113",
       "views": "(\"maestro\" \"schematic\")",
       "outputs": [
         {
@@ -229,6 +829,54 @@
         {
           "name": "VOUTN",
           "signal": "/VOUTN",
+          "raw": "t"
+        },
+        {
+          "name": "boot_diff_final_v",
+          "type": "point",
+          "unit": "V",
+          "description": "Final sampled differential output",
+          "expr": "value((VT(\"/VOUTP\")-VT(\"/VOUTN\")) 12e-09)",
+          "raw": "t"
+        },
+        {
+          "name": "boot_diff_final_error_mv",
+          "type": "point",
+          "unit": "mV",
+          "description": "Final differential tracking error",
+          "expr": "(value((VT(\"/VOUTP\")-VT(\"/VOUTN\")) 12e-09)-value((VT(\"/VIP\")-VT(\"/VIN\")) 12e-09))*1e3",
+          "raw": "t"
+        },
+        {
+          "name": "boot_track_error_on_avg_mv",
+          "type": "point",
+          "unit": "mV",
+          "description": "Average absolute tracking error during the first on window",
+          "expr": "average(abs(clip((VT(\"/VOUTP\")-VT(\"/VOUTN\"))-(VT(\"/VIP\")-VT(\"/VIN\")) 0.55e-09 2.5e-09)))*1e3",
+          "raw": "t"
+        },
+        {
+          "name": "boot_track_error_on_max_mv",
+          "type": "point",
+          "unit": "mV",
+          "description": "Peak absolute tracking error during the first on window",
+          "expr": "ymax(abs(clip((VT(\"/VOUTP\")-VT(\"/VOUTN\"))-(VT(\"/VIP\")-VT(\"/VIN\")) 0.55e-09 2.5e-09)))*1e3",
+          "raw": "t"
+        },
+        {
+          "name": "boot_settle_error_2p5n_mv",
+          "type": "point",
+          "unit": "mV",
+          "description": "Tracking error near the end of the first on window",
+          "expr": "value(abs((VT(\"/VOUTP\")-VT(\"/VOUTN\"))-(VT(\"/VIP\")-VT(\"/VIN\"))) 2.5e-09)*1e3",
+          "raw": "t"
+        },
+        {
+          "name": "boot_clk_overlap_product_peak_v2",
+          "type": "point",
+          "unit": "V^2",
+          "description": "Peak product of complementary bootstrap clocks",
+          "expr": "ymax(VT(\"/CLKS\")*VT(\"/CLKSB\"))",
           "raw": "t"
         }
       ]

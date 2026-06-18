@@ -34,8 +34,8 @@ Nominal variables:
 | `scripts/inspect_submodule_symbols.py` | Reads DUT symbol terminals and selected schematic instances. |
 | `scripts/inspect_adc_tb_sources.py` | Reads known ADC testbench source parameter names for reuse. |
 | `scripts/create_schematic_smoke.py` | Creates a small RC schematic to verify schematic creation APIs. |
-| `scripts/create_submodule_maestro_tests.py` | Creates/rebuilds the four schematic testbenches and corresponding Maestro `TRAN` views. Use `--cell` to update one testbench or `--rebuild-schematics` after changing stimulus wiring. |
-| `scripts/run_submodule_maestro_tests.py` | Runs Maestro, downloads logs/netlists/waveforms, and computes quick metrics. Supports `--trigger callback`, `--trigger gui-button`, and `--trigger mae`. |
+| `scripts/create_submodule_maestro_tests.py` | Creates/rebuilds the four schematic testbenches and corresponding Maestro `TRAN` views. Use `--cell` to update one testbench, `--rebuild-schematics` after changing stimulus wiring, or `--reset-maestro` to rebuild generated ADE outputs from scratch. |
+| `scripts/run_submodule_maestro_tests.py` | Runs Maestro, downloads logs/netlists/waveforms, records Maestro point outputs, exports PSF waveforms, and computes quick/offline metrics. Supports `--trigger callback`, `--trigger gui-button`, and `--trigger mae`. |
 | `scripts/archive_submodule_history.py` | Copies an existing remote Maestro history into this project. |
 | `scripts/inspect_fix_schematic_props.py` | Inspects/fixes schematic extraction metadata using `dbSetConnCurrent`; needed after bridge-created schematics. |
 | `scripts/check_submodule_remote_status.py` | Polls remote Maestro histories, logs, and process state for a selected cell. |
@@ -51,6 +51,7 @@ Nominal variables:
 | `artifacts/adc_tb_sources_raw.json` | Reusable source parameter names from the validated SAR9B ADC testbench. |
 | `artifacts/submodule_maestro_setup_manifest.json` | Manifest proving the four schematic and Maestro views were created. |
 | `artifacts/schematic_props_fix_manifest.json` | Manifest showing `connectivityLastUpdated` was repaired for all four new schematics. |
+| `docs/performance_metrics.md` | Online metric references and mapping to Maestro/offline measurements. |
 | `runs/TB_SUBMOD_COMPARATOR_PERF/Interactive.0` | Archived pre-fix failed run: `OSSHNL-108`. |
 | `runs/TB_SUBMOD_COMPARATOR_PERF/Interactive.1` | Archived pre-fix failed run: `OSSHNL-108`. |
 | `runs/TB_SUBMOD_COMPARATOR_PERF/Interactive.2` | Background run attempt stopped immediately by Maestro. |
@@ -58,15 +59,30 @@ Nominal variables:
 
 ## Current Run Status
 
-The four Maestro testbenches now run through Spectre with zero errors. Latest
-run manifest: `runs/submodule_run_manifest.json`.
+The four rebuilt Maestro testbenches now run through Maestro with zero ADE
+errors and through Spectre with zero simulator errors. Latest run manifest:
+`runs/submodule_run_manifest.json`.
 
-| Testbench | Latest history | Spectre | Quick metric |
-|-----------|----------------|---------|--------------|
-| `TB_SUBMOD_COMPARATOR_PERF` | `Interactive.9` | 0 errors, 5 warnings | `CLKC` rise to decision crossing: `3.923 ps` |
-| `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `Interactive.4` | 0 errors, 30 warnings | no simultaneous-high time; total both-low window `176 ps` |
-| `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `Interactive.9` | 0 errors, 10 warnings | all nine `CLKO<0..8>` reach rail; first rises step from `CLKO<8>` at `542 ps` to `CLKO<0>` at `20543 ps` |
-| `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `Interactive.5` | 0 errors, 30 warnings | final differential tracking: `100.000067 mV` for `100 mV` input |
+| Testbench | Latest history | ADE/Spectre | Maestro point-output highlights | Offline metric |
+|-----------|----------------|-------------|---------------------------------|----------------|
+| `TB_SUBMOD_COMPARATOR_PERF` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 5 warnings | `cmp_decision_delay_ps=4.483`, `cmp_vop_max_v=940m`, `cmp_von_min_v=-7.177m` | `cmp_avg_power_w=31.83 uW`, `cmp_energy_j=254.63 fJ` |
+| `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 30 warnings | `clk_gap_op_after_on_ps=35.08`, `clk_gap_on_after_op_ps=35.27`, `clk_overlap_product_peak_v2=6.792u` | `clk_avg_power_w=3.639 uW`, `clk_energy_j=43.66 fJ` |
+| `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 10 warnings | `asy_sequence_span_ps=20K`; all `CLKO<8:0>` reach about 0.905-0.907 V | `asy_avg_power_w=8.261 uW`, `asy_energy_j=231.30 fJ` |
+| `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 30 warnings | `boot_diff_final_v=100m`, `boot_settle_error_2p5n_mv=86.49u`, `boot_clk_overlap_product_peak_v2=202.5m` | `boot_avg_power_w=2.188 uW`, `boot_energy_j=26.25 fJ` |
+
+## Maestro Measurements Added
+
+The Maestro setup now includes published-style block metrics for each module:
+comparator clock-to-decision delay and swing; non-overlap propagation, gap,
+duty, and overlap checks; ASYCTRL conversion-sequence timing and per-clock rail
+reach; and bootstrap final/track/settling error. The metric rationale and
+source links are captured in `docs/performance_metrics.md`.
+
+Supply power and energy are intentionally not registered as Maestro point
+outputs. IC618 accepts the branch-current OCEAN expression after opening PSF
+results, but reports `Error No` when the same expression is stored as an ADE
+point output. The run helper therefore exports the supply current from the same
+history and records power/energy under `metrics.offline`.
 
 Important fixes made during this pass:
 
@@ -81,6 +97,9 @@ Important fixes made during this pass:
 4. ASYCTRL uses an active-high `DFFRN` reset. `CLKS` is now driven high only
    during the initial reset window, then held low so `VALID` pulses advance
    the 9-bit shift chain.
+5. A `--reset-maestro` flow was added to recreate generated Maestro views and
+   remove stale ADE outputs; this was used for the latest clean `Interactive.0`
+   run on all four testbenches.
 
 ## Recommended Next Step
 

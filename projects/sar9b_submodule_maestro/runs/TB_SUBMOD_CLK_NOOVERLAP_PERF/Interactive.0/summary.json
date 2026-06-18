@@ -1,0 +1,62 @@
+{
+  "cell": "TB_SUBMOD_CLK_NOOVERLAP_PERF",
+  "history": "Interactive.0",
+  "session": "fnxSession115",
+  "signals": [
+    "/CLKIN",
+    "/CLKOP",
+    "/CLKON"
+  ],
+  "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.0.log",
+  "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.0/1/TRAN/psf",
+  "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.0/1/TRAN/psf/spectre.out",
+  "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.0/1/TRAN/netlist/input.scs",
+  "completed": true,
+  "run_errors": 0,
+  "spectre_summary": {
+    "errors": 0,
+    "warnings": 30,
+    "notices": 10
+  },
+  "maestro_metrics": {
+    "clk_clkop_delay_ps": "91.81",
+    "clk_clkon_delay_ps": "2.093K",
+    "clk_gap_op_after_on_ps": "35.08",
+    "clk_gap_on_after_op_ps": "35.27",
+    "clk_clkop_duty_pct": "39.31",
+    "clk_clkon_duty_pct": "59.28",
+    "clk_overlap_product_peak_v2": "6.792u"
+  },
+  "waveform_points": 6001,
+  "metrics": {
+    "clkin_rise_ps": [
+      502.50000000000006,
+      5502.500000000001,
+      10502.5
+    ],
+    "clkop_rise_ps": [
+      594.3345629369733,
+      5594.336710395191,
+      10594.336717934731
+    ],
+    "clkon_rise_ps": [
+      2595.307265315768,
+      7595.305017661819
+    ],
+    "clkop_fall_ps": [
+      2560.0509656673735,
+      7560.05641325786
+    ],
+    "clkon_fall_ps": [
+      559.235075042873,
+      5559.233578791824,
+      10559.233580052347
+    ],
+    "both_high_total_ps": 0.0,
+    "both_low_total_ps": 176.0,
+    "offline": {
+      "clk_avg_power_w": 3.638671932613395e-06,
+      "clk_energy_j": 4.366406319136074e-14
+    }
+  }
+}

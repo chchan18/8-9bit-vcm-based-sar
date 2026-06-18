@@ -28,22 +28,24 @@ and section `top_tt`.
 | File | Content |
 |------|---------|
 | `projects/sar9b_submodule_maestro/README.md` | Detailed submodule Maestro handoff. |
-| `projects/sar9b_submodule_maestro/scripts/create_submodule_maestro_tests.py` | Creates the four testbenches and Maestro views. |
-| `projects/sar9b_submodule_maestro/scripts/run_submodule_maestro_tests.py` | Run/export/metric automation attempt. |
+| `projects/sar9b_submodule_maestro/scripts/create_submodule_maestro_tests.py` | Creates the four testbenches and Maestro views; `--reset-maestro` rebuilds generated ADE outputs from scratch. |
+| `projects/sar9b_submodule_maestro/scripts/run_submodule_maestro_tests.py` | Run/export/metric automation with Maestro point-output parsing and offline PSF supply metrics. |
+| `projects/sar9b_submodule_maestro/docs/performance_metrics.md` | Online metric references and mapping to Maestro/offline measurements. |
 | `projects/sar9b_submodule_maestro/artifacts/submodule_maestro_setup_manifest.json` | Setup manifest. |
 | `projects/sar9b_submodule_maestro/artifacts/schematic_props_fix_manifest.json` | Schematic property fix manifest. |
 
 ## Run Status
 
-The generated Maestro run/export flow now completes for all four submodule
-testbenches. Latest histories:
+The generated Maestro run/export flow now completes for all four rebuilt
+submodule testbenches with zero ADE errors and zero Spectre errors. Latest
+histories:
 
-| Testbench | Latest history | Spectre result | Quick result |
-|-----------|----------------|----------------|--------------|
-| `TB_SUBMOD_COMPARATOR_PERF` | `Interactive.9` | 0 errors, 5 warnings | decision crossing delay `3.923 ps` |
-| `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `Interactive.4` | 0 errors, 30 warnings | no simultaneous-high window; both-low total `176 ps` |
-| `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `Interactive.9` | 0 errors, 10 warnings | all nine `CLKO<0..8>` reach rail in order |
-| `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `Interactive.5` | 0 errors, 30 warnings | final differential output `100.000067 mV` for `100 mV` input |
+| Testbench | Latest history | Result | Highlight |
+|-----------|----------------|--------|-----------|
+| `TB_SUBMOD_COMPARATOR_PERF` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 5 warnings | Maestro `cmp_decision_delay_ps=4.483`; offline power `31.83 uW` |
+| `TB_SUBMOD_CLK_NOOVERLAP_PERF` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 30 warnings | Maestro non-overlap gaps about `35 ps`; offline power `3.639 uW` |
+| `TB_SUBMOD_ASYCTRL_9CLK_PERF` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 10 warnings | `CLKO<8>` to `CLKO<0>` span `20 ns`; offline power `8.261 uW` |
+| `TB_SUBMOD_BOOTSTRAP_DIFF_PERF` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 30 warnings | final differential output `100 mV`; offline power `2.188 uW` |
 
 Key repair details:
 
@@ -56,3 +58,9 @@ Key repair details:
    is high during startup reset and then held low. With that stimulus,
    `CLKO<8>` rises at `542 ps` and the chain advances down to `CLKO<0>` at
    `20543 ps`, with all nine outputs reaching about `0.9 V`.
+4. Published-style Maestro point outputs were added for comparator delay/swing,
+   non-overlap timing, ASYCTRL sequence timing/rail reach, and bootstrap
+   tracking/settling error.
+5. Supply power/energy remains part of the metric set, but is computed from
+   PSF current exports after the run because IC618 ADE point outputs rejected
+   branch-current expressions while OCEAN evaluation after `openResults` works.

@@ -580,15 +580,22 @@ Status:
 3. Done: generated testbenches rebuilt with a real `VSS_SRC (VSS 0)` ground
    reference through `analogLib/gnd`; plain `"0"` labels produced floating
    `_net0` references.
-4. Done: all four Maestro testbenches now run through Spectre with zero errors:
-   comparator `Interactive.9`, clock non-overlap `Interactive.4`, ASYCTRL
-   `Interactive.9`, and bootstrap `Interactive.5`.
+4. Done: all four rebuilt Maestro testbenches now run through ADE/Maestro and
+   Spectre with zero errors: comparator `Interactive.0`, clock non-overlap
+   `Interactive.0`, ASYCTRL `Interactive.0`, and bootstrap `Interactive.0`.
 5. Done: ASYCTRL standalone stimulus now exercises the full 9-step sequence.
    `DFFRN.RN` is active-high in this implementation, so `CLKS` is held high
    only for startup reset and then kept low while `VALID` pulses advance the
-   chain. In `Interactive.9`, all nine `CLKO<0..8>` outputs reach rail; first
+   chain. In `Interactive.0`, all nine `CLKO<0..8>` outputs reach rail; first
    rises progress from `CLKO<8>` at `542 ps` to `CLKO<0>` at `20543 ps`.
-6. Remaining: add robustness sweeps for ASYCTRL `VALID` spacing, comparator
+6. Done: online metric references were mapped into Maestro point outputs for
+   comparator delay/swing, non-overlap timing, ASYCTRL sequence timing/rail
+   reach, and bootstrap tracking/settling error. The run helper also records
+   `maestro_metrics` from the ADE log.
+7. Done: supply power and energy are still tracked, but as offline PSF metrics
+   computed from `getData("/VDD_SRC/PLUS" ?result "tran")`, because IC618
+   Maestro point outputs reject branch-current expressions as `Error No`.
+8. Remaining: add robustness sweeps for ASYCTRL `VALID` spacing, comparator
    input overdrive, non-overlap timing, and bootstrap tracking across corners.
 
 ### Priority 1: Proper 9-bit measurement
@@ -697,8 +704,9 @@ maeGetOutputValue("ENOB" "test" ?history "historyName")
 | Current SAR9B best run | `sar9b_work/iterations/sar9b_maestro_best_q4/README.md` | SAR9B `Interactive.11`, DAC9 `/out` ENOB 7.86 bits and raw-code ENOB 7.920 bits |
 | SAR9B ENOB recovery project | `projects/sar9b_enob_recovery/README.md` | Final Vpk=800m recovery result with `/out` ENOB 8.678 bits and raw-code ENOB 8.7203 bits |
 | SAR9B submodule Maestro project | `projects/sar9b_submodule_maestro/README.md` | Standalone comparator, clock, async-control, and bootstrap Maestro testbenches |
+| SAR9B submodule metric mapping | `projects/sar9b_submodule_maestro/docs/performance_metrics.md` | Online performance-metric references and mapping to Maestro/offline measurements |
 | SAR9B submodule Maestro creator | `projects/sar9b_submodule_maestro/scripts/create_submodule_maestro_tests.py` | Creates four standalone schematic testbenches and Maestro `TRAN` views in `SAR9B_400MV` |
-| SAR9B submodule run helper | `projects/sar9b_submodule_maestro/scripts/run_submodule_maestro_tests.py` | Attempts Maestro runs, archives histories, exports waveforms, and computes quick metrics |
+| SAR9B submodule run helper | `projects/sar9b_submodule_maestro/scripts/run_submodule_maestro_tests.py` | Runs Maestro, archives histories, records ADE point metrics, exports waveforms, and computes quick/offline metrics |
 | SAR9B Maestro launcher | `sar9b_work/start_sar9b_maestro_best_run.py` | Starts `SAR9B_400MV/ADC_9B_tb_best_q4` Maestro runs |
 | SAR9B result checker | `sar9b_work/check_sar9b_maestro_run.py` | Polls and archives SAR9B Maestro/Spectre status; success requires 0 run errors and 0 Spectre errors |
 | SAR9B AHDL wrapper setup | `sar9b_work/set_sar9b_ahdl_wrapper.py` | Uploads `sar9b_va_ahdl.scs` and sets Maestro definitionFiles to the wrapper |
@@ -727,3 +735,4 @@ maeGetOutputValue("ENOB" "test" ?history "historyName")
 13. **Bridge-created schematics may need extraction metadata repair**: If new schematic testbenches fail netlisting with `OSSHNL-108` or `OSSHNL-109`, run `schCheck`, `dbSave`, `dbSetConnCurrent`, then `dbSave`; manual `connectivityLastUpdated` edits are brittle because `dbSave` advances `schGeometryLastUpdated`.
 14. **Do not use text `"0"` labels as Spectre ground in generated TBs**: Wire a local `VSS_SRC` minus terminal to an `analogLib/gnd` symbol so the netlist emits `VSS_SRC (VSS 0)`. Text labels can netlist as floating `_net0`.
 15. **ASYCTRL `DFFRN.RN` is active-high reset here**: In standalone ASYCTRL tests, drive `CLKS` high only for startup reset, then hold it low so `VALID` pulses can advance `CLKO<8:0>`.
+16. **Do not register branch-current power expressions as IC618 Maestro point outputs**: `average(getData("/VDD_SRC/PLUS" ?result "tran"))` and `integ(...)` evaluate after `openResults`, but ADE stored outputs report `Error No`. Keep supply power/energy in `offline_metrics` and let `run_submodule_maestro_tests.py` compute them from PSF.

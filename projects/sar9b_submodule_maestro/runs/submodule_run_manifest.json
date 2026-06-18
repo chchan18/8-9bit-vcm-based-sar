@@ -6,8 +6,8 @@
   "runs": [
     {
       "cell": "TB_SUBMOD_COMPARATOR_PERF",
-      "history": "Interactive.9",
-      "session": "fnxSession86",
+      "history": "Interactive.0",
+      "session": "fnxSession114",
       "signals": [
         "/CLKC",
         "/VP",
@@ -15,16 +15,24 @@
         "/VOP",
         "/VON"
       ],
-      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.9.log",
-      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.9/1/TRAN/psf",
-      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.9/1/TRAN/psf/spectre.out",
-      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.9/1/TRAN/netlist/input.scs",
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.0.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.0/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.0/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_COMPARATOR_PERF/maestro/results/maestro/Interactive.0/1/TRAN/netlist/input.scs",
       "completed": true,
       "run_errors": 0,
       "spectre_summary": {
         "errors": 0,
         "warnings": 5,
         "notices": 9
+      },
+      "maestro_metrics": {
+        "cmp_clk_rise_s": "1.003n",
+        "cmp_decision_cross_s": "1.007n",
+        "cmp_decision_delay_ps": "4.483",
+        "cmp_vop_max_v": "940m",
+        "cmp_von_min_v": "-7.177m",
+        "cmp_final_diff_v": "-794n"
       },
       "waveform_points": 4001,
       "metrics": {
@@ -33,28 +41,41 @@
         "decision_delay_ps": 3.9230309591008004,
         "final_vop": 3.361434385704241e-06,
         "final_von": 4.155453536741088e-06,
-        "final_diff_v": -7.940191510368473e-07
+        "final_diff_v": -7.940191510368473e-07,
+        "offline": {
+          "cmp_avg_power_w": 3.1828778060200376e-05,
+          "cmp_energy_j": 2.54630224481603e-13
+        }
       }
     },
     {
       "cell": "TB_SUBMOD_CLK_NOOVERLAP_PERF",
-      "history": "Interactive.4",
-      "session": "fnxSession87",
+      "history": "Interactive.0",
+      "session": "fnxSession115",
       "signals": [
         "/CLKIN",
         "/CLKOP",
         "/CLKON"
       ],
-      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.4.log",
-      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.4/1/TRAN/psf",
-      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.4/1/TRAN/psf/spectre.out",
-      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.4/1/TRAN/netlist/input.scs",
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.0.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.0/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.0/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_CLK_NOOVERLAP_PERF/maestro/results/maestro/Interactive.0/1/TRAN/netlist/input.scs",
       "completed": true,
       "run_errors": 0,
       "spectre_summary": {
         "errors": 0,
         "warnings": 30,
         "notices": 10
+      },
+      "maestro_metrics": {
+        "clk_clkop_delay_ps": "91.81",
+        "clk_clkon_delay_ps": "2.093K",
+        "clk_gap_op_after_on_ps": "35.08",
+        "clk_gap_on_after_op_ps": "35.27",
+        "clk_clkop_duty_pct": "39.31",
+        "clk_clkon_duty_pct": "59.28",
+        "clk_overlap_product_peak_v2": "6.792u"
       },
       "waveform_points": 6001,
       "metrics": {
@@ -82,13 +103,17 @@
           10559.233580052347
         ],
         "both_high_total_ps": 0.0,
-        "both_low_total_ps": 176.0
+        "both_low_total_ps": 176.0,
+        "offline": {
+          "clk_avg_power_w": 3.638671932613395e-06,
+          "clk_energy_j": 4.366406319136074e-14
+        }
       }
     },
     {
       "cell": "TB_SUBMOD_ASYCTRL_9CLK_PERF",
-      "history": "Interactive.9",
-      "session": "fnxSession88",
+      "history": "Interactive.0",
+      "session": "fnxSession116",
       "signals": [
         "/CLKS",
         "/VALID",
@@ -103,16 +128,39 @@
         "/CLKO<7>",
         "/CLKO<8>"
       ],
-      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.9.log",
-      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.9/1/TRAN/psf",
-      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.9/1/TRAN/psf/spectre.out",
-      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.9/1/TRAN/netlist/input.scs",
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.0.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.0/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.0/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_ASYCTRL_9CLK_PERF/maestro/results/maestro/Interactive.0/1/TRAN/netlist/input.scs",
       "completed": true,
       "run_errors": 0,
       "spectre_summary": {
         "errors": 0,
         "warnings": 10,
         "notices": 6
+      },
+      "maestro_metrics": {
+        "asy_valid_to_clko8_ps": "39.84",
+        "asy_sequence_span_ps": "20K",
+        "asy_clkc_max_v": "916.7m",
+        "asy_clko8_rise_ps": "542.3",
+        "asy_clko7_rise_ps": "3.042K",
+        "asy_clko6_rise_ps": "5.542K",
+        "asy_clko5_rise_ps": "8.042K",
+        "asy_clko4_rise_ps": "10.54K",
+        "asy_clko3_rise_ps": "13.04K",
+        "asy_clko2_rise_ps": "15.54K",
+        "asy_clko1_rise_ps": "18.04K",
+        "asy_clko0_rise_ps": "20.54K",
+        "asy_clko8_max_v": "906.9m",
+        "asy_clko7_max_v": "906.9m",
+        "asy_clko6_max_v": "906.9m",
+        "asy_clko5_max_v": "906.9m",
+        "asy_clko4_max_v": "906.9m",
+        "asy_clko3_max_v": "906.9m",
+        "asy_clko2_max_v": "906.9m",
+        "asy_clko1_max_v": "906.9m",
+        "asy_clko0_max_v": "905m"
       },
       "waveform_points": 14001,
       "metrics": {
@@ -220,13 +268,17 @@
         },
         "clko_rail_count": 9,
         "clkc_min": -0.02804793070156442,
-        "clkc_max": 0.9162595506075792
+        "clkc_max": 0.9162595506075792,
+        "offline": {
+          "asy_avg_power_w": 8.260785785263466e-06,
+          "asy_energy_j": 2.3130200198737703e-13
+        }
       }
     },
     {
       "cell": "TB_SUBMOD_BOOTSTRAP_DIFF_PERF",
-      "history": "Interactive.5",
-      "session": "fnxSession89",
+      "history": "Interactive.0",
+      "session": "fnxSession117",
       "signals": [
         "/CLKS",
         "/CLKSB",
@@ -235,16 +287,24 @@
         "/VOUTP",
         "/VOUTN"
       ],
-      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.5.log",
-      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.5/1/TRAN/psf",
-      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.5/1/TRAN/psf/spectre.out",
-      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.5/1/TRAN/netlist/input.scs",
+      "run_log_remote": "/home/IC/Desktop/Project/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.0.log",
+      "results_dir_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.0/1/TRAN/psf",
+      "spectre_out_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.0/1/TRAN/psf/spectre.out",
+      "netlist_remote": "/home/IC/simulation/SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_PERF/maestro/results/maestro/Interactive.0/1/TRAN/netlist/input.scs",
       "completed": true,
       "run_errors": 0,
       "spectre_summary": {
         "errors": 0,
         "warnings": 30,
         "notices": 10
+      },
+      "maestro_metrics": {
+        "boot_diff_final_v": "100m",
+        "boot_diff_final_error_mv": "67.51u",
+        "boot_track_error_on_avg_mv": "184.5u",
+        "boot_track_error_on_max_mv": "30.88m",
+        "boot_settle_error_2p5n_mv": "86.49u",
+        "boot_clk_overlap_product_peak_v2": "202.5m"
       },
       "waveform_points": 6001,
       "metrics": {
@@ -255,7 +315,11 @@
         "diff_in_v": 0.09999999999999998,
         "diff_out_final_v": 0.1000000675070738,
         "max_on_diff_error_mv": 100.09498950735238,
-        "mean_on_diff_error_mv": 0.3741679325665769
+        "mean_on_diff_error_mv": 0.3741679325665769,
+        "offline": {
+          "boot_avg_power_w": 2.1879031931909745e-06,
+          "boot_energy_j": 2.6254838318291692e-14
+        }
       }
     }
   ]
