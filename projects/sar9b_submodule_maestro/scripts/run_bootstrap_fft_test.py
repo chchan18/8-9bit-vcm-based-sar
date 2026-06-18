@@ -34,7 +34,7 @@ from run_submodule_maestro_tests import (  # noqa: E402
 
 
 RUN_ROOT = PROJECT_DIR / "runs/bootstrap_fft_dynamic"
-DEFAULT_SAMPLE_START = 28.2e-9
+DEFAULT_SAMPLE_START = 50.2e-9
 DEFAULT_SAMPLE_STEP = 2.5e-9
 DEFAULT_NSAMPLES = 1024
 DEFAULT_FUND_BIN = 7
@@ -259,7 +259,7 @@ def run_fft_test(args: argparse.Namespace) -> dict[str, object]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--trigger", choices=["gui-button", "mae", "callback"], default="callback")
-    parser.add_argument("--out-dir", default=str(RUN_ROOT / "nominal_p2200"))
+    parser.add_argument("--out-dir", default=str(RUN_ROOT / "nominal_track_p200"))
     parser.add_argument("--vdd", default="900m")
     parser.add_argument("--vcm", default="450m")
     parser.add_argument("--vpk", default="800m")

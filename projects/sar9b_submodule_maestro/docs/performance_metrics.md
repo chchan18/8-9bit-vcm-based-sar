@@ -87,12 +87,17 @@ Offline PSF metrics:
 | Metric | Method |
 |--------|--------|
 | `boot_avg_power_w`, `boot_energy_j` | Integrate supply current after the run. |
-| `boot_fft_sndr_db`, `boot_fft_enob_bits`, `boot_fft_thd_db`, `boot_fft_sfdr_db` | Run `TB_SUBMOD_BOOTSTRAP_DIFF_FFT`, export coherent `VOUTP-VOUTN` samples, and compute the FFT offline. |
+| `boot_fft_sndr_db`, `boot_fft_enob_bits`, `boot_fft_thd_db`, `boot_fft_sfdr_db` | Run `TB_SUBMOD_BOOTSTRAP_DIFF_FFT`, export coherent `VOUTP-VOUTN` samples in the intended track/hold phase, and compute the FFT offline. |
 
 Dynamic FFT is only assigned to the analog bootstrap sampler. The comparator,
 clock, and ASYCTRL outputs are pulse/digital waveforms, so their FFTs are not
 reported as SNDR/ENOB. Their dynamic performance is represented by the timing,
 rail, overlap, and energy metrics above.
+
+For bootstrap tracking linearity, use the corrected `50.2 ns` sample start
+(`200 ps` into the 2.5 ns sampling period). The old p700-style export samples
+the simplified hold node after turn-off and should be labeled as a
+charge-injection/feedthrough diagnostic rather than tracking ENOB.
 
 ## ADE Current-Output Caveat
 

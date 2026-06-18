@@ -602,10 +602,14 @@ Status:
    non-overlap clock load/VDD, ASYCTRL `VALID` spacing/load/VDD, and
    bootstrap input/load/VDD.
 9. Done: bootstrap coherent-sine FFT testbench
-   `TB_SUBMOD_BOOTSTRAP_DIFF_FFT` was created and run. At `Vpk=800m`,
-   output `SNDR=41.895 dB`, `ENOB=6.667 bits`, `THD=-41.896 dB`, and
-   `SFDR=41.987 dB`; at `Vpk=400m`, output `SNDR=50.346 dB`,
-   `ENOB=8.071 bits`, `THD=-50.398 dB`, and `SFDR=50.400 dB`.
+   `TB_SUBMOD_BOOTSTRAP_DIFF_FFT` was created and its sampling window was
+   corrected after a phase-sweep audit. The original p700-style export
+   measured post-track charge-injection on a simplified 5 fF hold node, not
+   bootstrap tracking ENOB. With the corrected track-phase window
+   (`50.2 ns -> 2.6077 us`, `200 ps` into each 2.5 ns cycle), `Vpk=800m`
+   gives output `SNDR=128.974 dB`, `ENOB=21.132 bits`, `THD=-129.621 dB`,
+   and `SFDR=131.308 dB`; `Vpk=400m` gives output `SNDR=128.886 dB`,
+   `ENOB=21.117 bits`, `THD=-129.004 dB`, and `SFDR=131.814 dB`.
    Comparator, clock, and ASYCTRL FFTs are not reported as ENOB because their
    standalone outputs are pulse/digital waveforms; their dynamic behavior is
    tracked by timing/rail/energy metrics.
@@ -726,8 +730,10 @@ maeGetOutputValue("ENOB" "test" ?history "historyName")
 | SAR9B submodule run helper | `projects/sar9b_submodule_maestro/scripts/run_submodule_maestro_tests.py` | Runs Maestro, archives histories, records ADE point metrics, exports waveforms, and computes quick/offline metrics |
 | SAR9B bootstrap FFT creator | `projects/sar9b_submodule_maestro/scripts/create_bootstrap_fft_test.py` | Creates `SAR9B_400MV/TB_SUBMOD_BOOTSTRAP_DIFF_FFT` and its Maestro sample plan |
 | SAR9B bootstrap FFT runner | `projects/sar9b_submodule_maestro/scripts/run_bootstrap_fft_test.py` | Runs the bootstrap FFT Maestro test and computes SNDR/ENOB/THD/SFDR from PSF samples |
-| SAR9B bootstrap FFT full-scale result | `projects/sar9b_submodule_maestro/runs/bootstrap_fft_dynamic/nominal_p2200/summary.json` | `Vpk=800m` bootstrap FFT result: output ENOB 6.667 bits |
-| SAR9B bootstrap FFT mid-scale result | `projects/sar9b_submodule_maestro/runs/bootstrap_fft_dynamic/nominal_vpk400/summary.json` | `Vpk=400m` bootstrap FFT result: output ENOB 8.071 bits |
+| SAR9B bootstrap FFT phase auditor | `projects/sar9b_submodule_maestro/scripts/sweep_bootstrap_fft_phase.py` | Re-exports existing bootstrap FFT PSF histories over sample phase |
+| SAR9B bootstrap FFT full-scale result | `projects/sar9b_submodule_maestro/runs/bootstrap_fft_dynamic/nominal_track_p200/summary.json` | Corrected `Vpk=800m` bootstrap track-phase FFT result: output ENOB 21.132 bits |
+| SAR9B bootstrap FFT mid-scale result | `projects/sar9b_submodule_maestro/runs/bootstrap_fft_dynamic/nominal_vpk400_track_p200/summary.json` | Corrected `Vpk=400m` bootstrap track-phase FFT result: output ENOB 21.117 bits |
+| SAR9B bootstrap FFT phase audit | `projects/sar9b_submodule_maestro/runs/bootstrap_fft_dynamic/phase_sweep_existing/summary.json` | Re-exported existing PSF histories over 0-2.4 ns sample phase; proves p700 was a hold-phase diagnostic |
 | SAR9B Maestro launcher | `sar9b_work/start_sar9b_maestro_best_run.py` | Starts `SAR9B_400MV/ADC_9B_tb_best_q4` Maestro runs |
 | SAR9B result checker | `sar9b_work/check_sar9b_maestro_run.py` | Polls and archives SAR9B Maestro/Spectre status; success requires 0 run errors and 0 Spectre errors |
 | SAR9B AHDL wrapper setup | `sar9b_work/set_sar9b_ahdl_wrapper.py` | Uploads `sar9b_va_ahdl.scs` and sets Maestro definitionFiles to the wrapper |
@@ -758,3 +764,4 @@ maeGetOutputValue("ENOB" "test" ?history "historyName")
 15. **ASYCTRL `DFFRN.RN` is active-high reset here**: In standalone ASYCTRL tests, drive `CLKS` high only for startup reset, then hold it low so `VALID` pulses can advance `CLKO<8:0>`.
 16. **Do not register branch-current power expressions as IC618 Maestro point outputs**: `average(getData("/VDD_SRC/PLUS" ?result "tran"))` and `integ(...)` evaluate after `openResults`, but ADE stored outputs report `Error No`. Keep supply power/energy in `offline_metrics` and let `run_submodule_maestro_tests.py` compute them from PSF.
 17. **Only assign ADC-style FFT/ENOB to analog waveforms**: `TB_SUBMOD_BOOTSTRAP_DIFF_FFT` reports coherent-sine ENOB on `VOUTP-VOUTN`. Comparator latch outputs, non-overlap clocks, and ASYCTRL sequence clocks are pulse/digital waveforms; their FFTs are harmonic diagnostics, not dynamic ENOB.
+18. **Do not reuse the ADC `/out` p2200 FFT window for bootstrap tracking**: the `28.2 ns` p2200 window samples the standalone bootstrap around `700 ps` into the clock period, after the track window. Use the corrected `50.2 ns` track-phase window, or run `sweep_bootstrap_fft_phase.py` before drawing sampler-linearity conclusions.

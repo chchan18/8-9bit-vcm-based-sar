@@ -210,7 +210,7 @@ def main() -> None:
             "cload": "5f",
         },
         "fft": {
-            "sample_start_s": 28.2e-9,
+            "sample_start_s": 50.2e-9,
             "sample_step_s": 2.5e-9,
             "samples": 1024,
             "fundamental_bin": 7,

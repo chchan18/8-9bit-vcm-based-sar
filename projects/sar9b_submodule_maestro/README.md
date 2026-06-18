@@ -41,6 +41,7 @@ Nominal variables:
 | `scripts/run_submodule_robustness_sweeps.py` | Runs the nominal plus robustness matrix for the four submodule testbenches and writes one merged manifest. Supports `--cell` and `--case` for restartable partial reruns. |
 | `scripts/create_bootstrap_fft_test.py` | Creates `TB_SUBMOD_BOOTSTRAP_DIFF_FFT`, configures its Maestro `TRAN` view, and records the coherent-sine FFT sample plan. |
 | `scripts/run_bootstrap_fft_test.py` | Runs the bootstrap FFT Maestro test, exports coherent PSF sample points with OCEAN, and computes input/output SNDR, ENOB, THD, SFDR, gain, and tracking error. |
+| `scripts/sweep_bootstrap_fft_phase.py` | Re-exports an existing bootstrap FFT PSF history over multiple sample phases to distinguish track-window ENOB from hold-node diagnostics. |
 | `scripts/archive_submodule_history.py` | Copies an existing remote Maestro history into this project. |
 | `scripts/inspect_fix_schematic_props.py` | Inspects/fixes schematic extraction metadata using `dbSetConnCurrent`; needed after bridge-created schematics. |
 | `scripts/check_submodule_remote_status.py` | Polls remote Maestro histories, logs, and process state for a selected cell. |
@@ -65,8 +66,9 @@ Nominal variables:
 | `runs/TB_SUBMOD_COMPARATOR_PERF/Interactive.2` | Background run attempt stopped immediately by Maestro. |
 | `runs/submodule_run_manifest.json` | Latest four-testbench Maestro run summary. |
 | `runs/submodule_robustness_manifest.json` | Latest 20-case robustness sweep manifest. |
-| `runs/bootstrap_fft_dynamic/nominal_p2200/summary.json` | Full-scale `Vpk=800m` bootstrap FFT dynamic metrics. |
-| `runs/bootstrap_fft_dynamic/nominal_vpk400/summary.json` | Mid-scale `Vpk=400m` bootstrap FFT dynamic metrics. |
+| `runs/bootstrap_fft_dynamic/nominal_track_p200/summary.json` | Corrected full-scale `Vpk=800m` bootstrap track-phase FFT metrics. |
+| `runs/bootstrap_fft_dynamic/nominal_vpk400_track_p200/summary.json` | Corrected mid-scale `Vpk=400m` bootstrap track-phase FFT metrics. |
+| `runs/bootstrap_fft_dynamic/phase_sweep_existing/summary.json` | Sampling-phase sweep on existing PSF histories. |
 
 ## Current Run Status
 
@@ -99,19 +101,22 @@ Detailed per-case results and artifact paths are in
 
 ## Dynamic FFT Status
 
-The analog bootstrap path now has a coherent-sine FFT Maestro testbench:
-`TB_SUBMOD_BOOTSTRAP_DIFF_FFT`. It uses `fs=400M`, `fft_bin=7`,
+The analog bootstrap path now has a corrected coherent-sine FFT Maestro
+testbench: `TB_SUBMOD_BOOTSTRAP_DIFF_FFT`. It uses `fs=400M`, `fft_bin=7`,
 `fft_n=1024`, and exports `VIP-VIN` plus `VOUTP-VOUTN` for offline dynamic
-metrics.
+metrics. The headline FFT samples at `50.2 ns`, i.e. `200 ps` into each
+2.5 ns sampling-clock period, inside the bootstrap track window.
 
 | Case | History | ADE/Spectre | Output SNDR | Output ENOB | THD | SFDR |
 |------|---------|-------------|-------------|-------------|-----|------|
-| `Vpk=800m` | `Interactive.0` | 0 ADE errors; 0 Spectre errors, 35 warnings | `41.895 dB` | `6.667 bit` | `-41.896 dB` | `41.987 dB` |
-| `Vpk=400m` | `Interactive.1` | 0 ADE errors; 0 Spectre errors, 35 warnings | `50.346 dB` | `8.071 bit` | `-50.398 dB` | `50.400 dB` |
+| `Vpk=800m` | `Interactive.2` | 0 ADE errors; 0 Spectre errors, 35 warnings | `128.974 dB` | `21.132 bit` | `-129.621 dB` | `131.308 dB` |
+| `Vpk=400m` | `Interactive.3` | 0 ADE errors; 0 Spectre errors, 35 warnings | `128.886 dB` | `21.117 bit` | `-129.004 dB` | `131.814 dB` |
 
-The full-scale result is third-harmonic limited; the largest spur is bin 21
-(`8.203 MHz`). The comparator, non-overlap clock, and ASYCTRL outputs are
-not ADC-style FFT/ENOB targets in their present standalone pulse/digital
+The earlier `nominal_p2200`/`nominal_vpk400` FFT exports sampled around
+`700 ps` into the clock period and measured post-track behavior on the
+simplified 5 fF hold node. They are retained as hold-phase diagnostics, not as
+bootstrap tracking ENOB. The comparator, non-overlap clock, and ASYCTRL outputs
+are not ADC-style FFT/ENOB targets in their present standalone pulse/digital
 testbenches; their dynamic behavior is covered by timing, rail, and energy
 metrics. Details are in `docs/dynamic_fft_20260618.md`.
 

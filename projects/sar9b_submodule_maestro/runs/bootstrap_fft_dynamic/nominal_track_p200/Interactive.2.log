@@ -1,0 +1,21 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Thu Jun 18 15:41:49 2026
+Best design point: 1
+Design specs:
+	TRAN	corner	Nominal -
+Design parameters:
+	vdd		900m
+	vcm		450m
+	Vpk		800m
+	fs		400M
+	fft_bin		7
+	fft_n		1.024K
+	TSTOP		2.7u
+	cload		5f
+
+Interactive.2
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.2 completed.
+Current time: Thu Jun 18 15:42:47 2026

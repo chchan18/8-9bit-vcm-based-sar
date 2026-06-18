@@ -5,7 +5,7 @@
   "model_file": "/home/IC/Desktop/Project/project_tsmcN28_NEW/project_tsmcN28_NEW/iPDK_CRN28HPC+_v1.0_2p2a_20160226_all/CRN28HPCp/models/spectre/toplevel.scs",
   "maestro": {
     "cell": "TB_SUBMOD_BOOTSTRAP_DIFF_FFT",
-    "session": "fnxSession126",
+    "session": "fnxSession127",
     "outputs": [
       {
         "name": "CLKS",
@@ -50,7 +50,7 @@
     "cload": "5f"
   },
   "fft": {
-    "sample_start_s": 2.82e-08,
+    "sample_start_s": 5.02e-08,
     "sample_step_s": 2.5e-09,
     "samples": 1024,
     "fundamental_bin": 7,
